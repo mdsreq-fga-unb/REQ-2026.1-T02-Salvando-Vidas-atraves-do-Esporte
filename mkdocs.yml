@@ -1,0 +1,8 @@
+site_name: Documentação Grupo Na minha Maquina Funciona
+site_description: Documentação do projeto Salvando Vidas atraves do Esporte
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
