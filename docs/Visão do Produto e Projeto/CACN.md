@@ -5,10 +5,11 @@
 | 0.1 | 01/04/2026| Identificação do contexto do negócio do cliente | Pedro L; Júlia G. |
 | 0.2 | 02/04/2026 | Identificação da oportunidade/problema, Desafios do Projeto e Segmentação de Clientes | Pedro L.; Júlia G.;  Giovani; José A. |
 | 0.3 | 07/04/2026 | Adição da Proposta de Solução Geral e Objetivos Especificos sem correções | Pedro L. |
+| 0.4 | 08/04/2026 | Inclusão da pilha tecnológica, da viabilidade da proposta e do mapa de stakeholders | José A. | 
 
 ## 1.1 Identificação do Cliente/Parceiro
 
-- Nome: Projeto Salvando Vidas através do Esporte
+- Nome: Projeto Salvando Vidas através do Esporte 
 - Tipo: Iniciativa Social
 - Representante: José Lucas Siqueira
 - Forma de Contato: Reuniões online e encontros presencias quando necessário
@@ -44,13 +45,24 @@ dos materiais doados são realizados por meio de fichas de papel e trocas de men
 
 <p>A figura apresenta o Diagrama de Ishikawa do projeto Salvando Vidas Através do Esporte, no qual são organizadas as possíveis causas do problema identificado segundo os 6M’s (Método, Mão de Obra, Máquina, Material, Medição e Meio Ambiente). No diagrama, o fator Meio Ambiente é representado apenas como Ambiente, mantendo o mesmo significado. </p>
 
-![Fishbone Ishikawa](../assets/Fishbone.jpeg "Fishbone Ishikawa")
+![Diagrama de Ishikawa](../assets/fishbone.jpeg "Fishbone Ishikawa")
 
 ## 1.5 Desafios do Projeto
 
 O principal desafio operacional é a adoção da tecnologia por um público-alvo (voluntários e responsáveis) que preferem processos manuais e possuem letramento digital básico. Do ponto de vista técnico e de requisitos, o desafio será garantir uma usabilidade extrema, exigindo que a interface seja simples, prática e que se integre facilmente aos hábitos atuais (por exemplo, facilitando o envio de notificações e justificativas via WhatsApp). O sistema deve resolver a desorganização sem criar uma nova barreira de burocracia para a igreja.
 
 ## 1.6 Mapa de Stakeholders
+
+A seguir é apresentado um quadro resumo dos stakeholders e adiante uma representação gráfica dos mesmos.
+
+| Stakeholder | Relação com a solução | Interesse Principal | Influência |
+| :---------- | :-------------------- | :------------------ | :--------: |
+| Coordenador do Projeto | Usuário direto e responsável pela gestão da solução | Gerenciamento dos recursos e alunos do projeto | Alta |
+| Voluntários do Projeto | Usuários diretos da solução | Receber uma ferramenta com informações centralizadas que facilite processos administrativos | Média |
+| Equipe de Desenvolvimento | Responsável pela construção | Entregar uma aplicação que atenda às necessidades reais do cliente | Alta |
+| Alunos e Responsáveis | Beneficiários finais (indiretos) | Receber um atendimento eficiente, de qualidade e transparente | Baixa |
+
+![Mapa de Stakeholder](../assets/stakeholders.png "Mapa de Stakeholders")
 
 ## 1.7 Segmentação de Clientes
 

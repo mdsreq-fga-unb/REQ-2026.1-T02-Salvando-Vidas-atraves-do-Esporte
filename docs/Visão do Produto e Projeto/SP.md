@@ -26,11 +26,15 @@ Dessa forma o sistema contribuirá para tornar a gestão mais eficiente, reduzir
 
 ## 2.3 Características do Produto (mapeados com os OE do Produto)
 
-
 ## 2.4 Tecnologias a Serem Utilizados
+
+Para a construção da solução proposta para o projeto social, serão utilizadas tecnologias adequadas à necessidade de gerenciamento do estoque solidário, ao cadastro e acompanhamento de alunos e o desenvolvimento rápido da aplicação. No frontend, será utilizado o React, para construção de interfaces responsivas e reutilizáveis. No backend será utilizado o Django, um framework que já implementa várias das funcionalidades necessárias para a aplicação. Para persistência de dados será usado o PostgreSQL, por ser bem suportado pelo Django, e o Supabase como BaaS, facilitando a implantação do produto final.
+A integração entre o backend, o frontend e serviços externos será realizada por meio de APIs RESTful, permitindo sincronização de dados. Para apoiar o desenvolvimento será utilizado o Git e Github, além de práticas de teste e integração contínua. 
 
 ## 2.5 Pesquisa de Mercado e Análise Competitiva
 
 ## 2.6 Viabilidade da Proposta
+
+A proposta é viável no contexto da disciplina, considerando o acesso ao cliente, o escopo definido e a possibilidade de entrega de um MVP funcional ao final do semestre. Embora a equipe seja reduzida, a familiaridade dos membros da equipe com as ferramentas escolhidas para a construção da solução, aliado às reuniões semanais entre os membros da equipe, a priorização das funcionalidades essenciais da solução e o feedback frequente do cliente viabilizam o projeto.
 
 ## 2.7 Benefícios Esperados
