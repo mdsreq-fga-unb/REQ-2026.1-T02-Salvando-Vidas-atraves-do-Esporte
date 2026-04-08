@@ -1,0 +1,4 @@
+/* Justifica o texto de todos os parágrafos renderizados dos arquivos Markdown */
+.md-typeset p {
+  text-align: justify;
+}
