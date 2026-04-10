@@ -32,7 +32,8 @@ No quadro abaixo estão registradas as principais características do produto, r
 
 ## 2.4 Tecnologias a Serem Utilizados
 
-Para a construção da solução proposta para o projeto social, serão utilizadas tecnologias adequadas à necessidade de gerenciamento do estoque solidário, ao cadastro e acompanhamento de alunos e o desenvolvimento rápido da aplicação. No frontend, será utilizado o React, para construção de interfaces responsivas e reutilizáveis. No backend será utilizado o Django, um framework que já implementa várias das funcionalidades necessárias para a aplicação. Para persistência de dados será usado o PostgreSQL, por ser bem suportado pelo Django, e o Supabase como BaaS, facilitando a implantação do produto final. A integração entre o backend, o frontend e serviços externos será realizada por meio de APIs RESTful, permitindo sincronização de dados. Para apoiar o desenvolvimento será utilizado o Git e Github, além de práticas de teste e integração contínua.
+Para a construção da solução proposta para o projeto social, serão utilizadas tecnologias adequadas à necessidade de gerenciamento do estoque solidário, ao cadastro e acompanhamento de alunos e o desenvolvimento rápido da aplicação. Para isso, será utilizado o framework Flutter, que é um framework fullstack multiplataforma que permite o desenvolvimento rápido de interfaces nativas. Para persistência de dados será usado o PostgreSQL, por ser bem suportado pelo Flutter, e o Supabase como BaaS, facilitando a implantação do produto final.
+Para apoiar o desenvolvimento será utilizado o Git e Github, além de práticas de teste e integração contínua. 
 
 ## 2.5 Pesquisa de Mercado e Análise Competitiva
 
