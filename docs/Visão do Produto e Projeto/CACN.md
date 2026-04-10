@@ -6,6 +6,7 @@
 | 0.2 | 02/04/2026 | Identificação da oportunidade/problema, Desafios do Projeto e Segmentação de Clientes | Pedro L.; Júlia G.;  Giovani; José A. |
 | 0.3 | 07/04/2026 | Adição da Proposta de Solução Geral e Objetivos Especificos sem correções | Pedro L. |
 | 0.4 | 08/04/2026 | Inclusão da pilha tecnológica, da viabilidade da proposta e do mapa de stakeholders | José A. | 
+| 0.5 | 10/04/2026 | Inclusão da Pesquisa de Mercado e Análise Competitiva e da Interação entre Equipe e Cliente | Lucas O. | 
 
 ## 1.1 Identificação do Cliente/Parceiro
 

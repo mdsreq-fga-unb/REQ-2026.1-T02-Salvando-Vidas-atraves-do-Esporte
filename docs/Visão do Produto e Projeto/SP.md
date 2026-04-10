@@ -37,6 +37,8 @@ Para apoiar o desenvolvimento será utilizado o Git e Github, além de práticas
 
 ## 2.5 Pesquisa de Mercado e Análise Competitiva
 
+Após uma análise das atuais ferramentas de Dashboards disponíveis no mercado, como DojoApp / Dojo Brasil, chegamos a conclusão que grande maioria delas, senão todas, visam um único objetivo, gerar lucro para a empresa em que estão implementadas. Entretanto, o nosso sistema não visa gerar lucro ou chamar novos empreendedores para investir na instituição, nosso sistema visa organizar um projeto nobre para que ele possa crescer com organização. Além disso, igual outras ferramentas do mercado, nós visamos gerar informações para o cliente sobre a frequência dos alunos, dos recursos disponíveis para a instituição, mas de forma simplista, pois não adianta nada nós entregarmos um produto de alta complexibilidade nas mão de quem não entende como ele funciona ou sem algum tipo de capacitação prévia.
+
 ## 2.6 Viabilidade da Proposta
 
 A proposta é viável no contexto da disciplina, considerando o acesso ao cliente, o escopo definido e a possibilidade de entrega de um MVP funcional ao final do semestre. Embora a equipe seja reduzida, a familiaridade dos membros da equipe com as ferramentas escolhidas para a construção da solução, aliado às reuniões semanais entre os membros da equipe, a priorização das funcionalidades essenciais da solução e o feedback frequente do cliente viabilizam o projeto.
