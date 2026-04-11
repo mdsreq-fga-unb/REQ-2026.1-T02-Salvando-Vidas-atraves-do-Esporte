@@ -4,11 +4,11 @@
 
 | Papel | Descrição resumida | Responsável | Participantes |
 | --- | --- | --- | --- |
-| Gerente de Projeto | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas. | Julia Siqueira | X |
+| Gerente de Projeto | Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas. | Júlia Siqueira | X |
 | Desenvolvedor Frontend | Responsável pela interface do usuário, design e implementação das funcionalidades no lado do cliente | Giovani de Oliveira | Pedro Lucas |
-| Desenvolvedor Backend | Implementa a lógica de negócios, integração com banco de dados e APIs | José Augusto | X |
+| Desenvolvedor Backend | Implementa a lógica de negócios, integração com banco de dados e APIs | José Augusto | Júlia Siqueira |
 | Analista de QA | Garante a qualidade do produto, executando testes de funcionalidade, performance e usabilidade. | Pedro Lucas | X |
-| Analista de Requisitos | Define os requisitos funcionais e não funcionais do sistema e garante que eles sejam atendidos. | Lucas Oliveira | José Augusto |
+| Analista de Requisitos | Define os requisitos funcionais e não funcionais do sistema e garante que eles sejam atendidos. | Lucas Oliveira | Giovani de Oliveira; José Augusto; Júlia Siqueira; Pedro Lucas  |
 
 ## 6.2 Comunicação
 

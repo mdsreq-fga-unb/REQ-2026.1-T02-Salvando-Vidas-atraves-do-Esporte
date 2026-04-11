@@ -1,5 +1,7 @@
-site_name: Documentação Grupo Na minha Maquina Funciona
+site_name: Salvando Vidas atraves do Esporte
+repo_url: https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte
 site_description: Documentação do projeto Salvando Vidas atraves do Esporte
+repo_name: REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte
 
 theme:
   name: material
@@ -18,3 +20,9 @@ nav:
       - 5. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
       - 6. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
       - 10. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
+
+  - Atas:
+    - "data": Atas/nome.md
+  - Entregas:
+    - "Entregas": Entregas/entregas.md
+  - Referências: assets/referencias.md
