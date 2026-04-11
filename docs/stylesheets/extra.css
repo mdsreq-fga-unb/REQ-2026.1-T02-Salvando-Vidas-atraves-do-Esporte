@@ -2,3 +2,8 @@
 .md-typeset p {
   text-align: justify;
 }
+
+/* Itens de lista compacta podem não gerar <p>, então justifica diretamente o <li> */
+.md-typeset li {
+  text-align: justify;
+}

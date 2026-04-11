@@ -11,8 +11,10 @@ nav:
   - Home: index.md
 
   - Visão do Produto e Projeto:
-      - 1. Cenário Atual do Cliente e do Negócio: Visão do Produto e Projeto/CACN.md
-      - 2. Proposta da Solução: Visão do Produto e Projeto/SP.md
-      - 3. Estratégias de Engenharia de Software: Visão do Produto e Projeto/EES.md
-      - 4. Engenharia de Requisitos: Visão do Produto e Projeto/ER.md
-      - 10. Liçoes Aprendidas: Visão do Produto e Projeto/LICOES.md
+      - 1. Cenário Atual do Cliente e do Negócio: Visão do Produto e Projeto/cenarioAtualDoClienteEDoNegocio.md
+      - 2. Proposta da Solução: Visão do Produto e Projeto/PropostaDaSolucao.md
+      - 3. Estratégias de Engenharia de Software: Visão do Produto e Projeto/estrategiasDeEngenhariaDeSoftware.md
+      - 4. Engenharia de Requisitos: Visão do Produto e Projeto/engenhariaDeRequisitos.md
+      - 5. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
+      - 6. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
+      - 10. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md

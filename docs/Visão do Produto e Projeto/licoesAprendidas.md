@@ -1,4 +1,4 @@
-# 10 LIÇÕES APRENDIDAS
+# 10 Lições Aprendidas
 
 ## 10.1 Unidade 1
 
