@@ -2,12 +2,13 @@
 
 | Versão | Data | Descrição | Autores |
 | :---:  | :---:| :---:     | :---    |
-| 0.1 | 01/04/2026| Identificação do contexto do negócio do cliente | Pedro L; Júlia G. |
-| 0.2 | 02/04/2026 | Identificação da oportunidade/problema, Desafios do Projeto e Segmentação de Clientes | Pedro L.; Júlia G.;  Giovani; José A. |
+| 0.1 | 01/04/2026| Identificação do contexto do negócio do cliente | Pedro L.; Júlia G. |
+| 0.2 | 02/04/2026 | Identificação da oportunidade/problema, Desafios do Projeto e Segmentação de Clientes | Pedro L.; Júlia G.;  Giovani de O.; José A. |
 | 0.3 | 07/04/2026 | Adição da Proposta de Solução Geral e Objetivos Especificos sem correções | Pedro L. |
 | 0.4 | 08/04/2026 | Inclusão da pilha tecnológica, da viabilidade da proposta e do mapa de stakeholders | José A. | 
-| 0.5 | 10/04/2026 | Inclusão da Pesquisa de Mercado e Análise Competitiva e da Interação entre Equipe e Cliente | Lucas O. |
-| 0.6 | 10/04/2026 | Inclusão das Estratégias de Engenharia de Software | Júlia G. |  
+| 0.5 | 09/04/2026 | Correções dos Objetivos Especificos e adição da seção de lições aprendidas | Giovani de O. |
+| 0.6 | 10/04/2026 | Inclusão da Pesquisa de Mercado e Análise Competitiva e da Interação entre Equipe e Cliente | Lucas O. |
+| 0.7 | 10/04/2026 | Inclusão das Estratégias de Engenharia de Software | Júlia G. |  
 
 ## 1.1 Identificação do Cliente/Parceiro
 
@@ -28,6 +29,8 @@ dos materiais doados são realizados por meio de fichas de papel e trocas de men
 ## 1.3 Rich Picture
 
 ![Rich Picture](../assets/RichPicture.png "Rich Picture")
+**Figura 1:** Rich Picture.
+Fonte: Elaborada por [Pedro Lucas](https://github.com/pwdrinho)
 
 
 - <strong> Atores: </strong> Instrutor, Voluntário Administrativo, Aluno/Responsável, Doador.
@@ -47,15 +50,17 @@ dos materiais doados são realizados por meio de fichas de papel e trocas de men
 
 <p>A figura apresenta o Diagrama de Ishikawa do projeto Salvando Vidas Através do Esporte, no qual são organizadas as possíveis causas do problema identificado segundo os 6M’s (Método, Mão de Obra, Máquina, Material, Medição e Meio Ambiente). No diagrama, o fator Meio Ambiente é representado apenas como Ambiente, mantendo o mesmo significado. </p>
 
-![Diagrama de Ishikawa](../assets/fishbone.jpeg "Fishbone Ishikawa")
+![Diagrama de Ishikawa](../assets/Fishbone.jpeg "Fishbone Ishikawa")
+**Figura 2:** Diagrama de Ishikawa "Fishbone".
+Fonte: Elaborada pelos autores
 
 ## 1.5 Desafios do Projeto
 
-O principal desafio operacional é a adoção da tecnologia por um público-alvo (voluntários e responsáveis) que preferem processos manuais e possuem letramento digital básico. Do ponto de vista técnico e de requisitos, o desafio será garantir uma usabilidade extrema, exigindo que a interface seja simples, prática e que se integre facilmente aos hábitos atuais (por exemplo, facilitando o envio de notificações e justificativas via WhatsApp). O sistema deve resolver a desorganização sem criar uma nova barreira de burocracia para a igreja.
+<p>O principal desafio operacional é a adoção da tecnologia por um público-alvo (voluntários e responsáveis) que preferem processos manuais e possuem letramento digital básico. Do ponto de vista técnico e de requisitos, o desafio será garantir uma usabilidade extrema, exigindo que a interface seja simples, prática e que se integre facilmente aos hábitos atuais (por exemplo, facilitando o envio de notificações e justificativas via WhatsApp). O sistema deve resolver a desorganização sem criar uma nova barreira de burocracia para a igreja.</p>
 
 ## 1.6 Mapa de Stakeholders
 
-A seguir é apresentado um quadro resumo dos stakeholders e adiante uma representação gráfica dos mesmos.
+<p>A seguir é apresentado um quadro resumo dos stakeholders e adiante uma representação gráfica dos mesmos.</p>
 
 | Stakeholder | Relação com a solução | Interesse Principal | Influência |
 | :---------- | :-------------------- | :------------------ | :--------: |
@@ -64,7 +69,9 @@ A seguir é apresentado um quadro resumo dos stakeholders e adiante uma represen
 | Equipe de Desenvolvimento | Responsável pela construção | Entregar uma aplicação que atenda às necessidades reais do cliente | Alta |
 | Alunos e Responsáveis | Beneficiários finais (indiretos) | Receber um atendimento eficiente, de qualidade e transparente | Baixa |
 
-![Mapa de Stakeholder](../assets/stakeholders.png "Mapa de Stakeholders")
+![Mapa de Stakeholders](../assets/Stakeholders.png "Mapa de Stakeholders")
+**Figura 3:** Mapa de Stakeholders.
+Fonte: Elaborada pelo [José Augusto](https://github.com/JAugustoM)
 
 ## 1.7 Segmentação de Clientes
 
