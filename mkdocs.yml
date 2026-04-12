@@ -22,8 +22,6 @@ nav:
       - 5. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
       - 6. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
       - 10. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
-  - Atas:
-    - "data": Atas/nome.md
   - Entregas:
     - "Entregas": Entregas/entregas.md
   - Referências: assets/referencias.md

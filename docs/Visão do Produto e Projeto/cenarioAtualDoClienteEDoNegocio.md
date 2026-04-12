@@ -31,7 +31,7 @@ Atualmente, entretanto, grande parte da gestão do projeto ocorre de forma manua
 
 ## 1.3 Rich Picture
 
-![Rich Picture](../assets/RichPicture.png "Rich Picture")
+![Rich Picture](../assets/richPicture.png "Rich Picture")
 **Figura 1:** Rich Picture.
 Fonte: Elaborada por [Pedro Lucas](https://github.com/pwdrinho)
 
