@@ -9,10 +9,10 @@ O objetivo do produto é facilitar a organização e o gerenciamento dos alunos 
 Para alcançar o objetivo geral do sistema, foram definidos os seguintes objetivos específicos, numerados para fins de rastreabilidade como os requisitos do projeto. Eles expressam apenas o estado ou resultado desejado; os CPs detalham o "como" isso será viabilizado:
 
 - **OE01:** Cadastro de alunos e responsáveis organizado, centralizado e acessível para consulta.
-- **OE02:** Frequência dos alunos monitorada com sinais de evasão identificáveis. 3
-- **OE03:** Disponibilidade e movimentação de kimonos e materiais pedagógicos acompanhadas. 4
-- **OE04:** Responsabilidade sobre os materiais emprestados e suas devoluções rastreável. 5
-- **OE05:** Histórico de ocorrências, orientações e comunicações relevantes dos alunos preservado em um único registro. 7
+- **OE02:** Frequência dos alunos monitorada com sinais de evasão identificáveis.
+- **OE03:** Disponibilidade e movimentação de kimonos e materiais pedagógicos acompanhadas.
+- **OE04:** Responsabilidade sobre os materiais emprestados e suas devoluções rastreável.
+- **OE05:** Histórico de ocorrências, orientações e comunicações relevantes dos alunos preservado em um único registro.
 
 ## 2.3 Características do Produto (mapeados com os OE do Produto)
 
