@@ -9,10 +9,9 @@
 | 0.5 | 09/04/2026 | Correções dos Objetivos Especificos e adição da seção de lições aprendidas | Giovani de O. |
 | 0.6 | 10/04/2026 | Inclusão da Pesquisa de Mercado e Análise Competitiva e da Interação entre Equipe e Cliente | Lucas O. |
 | 0.7 | 10/04/2026 | Inclusão das Estratégias de Engenharia de Software | Júlia G. |  
-| 0.9 | 11/04/2026 | Adição Engenharia de Requisitos + tabela ER e o RAD | Pedro Lucas |
-| 0.10 | 11/04/2026 | Mudança da home page e coloquei as tecnologias numa tabela | José A. | 
-
----
+| 0.8 | 11/04/2026 | Adição Engenharia de Requisitos + tabela ER e o RAD | Pedro L. |
+| 0.9 | 11/04/2026 | Mudança da home page e coloquei as tecnologias numa tabela | José A. | 
+| 0.10 | 12/04/2026 | Inclusão do cronograma inicial | Júlia G. |
 
 # 1. Cenário Atual do Cliente e do Negócio
 
