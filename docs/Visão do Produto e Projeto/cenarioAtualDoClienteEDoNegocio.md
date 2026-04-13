@@ -12,6 +12,8 @@
 | 0.8 | 11/04/2026 | Adição Engenharia de Requisitos + tabela ER e o RAD | Pedro L. |
 | 0.9 | 11/04/2026 | Mudança da home page e coloquei as tecnologias numa tabela | José A. | 
 | 0.10 | 12/04/2026 | Inclusão do cronograma inicial | Júlia G. |
+| 0.11 | 12/04/2026 | Inclusão das Atas de reuniões em equipe e com cliente | Júlia G. |
+
 
 # 1. Cenário Atual do Cliente e do Negócio
 
@@ -26,7 +28,7 @@
 ## 1.2 introdução ao Negócio e Contexto
 
 O projeto **Salvando Vidas Através do Esporte**, realizado pela Segunda Igreja Batista do Recanto das Emas desde 2019, oferece aulas gratuitas de jiu-jitsu voltadas à comunidade, com foco principal em jovens e famílias, muitas vezes em situação de vulnerabilidade social. Além da prática esportiva, o projeto também desempenha um importante papel de assistência social, promovendo a doação e o empréstimo de kimonos para alunos que não possuem condições de adquiri-los.
-Atualmente, entretanto, grande parte da gestão do projeto ocorre de forma manual e descentralizada. O controle de alunos, registros de frequência, acompanhamento da evolução de faixas e a gestão dos materiais doados são realizados por meio de fichas de papel e trocas de mensagens em grupos de WhatsApp.Essa forma de organização dificulta o acesso às informações, aumenta o risco de perda de dados e torna o acompanhamento dos alunos e dos recursos do projeto mais complexo.
+Atualmente, entretanto, grande parte da gestão do projeto ocorre de forma manual e descentralizada. O controle de alunos, registros de frequência, acompanhamento da evolução de faixas e a gestão dos materiais doados são realizados por meio de fichas de papel e trocas de mensagens em grupos de WhatsApp. Essa forma de organização dificulta o acesso às informações, aumenta o risco de perda de dados e torna o acompanhamento dos alunos e dos recursos do projeto mais complexo.
 
 ## 1.3 Rich Picture
 
