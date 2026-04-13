@@ -13,7 +13,7 @@
 | 0.9 | 11/04/2026 | Mudança da home page e coloquei as tecnologias numa tabela | José A. | 
 | 0.10 | 12/04/2026 | Inclusão do cronograma inicial | Júlia G. |
 | 0.11 | 12/04/2026 | Inclusão das Atas de reuniões em equipe e com cliente | Júlia G. |
-
+| 1.0 | 13/04/2026 | Ajustes finais + inclusão do vídeo entrega 1 | José A. ; Pedro L. |
 
 # 1. Cenário Atual do Cliente e do Negócio
 

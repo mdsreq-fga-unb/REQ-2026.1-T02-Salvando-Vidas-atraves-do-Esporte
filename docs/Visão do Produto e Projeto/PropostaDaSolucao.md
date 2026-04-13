@@ -41,6 +41,7 @@ No quadro abaixo estão registradas as principais características do produto, r
 | :fontawesome-brands-flutter: Mockito       | Biblioteca para geração de *mocks*                            |       Testes       |
 | :simple-github: Github                     | Repositório para versionamento e colaboração                  | Controle de Versão |
 | :simple-githubactions: Github Actions      | Ferramenta de CI/CD, usada para deploy e testes automatizados |       CI/CD        |
+| :simple-figma: Figma                       | Ferramenta para prototipação e design de interfaces           |      Design        |
 | :material-microsoft-teams: Microsoft Teams | Plataforma para comunicação e reuniões internas               |    Comunicação     |
 | :simple-googlemeet: Google Meet            | Plataforma para reuniões com o cliente                        |    Comunicação     |
 | :simple-whatsapp: WhatsApp                 | Plataforma para comunicações rápidas entre a equipe           |    Comunicação     |
