@@ -30,7 +30,7 @@ Atualmente, entretanto, grande parte da gestão do projeto ocorre de forma manua
 
 ## 1.3 Rich Picture
 
-![Rich Picture](../assets/richPicture.png "Rich Picture")
+![Rich Picture](../assets/RichPicture.png "Rich Picture")
 **Figura 1:** Rich Picture.
 Fonte: Elaborada por [Pedro Lucas](https://github.com/pwdrinho)
 
@@ -52,9 +52,9 @@ Atualmente, o projeto social de jiu-jitsu sofre com a fragmentação de informa�
 
 A figura apresenta o Diagrama de Ishikawa do projeto Salvando Vidas Através do Esporte, no qual são organizadas as possíveis causas do problema identificado segundo os 6M’s (Método, Mão de Obra, Máquina, Material, Medição e Meio Ambiente). No diagrama, o fator Meio Ambiente é representado apenas como Ambiente, mantendo o mesmo significado.
 
-![Diagrama de Ishikawa](../assets/fishbone.jpeg "Fishbone Ishikawa")
+![Diagrama de Ishikawa](../assets/fishbone.png "Fishbone Ishikawa")
 **Figura 2:** Diagrama de Ishikawa "Fishbone".
-Fonte: Elaborada pelo [José Augusto](https://github.com/JAugustoM)
+Fonte: Elaborada por [José Augusto](https://github.com/JAugustoM)
 
 ## 1.5 Desafios do Projeto
 
@@ -73,7 +73,7 @@ A seguir é apresentado um quadro resumo dos stakeholders e adiante uma represen
 
 ![Mapa de Stakeholders](../assets/stakeholders.png "Mapa de Stakeholders")
 **Figura 3:** Mapa de Stakeholders.
-Fonte: Elaborada pelo [José Augusto](https://github.com/JAugustoM)
+Fonte: Elaborada por [José Augusto](https://github.com/JAugustoM)
 
 ## 1.7 Segmentação de Clientes
 
