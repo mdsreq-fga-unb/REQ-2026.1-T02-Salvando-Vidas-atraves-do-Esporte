@@ -3,12 +3,10 @@ import 'package:test/test.dart';
 
 void main() {
   test("Teste da classe Counter", () {
-    Counter? counter;
+    Counter counter = Counter();
+    expect(counter.value, 0);
 
-    setUp(() {
-      counter = Counter();
-    });
-
-    expect(counter?.value, 0);
+    counter.increment();
+    expect(counter.value, 1);
   });
 }

@@ -34,31 +34,38 @@
 
 Para baixar as dependências do projeto
 
-```bash
+```shell
 flutter pub get
 ```
 
 Para atualizar as dependências do projeto
 
-```bash
+```shell
 flutter pub upgrade
 ```
 
 Para rodar os testes
 
-```bash
+```shell
 flutter test
+```
+
+Para rodar os testes e obter a cobertura
+
+```shell
+flutter test --coverage
+dart run test_cov_console -e ".g.dart"
 ```
 
 Para rodar o projeto localmente
 
-```bash
+```shell
 flutter run
 ```
 
 Para gerar arquivos do MobX e Mockito
 
-```bash
+```shell
 flutter pub run build_runner build
 ```
 
