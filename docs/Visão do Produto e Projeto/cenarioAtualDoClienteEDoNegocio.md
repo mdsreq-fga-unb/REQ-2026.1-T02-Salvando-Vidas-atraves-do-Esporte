@@ -14,6 +14,8 @@
 | 0.10 | 12/04/2026 | Inclusão do cronograma inicial | Júlia G. |
 | 0.11 | 12/04/2026 | Inclusão das Atas de reuniões em equipe e com cliente | Júlia G. |
 | 1.0 | 13/04/2026 | Ajustes finais + inclusão do vídeo entrega 1 | José A. ; Pedro L. |
+| 1.1.1 | 29/04/2026 | Criação documento DoR | José A. |
+| 1.1.2 | 30/04/2026 | Adição documento DoD | Pedro L. |
 
 # 1. Cenário Atual do Cliente e do Negócio
 
