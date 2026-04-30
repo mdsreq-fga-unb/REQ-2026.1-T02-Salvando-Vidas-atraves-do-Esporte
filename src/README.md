@@ -26,6 +26,7 @@
 │   └── main.dart    # Arquivo de entrada do projeto
 ├── linux/           # Pasta de configuração do linux
 ├── test/            # Pasta de testes
+├── web/             # Pasta de configuração do site
 ├── windows/         # Pasta de configuração do windows
 └── pubspec.yaml     # Arquivo de configuração do projeto
 ```
@@ -34,38 +35,38 @@
 
 Para baixar as dependências do projeto
 
-```shell
+```sh
 flutter pub get
 ```
 
 Para atualizar as dependências do projeto
 
-```shell
+```sh
 flutter pub upgrade
 ```
 
 Para rodar os testes
 
-```shell
+```sh
 flutter test
 ```
 
 Para rodar os testes e obter a cobertura
 
-```shell
+```sh
 flutter test --coverage
 dart run test_cov_console -e ".g.dart"
 ```
 
 Para rodar o projeto localmente
 
-```shell
+```sh
 flutter run
 ```
 
 Para gerar arquivos do MobX e Mockito
 
-```shell
+```sh
 flutter pub run build_runner build
 ```
 
@@ -95,3 +96,8 @@ flutter pub run build_runner build
 - Materiais de Estudo:
   - [Artigo Alura](https://www.alura.com.br/artigos/mockito-para-apps-flutter)
 
+### Flutter Local Notifications
+
+- Descrição: biblioteca para mostrar notificações
+- [Homepage](https://pub.dev/packages/flutter_local_notifications)
+- [Documentação](https://pub.dev/documentation/flutter_local_notifications/latest/)
