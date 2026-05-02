@@ -16,6 +16,7 @@
 | 1.0 | 13/04/2026 | Ajustes finais + inclusão do vídeo entrega 1 | José A. ; Pedro L. |
 | 1.1.1 | 29/04/2026 | Criação documento DoR | José A. |
 | 1.1.2 | 30/04/2026 | Adição documento DoD | Pedro L. |
+| 1.1.3 | 02/05/2026 | Ajustes na estratégia de engenharia de software pós feedback do professor | José A. |
 
 # 1. Cenário Atual do Cliente e do Negócio
 
