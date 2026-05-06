@@ -20,7 +20,7 @@ No quadro abaixo estão registradas as principais características do produto, r
 
 | ID | Descrição resumida | ID | Valor de negócio principal | OE principal | Contribuição secundária |
 | :-: | :-----------------: | :-: | :-------------------------: | :-----------: | :----------------------: |
-| CP01 | Cadastro centralizado de perfis de alunos para evitar redundância. | VN01 | Eliminar erros de registro e assegurar precisão cadastral. | OE01 | - |
+| CP01 | Cadastro centralizado de perfis de alunos. | VN01 | Eliminar erros de registro e assegurar precisão cadastral. | OE01 | - |
 | CP02 | Gestão de vínculos legais e contatos dos responsáveis. | VN02 | Fortalecer a comunicação institucional e responsabilidade. | OE01 | - |
 | CP03 | Interface para registro diário de presenças em tempo real. | VN03 | Garantir a precisão estatística da participação. | OE02 | OE05 |
 | CP04 | Mecanismo de análise de dados para detecção precoce de riscos. | VN04 | Mitigar taxas de evasão através de intervenções ágeis. | OE02 | OE05 |
