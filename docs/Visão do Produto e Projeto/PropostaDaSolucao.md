@@ -8,11 +8,11 @@ O objetivo do produto é facilitar a organização e o gerenciamento dos alunos 
 
 Para alcançar o objetivo geral do sistema, foram definidos os seguintes objetivos específicos, numerados para fins de rastreabilidade como os requisitos do projeto. Eles expressam apenas o estado ou resultado desejado; os CPs detalham o "como" isso será viabilizado:
 
-- **OE01:** Cadastro de alunos e responsáveis organizado, centralizado e acessível para consulta.
-- **OE02:** Frequência dos alunos monitorada com sinais de evasão identificáveis.
-- **OE03:** Disponibilidade e movimentação de kimonos e materiais pedagógicos acompanhadas. 
-- **OE04:** Responsabilidade sobre os materiais emprestados e suas devoluções rastreável. 
-- **OE05:** Histórico de ocorrências, orientações e comunicações relevantes dos alunos preservado em um único registro. 
+- **OE01:** Fortalecer a gestão administrativa do projeto social através da centralização da informação e qualificação dos dados.
+- **OE02:** Ampliar a capacidade de retenção dos participantes mediante o acompanhamento sistemático de frequência.
+- **OE03:** Assegurar a disponibilidade contínua dos recursos necessários para a prática esportiva.
+- **OE04:** Promover a transparência e a equidade na distribuição e compartilhamento de materiais.
+- **OE05:** Qualificar o acompanhamento pedagógico e psicossocial dos participantes para subsidiar intervenções assertivas.
 
 ## 2.3 Características do Produto (mapeados com os OE do Produto)
 
