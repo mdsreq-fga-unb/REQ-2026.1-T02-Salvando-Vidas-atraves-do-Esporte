@@ -18,17 +18,17 @@ Para alcançar o objetivo geral do sistema, foram definidos os seguintes objetiv
 
 No quadro abaixo estão registradas as principais características do produto, relacionadas com os objetivos específicos listados acima.
 
-| ID  | Descrição resumida | Valor de negócio principal | OE principal | Contribuição secundária |
-| :-: | :----------------- | :------------------------- | :----------- | :---------------------- |
-| CP1 | Cadastro centralizado de alunos e responsáveis. | Reunir as informações em um único lugar para consulta e atualização. | OE01 | OE05 |
-| CP2 | Registro de frequência por aula. | Permitir o acompanhamento da presença dos alunos. | OE02 | OE05 |
-| CP3 | Acompanhamento de faltas com alertas. | Apoiar a identificação de possíveis evasões. | OE02 | OE05 |
-| CP4 | Controle de kimonos e materiais. | Organizar a disponibilidade dos recursos e sua posse atual. | OE03 | OE04 |
-| CP5 | Fila de espera para materiais. | Apoiar a distribuição dos recursos conforme a necessidade. | OE04 | OE03 |
-| CP6 | Painel de acompanhamento geral. | Acompanhar frequência, uso de recursos e evolução dos alunos. | OE02 | OE05 |
-| CP7 | Histórico de ocorrências e orientações. | Manter um registro único para consulta posterior. | OE05 | OE01 |
-| CP8 | Proteção e conservação dos dados. | Garantir que as informações permaneçam seguras e disponíveis. | OE01 | OE02 |
-| CP9 | Redistribuição de recursos. | Apoiar o reaproveitamento e a entrega de materiais. | OE04 | OE03 |
+| ID  | Descrição resumida | ID | Valor de negócio principal | OE principal | Contribuição secundária |
+| :-: | :-----------------: | :-: | :-------------------------: | :-----------: | :----------------------: |
+| CP1 | Cadastro centralizado de alunos e responsáveis. | VN1 | Reunir as informações em um único lugar para consulta e atualização. | OE01 | OE05 |
+| CP2 | Registro de frequência por aula. | VN2 | Permitir o acompanhamento da presença dos alunos. | OE02 | OE05 |
+| CP3 | Acompanhamento de faltas com alertas. | VN3 | Apoiar a identificação de possíveis evasões. | OE02 | OE05 |
+| CP4 | Controle de kimonos e materiais. | VN4 | Organizar a disponibilidade dos recursos e sua posse atual. | OE03 | OE04 |
+| CP5 | Fila de espera para materiais. | VN5 | Apoiar a distribuição dos recursos conforme a necessidade. | OE04 | OE03 |
+| CP6 | Painel de acompanhamento geral. | VN6 | Acompanhar frequência, uso de recursos e evolução dos alunos. | OE02 | OE05 |
+| CP7 | Histórico de ocorrências e orientações. | VN7 | Manter um registro único para consulta posterior. | OE05 | OE01 |
+| CP8 | Proteção e conservação dos dados. | VN8 | Garantir que as informações permaneçam seguras e disponíveis. | OE01 | OE02 |
+| CP9 | Redistribuição de recursos. | VN9 | Apoiar o reaproveitamento e a entrega de materiais. | OE04 | OE03 |
 
 ## 2.4 Tecnologias a Serem Utilizados
 
