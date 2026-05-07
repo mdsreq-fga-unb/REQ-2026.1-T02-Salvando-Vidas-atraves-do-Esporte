@@ -21,6 +21,7 @@ nav:
       - 4. Engenharia de Requisitos: Visão do Produto e Projeto/engenhariaDeRequisitos.md
       - 5. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
       - 6. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
+      - 8. DoR e DoD: Visão do Produto e Projeto/DoREDoD.md
       - 10. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
   - Entregas:
     - "Entregas": Entregas/entregas.md
