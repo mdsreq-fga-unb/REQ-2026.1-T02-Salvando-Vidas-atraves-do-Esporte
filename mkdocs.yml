@@ -17,13 +17,13 @@ nav:
   - Visão do Produto e Projeto:
       - 1. Cenário Atual do Cliente e do Negócio: Visão do Produto e Projeto/cenarioAtualDoClienteEDoNegocio.md
       - 2. Proposta da Solução: Visão do Produto e Projeto/PropostaDaSolucao.md
-      - Interveção Social: Visão do Produto e Projeto/intervencaoSocial.md
-      - 3. Estratégias de Engenharia de Software: Visão do Produto e Projeto/estrategiasDeEngenhariaDeSoftware.md
-      - 4. Engenharia de Requisitos: Visão do Produto e Projeto/engenhariaDeRequisitos.md
-      - 5. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
-      - 6. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
-      - 8. DoR e DoD: Visão do Produto e Projeto/DoREDoD.md
-      - 10. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
+      - 3. Interveção Social: Visão do Produto e Projeto/intervencaoSocial.md
+      - 4. Estratégias de Engenharia de Software: Visão do Produto e Projeto/estrategiasDeEngenhariaDeSoftware.md
+      - 5. Engenharia de Requisitos: Visão do Produto e Projeto/engenhariaDeRequisitos.md
+      - 6. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
+      - 7. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
+      - 9. DoR e DoD: Visão do Produto e Projeto/DoREDoD.md
+      - 11. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
   - Entregas:
     - "Entregas": Entregas/entregas.md
   - Atas:
