@@ -45,13 +45,8 @@ jobs:
 
       - name: Copy content to target repo and push
         run: |
-          cp src/build/web target-repo
+          cp -r build/web target-repo
           cd target-repo
-          git status
-          if git diff --quiet; then
-            echo "No changes to push."
-          else
-            git add .
-            git commit -m "Update Flutter Web (commit: ${{ github.sha }})"
-            git push origin ${{ env.TARGET_BRANCH }}
-          fi
+          git add .
+          git commit -m "Update Flutter Web (commit: ${{ github.sha }})"
+          git push origin ${{ env.TARGET_BRANCH }}
