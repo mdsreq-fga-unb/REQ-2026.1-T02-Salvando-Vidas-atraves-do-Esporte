@@ -1,6 +1,6 @@
-# 10 Lições Aprendidas
+# 11 Lições Aprendidas
 
-## 10.1 Unidade 1
+## 11.1 Unidade 1
 
 A Unidade 1 foi um período de adaptação intensa, marcado pela formação de uma equipe parcialmente nova e pelo desafio de alinhar expectativas acadêmicas com a realidade de um cliente real. A seguir, detalhamos as lições extraídas dessa experiência.
 
@@ -44,8 +44,8 @@ A Unidade 1 foi um período de adaptação intensa, marcado pela formação de u
 
     **Como foi superada:** A colaboração foi a chave; cada membro assumiu sua responsabilidade, e o apoio mútuo permitiu que as entregas fossem realizadas a tempo, sem sobrecarregar apenas um indivíduo.
 
-## 10.2 Unidade 2
+## 11.2 Unidade 2
 
-## 10.3 Unidade 3
+## 11.3 Unidade 3
 
-## 10.4 Unidade 4
+## 11.4 Unidade 4

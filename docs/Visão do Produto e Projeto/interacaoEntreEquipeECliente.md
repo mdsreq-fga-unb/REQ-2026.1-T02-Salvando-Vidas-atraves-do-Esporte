@@ -1,6 +1,6 @@
 # Interação Entre Equipe e Cliente
 
-## 6.1 Composição da Equipe
+## 7.1 Composição da Equipe
 
 | Papel | Descrição resumida | Responsável | Participantes |
 | --- | --- | --- | --- |
@@ -10,7 +10,7 @@
 | Analista de QA | Garante a qualidade do produto, executando testes de funcionalidade, performance e usabilidade. | Pedro Lucas | X |
 | Analista de Requisitos | Define os requisitos funcionais e não funcionais do sistema e garante que eles sejam atendidos. | Lucas Oliveira | Giovani de Oliveira; José Augusto; Júlia Siqueira; Pedro Lucas  |
 
-## 6.2 Comunicação
+## 7.2 Comunicação
 
 Para garantir o alinhamento da equipe e o cumprimento dos prazos, estabelecemos uma rotina de comunicação dividida entre interações internas e externas, utilizando ferramentas que facilitam a transparência do processo:
 
@@ -20,7 +20,7 @@ Para garantir o alinhamento da equipe e o cumprimento dos prazos, estabelecemos 
 
 - **Comunicação com o Cliente:** O contato direto com o cliente para apresentações de progresso, elicitação e validação de requisitos é realizado de forma presencial e/ou remota (Google Meet). Essas reuniões garantem que o cliente esteja sempre a par da evolução do projeto e possa fornecer feedbacks em tempo real.
 
-## 6.3 Processo de Validação
+## 7.3 Processo de Validação
 
 Seguindo a metodologia RAD, o processo de validação é focado em ciclos rápidos de construção e feedback, garantindo que o produto evolua conforme as necessidades reais do cliente através de iterações constantes:
 

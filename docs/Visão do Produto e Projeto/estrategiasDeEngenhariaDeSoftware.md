@@ -1,6 +1,6 @@
 # Estratégias de Engenharia de Software
 
-## 3.1 Estratégia Priorizada
+## 4.1 Estratégia Priorizada
  
 **Abordagem de Desenvolvimento de Software:** Híbrida
 
@@ -10,7 +10,7 @@
 
 ---
  
-## 3.2 Quadro Comparativo
+## 4.2 Quadro Comparativo
  
 O quadro a seguir apresenta uma comparação entre o **RAD** e o **Modelo Espiral**, os dois processos são híbridos/adaptativos, a análise a seguir irá permitir uma melhor compreensão e justificativa da escolha que melhor se adapta ao contexto do projeto Salvando Vidas Através do Esporte.
  
@@ -34,7 +34,7 @@ O quadro a seguir apresenta uma comparação entre o **RAD** e o **Modelo Espira
  
 ---
  
-## 3.3 Justificativa
+## 4.3 Justificativa
  
 O RAD foi escolhido em detrimento do Modelo Espiral, pois, embora o Modelo Espiral ofereça uma boa gestão de risco e incerteza, o maior custo e formalidade comparado ao RAD torna ele menos desejável para o projeto. A escolha ainda se fundamenta em mais quatro argumentos:
  
