@@ -22,6 +22,7 @@
 | 1.1.6 | 07/05/2026 | Estilização do calendário | José A. |
 | 1.2 | 10/05/2026 | Correções Engenharia de Requisitos | Pedro L. |
 | 1.2.1 | 10/05/2026 | Correções dos números dos tópicos | Pedro L.
+| 1.3 | 11/05/2026 | Correções Interação entre Equipe e Cliente | Júlia G.
 
 # 1. Cenário Atual do Cliente e do Negócio
 
