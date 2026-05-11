@@ -97,8 +97,6 @@ Os requisitos funcionais descrevem as funcionalidades específicas que o sistema
 
 ## 8.2 Lista de Requisitos Não Funcionais
 
-## 8.2 Lista de Requisitos Não Funcionais
-
 **RNF01 - Usabilidade (Usability):** A interface de usuário deve ser totalmente responsiva, utilizando princípios de design fluido para se adaptar automaticamente a diferentes resoluções de tela e dispositivos. A experiência de uso não deve ser degradada em telas menores (smartphones e tablets), garantindo que botões, textos e menus permaneçam legíveis, acessíveis e operáveis sem a necessidade de zoom manual.
 
 **RNF02 - Usabilidade (Usability):** A arquitetura de informação e a navegação do sistema devem ser otimizadas para que os usuários consigam acessar e executar as funcionalidades principais (como registrar presença, consultar estoque ou cadastrar alunos) em, no máximo, três cliques a partir da tela inicial. O design deve ser intuitivo o suficiente para evitar confusão de navegação e dispensar manuais complexos.
