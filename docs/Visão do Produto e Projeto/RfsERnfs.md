@@ -97,7 +97,17 @@ Os requisitos funcionais descrevem as funcionalidades específicas que o sistema
 
 ## 8.2 Lista de Requisitos Não Funcionais
 
+**RNF01 - Usabilidade (Usability)**: A interface deve ser responsiva, adaptando-se a dispositivos móveis e desktops.
 
+**RNF02 - Usabilidade (Usability)**: O sistema deve permitir a execução de tarefas principais em até 3 cliques.
+
+**RNF03 - Confiabilidade (Reliability)**: O sistema deve manter logs de alteração para auditoria de dados sensíveis.
+
+**RNF04 - Desempenho (Performance)**: A consulta de listas de alunos deve ocorrer em tempo inferior a 2 segundos.
+
+**RNF05 - Segurança (Security)**: Apenas usuários com permissão de "Instrutor" ou "Admin" devem alterar registros.
+
+**RNF06 - Portabilidade (Portability)**: O sistema deve ser acessível via navegadores web modernos (Chrome, Firefox, Safari).
 
 ## 8.3 Matriz-síntese de rastreabilidade
 
