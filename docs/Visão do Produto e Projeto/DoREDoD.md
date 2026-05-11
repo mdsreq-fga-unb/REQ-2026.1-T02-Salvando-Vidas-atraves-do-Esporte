@@ -1,6 +1,6 @@
 # DoR e DoD
 
-## 8.1 Definition of Ready (DoR)
+## 9.1 Definition of Ready (DoR)
 
 O DoR é um conjunto de critérios que indicam quando um requisito está pronto para ser trabalhado no Design de Usuário e na Construção rápida. Também é o acordo entre a equipe de desenvolvimento e o Product Owner que garante clareza e alinhamento, minimizando o desenvolvimento de código que não atende às necessidades do cliente. Os critérios do DoR estão descritos no quadro abaixo:
 
@@ -12,7 +12,7 @@ O DoR é um conjunto de critérios que indicam quando um requisito está pronto 
 |  Testável   | O requisito deve ter critérios de aceite claros, que possam ser verificados pela equipe durante o desenvolvimento.   |
 |  Validação  | O requisito deve ser analisado e validado pelo Product Owner para garantir que está alinhado com a visão do produto. |
 
-## 8.2 Definition of Done (DoD)
+## 9.2 Definition of Done (DoD)
 
 O DoD é um conjunto de critérios que indica quando uma funcionalidade, requisito ou entrega do projeto pode ser considerada finalizada e apta para uso. Isso significa que a solução foi desenvolvida, validada com o cliente e documentada de forma suficiente para manter a rastreabilidade das entregas.
 

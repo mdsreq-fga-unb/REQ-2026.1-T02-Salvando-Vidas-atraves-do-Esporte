@@ -71,7 +71,7 @@
     Reunião de Equipe
     ```
     ```
-    Reunião com Clintes
+    Reunião com Clientes
     ```
     </div>
     <div class="card outro-mes-card" markdown>**1**</div>
@@ -185,7 +185,6 @@
     </div>
 
 === "Maio"
-
     <div class="grid calendar-grid" markdown>
     <!-- Cabeçalho -->
     <div class="card weekday-card" markdown>**Segunda**</div>
