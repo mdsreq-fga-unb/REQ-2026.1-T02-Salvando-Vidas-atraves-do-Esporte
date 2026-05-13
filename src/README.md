@@ -101,3 +101,9 @@ flutter pub run build_runner build
 - Descrição: biblioteca para mostrar notificações
 - [Homepage](https://pub.dev/packages/flutter_local_notifications)
 - [Documentação](https://pub.dev/documentation/flutter_local_notifications/latest/)
+
+### mock_supabase_http_client
+
+- Descrição: Mock do cliente Supabase
+- [Homepage](https://pub.dev/packages/mock_supabase_http_client)
+- [Documentação](https://pub.dev/documentation/mock_supabase_http_client/latest/)
