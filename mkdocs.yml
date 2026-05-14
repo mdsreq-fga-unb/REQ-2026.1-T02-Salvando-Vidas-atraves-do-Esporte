@@ -7,8 +7,6 @@ theme:
   name: material
   palette:
     scheme: slate
-  features:
-    - toc.integrate
 
 extra_css:
   - stylesheets/extra.css
@@ -33,6 +31,9 @@ nav:
       - "Atas": Atas/atas.md
       - "Reuniões Gravadas": Atas/reunioes.md
   - Referências: assets/referencias.md
+
+plugins:
+  - include-markdown
 
 markdown_extensions:
   - admonition
