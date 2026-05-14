@@ -8,26 +8,26 @@ O objetivo do produto é facilitar a organização e o gerenciamento dos alunos 
 
 Para alcançar o objetivo geral do sistema, foram definidos os seguintes objetivos específicos, numerados para fins de rastreabilidade como os requisitos do projeto. Eles expressam apenas o estado ou resultado desejado; os CPs detalham o "como" isso será viabilizado:
 
-- **OE01:** Fortalecer a gestão administrativa do projeto social através da centralização da informação e qualificação dos dados.
-- **OE02:** Ampliar a capacidade de retenção dos participantes mediante o acompanhamento sistemático de frequência.
-- **OE03:** Assegurar a disponibilidade contínua dos recursos necessários para a prática esportiva.
-- **OE04:** Promover a transparência e a equidade na distribuição e compartilhamento de materiais.
-- **OE05:** Qualificar o acompanhamento pedagógico e psicossocial dos participantes para subsidiar intervenções assertivas.
+* **OE01:** Fortalecer a gestão adimistrativa do projeto através da cerntralização de dados, indicadores estratégicos e automação de alertas para apoiar a tomada de decisão.
+* **OE02:** Ampliar a capacidade de retenção dos participantes mediante o acompanhamento sistemático de frequência.
+* **OE03:** Assegurar a disponibilidade contínua e a distribuição transparente e equitativa dos recursos necessarios para a prática esportiva.
+* **OE04:** Qualificar o acompanhamento pedagógico e psicossocial dos participantes para subsidiar intervenções assertivas.
 
 ## 2.3 Características do Produto (mapeados com os OE do Produto)
 
 No quadro abaixo estão registradas as principais características do produto, relacionadas com os objetivos específicos listados acima.
 
 | ID | Descrição resumida | ID | Valor de negócio principal | OE principal | Contribuição secundária |
-| :-: | :-----------------: | :-: | :-------------------------: | :-----------: | :----------------------: |
+| :-: | :--- | :-: | :--- | :---: | :---: |
 | CP01 | Cadastro centralizado de perfis de alunos. | VN01 | Eliminar erros de registro e assegurar precisão cadastral. | OE01 | - |
 | CP02 | Gestão de vínculos legais e contatos dos responsáveis. | VN02 | Fortalecer a comunicação institucional e responsabilidade. | OE01 | - |
-| CP03 | Interface para registro diário de presenças em tempo real. | VN03 | Garantir a precisão estatística da participação. | OE02 | OE05 |
-| CP04 | Mecanismo de análise de dados para detecção precoce de riscos. | VN04 | Mitigar taxas de evasão através de intervenções ágeis. | OE02 | OE05 |
-| CP05 | Estrutura de estoque e fluxo de entrada/saída de materiais. | VN05 | Assegurar o controle rigoroso da disponibilidade de recursos. | OE03 | OE04 |
-| CP06 | Sistema de controle de posse, empréstimos e devoluções. | VN06 | Minimizar perdas de ativos e garantir rotatividade justa. | OE04 | OE03 |
-| CP07 | Banco de registro cronológico de ocorrências pedagógicas. | VN07 | Institucionalizar a memória do progresso do aluno. | OE05 | OE01 |
-| CP08 | Módulo de extração de relatórios e indicadores sociais. | VN08 | Qualificar a transparência para prestação de contas. | OE05 | OE02 |
+| CP03 | Painel de Bordo (Dashboard) e Alertas Centralizados. | VN03 | Acelerar a identificação de prioridades diárias através de visões consolidadas. | OE01 | - |
+| CP04 | Interface para registro diário de presenças em tempo real. | VN04 | Garantir a precisão estatística da participação. | OE02 | OE04 |
+| CP05 | Mecanismo de análise de dados para detecção precoce de riscos. | VN05 | Mitigar taxas de evasão através de intervenções ágeis. | OE02 | OE04 |
+| CP06 | Estrutura de estoque e fluxo de entrada/saída de materiais. | VN06 | Assegurar o controle rigoroso da disponibilidade de recursos. | OE03 | - |
+| CP07 | Sistema de controle de posse, empréstimos e devoluções. | VN07| Minimizar perdas de ativos e garantir rotatividade justa. | OE03 | - |
+| CP08 | Banco de registro cronológico de ocorrências pedagógicas. | VN08 | Institucionalizar a memória do progresso do aluno. | OE04 | OE01 |
+| CP09 | Módulo de extração de relatórios e indicadores sociais. | VN09| Qualificar a transparência para prestação de contas. | OE04 | OE02 |
 
 ## 2.4 Tecnologias a Serem Utilizados
 
