@@ -95,16 +95,16 @@ A seguir está a lista de requisitos não funcionais derivados das característi
 
 ## 8.3 Matriz-síntese de rastreabilidade
 
-A matriz, a seguir, representa a rastreabilidade entre objetivos específicos (OE), características de produto (CP), valor de negócio (VN), requisitos funcionais (RFs) e não funcionais (RNFs).
+A matriz a seguir representa a rastreabilidade entre objetivos específicos (OE), características do produto (CP), valores de negócio (VN), requisitos funcionais (RFs) e não funcionais (RNFs).
 
 | Contribuição principal | Contribuição secundária | CP | VN | RFs relacionados | RNFs relacionados |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| OE01 | - | CP01 | VN01 | RF01, RF02, RF03, RF04, RF34, RF35, RF36, RF37, RF38 | RNF01, RNF03, RNF04, RNF05, RNF06 |
+| OE01 | - | CP01 | VN01 | RF01, RF02, RF03, RF04, RF34, RF35, RF36, RF37 | RNF01, RNF03, RNF04, RNF05 |
 | OE01 | - | CP02 | VN02 | RF05, RF06, RF07, RF08 | RNF01, RNF03, RNF05 | 
-| OE01 | - | CP03 | VN03 | RF43, RF44, RF45 | RNF01, RNF02, RNF04, RNF06 |
-| OE02 | OE04 | CP04 | VN04 | RF09, RF10, RF11, RF12, RF13 | RNF01, RNF02, RNF04, RNF06 |
-| OE02 | OE04 | CP05 | VN05 | RF14, RF15, RF16 | RNF03, RNF04, RNF05 |
-| OE03 | - | CP06 | VN06 | RF17, RF18, RF19, RF20 | RNF01, RNF02, RNF06 |
+| OE01 | - | CP03 | VN03 | RF13, RF16, RF17, RF27 | RNF01, RNF02, RNF04 |
+| OE02 | OE04 | CP04 | VN04 | RF09, RF10, RF11, RF12 | RNF01, RNF02, RNF04 |
+| OE02 | OE04 | CP05 | VN05 | RF14, RF15 | RNF03, RNF04, RNF05 |
+| OE03 | - | CP06 | VN06 | RF18, RF19, RF20 | RNF01, RNF02 |
 | OE03 | - | CP07 | VN07 | RF21, RF22, RF23, RF24 | RNF01, RNF02, RNF03, RNF05 |
-| OE04 | OE01 | CP08 | VN08 | RF25, RF26, RF27, RF28, RF29, RF39, RF40, RF41, RF42 | RNF01, RNF03, RNF05 |
+| OE04 | OE01 | CP08 | VN08 | RF25, RF26, RF28, RF29 | RNF01, RNF03, RNF05 |
 | OE04 | OE02 | CP09 | VN09 | RF30, RF31, RF32, RF33 | RNF03, RNF04, RNF05 |
