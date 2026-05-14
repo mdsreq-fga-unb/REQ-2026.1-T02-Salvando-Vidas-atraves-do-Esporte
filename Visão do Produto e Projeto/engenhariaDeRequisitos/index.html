@@ -480,10 +480,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#41-atividades-e-tecnicas-de-er" class="md-nav__link">
+  <a href="#51-atividades-e-tecnicas-de-er" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 Atividades e Técnicas de ER
+        5.1 Atividades e Técnicas de ER
       
     </span>
   </a>
@@ -491,10 +491,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#42-engenharia-de-requisitos-e-o-rad" class="md-nav__link">
+  <a href="#52-engenharia-de-requisitos-e-o-rad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 Engenharia de Requisitos e o RAD
+        5.2 Engenharia de Requisitos e o RAD
       
     </span>
   </a>
@@ -553,6 +553,34 @@
     
   
     7. Interação entre Equipe e Cliente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RfsERnfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Requisitos de Software
   
 
     
@@ -847,10 +875,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#41-atividades-e-tecnicas-de-er" class="md-nav__link">
+  <a href="#51-atividades-e-tecnicas-de-er" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 Atividades e Técnicas de ER
+        5.1 Atividades e Técnicas de ER
       
     </span>
   </a>
@@ -858,10 +886,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#42-engenharia-de-requisitos-e-o-rad" class="md-nav__link">
+  <a href="#52-engenharia-de-requisitos-e-o-rad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 Engenharia de Requisitos e o RAD
+        5.2 Engenharia de Requisitos e o RAD
       
     </span>
   </a>
@@ -889,43 +917,64 @@
 
 
 <h1 id="engenharia-de-requisitos">Engenharia de Requisitos</h1>
-<h2 id="41-atividades-e-tecnicas-de-er">4.1 Atividades e Técnicas de ER</h2>
-<p>Abaixo, detalhamos as atividades da Engenharia de Requisitos (ER) associadas às técnicas que serão utilizadas no contexto do RAD, cujo foco é o engajamento contínuo do cliente por meio de prototipagem e desenvolvimento em ciclos curtos</p>
+<h2 id="51-atividades-e-tecnicas-de-er">5.1 Atividades e Técnicas de ER</h2>
+<p>Abaixo, detalhamos as atividades da Engenharia de Requisitos (ER) associadas às técnicas que serão utilizadas no contexto do RAD, cujo foco é o engajamento contínuo do cliente por meio de prototipagem e desenvolvimento em ciclos curtos.</p>
 <p><strong>Planejamento de Requisitos</strong></p>
 <ul>
 <li>
-<p><strong>Elicitações e Descoberta:</strong></p>
+<p><strong>Elicitação e Descoberta:</strong></p>
 <ul>
-<li><strong>Workshop JAD (Joint Application Design):</strong> Sessões de trabalho colaborativo e intensivo envolvendo a equipe de desenvolvimento, o cliente e os usuários finais para levantar rapidamente as necessidades de negócio, mapear as funcionalidades centrais do sistema e alinhas as expectativas gerais do sistema.</li>
-<li><strong>Entrevistas e Brainstorming:</strong> Utilizadas no início do projeto e a cada iteração para capturar as dores do usuários e propor soluções em conjunto com os stakeholders.</li>
+<li><strong>Workshop JAD (Joint Application Design) adaptado ao contexto do projeto:</strong> Sessões de trabalho colaborativo envolvendo a equipe de desenvolvimento, o cliente e os usuários finais para levantar rapidamente as necessidades de negócio, mapear as funcionalidades centrais do sistema e alinhar as expectativas gerais do projeto.</li>
+<li><strong>Entrevistas e Brainstorming:</strong> Utilizados no início do projeto e a cada iteração para capturar as dores dos usuários e propor soluções em conjunto com os stakeholders.</li>
 </ul>
 </li>
 <li>
 <p><strong>Análise e Consenso:</strong></p>
 <ul>
-<li><strong>Priorização MoSCoW:</strong> Técnica de priorização compatível com ambientes iterativos como o RAD, responsável por classificar os requisitos em <em>Must have</em> (essenciais para o protótipo/MVP), <em>Should have</em>, <em>Could have</em> e <em>Won't have</em>, garantindo que a equipe foque no que gera mais valor em menos tempo.</li>
-<li><strong>Timeboxing:</strong> Alinhado à natureza iterativa do RAD, consiste na fixação de prazos rigorosos para cada fase de prototipagem e construção, assegurando que o escopo caiba no tempo de desenvolvimento estipulado e auxiliando a equipe e o cliente a chegarem a um consenso sobre o que é essencial e factível em cada iteração.</li>
+<li><strong>Priorização MoSCoW:</strong> Técnica de priorização compatível com ambientes iterativos como o RAD, responsável por classificar os requisitos em <em>Must have</em> (essenciais para o protótipo/MVP), <em>Should Have</em>, <em>Could Have</em> e <em>Won't Have</em>, garantindo que a equipe foque no que gera mais valor em menos tempo.</li>
+<li><strong>Matriz Avaliação Técnica × Valor de Negócio:</strong> Para ir além do MoSCoW, esta técnica posiciona os requisitos cruzando o valor percebido pelo cliente com a complexidade/esforço técnico estimado pela equipe, permitindo identificar entregas de alto valor e organizando o esforço de forma mais realista.<ul>
+<li>Para definir o eixo de esforço técnico de forma colaborativa, a equipe utilizará o <strong>Planning Poker</strong> como técnica auxiliar: uma estimativa ágil baseada em consenso onde os requisitos são debatidos, votados simultaneamente em complexidade usando a sequência modificada de Fibonacci (1,2, 3, 5, 8, 13, ...), e as divergências são discutidas até o consenso, garantindo uma avaliação realista e democrática antes de organizar as entregas na matriz.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
 <p><strong>Declaração de Requisitos:</strong></p>
 <ul>
-<li><strong>Temas, Épicos e User Stories (Histórias de Usuário) e Critérios de Aceitação:</strong> Como complemento à abordagem de prototipação do RAD e para dar suporte ao caráter ágil da abordagem híbrida, os requisitos podem ser organizados em temas e épicos e detalhados no formato de histórias focadas no usuário, acompanhadas de critérios de aceitação claros (Definition of Ready e Definition of Done). Essa estrutura auxilia na organização do backlog inicial e no alinhamento com os stakeholders, especialmente usuários com baixo letramento digital.</li>
-</ul>
-</li>
-</ul>
-<p><strong>Design do Usuário (Prototipagem iterativa)</strong></p>
-<ul>
-<li>
-<p><strong>Representação de Requisitos:</strong></p>
-<ul>
-<li><strong>Prototipagem Rápida (Wireframes e Mockups):</strong> No RAD, a representação visual é a técnica central para tornar os requisitos concretos, visíveis e validáveis.Consiste na criação iterativa de protótipos de interface, telas e fluxos navegáveis, que servem como principal modelo visual para que os stakeholders compreendam, validem e refinem a solução antes do desenvolvimento completo.</li>
+<li><strong>Temas, Épicos, User Stories (Histórias de Usuário) e Critérios de Aceitação:</strong> Como complemento à abordagem de prototipação do RAD e para dar suporte ao caráter ágil da abordagem híbrida, os requisitos são organizados em temas e épicos, e detalhados em histórias focadas no usuário. As histórias possuem os seus próprios Critérios de Aceitação (condições que o requisito deve atender para ser considerado válido). Separadamente, para gerenciar o fluxo de trabalho, a equipe utiliza políticas de entrada e saída, como a <em>Definition of Ready (DoR)</em> e a <em>Definition of Done (DoD)</em>. Essa estrutura é essencial, pois auxilia na organização do backlog inicial e no alinhamento com os stakeholders, especialmente usuários com baixo letramento digital.</li>
 </ul>
 </li>
 <li>
 <p><strong>Verificação e Validação de Requisitos:</strong></p>
 <ul>
-<li><strong>Validação de Protótipos com o Cliente:</strong> Sessões onde os <em>protótipos</em> são testados em sessões nas quais o cliente interage diretamente com as interfaces e fluxos propostos. O feedback imediato, obtido de forma visual e prática, permite validar se o entendimento dos requisitos, incluindo as histórias de usuário associadas está correta e alinhada às necessidades reais.</li>
+<li><strong>V&amp;V Contínua e Iterativa:</strong> Avaliação para garantir que os requisitos estão estruturalmente corretos (verificação) e atendem às reais necessidades de negócio (validação). No RAD, essa prática não se limita ao início do projeto; ela ocorre a cada iteração, em trabalho conjunto entre a equipe e os clientes, mantendo o alinhamento constante das expectativas. </li>
+</ul>
+</li>
+<li>
+<p><strong>Organização e Atualização:</strong></p>
+<ul>
+<li><strong>Matriz de Rastreabilidade:</strong> Estruturação do backlog e garantia da rastreabilidade explícita dos requisitos. Para manter a coerência do que será construído, a equipe utilizará o mapeamento contínuo seguindo a cadeia de rastreabilidade: <em>OE</em> (Objetivos Específicos) - <em>CP</em> (Característica do Produto) - <em>requisito/user story</em> - <em>critério de aceitação</em> - <em>protótipo</em> - <em>validação</em> - <em>entrega</em>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Design do Usuário (Prototipagem Iterativa)</strong></p>
+<ul>
+<li>
+<p><strong>Análise e Consenso:</strong> Negociação contínua com os stakeholders sobre quais funcionalidades farão parte do protótipo atual, avaliando trade-offs entre usabilidade e viabilidade técnica.</p>
+</li>
+<li>
+<p><strong>Declaração de Requisitos:</strong> Atualização das histórias de usuário e criação de novos critérios de aceitação à medida que a interação com o protótipo exige refinamentos textuais e técnicos.</p>
+</li>
+<li>
+<p><strong>Representação de Requisitos:</strong></p>
+<ul>
+<li><strong>Prototipagem Rápida (Wireframes e Mockups):</strong> No RAD, a representação visual é a técnica central para tornar os requisitos concretos, visíveis e validáveis. Consiste na criação iterativa de protótipos de interface, telas e fluxos navegáveis, que servem como principal modelo visual para que os stakeholders compreendam, validem e refinem a solução antes do desenvolvimento completo.</li>
+</ul>
+</li>
+<li>
+<p><strong>Verificação e Validação de Requisitos:</strong></p>
+<ul>
+<li><strong>Validação de Protótipos com o Cliente:</strong> Sessões onde os <em>protótipos</em> são testados em sessões nas quais o cliente interage diretamente com as interfaces e fluxos propostos. O feedback imediato, obtido de forma visual e prática, permite validar se o entendimento dos requisitos, incluindo as histórias de usuário associadas, está correto e alinhado às necessidades reais.</li>
 </ul>
 </li>
 <li>
@@ -946,18 +995,18 @@
 <li>
 <p><strong>Verificação e Validação de Requisitos:</strong></p>
 <ul>
-<li><strong>Checklist e Revisão de Critérios de Aceitação:</strong> Verificação técnica realizada ao final de cada ciclo de construção rápida, assegurando que o incremento de software atende aos critérios de aceitação definidos e à Definition of Done (DoD), validando o comportamento esperado e o alinhamento com a história de usuário associada.</li>
+<li><strong>Verificação (Checklists e Revisão Técnica):</strong> Verificação técnica realizada ao final de cada ciclo de construção rápida, a equipe realiza a aplicação de checklists internos e a revisão contra a Definition of Done (DoD) para atestar que o incremento foi construído de forma correta, consistente e testável. </li>
 </ul>
 </li>
 </ul>
 <p><strong>Transição (Cutover)</strong></p>
 <ul>
 <li><strong>Verificação e Validação de Requisitos:</strong><ul>
-<li><strong>Teste de Aceitação pelo Cliente (UAT) / Homologação:</strong> Validação final do sistema consolidado com o cliente e usuários em ambiente de homologação, garantindo que o produto atende às necessidades que motivaram o projeto antes do lançamento oficial.</li>
+<li><strong>Validação Final (Homologação / UAT Final):</strong> Validação definitiva do sistema consolidado. Acontece diretamente com o cliente e usuários finais em um ambiente de homologação. Enquanto as fases de "Design" e "Construção Rápida" validavam protótipos e incrementos a cada ciclo, esta etapa garante que o produto completo soluciona o problema real e atende aos Objetivos Específicos (OE) que motivaram o projeto. É a confirmação que encerra a cadeia de rastreabilidade, autorizando a entrega e o lançamento oficial da solução.</li>
 </ul>
 </li>
 </ul>
-<h2 id="42-engenharia-de-requisitos-e-o-rad">4.2 Engenharia de Requisitos e o RAD</h2>
+<h2 id="52-engenharia-de-requisitos-e-o-rad">5.2 Engenharia de Requisitos e o RAD</h2>
 <table>
 <thead>
 <tr>
@@ -979,58 +1028,86 @@
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Análise e Consenso</td>
-<td style="text-align: left;">Definição de Escopo e Prioridade</td>
-<td style="text-align: left;">Priorização MoSCoW, Timeboxing</td>
-<td style="text-align: left;">Requisitos críticos (Must have) priorizados e acordados para o primeiro protótipo, limitados pelo prazo.</td>
+<td style="text-align: left;">Definição de Escopo, Prioridade e Esforço Técnico</td>
+<td style="text-align: left;">Priorização MoSCoW, Matriz Avaliação Técnica × Valor de Negócio (Planning Poker auxiliar)</td>
+<td style="text-align: left;">Requisitos críticos (Must have) priorizados, avaliados e acordados para o primeiro protótipo</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Declaração de Requisitos</td>
 <td style="text-align: left;">Registro Inicial de Requisitos</td>
-<td style="text-align: left;">Temas, Épicos e User Stories</td>
-<td style="text-align: left;">Backlog inicial estruturado com histórias focadas nas necessidades do usuário.</td>
+<td style="text-align: left;">Temas, Épicos, User Stories, Critérios de Aceitação, DoR e DoD</td>
+<td style="text-align: left;">Backlog inicial estruturado com histórias focadas nas necessidades do usuário, com políticas de entrada e saída definidas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Verificação e Validação</td>
+<td style="text-align: left;">V&amp;V Contínua e Iterativa</td>
+<td style="text-align: left;">Alinhamento contínuo com stakeholders</td>
+<td style="text-align: left;">Requisitos estruturalmente corretos e validados quanto ao atendimento das necessidades de negócio desde o início.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Organização e Atualização</td>
+<td style="text-align: left;">Estruturação de Rastreabilidade</td>
+<td style="text-align: left;">Matriz de Rastreabilidade (OE - CP - requisito - critério - protótipo - validação - entrega)</td>
+<td style="text-align: left;">Cadeia de rastreabilidade explícita garantindo coerência entre objetivos específicos e entregas.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Design do Usuário (Prototipagem Iterativa)</td>
+<td style="text-align: left;">Análise e Consenso</td>
+<td style="text-align: left;">Negociação Contínua com Stakeholders</td>
+<td style="text-align: left;">Trade-offs entre usabilidade e viabilidade técnica</td>
+<td style="text-align: left;">Definição clara das funcionalidades que farão parte do protótipo atual.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Declaração de Requisitos</td>
+<td style="text-align: left;">Refinamento de Histórias</td>
+<td style="text-align: left;">Atualização contínua de histórias de usuário e critérios de aceitação</td>
+<td style="text-align: left;">Histórias refinadas e ajustadas conforme interações com protótipos.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
 <td style="text-align: left;">Representação de Requisitos</td>
 <td style="text-align: left;">Criação de Interfaces Visuais</td>
 <td style="text-align: left;">Prototipagem Rápida (Wireframes e Mockups)</td>
-<td style="text-align: left;">Protótipos de interface e fluxos navegáveis desenvolvidos para avaliação visual do cliente.</td>
+<td style="text-align: left;">Protótipos de interface e fluxos navegáveis desenvolvidos iterativamente para avaliação visual do cliente.</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Verificação e Validação</td>
 <td style="text-align: left;">Avaliação com Stakeholders</td>
 <td style="text-align: left;">Validação de Protótipos com o Cliente</td>
-<td style="text-align: left;">Confirmação visual de que o design atende à história de usuário antes da codificação.</td>
+<td style="text-align: left;">Confirmação visual de que o design atende às histórias de usuário e necessidades reais antes da codificação.</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Elicitação e Descoberta</td>
 <td style="text-align: left;">Refinamento Iterativo</td>
-<td style="text-align: left;">Refinamento Iterativo (Sessões JAD Contínuas)</td>
-<td style="text-align: left;">Novos requisitos ou ajustes detalhados a partir da interação do cliente com os protótipos.</td>
+<td style="text-align: left;">Sessões JAD Contínuas</td>
+<td style="text-align: left;">Novos requisitos ou ajustes detalhados a partir da interação visual do cliente com os protótipos.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Construção Rápida (Iterativa)</td>
 <td style="text-align: left;">Organização e Atualização</td>
-<td style="text-align: left;">Manutenção do Backlog</td>
+<td style="text-align: left;">Manutenção Contínua do Backlog</td>
 <td style="text-align: left;">Gerenciamento e Refinamento de Backlog (Grooming)</td>
-<td style="text-align: left;">Histórias de usuário detalhadas, estimadas e ajustadas no backlog (DEEP) conforme as mudanças da fase de design.</td>
+<td style="text-align: left;">Histórias de usuário detalhadas, estimadas e ajustadas no backlog (DEEP) conforme mudanças da fase de design.</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Verificação e Validação</td>
-<td style="text-align: left;">Testes de Funcionalidade</td>
-<td style="text-align: left;">Revisão de Critérios de Aceitação e Checklist</td>
-<td style="text-align: left;">Incremento de software construído rapidamente verificado contra a Definition of Done (DoD).</td>
+<td style="text-align: left;">Verificação Técnica</td>
+<td style="text-align: left;">Revisão de Critérios de Aceitação, Checklists e Definition of Done (DoD)</td>
+<td style="text-align: left;">Incremento de software construído rapidamente verificado quanto à correção, consistência e testabilidade.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Transição (Cutover)</td>
 <td style="text-align: left;">Verificação e Validação</td>
 <td style="text-align: left;">Homologação Final</td>
-<td style="text-align: left;">Teste de Aceitação pelo Cliente (UAT) / Homologação</td>
-<td style="text-align: left;">Produto consolidado validado no ambiente de homologação e aprovado para lançamento oficial.</td>
+<td style="text-align: left;">Validação Final (Teste de Aceitação pelo Cliente - UAT / Homologação)</td>
+<td style="text-align: left;">Produto consolidado validado no ambiente de homologação com aprovação para lançamento oficial.</td>
 </tr>
 </tbody>
 </table>
