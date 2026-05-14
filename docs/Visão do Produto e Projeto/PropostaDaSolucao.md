@@ -21,13 +21,13 @@ No quadro abaixo estão registradas as principais características do produto, r
 | :-: | :--- | :-: | :--- | :---: | :---: |
 | CP01 | Cadastro centralizado de perfis de alunos. | VN01 | Eliminar erros de registro e assegurar precisão cadastral. | OE01 | - |
 | CP02 | Gestão de vínculos legais e contatos dos responsáveis. | VN02 | Fortalecer a comunicação institucional e responsabilidade. | OE01 | - |
-| CP03 (CP09) | Painel de Bordo (Dashboard) e Alertas Centralizados. | VN03 (VN09) | Acelerar a identificação de prioridades diárias através de visões consolidadas. | OE01 | - |
-| CP04 (CP03) | Interface para registro diário de presenças em tempo real. | VN04(VN03) | Garantir a precisão estatística da participação. | OE02 | OE04 |
-| CP05(CP04) | Mecanismo de análise de dados para detecção precoce de riscos. | VN05(VN04) | Mitigar taxas de evasão através de intervenções ágeis. | OE02 | OE04 |
-| CP06(CP05) | Estrutura de estoque e fluxo de entrada/saída de materiais. | VN06(VN05) | Assegurar o controle rigoroso da disponibilidade de recursos. | OE03 | - |
-| CP07(CP06) | Sistema de controle de posse, empréstimos e devoluções. | VN07(VN06) | Minimizar perdas de ativos e garantir rotatividade justa. | OE03 | - |
-| CP08(CP07) | Banco de registro cronológico de ocorrências pedagógicas. | VN08(VN07) | Institucionalizar a memória do progresso do aluno. | OE04 | OE01 |
-| CP09(CP08) | Módulo de extração de relatórios e indicadores sociais. | VN09(VN08) | Qualificar a transparência para prestação de contas. | OE04 | OE02 |
+| CP03 | Painel de Bordo (Dashboard) e Alertas Centralizados. | VN03 | Acelerar a identificação de prioridades diárias através de visões consolidadas. | OE01 | - |
+| CP04 | Interface para registro diário de presenças em tempo real. | VN04 | Garantir a precisão estatística da participação. | OE02 | OE04 |
+| CP05 | Mecanismo de análise de dados para detecção precoce de riscos. | VN05 | Mitigar taxas de evasão através de intervenções ágeis. | OE02 | OE04 |
+| CP06 | Estrutura de estoque e fluxo de entrada/saída de materiais. | VN06 | Assegurar o controle rigoroso da disponibilidade de recursos. | OE03 | - |
+| CP07 | Sistema de controle de posse, empréstimos e devoluções. | VN07| Minimizar perdas de ativos e garantir rotatividade justa. | OE03 | - |
+| CP08 | Banco de registro cronológico de ocorrências pedagógicas. | VN08 | Institucionalizar a memória do progresso do aluno. | OE04 | OE01 |
+| CP09 | Módulo de extração de relatórios e indicadores sociais. | VN09| Qualificar a transparência para prestação de contas. | OE04 | OE02 |
 
 ## 2.4 Tecnologias a Serem Utilizados
 
