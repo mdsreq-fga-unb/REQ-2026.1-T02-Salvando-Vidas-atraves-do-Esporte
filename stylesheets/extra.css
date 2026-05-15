@@ -166,3 +166,32 @@
     white-space: pre-wrap;
     text-align: center;
 }
+
+/* Layout for the legend container */
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--md-default-bg-color--light);
+    border-radius: 0.2rem;
+}
+
+/* Individual label alignment */
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+/* The tiny colored square */
+.legend-color {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 4px;
+    border: 1px solid rgba(128, 128, 128, 0.3); /* Adds a subtle border so the white "dia-vazio" box is visible */
+}
