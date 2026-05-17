@@ -2,7 +2,7 @@
 
 Este cronograma detalha o planejamento semestral das atividades, estruturado para percorrer todas as fases do projeto. O fluxo de trabalho adota uma **abordagem híbrida** com ciclo de vida **iterativo-incremental**, fundamentado no processo **RAD (Rapid Application Development)** para assegurar entregas rápidas e alinhadas às necessidades reais do cliente.
 
-A execução baseia-se no engajamento contínuo: a equipe realiza **reuniões internas às terças e quintas-feiras** para alinhamento técnico, além de manter uma cadência de **reuniões presenciais com o cliente** aproximadamente a cada 14 dias para validação e refinamento de requisitos. Interações online suplementares podem ocorrer conforme a necessidade, embora não estejam registradas formalmente neste cronograma.
+A execução baseia-se no engajamento contínuo: a equipe realiza **reuniões internas às terças e/ou quintas-feiras** para alinhamento técnico, além de manter uma cadência de **reuniões online com o cliente** aproximadamente a cada 14 dias para validação e refinamento de requisitos, poderão ocorrer interações presenciais suplementares (podendo estar ou não registradas formalmente neste cronograma).
 
 ---
 
