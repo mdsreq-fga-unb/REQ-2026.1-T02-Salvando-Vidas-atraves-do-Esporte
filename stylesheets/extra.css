@@ -136,17 +136,22 @@
     color: black;
 }
 
+.md-typeset .grid > .card {
+    padding: 0.15rem;
+}
+
 .calendar-grid .card.weekday-card {
     min-height: 50px; /* Overrides the 120px height to make them much shorter */
     justify-content: center; /* Centers the text vertically */
     align-items: center; /* Centers the text horizontally */
     text-align: center;
     background-color: var(--md-default-bg-color--light);
+    font-size: 0.75rem;
 }
 
 .grid.calendar-grid {
-    grid-template-columns: repeat(7, minmax(150px, 1fr));
-    gap: 0.25rem;
+    grid-template-columns: repeat(7, minmax(100px, 1fr));
+    gap: 0.15rem;
     overflow-x: auto;
     padding-bottom: 10px;
 }
@@ -155,12 +160,13 @@
     min-height: 120px;
     display: flex;
     flex-direction: column;
+    font-size: 0.7rem;
 }
 
 .calendar-grid .card pre {
     margin-top: 0.5rem;
     margin-bottom: 0;
-    padding: 0.4rem;
+    padding: 0rem;
     font-size: 0.75em;
     overflow-x: auto;
     white-space: pre-wrap;
