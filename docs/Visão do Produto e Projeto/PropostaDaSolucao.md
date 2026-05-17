@@ -19,15 +19,15 @@ No quadro abaixo estão registradas as principais características do produto, r
 
 | ID | Descrição resumida | ID | Valor de negócio principal | OE principal | Contribuição secundária |
 | :-: | :--- | :-: | :--- | :---: | :---: |
-| CP01 | Cadastro centralizado de perfis de alunos. | VN01 | Eliminar erros de registro e assegurar precisão cadastral. | OE01 | - |
-| CP02 | Gestão de vínculos legais e contatos dos responsáveis. | VN02 | Fortalecer a comunicação institucional e responsabilidade. | OE01 | - |
-| CP03 | Painel de Bordo (Dashboard) e Alertas Centralizados. | VN03 | Acelerar a identificação de prioridades diárias através de visões consolidadas. | OE01 | - |
-| CP04 | Interface para registro diário de presenças em tempo real. | VN04 | Garantir a precisão estatística da participação. | OE02 | OE04 |
-| CP05 | Mecanismo de análise de dados para detecção precoce de riscos. | VN05 | Mitigar taxas de evasão através de intervenções ágeis. | OE02 | OE04 |
-| CP06 | Estrutura de estoque e fluxo de entrada/saída de materiais. | VN06 | Assegurar o controle rigoroso da disponibilidade de recursos. | OE03 | - |
-| CP07 | Sistema de controle de posse, empréstimos e devoluções. | VN07| Minimizar perdas de ativos e garantir rotatividade justa. | OE03 | - |
-| CP08 | Banco de registro cronológico de ocorrências pedagógicas. | VN08 | Institucionalizar a memória do progresso do aluno. | OE04 | OE01 |
-| CP09 | Módulo de extração de relatórios e indicadores sociais. | VN09| Qualificar a transparência para prestação de contas. | OE04 | OE02 |
+| CP01 | Gestão cadastral de alunos e responsáveis | VN01 | Assegurar a integridade cadastral e os vínculos entre alunos e responsáveis | OE01 | - |
+| CP02 | Gestão de usuários e acesso ao sistema | VN02 | Garantir controle e segurança no acesso ao sistema | OE01 | - |
+| CP03 | Painel de Bordo (Dashboard) e Alertas Centralizados | VN03 | Acelerar a identificação de prioridades diárias através de visões consolidadas | OE01 | OE04 |
+| CP04 | Interface para registro diário de presenças em tempo real | VN04 | Garantir a precisão estatística da participação | OE02 | OE04 |
+| CP05 | Gestão de participação em turmas e campeonatos | VN05 | Fortalecer o acompanhamento de participação dos alunos nas atividades esportivas | OE02 | OE04 |
+| CP06 | Estrutura de estoque e fluxo de entrada/saída de materiais | VN06 | Assegurar o controle da disponibilidade de recursos | OE03 | - |
+| CP07 | Sistema de controle de posse, empréstimos e devoluções | VN07 | Minimizar perdas de ativos e garantir rotatividade justa | OE03 | - |
+| CP08 | Banco de registro cronológico de ocorrências pedagógicas | VN08 |Assegurar o registro histórico do acompanhamento pedagógico| OE04 | OE01 |
+| CP09 | Módulo de indicadores sociais e análise estratégica | VN09 | Apoiar a tomada de decisão através de indicadores sociais| OE04 | OE02 |
 
 ## 2.4 Tecnologias a Serem Utilizados
 
