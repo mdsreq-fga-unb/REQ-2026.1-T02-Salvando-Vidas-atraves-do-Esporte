@@ -46,6 +46,38 @@ A Unidade 1 foi um período de adaptação intensa, marcado pela formação de u
 
 ## 11.2 Unidade 2
 
+### Lições Aprendidas e Melhorias para o Processo
+
+1. Criação e Gestão do Backlog
+
+    **Desafio:** A equipe teve dificuldade em organizar e priorizar o backlog inicialmente — havia incerteza sobre o escopo, falta de critérios de prioridade e pouca experiência em decompor épicos em histórias menores.
+
+    **Lição:** Um backlog precisa ser vivo e iterativo; sem critérios claros e sessões regulares de refinamento, itens importantes se perdem ou viram tarefas mal definidas.
+
+    **Ação de Melhoria:** Estudamos e aplicamos práticas de RAD para elaborar o backlog, estruturando épicos, histórias de usuário e tarefas menores. Definir critérios de priorização (por exemplo MoSCoW ou valor/risco), realizar reuniões de refinement periódicas, usar estimativas relativas (story points) e dividir épicos em histórias de usuário testáveis. 
+
+2. Declaração e Formalização de Requisitos
+
+    **Desafio:** A equipe encontrou dificuldades em declarar requisitos de forma clara e verificável — requisitos ambíguos, mistura de solução com necessidade e ausência de critérios de aceite dificultaram o desenvolvimento e a validação com o cliente.
+
+    **Lição:** Requisitos bem escritos reduzem retrabalho e mal-entendidos; separar necessidade do detalhamento da solução facilita a negociação com o cliente e a implementação técnica.
+
+    **Ação de Melhoria:** Passar a usar user stories no formato "Como <persona>, quero <ação>, para <valor>", sempre acompanhadas de critérios de aceitação claros. Manter um checklist de qualidade de requisito (clareza, testabilidade, prioridade, dependências), registrar suposições/ restrições e validar requisitos com protótipos rápidos e revisões com o cliente.
+
+### Dificuldades e Ações para Superá-las
+
+1. Falta de experiência em priorização
+
+    **Como superar:** Realizar um workshop de priorização com a equipe e o cliente; estabelecer regras de decisão e documentar prioridades.
+
+2. Ambiguidade nos requisitos
+
+    **Como superar:** Criar templates e exemplos padrão de user stories e critérios de aceite; promover revisões curtas de requisitos antes do desenvolvimento.
+
+3. Integração do backlog com o planejamento
+
+    **Como superar:** Vincular o backlog ao roadmap/incrementos do cronograma, garantindo entregas menores e feedbacks contínuos do cliente.
+
 ## 11.3 Unidade 3
 
 ## 11.4 Unidade 4
