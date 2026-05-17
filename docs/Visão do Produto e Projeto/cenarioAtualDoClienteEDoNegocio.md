@@ -22,13 +22,13 @@
 | 1.1.6 | 07/05/2026 | Estilização do calendário | José A. |
 | 1.2 | 10/05/2026 | Correções Engenharia de Requisitos | Pedro L. |
 | 1.2.1 | 10/05/2026 | Correções dos números dos tópicos | Pedro L. |
-| 1.3 | 10/05/2026 | Correções dos números dos tópicos | Pedro L. |
-| 1.4 | 11/05/2026 | Correções Interação entre Equipe e Cliente | Júlia G. |
-| 1.5 | 13/05/2026 | Correção geral dos requisitos | Giovani de O.; José A.; Júlia G. Lucas O.; Pedro L. |
-| 1.6 | 14/05/2026 | Generalização do DoD | Pedro L. |
+| 1.3 | 11/05/2026 | Correções Interação entre Equipe e Cliente | Júlia G. |
+| 1.4 | 13/05/2026 | Correção geral dos requisitos | Giovani de O.; José A.; Júlia G. Lucas O.; Pedro L. |
+| 1.5 | 14/05/2026 | Generalização do DoD | Pedro L. |
 | 1.6.1 | 14/05/2026 | Criação documento Backlog | Pedro L. |
 | 1.7 | 16/05/2026 | Correção geral dos requisitos e adição da árvore de rastreabilidade | Giovani de O.; José A.; Pedro L. |
-| 1.8 | 17/05/2026 | Adiciona tabela cronograma | Pedro L. |
+| 1.8 | 17/05/2026 | Adiciona a sessão de priorização do backlog geral | José A. |
+| 1.9 | 17/05/2026 | Adiciona tabela cronograma | Pedro L. |
 | 1.8.1 | 17/05/2026 | Corrige links no cronograma | José A. |
 
 # 1. Cenário Atual do Cliente e do Negócio
