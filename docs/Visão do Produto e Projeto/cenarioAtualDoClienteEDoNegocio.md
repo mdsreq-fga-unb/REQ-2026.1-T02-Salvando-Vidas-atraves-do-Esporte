@@ -30,6 +30,9 @@
 | 1.8 | 17/05/2026 | Adiciona a sessão de priorização do backlog geral | José A. |
 | 1.9 | 17/05/2026 | Adiciona tabela cronograma | Pedro L. |
 | 1.9.1 | 17/05/2026 | Corrige links no cronograma | José A. |
+| 2.0 | 17/05/2026 | Inclui Backlog Geral | Júlia G. |
+| 2.1.1 | 17/05/2026 | Inclui Priorização do Backlog e MVP | José A. |
+| 2.1.2 | 17/05/2026 | Inclui Critérios de Aceitação do MVP | Júlia G. |
 
 # 1. Cenário Atual do Cliente e do Negócio
 

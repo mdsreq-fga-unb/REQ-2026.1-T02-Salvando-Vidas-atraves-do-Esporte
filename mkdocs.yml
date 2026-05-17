@@ -27,6 +27,7 @@ nav:
       - 10. Backlog do Produto:
           - 10.1 Backlog Geral: Visão do Produto e Projeto/10_1_backlog_geral.md
           - 10.2 Priorização Geral e MVP: Visão do Produto e Projeto/10_2_Priorizacao_MVP.md
+          - 10.3 Critérios de Aceitação do MVP: Visão do Produto e Projeto/10_3_criterios_aceitacao_MVP
       - 11. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
   - Entregas e Documentos:
       - "Entregas": Entregas/entregas.md
