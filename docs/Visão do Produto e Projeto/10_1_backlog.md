@@ -33,7 +33,7 @@ Antes do detalhamento granular, apresenta-se a síntese arquitetural do escopo d
 
 | ID da US | Épico | História de Usuário | RFs Relacionados | RNFs Relacionados |
 | :---: | :--- | :--- | :---: | :---: |
-| US-01 | Cadastro e Manutenção de Dados Cadastrais | Como **Coordenador**, quero registrar e buscar dados de alunos e responsáveis, para eliminar o uso de fichas de papel. | RF01, RF04 | - |
+| US-01 | Cadastro e Manutenção de Dados Cadastrais | Como **Coordenador**, quero registrar e buscar dados de alunos e responsáveis, para reduzir o uso de fichas de papel. | RF01, RF04 | - |
 | US-02 | Cadastro e Manutenção de Dados Cadastrais | Como **Coordenador**, quero editar dados de alunos e responsáveis e inativá-los quando saírem, para manter o cadastro organizado sem apagar o histórico. | RF02, RF03 | - |
 | US-03 | Vínculos entre Aluno e Responsável | Como **Coordenador**, quero vincular responsáveis a cada aluno, para saber com quem contatar quando necessário. | RF05 | - |
 | US-04 | Vínculos entre Aluno e Responsável | Como **Coordenador**, quero remover o vínculo entre aluno e responsável, para manter as informações de tutela sempre atualizadas. | RF06 | - |
