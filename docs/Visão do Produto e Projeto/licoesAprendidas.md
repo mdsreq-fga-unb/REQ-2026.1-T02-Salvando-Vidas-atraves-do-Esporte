@@ -86,6 +86,14 @@ A Unidade 1 foi um período de adaptação intensa, marcado pela formação de u
 
     **Como superar:** Vincular o backlog ao roadmap/incrementos do cronograma, garantindo entregas menores e feedbacks contínuos do cliente.
 
+4. Acompanhamento das Atividades e Ferramentas de Gestão
+
+    **Desafio:** O grupo teve dificuldades em acompanhar o progresso das atividades de forma centralizada; tarefas e responsabilidades ficaram dispersas, reduzindo a visibilidade do andamento.
+
+    **Lição:** Um quadro de acompanhamento bem estruturado facilita a coordenação, a responsabilização e o ajuste de prioridades em tempo hábil.
+
+    **Ação de Melhoria:** Planejamos utilizar com mais intensidade e eficiência o GitHub Projects para organizar o trabalho (boards, colunas e cartões) e vincular issues às tarefas. Também vamos estabelecer rotações de revisão para manter o controle.
+
 ## 11.3 Unidade 3
 
 ## 11.4 Unidade 4
