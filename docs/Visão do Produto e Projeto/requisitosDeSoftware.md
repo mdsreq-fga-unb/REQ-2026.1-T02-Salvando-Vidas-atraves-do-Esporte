@@ -67,7 +67,7 @@ A seguir está a lista de requisitos não funcionais derivados das característi
 | RNF10 | Indicadores atualizados em menos de 3 segundos | Os indicadores e dashboards do sistema devem ser atualizados e refletir dados em tempo real em menos de 3 segundos após qualquer mudança nos dados. | Performance |
 
 !!! info "Requisitos não funcionais trânsversais :" 
-    **RNF05** e o **RNF06** se aplicam a todo o projeto
+    **RNF05** e o **RNF08** se aplicam a todo o projeto
 
 ## 8.3 Matriz-síntese de rastreabilidade
 
@@ -86,5 +86,7 @@ A matriz a seguir representa a rastreabilidade entre objetivos específicos (OE)
 | OE04 | OE02 | CP09 | VN09 | RF17, RF27, RF28, RF29 | - |
 
 ## 8.4 Árvore de Rastreabilidade
+
+A árvore de rastreabilidade visual apresenta as conexões entre os objetivos estratégicos, as características do produto, os valores de negócio e os requisitos funcionais e não funcionais, permitindo acompanhar como cada funcionalidade contribui para o valor de negócio do projeto.
 
 <iframe style="border: 2px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/Árvore-de-Rastreabilidade?embed-host=share" allowfullscreen></iframe>

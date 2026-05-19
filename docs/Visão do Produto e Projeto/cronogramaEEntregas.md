@@ -49,7 +49,7 @@ A execução baseia-se no engajamento contínuo: a equipe realiza **reuniões in
     | 01/04 | Resultado do Braistorming da sessão [R2 dia 24/04](#R2)
     | 02/04 | Criação do DoR e DoD <br> Adição da seção de Intervenção Social| 
     | 13/05 | Aplicação do Planning Poker para priorização do esforço em equipe |
-    | 14/05 - 17/05 (3 dias) | Refinamento da lista de requisitos <br> [Árvore de Rastreabilidade visual](./RfsERnfs.md#84-arvore-de-rastreabilidade)* <br> Matriz Avaliação Técnica × Valor de Negócio <br> priorização quantitativa do MVP | 
+    | 14/05 - 17/05 (3 dias) | Refinamento da lista de requisitos <br> [Árvore de Rastreabilidade visual](./requisitosDeSoftware.md#84-arvore-de-rastreabilidade) <br> Matriz Avaliação Técnica × Valor de Negócio <br> priorização quantitativa do MVP | 
     | 16/05 - 17/05 | Estruturação do Backlog |
     | 18/05 | Gravação da apresentação entrega 2 |
 
@@ -57,7 +57,7 @@ A execução baseia-se no engajamento contínuo: a equipe realiza **reuniões in
 
     | Iteração | Data | Atividade ER | Técnica | Descrição | Verificação e Validação |
     | - | - | - | - | - | - |
-    | <span id="R2"></span> R2 | 24/04 | Elicitação e Descoberta | Entrevistas e Brainstorming | Reunião com Cliente para alinhar escopo preliminar elicitado <br> Aplicação da técnica [Brainstorming](../Entregas/documentos.md#brainstorm---reuniao-24-04)* para descobrimento de mais requisitos | Verificação da lista preliminar das funcionalidades |
+    | <span id="R2"></span> R2 | 24/04 | Elicitação e Descoberta | Entrevistas e Brainstorming | Reunião com Cliente para alinhar escopo preliminar elicitado <br> Aplicação da técnica [Brainstorming](../Entregas/documentos.md#r2---brainstorm---reunião-2404) para descobrimento de mais requisitos | Verificação da lista preliminar das funcionalidades |
     | R3 | 08/05 | Elicitação e Descoberta <br> Análise e Consenso | Workshop JAD e MoSCoW <br> >Protótipos | Realização do Workshop JAD adaptado ao projeto com sessão reduzida baseada no formulário preenchido pelos clientes com foco nas funcionalidades <br> Apresentação do Protótipo de baixa fidelidade <br> Aplicação da priorização MoSCoW como parte final da sessão | Confirmação do entendimento das necessidades <br> Validação dos requisitos apresentados em forma de funcionalidades <br> Consenso mútuo entre os clientes <br> Sugestões sobre o protótipo |
     | R4 |14/05 | Análise e Consenso <br> Verificação e Validação | V&V Contínuo e Interativa | Reunião com coordenador e voluntários para validação do MVP <br> Apresentação protótipo de média fidelidade e proposta de Logo | Aceitação por parte dos clientes <br> Sugestões para refinamento dos protótipos |
     | E2 | 18/05 | - | - | Entrega 2 <br> Correções Fase 1 <br> Backlog Estruturado com Matriz de Avaliação Técnica × Valor de Negócio <br> Lista de Requisitos Funcionais e Não Funcionais <br> Árvore de Rastreabilidade | - |
