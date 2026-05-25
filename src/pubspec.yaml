@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.5+1
   flutter_background_service: ^5.1.0
   supabase_flutter: ^2.12.4
+  image_picker: ^1.2.2
 
 dev_dependencies:
   flutter_test:

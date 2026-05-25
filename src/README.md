@@ -107,3 +107,10 @@ flutter pub run build_runner build
 - Descrição: Mock do cliente Supabase
 - [Homepage](https://pub.dev/packages/mock_supabase_http_client)
 - [Documentação](https://pub.dev/documentation/mock_supabase_http_client/latest/)
+
+### image_picker
+
+- Descrição: Widget para pegar imagens do sistema ou cámera, usado para lidar
+  com as fotos dos alunos no cadastro.
+- [Homepage](https://pub.dev/packages/image_picker)
+- [Documentação](https://pub.dev/documentation/image_picker/latest/)
