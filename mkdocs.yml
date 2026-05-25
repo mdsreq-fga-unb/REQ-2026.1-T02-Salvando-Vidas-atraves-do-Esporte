@@ -5,8 +5,16 @@ repo_name: REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte
 
 theme:
   name: material
+  language: pt-BR
   palette:
-    scheme: slate
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 extra_css:
   - stylesheets/extra.css
@@ -41,13 +49,25 @@ nav:
 
 plugins:
   - include-markdown
+  - search
+  - panzoom:
+      full_screen: True
+      hint_location: "top"
+      include_selectors:
+        - "img"
 
 markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
+  - pymdownx.blocks.caption
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.emoji:

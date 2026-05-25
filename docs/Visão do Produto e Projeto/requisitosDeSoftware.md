@@ -89,4 +89,7 @@ A matriz a seguir representa a rastreabilidade entre objetivos específicos (OE)
 
 A árvore de rastreabilidade visual apresenta as conexões entre os objetivos estratégicos, as características do produto, os valores de negócio e os requisitos funcionais e não funcionais, permitindo acompanhar como cada funcionalidade contribui para o valor de negócio do projeto.
 
-<iframe style="border: 2px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/Árvore-de-Rastreabilidade?embed-host=share" allowfullscreen></iframe>
+![Árvore de Rastreabilidade](../assets/arvoreRastreabilidade.jpg){ width="800" }
+**Figura 4:** Árvore de Rastreabilidade. Fonte: Elaborada por Pedro Lucas
+
+<!--<iframe style="border: 2px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/Árvore-de-Rastreabilidade?embed-host=share" allowfullscreen></iframe>-->
