@@ -1,5 +1,3 @@
-# Guia Flutter
-
 ## Recursos de Aprendizado
 
 - [Documentação Dart](https://dart.dev/language)

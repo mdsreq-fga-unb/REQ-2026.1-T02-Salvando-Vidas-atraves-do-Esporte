@@ -1,12 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'routes.dart';
 
-import '../ui/home/view_models/home_view_models.dart';
+import '../ui/auth/login_page.dart';
 
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: Routes.home,
+  initialLocation: Routes.login,
   routes: [
-    GoRoute(path: Routes.home, builder: (context, state) => MyHomePage()),
+    GoRoute(path: Routes.login, builder: (context, state) => const LoginPage()),
   ],
 );

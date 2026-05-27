@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       title: "Salvando Vidas Através do Esporte",
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-        fontFamily: "Open Sans",
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2457F0)),
+        useMaterial3: true,
       ),
     );
   }
