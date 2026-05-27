@@ -13,8 +13,8 @@ O requisito deve ter sido avaliado pela equipe de desenvolvimento quanto à comp
 - **O requisito foi priorizado?**  
 O requisito deve ter sido priorizado pelos clientes utilizando a técnica MoSCoW, com a decisão documentada em ata ou vídeo e registrada no backlog.
 
-- **O requisito está claro?**  
-O requisito deve conter informações suficientes para que a equipe de desenvolvimento entenda exatamente o que precisa ser implementado, com os detalhes registrados em ata ou vídeo.
+- **O requisito está claro e delimitado?**
+O requisito deve definir o fluxo principal da funcionalidade, detalhando quais são as entradas necessárias, as saídas geradas pelo sistema e as restrições (o que o sistema não deve fazer). O alinhamento sobre essas definições deve estar registrado em ata ou vídeo.
 
 - **A *User Story* foi prototipada?**  
 Para *User Stories* que resultem no desenvolvimento de uma interface visual, deve haver um protótipo de baixa fidelidade associado a ela, o qual precisa ter sido previamente validado pelos clientes.
