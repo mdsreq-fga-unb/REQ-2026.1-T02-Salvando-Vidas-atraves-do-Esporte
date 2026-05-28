@@ -13,7 +13,7 @@ O requisito deve ter sido avaliado pela equipe de desenvolvimento quanto à comp
 - **O requisito foi priorizado?**  
 O requisito deve ter sido priorizado pelos clientes utilizando a técnica MoSCoW, com a decisão documentada em ata ou vídeo e registrada no backlog.
 
-- **O requisito está claro e delimitado?**
+- **O requisito está claro e delimitado?**  
 O requisito deve definir o fluxo principal da funcionalidade, detalhando quais são as entradas necessárias, as saídas geradas pelo sistema e as restrições (o que o sistema não deve fazer). O alinhamento sobre essas definições deve estar registrado em ata ou vídeo.
 
 - **A *User Story* foi prototipada?**  
@@ -38,7 +38,7 @@ A funcionalidade deve atender a todos os critérios de aceitação definidos na 
 O código produzido para a *User Story* deve ter sido revisado e aprovado via *Pull Request* por pelo menos um outro desenvolvedor da equipe.
 
 - **Os testes automatizados foram executados e passaram?**  
-Cada *User Story* trabalhada deve contar com testes unitários (no mínimo testes de caixa preta cobrindo as classes de equivalência válidas e inválidas) e testes de interface cobrindo o fluxo esperado de funcionamento. Tanto os testes recém-criados quanto os legados devem passar com sucesso. A execução deve ser documentada na *Issue* da *User Story* ou, caso não tenha sido realizada, o motivo deve ser detalhado.
+Cada *User Story* trabalhada deve contar com testes unitários (no mínimo testes de caixa preta cobrindo os fluxos de funcionamento válidos e inválidos) e testes de interface cobrindo o fluxo esperado de funcionamento. Tanto os testes recém-criados quanto os legados devem passar com sucesso. A execução deve ser documentada na *Issue* da *User Story* ou, caso não tenha sido realizada, o motivo deve ser detalhado.
 
 - **Os *workflows* do projeto foram executados com sucesso?**  
 Os *workflows* de *build* do projeto devem gerar os binários de instalação totalmente funcionais, tanto para *Android* quanto para *Windows*, além de disponibilizar a versão atualizada do site no *Vercel*. O *workflow* também deve criar uma *Release* automática no GitHub contendo os respectivos binários.
