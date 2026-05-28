@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../routing/routes.dart';
+import 'components/expansion_action_card.dart';
+import 'components/input_field.dart';
+import 'components/action_button.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -206,7 +209,7 @@ class _AdminPageState extends State<AdminPage> {
                       ),
                     ),
                     const SizedBox(height: 22),
-                    _ExpansionActionCard(
+                    ExpansionActionCard(
                       title: 'Cadastrar voluntários',
                       subtitle: 'Nome, contato e função do colaborador',
                       icon: Icons.groups_outlined,
@@ -217,14 +220,14 @@ class _AdminPageState extends State<AdminPage> {
                         key: _volunteerFormKey,
                         child: Column(
                           children: [
-                            _InputField(
+                            InputField(
                               controller: _volunteerNameController,
                               label: 'Nome do voluntário',
                               hint: 'Digite o nome completo',
                               validatorMessage: 'Informe o nome do voluntário',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _volunteerEmailController,
                               label: 'Email',
                               hint: 'Digite o email do voluntário',
@@ -232,7 +235,7 @@ class _AdminPageState extends State<AdminPage> {
                               validatorMessage: 'Informe o email do voluntário',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _volunteerPhoneController,
                               label: 'Telefone',
                               hint: 'Digite o telefone de contato',
@@ -240,14 +243,14 @@ class _AdminPageState extends State<AdminPage> {
                               validatorMessage: 'Informe o telefone',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _volunteerRoleController,
                               label: 'Função',
                               hint: 'Ex.: professor, monitor, apoio',
                               validatorMessage: 'Informe a função do voluntário',
                             ),
                             const SizedBox(height: 18),
-                            _ActionButton(
+                            ActionButton(
                               label: 'Salvar voluntário',
                               onPressed: _submitVolunteer,
                             ),
@@ -256,7 +259,7 @@ class _AdminPageState extends State<AdminPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _ExpansionActionCard(
+                    ExpansionActionCard(
                       title: 'Cadastrar turmas',
                       subtitle: 'Faixa etária, dias, horários e responsável',
                       icon: Icons.calendar_month_outlined,
@@ -267,21 +270,21 @@ class _AdminPageState extends State<AdminPage> {
                         key: _classFormKey,
                         child: Column(
                           children: [
-                            _InputField(
+                            InputField(
                               controller: _classNameController,
                               label: 'Nome da turma',
                               hint: 'Digite o nome ou identificação',
                               validatorMessage: 'Informe o nome da turma',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _classAgeGroupController,
                               label: 'Faixa etária',
                               hint: 'Ex.: 7 a 10 anos',
                               validatorMessage: 'Informe a faixa etária',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _classDaysController,
                               label: 'Dias da semana',
                               hint: 'Ex.: segunda e quarta',
@@ -291,7 +294,7 @@ class _AdminPageState extends State<AdminPage> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: _InputField(
+                                  child: InputField(
                                     controller: _classStartTimeController,
                                     label: 'Início',
                                     hint: '08:00',
@@ -301,7 +304,7 @@ class _AdminPageState extends State<AdminPage> {
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
-                                  child: _InputField(
+                                  child: InputField(
                                     controller: _classEndTimeController,
                                     label: 'Fim',
                                     hint: '10:00',
@@ -312,7 +315,7 @@ class _AdminPageState extends State<AdminPage> {
                               ],
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _classResponsibleController,
                               label: 'Professor voluntário responsável',
                               hint: 'Digite o nome do responsável',
@@ -320,7 +323,7 @@ class _AdminPageState extends State<AdminPage> {
                                   'Informe o professor voluntário responsável',
                             ),
                             const SizedBox(height: 18),
-                            _ActionButton(
+                            ActionButton(
                               label: 'Salvar turma',
                               onPressed: _submitClass,
                             ),
@@ -329,7 +332,7 @@ class _AdminPageState extends State<AdminPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _ExpansionActionCard(
+                    ExpansionActionCard(
                       title: 'Cadastrar alunos',
                       subtitle: 'Aluno, responsáveis e vínculo inicial',
                       icon: Icons.person_add_alt_1_outlined,
@@ -340,14 +343,14 @@ class _AdminPageState extends State<AdminPage> {
                         key: _studentFormKey,
                         child: Column(
                           children: [
-                            _InputField(
+                            InputField(
                               controller: _studentNameController,
                               label: 'Nome do aluno',
                               hint: 'Digite o nome completo do aluno',
                               validatorMessage: 'Informe o nome do aluno',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _studentBirthDateController,
                               label: 'Data de nascimento',
                               hint: 'DD/MM/AAAA',
@@ -356,7 +359,7 @@ class _AdminPageState extends State<AdminPage> {
                                   'Informe a data de nascimento do aluno',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _studentDocumentController,
                               label: 'Matrícula ou documento',
                               hint: 'Número da matrícula ou documento',
@@ -364,14 +367,14 @@ class _AdminPageState extends State<AdminPage> {
                                   'Informe a matrícula ou documento',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _studentResponsibleNameController,
                               label: 'Responsável legal',
                               hint: 'Nome do responsável legal',
                               validatorMessage: 'Informe o responsável legal',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _studentResponsiblePhoneController,
                               label: 'Telefone do responsável',
                               hint: 'Telefone para contato',
@@ -380,7 +383,7 @@ class _AdminPageState extends State<AdminPage> {
                                   'Informe o telefone do responsável',
                             ),
                             const SizedBox(height: 14),
-                            _InputField(
+                            InputField(
                               controller: _studentResponsibleEmailController,
                               label: 'Email do responsável',
                               hint: 'Email de contato',
@@ -389,7 +392,7 @@ class _AdminPageState extends State<AdminPage> {
                                   'Informe o email do responsável',
                             ),
                             const SizedBox(height: 18),
-                            _ActionButton(
+                            ActionButton(
                               label: 'Salvar aluno',
                               onPressed: _submitStudent,
                             ),
@@ -403,205 +406,6 @@ class _AdminPageState extends State<AdminPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _ExpansionActionCard extends StatelessWidget {
-  const _ExpansionActionCard({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.accentColor,
-    required this.expanded,
-    required this.onToggle,
-    required this.child,
-  });
-
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color accentColor;
-  final bool expanded;
-  final VoidCallback onToggle;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: const Color(0xFFD8DDE6),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x22000000),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: accentColor,
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Icon(icon, color: Colors.white, size: 30),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: Color(0xFF08216F),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        color: Color(0xFF1E2B61),
-                        fontSize: 13,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              IconButton(
-                onPressed: onToggle,
-                icon: Icon(
-                  expanded ? Icons.expand_less : Icons.expand_more,
-                  color: const Color(0xFF2457F0),
-                ),
-              ),
-            ],
-          ),
-          if (expanded) ...[
-            const SizedBox(height: 18),
-            child,
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-class _InputField extends StatelessWidget {
-  const _InputField({
-    required this.controller,
-    required this.label,
-    required this.hint,
-    required this.validatorMessage,
-    this.keyboardType,
-  });
-
-  final TextEditingController controller;
-  final String label;
-  final String hint;
-  final String validatorMessage;
-  final TextInputType? keyboardType;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Color(0xFF10A9D0),
-            fontSize: 14,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 6),
-        TextFormField(
-          controller: controller,
-          keyboardType: keyboardType,
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(
-              color: Color(0xAA000000),
-              fontSize: 13,
-            ),
-            filled: true,
-            fillColor: const Color(0xFFF1F3F8),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: BorderSide.none,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: const BorderSide(
-                color: Color(0xFF2457F0),
-                width: 1.5,
-              ),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
-          ),
-          validator: (value) {
-            final text = value?.trim() ?? '';
-            if (text.isEmpty) {
-              return validatorMessage;
-            }
-            return null;
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _ActionButton extends StatelessWidget {
-  const _ActionButton({required this.label, required this.onPressed});
-
-  final String label;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 52,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF2457F0),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          textStyle: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        child: Text(label),
       ),
     );
   }
