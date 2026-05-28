@@ -14,5 +14,6 @@ Esta página reúne as atas relacionadas à Unidade 3 do projeto **Salvando Vida
 
 ### Atas de Reunião com Cliente
 
-!!! info "Sem atas cadastradas"
-    Ainda não há atas de reunião com cliente cadastradas para esta unidade.
+=== "27/05 — C5 — Validação DoR/DoD"
+
+    {% include "./cliente/unidade-3/ATA-20260527-C5.md" %}
