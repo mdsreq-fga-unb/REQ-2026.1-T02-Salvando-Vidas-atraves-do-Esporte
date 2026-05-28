@@ -77,5 +77,4 @@ Esta reunião foi dedicada para a validação do backlog proposto pela equipe de
 
 ### Resumo
 
-Esta reunião foi dedicada para a validação do backlog proposto pela equipe de desenvolvimento, baseado nas informações coletadas durante o Workshop JAD e demais reuniões, incluindo os requisitos e o valor de negócio associado a cada um.
 Esta reunião, foi dedicada à validação das atualizações do *Definition of Ready* (DoR) e *Definition of Done* (DoD), incluindo uma explicação prática para o cliente sobre como esses critérios funcionarão no andamento do projeto. Além disso, foi validado o escopo da implementação inicial: houve a demonstração e revisão do protótipo da tela de login e tela de cadastro de voluntário.
