@@ -56,11 +56,6 @@ plugins:
       hint_location: "top"
       include_selectors:
         - "img"
-  - glightbox:
-      touchNavigation: true
-      loop: false
-      zoomable: true
-      draggable: true
 
 markdown_extensions:
   - admonition
