@@ -35,21 +35,21 @@ mixin _$LoginFormStore on _LoginFormStore, Store {
     });
   }
 
-  late final _$passwordAtom = Atom(
-    name: '_LoginFormStore.password',
+  late final _$senhaAtom = Atom(
+    name: '_LoginFormStore.senha',
     context: context,
   );
 
   @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
+  String get senha {
+    _$senhaAtom.reportRead();
+    return super.senha;
   }
 
   @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
+  set senha(String value) {
+    _$senhaAtom.reportWrite(value, super.senha, () {
+      super.senha = value;
     });
   }
 
@@ -86,19 +86,19 @@ mixin _$LoginFormStore on _LoginFormStore, Store {
   String toString() {
     return '''
 email: ${email},
-password: ${password},
+senha: ${senha},
 canLogin: ${canLogin}
     ''';
   }
 }
 
 mixin _$LoginFormErrorState on _LoginFormErrorState, Store {
-  Computed<bool>? _$hasErrorsComputed;
+  Computed<bool>? _$temErrosComputed;
 
   @override
-  bool get hasErrors => (_$hasErrorsComputed ??= Computed<bool>(
-    () => super.hasErrors,
-    name: '_LoginFormErrorState.hasErrors',
+  bool get temErros => (_$temErrosComputed ??= Computed<bool>(
+    () => super.temErros,
+    name: '_LoginFormErrorState.temErros',
   )).value;
 
   late final _$emailAtom = Atom(
@@ -119,21 +119,21 @@ mixin _$LoginFormErrorState on _LoginFormErrorState, Store {
     });
   }
 
-  late final _$passwordAtom = Atom(
-    name: '_LoginFormErrorState.password',
+  late final _$senhaAtom = Atom(
+    name: '_LoginFormErrorState.senha',
     context: context,
   );
 
   @override
-  String? get password {
-    _$passwordAtom.reportRead();
-    return super.password;
+  String? get senha {
+    _$senhaAtom.reportRead();
+    return super.senha;
   }
 
   @override
-  set password(String? value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
+  set senha(String? value) {
+    _$senhaAtom.reportWrite(value, super.senha, () {
+      super.senha = value;
     });
   }
 
@@ -141,8 +141,8 @@ mixin _$LoginFormErrorState on _LoginFormErrorState, Store {
   String toString() {
     return '''
 email: ${email},
-password: ${password},
-hasErrors: ${hasErrors}
+senha: ${senha},
+temErros: ${temErros}
     ''';
   }
 }

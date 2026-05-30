@@ -39,10 +39,7 @@ class InputField extends StatelessWidget {
           ),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: const TextStyle(
-              color: Color(0xAA000000),
-              fontSize: 13,
-            ),
+            hintStyle: const TextStyle(color: Color(0xAA000000), fontSize: 13),
             filled: true,
             fillColor: const Color(0xFFD8DDE6),
             border: OutlineInputBorder(

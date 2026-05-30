@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:salvando_vidas/main_imports.dart';
 
-import '../../routing/routes.dart';
+import 'package:salvando_vidas/data/stores/cadastros/cadastro_voluntario_form.dart';
+
+import 'widgets/voluntario_input_field.dart';
+
 import 'components/expansion_action_card.dart';
 import 'components/input_field.dart';
 import 'components/action_button.dart';
@@ -18,10 +20,7 @@ class _AdminPageState extends State<AdminPage> {
   final _classFormKey = GlobalKey<FormState>();
   final _studentFormKey = GlobalKey<FormState>();
 
-  final _volunteerNameController = TextEditingController();
-  final _volunteerEmailController = TextEditingController();
-  final _volunteerPhoneController = TextEditingController();
-  final _volunteerRoleController = TextEditingController();
+  final _cadastroVoluntario = CadastroVoluntarioFormStore();
 
   final _classNameController = TextEditingController();
   final _classAgeGroupController = TextEditingController();
@@ -42,11 +41,14 @@ class _AdminPageState extends State<AdminPage> {
   bool _studentExpanded = false;
 
   @override
+  void initState() {
+    super.initState();
+    _cadastroVoluntario.setupValidations();
+  }
+
+  @override
   void dispose() {
-    _volunteerNameController.dispose();
-    _volunteerEmailController.dispose();
-    _volunteerPhoneController.dispose();
-    _volunteerRoleController.dispose();
+    _cadastroVoluntario.dispose();
     _classNameController.dispose();
     _classAgeGroupController.dispose();
     _classDaysController.dispose();
@@ -96,12 +98,37 @@ class _AdminPageState extends State<AdminPage> {
     context.go(Routes.home);
   }
 
-  void _submitVolunteer() {
-    if (_volunteerFormKey.currentState?.validate() ?? false) {
+  void _submitVolunteer() async {
+    if (_cadastroVoluntario.podeCadastrar) {
+      try {
+        await context.read<UserService>().registerUser(
+          _cadastroVoluntario.email,
+          _cadastroVoluntario.senha,
+          _cadastroVoluntario.nome,
+          _cadastroVoluntario.telefone,
+          _cadastroVoluntario.cpf,
+        );
+      } catch (e) {
+        context.read<Logger>().e("Erro ao cadastrar usuário", error: e);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Houve um erro de conexão com o servidor, tente novamente mais tarde.',
+            ),
+          ),
+        );
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Voluntário cadastrado com sucesso.')),
       );
       _volunteerFormKey.currentState?.reset();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Algum campo não foi preenchido corretamente.'),
+        ),
+      );
     }
   }
 
@@ -151,9 +178,7 @@ class _AdminPageState extends State<AdminPage> {
                         label: const Text('Voltar às seções'),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: const Color(0xFF08216F),
-                          side: const BorderSide(
-                            color: Color(0xFF08216F),
-                          ),
+                          side: const BorderSide(color: Color(0xFF08216F)),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -200,10 +225,7 @@ class _AdminPageState extends State<AdminPage> {
                           Text(
                             'Toque em uma seção para abrir os campos de cadastro na mesma página.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
+                            style: TextStyle(color: Colors.white, fontSize: 14),
                           ),
                         ],
                       ),
@@ -220,34 +242,34 @@ class _AdminPageState extends State<AdminPage> {
                         key: _volunteerFormKey,
                         child: Column(
                           children: [
-                            InputField(
-                              controller: _volunteerNameController,
-                              label: 'Nome do voluntário',
-                              hint: 'Digite o nome completo',
-                              validatorMessage: 'Informe o nome do voluntário',
+                            CadastroTextField(
+                              _cadastroVoluntario,
+                              InputTypes.nome,
                             ),
                             const SizedBox(height: 14),
-                            InputField(
-                              controller: _volunteerEmailController,
-                              label: 'Email',
-                              hint: 'Digite o email do voluntário',
-                              keyboardType: TextInputType.emailAddress,
-                              validatorMessage: 'Informe o email do voluntário',
+                            CadastroTextField(
+                              _cadastroVoluntario,
+                              InputTypes.email,
                             ),
                             const SizedBox(height: 14),
-                            InputField(
-                              controller: _volunteerPhoneController,
-                              label: 'Telefone',
-                              hint: 'Digite o telefone de contato',
-                              keyboardType: TextInputType.phone,
-                              validatorMessage: 'Informe o telefone',
+                            CadastroTextField(
+                              _cadastroVoluntario,
+                              InputTypes.senha,
                             ),
                             const SizedBox(height: 14),
-                            InputField(
-                              controller: _volunteerRoleController,
-                              label: 'Função',
-                              hint: 'Ex.: professor, monitor, apoio',
-                              validatorMessage: 'Informe a função do voluntário',
+                            CadastroTextField(
+                              _cadastroVoluntario,
+                              InputTypes.telefone,
+                            ),
+                            const SizedBox(height: 14),
+                            CadastroTextField(
+                              _cadastroVoluntario,
+                              InputTypes.cpf,
+                            ),
+                            const SizedBox(height: 14),
+                            CadastroTextField(
+                              _cadastroVoluntario,
+                              InputTypes.funcao,
                             ),
                             const SizedBox(height: 18),
                             ActionButton(
@@ -299,7 +321,8 @@ class _AdminPageState extends State<AdminPage> {
                                     label: 'Início',
                                     hint: '08:00',
                                     keyboardType: TextInputType.datetime,
-                                    validatorMessage: 'Informe o horário inicial',
+                                    validatorMessage:
+                                        'Informe o horário inicial',
                                   ),
                                 ),
                                 const SizedBox(width: 12),

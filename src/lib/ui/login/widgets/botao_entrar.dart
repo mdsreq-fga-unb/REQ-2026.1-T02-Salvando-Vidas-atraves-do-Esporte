@@ -17,7 +17,7 @@ class BotaoEntrar extends StatelessWidget {
             try {
               final loggedin = await context.read<UserService>().login(
                 store.email,
-                store.password,
+                store.senha,
               );
               if (context.mounted && loggedin) {
                 context.go(Routes.home);

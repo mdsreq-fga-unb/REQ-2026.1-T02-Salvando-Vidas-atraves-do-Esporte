@@ -149,16 +149,16 @@ class MockLoginFormStore extends _i1.Mock implements _i2.LoginFormStore {
           as String);
 
   @override
-  String get password =>
+  String get senha =>
       (super.noSuchMethod(
-            Invocation.getter(#password),
+            Invocation.getter(#senha),
             returnValue: _i8.dummyValue<String>(
               this,
-              Invocation.getter(#password),
+              Invocation.getter(#senha),
             ),
             returnValueForMissingStub: _i8.dummyValue<String>(
               this,
-              Invocation.getter(#password),
+              Invocation.getter(#senha),
             ),
           )
           as String);
@@ -179,8 +179,8 @@ class MockLoginFormStore extends _i1.Mock implements _i2.LoginFormStore {
   );
 
   @override
-  set password(String? value) => super.noSuchMethod(
-    Invocation.setter(#password, value),
+  set senha(String? value) => super.noSuchMethod(
+    Invocation.setter(#senha, value),
     returnValueForMissingStub: null,
   );
 

@@ -60,7 +60,7 @@ class _SenhaTextFieldState extends State<SenhaTextField> {
     return Container(
       decoration: LoginDecorations.inputContainerShadow,
       child: TextFormField(
-        onChanged: (value) => widget.store.password = value,
+        onChanged: (value) => widget.store.senha = value,
         obscureText: _isObscure,
         style: const TextStyle(
           color: Colors.black,
@@ -68,7 +68,7 @@ class _SenhaTextFieldState extends State<SenhaTextField> {
         ),
         decoration: LoginDecorations.baseInputDecoration.copyWith(
           hintText: 'Insira aqui sua senha',
-          errorText: widget.store.error.password,
+          errorText: widget.store.error.senha,
           prefixIcon: Container(
             width: 54,
             margin: const EdgeInsets.only(right: 8),

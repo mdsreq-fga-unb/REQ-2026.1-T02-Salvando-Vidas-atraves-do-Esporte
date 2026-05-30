@@ -13,19 +13,19 @@ abstract class _LoginFormStore with Store {
   String email = '';
 
   @observable
-  String password = '';
+  String senha = '';
 
   @computed
-  bool get canLogin => !error.hasErrors;
+  bool get canLogin => !error.temErros;
 
   @action
   void validateEmail(String value) {
-    error.email = isEmail(value) ? null : 'Não é um email válido';
+    error.email = eEmail(value) ? null : 'Não é um email válido';
   }
 
   @action
   void validatePassword(String value) {
-    error.password = value.isNotEmpty ? null : 'Não pode estar em branco';
+    error.senha = value.isNotEmpty ? null : 'Não pode estar em branco';
   }
 
   late List<ReactionDisposer> _disposers;
@@ -33,7 +33,7 @@ abstract class _LoginFormStore with Store {
   void setupValidations() {
     _disposers = [
       reaction((_) => email, validateEmail),
-      reaction((_) => password, validatePassword),
+      reaction((_) => senha, validatePassword),
     ];
   }
 
@@ -52,8 +52,8 @@ abstract class _LoginFormErrorState with Store {
   String? email;
 
   @observable
-  String? password;
+  String? senha;
 
   @computed
-  bool get hasErrors => email != null || password != null;
+  bool get temErros => email != null || senha != null;
 }

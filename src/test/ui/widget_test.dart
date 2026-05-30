@@ -51,7 +51,7 @@ Future<void> _pumpApp(
 void main() {
   late MockUserService userService;
   late MockLoginFormStore store;
-  late final MockLogger logger;
+  late MockLogger logger;
 
   setUp(() {
     userService = MockUserService();

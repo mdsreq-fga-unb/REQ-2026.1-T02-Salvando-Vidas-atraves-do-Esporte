@@ -10,28 +10,28 @@ void main() {
     addTearDown(store.dispose);
 
     store.email = 'invalido';
-    store.password = 'SenhaTeste';
+    store.senha = 'SenhaTeste';
 
     await Future<void>.delayed(Duration.zero);
 
     expect(store.error.email, 'Não é um email válido');
-    expect(store.error.password, isNull);
+    expect(store.error.senha, isNull);
     expect(store.canLogin, isFalse);
 
-    store.password = '';
+    store.senha = '';
 
     await Future<void>.delayed(Duration.zero);
 
-    expect(store.error.password, 'Não pode estar em branco');
+    expect(store.error.senha, 'Não pode estar em branco');
     expect(store.canLogin, isFalse);
 
     store.email = 'teste@teste.com';
-    store.password = 'SenhaTeste';
+    store.senha = 'SenhaTeste';
 
     await Future<void>.delayed(Duration.zero);
 
     expect(store.error.email, isNull);
-    expect(store.error.password, isNull);
+    expect(store.error.senha, isNull);
     expect(store.canLogin, isTrue);
   });
 }
