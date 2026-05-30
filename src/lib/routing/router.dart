@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:salvando_vidas/data/services/user_service.dart';
+import 'package:salvando_vidas/main_imports.dart';
+
 import 'package:salvando_vidas/ui/home/admin_page.dart';
 import 'package:salvando_vidas/ui/home/cadastros_page.dart';
 import 'package:salvando_vidas/ui/home/home_page.dart';
 import 'package:salvando_vidas/ui/login/views/login_page.dart';
-import 'routes.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -23,12 +20,12 @@ final router = GoRouter(
   redirect: (BuildContext context, GoRouterState state) async {
     final userService = context.read<UserService>();
 
-    if (!await userService.isLoggedIn()) {
-      // Tire o comentário da linha abaixo apenas para testes
-      // userService.logout();
-      return Routes.login;
-    } else {
-      return null;
+    switch (await userService.isLoggedIn()) {
+      case Failure(message: final m, error: final e):
+        context.read<Logger>().e(m, error: e);
+        return null;
+      case Success(value: final v):
+        return !v ? Routes.login : null;
     }
   },
 );

@@ -52,6 +52,7 @@ void main() {
   late MockUserService userService;
   late MockLoginFormStore store;
   late MockLogger logger;
+  provideDummy<Result<bool>>(Success(false));
 
   setUp(() {
     userService = MockUserService();
@@ -79,7 +80,7 @@ void main() {
 
     when(
       userService.login('teste@teste.com', 'SenhaTeste'),
-    ).thenAnswer((_) async => true);
+    ).thenAnswer((_) async => Success(true));
 
     await _pumpApp(
       tester,
@@ -108,7 +109,7 @@ void main() {
 
     when(
       userService.login('teste@teste.com', 'SenhaTeste'),
-    ).thenThrow(AuthApiException('Usuário inválido'));
+    ).thenAnswer((_) async => Failure("Erro ao autenticar"));
 
     await _pumpApp(
       tester,

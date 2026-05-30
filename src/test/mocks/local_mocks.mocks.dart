@@ -10,8 +10,9 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
 import 'package:salvando_vidas/data/services/user_service.dart' as _i4;
 import 'package:salvando_vidas/data/stores/login/login_form.dart' as _i2;
+import 'package:salvando_vidas/data/supabase_call.dart' as _i7;
 import 'package:salvando_vidas/domain/local_user.dart' as _i5;
-import 'package:supabase_flutter/supabase_flutter.dart' as _i7;
+import 'package:supabase_flutter/supabase_flutter.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -60,40 +61,84 @@ class MockUserService extends _i1.Mock implements _i4.UserService {
   );
 
   @override
-  _i6.Future<bool> login(String? email, String? password) =>
+  _i6.Future<_i7.Result<bool>> login(String? email, String? password) =>
       (super.noSuchMethod(
             Invocation.method(#login, [email, password]),
-            returnValue: _i6.Future<bool>.value(false),
-            returnValueForMissingStub: _i6.Future<bool>.value(false),
+            returnValue: _i6.Future<_i7.Result<bool>>.value(
+              _i8.dummyValue<_i7.Result<bool>>(
+                this,
+                Invocation.method(#login, [email, password]),
+              ),
+            ),
+            returnValueForMissingStub: _i6.Future<_i7.Result<bool>>.value(
+              _i8.dummyValue<_i7.Result<bool>>(
+                this,
+                Invocation.method(#login, [email, password]),
+              ),
+            ),
           )
-          as _i6.Future<bool>);
+          as _i6.Future<_i7.Result<bool>>);
 
   @override
-  void logout() => super.noSuchMethod(
-    Invocation.method(#logout, []),
-    returnValueForMissingStub: null,
-  );
+  _i6.Future<_i7.Result<void>> logout() =>
+      (super.noSuchMethod(
+            Invocation.method(#logout, []),
+            returnValue: _i6.Future<_i7.Result<void>>.value(
+              _i8.dummyValue<_i7.Result<void>>(
+                this,
+                Invocation.method(#logout, []),
+              ),
+            ),
+            returnValueForMissingStub: _i6.Future<_i7.Result<void>>.value(
+              _i8.dummyValue<_i7.Result<void>>(
+                this,
+                Invocation.method(#logout, []),
+              ),
+            ),
+          )
+          as _i6.Future<_i7.Result<void>>);
 
   @override
-  _i6.Future<bool> isLoggedIn() =>
+  _i6.Future<_i7.Result<bool>> isLoggedIn() =>
       (super.noSuchMethod(
             Invocation.method(#isLoggedIn, []),
-            returnValue: _i6.Future<bool>.value(false),
-            returnValueForMissingStub: _i6.Future<bool>.value(false),
+            returnValue: _i6.Future<_i7.Result<bool>>.value(
+              _i8.dummyValue<_i7.Result<bool>>(
+                this,
+                Invocation.method(#isLoggedIn, []),
+              ),
+            ),
+            returnValueForMissingStub: _i6.Future<_i7.Result<bool>>.value(
+              _i8.dummyValue<_i7.Result<bool>>(
+                this,
+                Invocation.method(#isLoggedIn, []),
+              ),
+            ),
           )
-          as _i6.Future<bool>);
+          as _i6.Future<_i7.Result<bool>>);
 
   @override
-  _i6.Future<_i5.LocalUser?> getLocalUser(_i7.User? user) =>
+  _i6.Future<_i7.Result<_i5.LocalUser?>> getLocalUser(_i9.User? user) =>
       (super.noSuchMethod(
             Invocation.method(#getLocalUser, [user]),
-            returnValue: _i6.Future<_i5.LocalUser?>.value(),
-            returnValueForMissingStub: _i6.Future<_i5.LocalUser?>.value(),
+            returnValue: _i6.Future<_i7.Result<_i5.LocalUser?>>.value(
+              _i8.dummyValue<_i7.Result<_i5.LocalUser?>>(
+                this,
+                Invocation.method(#getLocalUser, [user]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i6.Future<_i7.Result<_i5.LocalUser?>>.value(
+                  _i8.dummyValue<_i7.Result<_i5.LocalUser?>>(
+                    this,
+                    Invocation.method(#getLocalUser, [user]),
+                  ),
+                ),
           )
-          as _i6.Future<_i5.LocalUser?>);
+          as _i6.Future<_i7.Result<_i5.LocalUser?>>);
 
   @override
-  _i6.Future<bool> registerUser(
+  _i6.Future<_i7.Result<bool>> registerUser(
     String? email,
     String? password,
     String? nome,
@@ -108,10 +153,32 @@ class MockUserService extends _i1.Mock implements _i4.UserService {
               telefone,
               cpf,
             ]),
-            returnValue: _i6.Future<bool>.value(false),
-            returnValueForMissingStub: _i6.Future<bool>.value(false),
+            returnValue: _i6.Future<_i7.Result<bool>>.value(
+              _i8.dummyValue<_i7.Result<bool>>(
+                this,
+                Invocation.method(#registerUser, [
+                  email,
+                  password,
+                  nome,
+                  telefone,
+                  cpf,
+                ]),
+              ),
+            ),
+            returnValueForMissingStub: _i6.Future<_i7.Result<bool>>.value(
+              _i8.dummyValue<_i7.Result<bool>>(
+                this,
+                Invocation.method(#registerUser, [
+                  email,
+                  password,
+                  nome,
+                  telefone,
+                  cpf,
+                ]),
+              ),
+            ),
           )
-          as _i6.Future<bool>);
+          as _i6.Future<_i7.Result<bool>>);
 }
 
 /// A class which mocks [LoginFormStore].

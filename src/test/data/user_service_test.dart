@@ -1,3 +1,5 @@
+import 'package:salvando_vidas/data/supabase_call.dart';
+
 import '../test_imports.dart';
 
 import 'package:salvando_vidas/data/services/user_service.dart';
@@ -8,6 +10,8 @@ void main() {
   late MockSupabaseClient supabase;
   late MockGoTrueClient mockAuth;
   late UserService userService;
+
+  // provideDummy<Result<bool>>(Success(false));
 
   setUp(() {
     supabase = MockSupabaseClient();
@@ -46,17 +50,22 @@ void main() {
 
     // Act
     final result = await userService.login("teste@teste.com", "SenhaTeste");
-    userService.logout();
 
-    // Assert
-    expect(result, isTrue);
-    expect(userService.localUser?.name, "João Silva");
-    expect(userService.localUser?.role, Role.admin);
+    if (result case Success(value: final v)) {
+      expect(v, isTrue);
+      expect(userService.localUser?.name, "João Silva");
+      expect(userService.localUser?.role, Role.admin);
+
+      await userService.logout();
+      expect(userService.localUser, isNull);
+    } else {
+      fail("Esperava que o usuário fizesse login com sucesso");
+    }
   });
 
   test(
     "UserService - Login falha ao autenticar com um usuário inexistente",
-    () {
+    () async {
       // Arrange
       when(
         mockAuth.signInWithPassword(
@@ -65,11 +74,15 @@ void main() {
         ),
       ).thenThrow(AuthApiException("Usuário não cadastrado"));
 
-      // Act + Assert
-      expect(
-        () => userService.login("teste@teste.com", "SenhaTeste"),
-        throwsA(isA<AuthApiException>()),
-      );
+      // Act
+      final result = await userService.login("teste@teste.com", "SenhaTeste");
+
+      // Assert
+      if (result case Failure(message: final m)) {
+        expect(m, isA<String>());
+      } else {
+        fail("Esperava que login falhasse");
+      }
     },
   );
 
@@ -95,7 +108,7 @@ void main() {
     final result = await userService.isLoggedIn();
 
     // Assert
-    expect(result, isTrue);
+    expect((result as Success<bool>).value, isTrue);
     expect(userService.localUser?.name, "João Silva");
     expect(userService.localUser?.role, Role.admin);
   });
@@ -108,6 +121,6 @@ void main() {
     final result = await userService.isLoggedIn();
 
     // Assert
-    expect(result, isFalse);
+    expect((result as Success<bool>).value, isFalse);
   });
 }

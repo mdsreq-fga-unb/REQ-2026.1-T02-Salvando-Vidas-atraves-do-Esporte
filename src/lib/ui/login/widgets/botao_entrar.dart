@@ -14,18 +14,17 @@ class BotaoEntrar extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () async {
           if (store.canLogin) {
-            try {
-              final loggedin = await context.read<UserService>().login(
-                store.email,
-                store.senha,
-              );
-              if (context.mounted && loggedin) {
-                context.go(Routes.home);
-              }
-            } on AuthApiException catch (e) {
-              if (context.mounted) {
-                context.read<Logger>().e("Erro ao autenticar", error: e);
-              }
+            switch (await context.read<UserService>().login(
+              store.email,
+              store.senha,
+            )) {
+              case Failure(message: final m, error: final e):
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(m)));
+                context.read<Logger>().e(m, error: e);
+              case Success(value: final v):
+                if (v) context.go(Routes.home);
             }
           }
         },

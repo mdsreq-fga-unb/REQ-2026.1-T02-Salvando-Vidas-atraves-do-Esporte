@@ -100,29 +100,24 @@ class _AdminPageState extends State<AdminPage> {
 
   void _submitVolunteer() async {
     if (_cadastroVoluntario.podeCadastrar) {
-      try {
-        await context.read<UserService>().registerUser(
-          _cadastroVoluntario.email,
-          _cadastroVoluntario.senha,
-          _cadastroVoluntario.nome,
-          _cadastroVoluntario.telefone,
-          _cadastroVoluntario.cpf,
-        );
-      } catch (e) {
-        context.read<Logger>().e("Erro ao cadastrar usuário", error: e);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Houve um erro de conexão com o servidor, tente novamente mais tarde.',
-            ),
-          ),
-        );
+      switch (await context.read<UserService>().registerUser(
+        _cadastroVoluntario.email,
+        _cadastroVoluntario.senha,
+        _cadastroVoluntario.nome,
+        _cadastroVoluntario.telefone,
+        _cadastroVoluntario.cpf,
+      )) {
+        case Failure(message: final m, error: final e):
+          context.read<Logger>().e(m, error: e);
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(m)));
+        case Success():
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Voluntário cadastrado com sucesso.')),
+          );
+          _volunteerFormKey.currentState?.reset();
       }
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Voluntário cadastrado com sucesso.')),
-      );
-      _volunteerFormKey.currentState?.reset();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

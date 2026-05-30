@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:salvando_vidas/data/services/user_service.dart';
-
-import '../../routing/routes.dart';
+import 'package:salvando_vidas/main_imports.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,8 +28,8 @@ class HomePage extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton.icon(
-                        onPressed: () {
-                          context.read<UserService>().logout();
+                        onPressed: () async {
+                          await context.read<UserService>().logout();
                           context.go(Routes.login);
                         },
                         icon: const Icon(Icons.logout_outlined),

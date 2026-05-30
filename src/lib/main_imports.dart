@@ -5,6 +5,7 @@ export 'package:logger/logger.dart';
 export 'package:provider/provider.dart';
 export 'package:supabase_flutter/supabase_flutter.dart';
 
+export 'package:salvando_vidas/data/supabase_call.dart';
 export 'package:salvando_vidas/data/services/user_service.dart';
 
 export 'consts.dart';
