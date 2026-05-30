@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:provider/provider.dart';
-import 'package:salvando_vidas/data/services/user_service.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'consts.dart';
-import 'routing/router.dart';
+import 'main_imports.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

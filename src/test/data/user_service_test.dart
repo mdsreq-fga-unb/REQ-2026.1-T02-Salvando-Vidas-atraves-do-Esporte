@@ -1,11 +1,8 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import '../test_imports.dart';
+
 import 'package:salvando_vidas/data/services/user_service.dart';
 import 'package:salvando_vidas/domain/local_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import '../mocks/supabase_client.mocks.dart';
-import '../mocks/supabase_fakes.dart';
 
 void main() {
   late MockSupabaseClient supabase;

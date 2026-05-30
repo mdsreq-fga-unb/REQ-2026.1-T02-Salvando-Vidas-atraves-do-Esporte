@@ -56,6 +56,7 @@ class UserService {
     String password,
     String nome,
     String telefone,
+    String cpf,
   ) async {
     try {
       final data = await _supabase.rpc(
@@ -66,6 +67,7 @@ class UserService {
           'new_role': 'voluntario',
           'new_name': nome,
           'new_telefone': telefone,
+          'new_cpf': cpf,
         },
       );
 

@@ -1,68 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
-import 'package:salvando_vidas/data/services/user_service.dart';
-import 'package:salvando_vidas/routing/routes.dart';
+import '../test_imports.dart';
+import 'package:salvando_vidas/main_imports.dart';
+import 'package:salvando_vidas/ui/login/login_imports.dart';
+
 import 'package:salvando_vidas/ui/home/admin_page.dart';
 import 'package:salvando_vidas/ui/home/cadastros_page.dart';
 import 'package:salvando_vidas/ui/home/home_page.dart';
-import 'package:salvando_vidas/ui/login/views/login_page.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-
-class MockUserService extends Mock implements UserService {}
-
-class MockLogger extends Mock implements Logger {}
-
-class _FakeSupabaseClient extends Fake implements SupabaseClient {}
-
-class FakeUserService extends UserService {
-  FakeUserService() : super(_FakeSupabaseClient());
-
-  bool admin = false;
-  bool loggedIn = true;
-  bool logoutCalled = false;
-  Future<bool> Function(String email, String password)? loginHandler;
-  Future<bool> Function()? isLoggedInHandler;
-
-  @override
-  Future<bool> login(String email, String password) {
-    final handler = loginHandler;
-    if (handler != null) {
-      return handler(email, password);
-    }
-
-    return Future<bool>.value(false);
-  }
-
-  @override
-  void logout() {
-    logoutCalled = true;
-  }
-
-  @override
-  Future<bool> isLoggedIn() {
-    final handler = isLoggedInHandler;
-    if (handler != null) {
-      return handler();
-    }
-
-    return Future<bool>.value(loggedIn);
-  }
-
-  @override
-  bool get isAdmin => admin;
-}
 
 GoRouter _buildRouter(String initialLocation) {
   return GoRouter(
     initialLocation: initialLocation,
     routes: [
-      GoRoute(path: Routes.login, builder: (context, state) => const LoginPage()),
+      GoRoute(
+        path: Routes.login,
+        builder: (context, state) => const LoginPage(),
+      ),
       GoRoute(path: Routes.home, builder: (context, state) => const HomePage()),
-      GoRoute(path: Routes.admin, builder: (context, state) => const AdminPage()),
+      GoRoute(
+        path: Routes.admin,
+        builder: (context, state) => const AdminPage(),
+      ),
       GoRoute(
         path: Routes.cadastros,
         builder: (context, state) => const CadastrosPage(),
@@ -85,9 +41,7 @@ Future<void> _pumpApp(
   await tester.pumpWidget(
     MultiProvider(
       providers: providers,
-      child: MaterialApp.router(
-        routerConfig: _buildRouter(initialLocation),
-      ),
+      child: MaterialApp.router(routerConfig: _buildRouter(initialLocation)),
     ),
   );
 
@@ -95,10 +49,17 @@ Future<void> _pumpApp(
 }
 
 void main() {
-  testWidgets('LoginPage exibe os elementos principais', (tester) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
+  late MockUserService userService;
+  late MockLoginFormStore store;
+  late final MockLogger logger;
 
+  setUp(() {
+    userService = MockUserService();
+    store = MockLoginFormStore();
+    logger = MockLogger();
+  });
+
+  testWidgets('LoginPage exibe os elementos principais', (tester) async {
     await _pumpApp(
       tester,
       userService: userService,
@@ -114,11 +75,11 @@ void main() {
   });
 
   testWidgets('LoginPage navega para home ao autenticar', (tester) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
+    when(store.canLogin).thenReturn(true);
 
-    userService.loginHandler = (email, password) async =>
-        email == 'teste@teste.com' && password == 'SenhaTeste';
+    when(
+      userService.login('teste@teste.com', 'SenhaTeste'),
+    ).thenAnswer((_) async => true);
 
     await _pumpApp(
       tester,
@@ -143,12 +104,11 @@ void main() {
   testWidgets('LoginPage registra erro quando a autenticação falha', (
     tester,
   ) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
+    when(store.canLogin).thenReturn(true);
 
-    userService.loginHandler = (email, password) {
-      throw AuthApiException('Usuário inválido');
-    };
+    when(
+      userService.login('teste@teste.com', 'SenhaTeste'),
+    ).thenThrow(AuthApiException('Usuário inválido'));
 
     await _pumpApp(
       tester,
@@ -173,10 +133,7 @@ void main() {
   testWidgets('HomePage mostra a mensagem de perfil comum e abre cadastros', (
     tester,
   ) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
-
-    userService.admin = false;
+    when(userService.isAdmin).thenReturn(false);
 
     await _pumpApp(
       tester,
@@ -187,14 +144,19 @@ void main() {
 
     expect(find.text('Página inicial'), findsOneWidget);
     expect(find.text('Seu perfil não é administrador.'), findsOneWidget);
-    expect(find.text('A seção de administrador fica visível apenas para login ADM.'), findsOneWidget);
+    expect(
+      find.text('A seção de administrador fica visível apenas para login ADM.'),
+      findsOneWidget,
+    );
     expect(find.byIcon(Icons.admin_panel_settings_outlined), findsNothing);
 
     await tester.tap(find.byIcon(Icons.folder_open_outlined));
     await tester.pumpAndSettle();
 
     expect(
-      find.text('Área simples para organizar acessos rápidos e cadastrar alunos.'),
+      find.text(
+        'Área simples para organizar acessos rápidos e cadastrar alunos.',
+      ),
       findsOneWidget,
     );
   });
@@ -202,10 +164,7 @@ void main() {
   testWidgets('HomePage mostra a área de administrador para o perfil ADM', (
     tester,
   ) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
-
-    userService.admin = true;
+    when(userService.isAdmin).thenReturn(true);
 
     await _pumpApp(
       tester,
@@ -224,9 +183,6 @@ void main() {
   });
 
   testWidgets('CadastrosPage permite cadastrar um aluno', (tester) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
-
     await _pumpApp(
       tester,
       userService: userService,
@@ -258,9 +214,6 @@ void main() {
   testWidgets('AdminPage permite expandir e salvar o cadastro de alunos', (
     tester,
   ) async {
-    final userService = FakeUserService();
-    final logger = MockLogger();
-
     await _pumpApp(
       tester,
       userService: userService,
@@ -273,10 +226,7 @@ void main() {
     expect(find.text('Cadastrar turmas'), findsOneWidget);
     expect(find.text('Cadastrar alunos'), findsOneWidget);
 
-    await tester.scrollUntilVisible(
-      find.byIcon(Icons.expand_more).at(2),
-      300,
-    );
+    await tester.scrollUntilVisible(find.byIcon(Icons.expand_more).at(2), 300);
     await tester.tap(find.byIcon(Icons.expand_more).at(2));
     await tester.pumpAndSettle();
 

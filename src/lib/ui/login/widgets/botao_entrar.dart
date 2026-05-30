@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:logger/web.dart';
-import 'package:provider/provider.dart';
-import 'package:salvando_vidas/data/services/user_service.dart';
-import 'package:salvando_vidas/data/stores/login/login_form.dart';
-import 'package:salvando_vidas/routing/routes.dart';
-import 'package:salvando_vidas/ui/login/theme/login_colors.dart';
-import 'package:salvando_vidas/ui/login/theme/login_text_styles.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:salvando_vidas/main_imports.dart';
+
+import '../login_imports.dart';
 
 class BotaoEntrar extends StatelessWidget {
   final LoginFormStore store;

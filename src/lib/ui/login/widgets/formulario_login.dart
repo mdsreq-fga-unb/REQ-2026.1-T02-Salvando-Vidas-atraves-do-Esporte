@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:salvando_vidas/data/stores/login/login_form.dart';
-import 'package:salvando_vidas/ui/login/theme/login_decorations.dart';
-import 'package:salvando_vidas/ui/login/theme/login_text_styles.dart';
-import 'package:salvando_vidas/ui/login/widgets/text_fields.dart';
+import 'package:salvando_vidas/main_imports.dart';
+
+import '../login_imports.dart';
 
 class FormularioLogin extends StatelessWidget {
   final LoginFormStore store;

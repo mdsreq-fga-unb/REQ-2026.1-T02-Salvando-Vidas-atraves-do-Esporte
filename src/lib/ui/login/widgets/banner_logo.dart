@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:salvando_vidas/ui/login/theme/login_colors.dart';
+import 'package:salvando_vidas/main_imports.dart';
+
+import '../login_imports.dart';
 
 class BannerLogo extends StatelessWidget {
   const BannerLogo({super.key});

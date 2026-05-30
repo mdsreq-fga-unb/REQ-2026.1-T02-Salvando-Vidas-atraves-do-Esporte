@@ -1,4 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
+import '../test_imports.dart';
+
 import 'package:salvando_vidas/data/stores/login/login_form.dart';
 
 void main() {

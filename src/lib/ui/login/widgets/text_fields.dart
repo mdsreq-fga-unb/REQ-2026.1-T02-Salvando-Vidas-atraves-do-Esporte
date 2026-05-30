@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:salvando_vidas/data/stores/login/login_form.dart';
-import 'package:salvando_vidas/ui/login/theme/login_decorations.dart';
+import 'package:salvando_vidas/main_imports.dart';
+
+import '../login_imports.dart';
 
 class EmailTextField extends StatelessWidget {
   final LoginFormStore store;

@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:salvando_vidas/data/stores/login/login_form.dart';
-import 'package:salvando_vidas/ui/login/theme/login_decorations.dart';
-import 'package:salvando_vidas/ui/login/widgets/banner_logo.dart';
-import 'package:salvando_vidas/ui/login/widgets/botao_entrar.dart';
-import 'package:salvando_vidas/ui/login/widgets/formulario_login.dart';
+import 'package:salvando_vidas/main_imports.dart';
+
+import '../login_imports.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
