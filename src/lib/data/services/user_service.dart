@@ -1,4 +1,4 @@
-import 'package:salvando_vidas/domain/local_user.dart';
+import 'package:salvando_vidas/domain/local_user/local_user.dart';
 
 import '../supabase_call.dart';
 
@@ -70,12 +70,7 @@ class UserService {
     }
 
     if (data.isNotEmpty) {
-      return Success(
-        LocalUser(
-          data[0]["nome"],
-          data[0]["role"] == "admin" ? Role.admin : Role.voluntario,
-        ),
-      );
+      return Success(LocalUser.fromJson(data.first));
     }
 
     return Success(null);

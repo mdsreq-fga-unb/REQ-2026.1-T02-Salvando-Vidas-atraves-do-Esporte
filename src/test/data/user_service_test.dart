@@ -3,7 +3,7 @@ import 'package:salvando_vidas/data/supabase_call.dart';
 import '../test_imports.dart';
 
 import 'package:salvando_vidas/data/services/user_service.dart';
-import 'package:salvando_vidas/domain/local_user.dart';
+import 'package:salvando_vidas/domain/local_user/local_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
@@ -44,7 +44,13 @@ void main() {
 
     when(supabase.from('users')).thenAnswer(
       (_) => FakeQueryBuilder([
-        {"nome": "João Silva", "role": "admin"},
+        {
+          "id": "111",
+          "role": "admin",
+          "nome": "João Silva",
+          "telefone": "61999999999",
+          "cpf": "99999999999",
+        },
       ]),
     );
 
@@ -53,7 +59,7 @@ void main() {
 
     if (result case Success(value: final v)) {
       expect(v, isTrue);
-      expect(userService.localUser?.name, "João Silva");
+      expect(userService.localUser?.nome, "João Silva");
       expect(userService.localUser?.role, Role.admin);
 
       await userService.logout();
@@ -100,7 +106,13 @@ void main() {
 
     when(supabase.from('users')).thenAnswer(
       (_) => FakeQueryBuilder([
-        {"nome": "João Silva", "role": "admin"},
+        {
+          "id": "111",
+          "role": "admin",
+          "nome": "João Silva",
+          "telefone": "61999999999",
+          "cpf": "99999999999",
+        },
       ]),
     );
 
@@ -109,7 +121,7 @@ void main() {
 
     // Assert
     expect((result as Success<bool>).value, isTrue);
-    expect(userService.localUser?.name, "João Silva");
+    expect(userService.localUser?.nome, "João Silva");
     expect(userService.localUser?.role, Role.admin);
   });
 

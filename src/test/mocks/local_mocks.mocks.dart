@@ -11,8 +11,7 @@ import 'package:mockito/src/dummies.dart' as _i8;
 import 'package:salvando_vidas/data/services/user_service.dart' as _i4;
 import 'package:salvando_vidas/data/stores/login/login_form.dart' as _i2;
 import 'package:salvando_vidas/data/supabase_call.dart' as _i7;
-import 'package:salvando_vidas/domain/local_user.dart' as _i5;
-import 'package:supabase_flutter/supabase_flutter.dart' as _i9;
+import 'package:salvando_vidas/domain/local_user/local_user.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -118,7 +117,7 @@ class MockUserService extends _i1.Mock implements _i4.UserService {
           as _i6.Future<_i7.Result<bool>>);
 
   @override
-  _i6.Future<_i7.Result<_i5.LocalUser?>> getLocalUser(_i9.User? user) =>
+  _i6.Future<_i7.Result<_i5.LocalUser?>> getLocalUser(_i7.User? user) =>
       (super.noSuchMethod(
             Invocation.method(#getLocalUser, [user]),
             returnValue: _i6.Future<_i7.Result<_i5.LocalUser?>>.value(
