@@ -56,27 +56,33 @@ class UserService {
   }
 
   Future<Result<LocalUser?>> getLocalUser(User user) async {
-    final call = await safeSupabaseCall(
-      () async => await _supabase.from('users').select().eq('id', user.id),
-    );
+    return await safeSupabaseCall(() async {
+      final data = await _supabase.from('users').select().eq('id', user.id);
 
-    final Response data;
+      if (data.isNotEmpty) {
+        return LocalUser.fromJson(data.first);
+      }
 
-    switch (call) {
-      case Failure(message: final m, error: final e):
-        return Failure(m, e);
-      case Success(value: final v):
-        data = v;
-    }
-
-    if (data.isNotEmpty) {
-      return Success(LocalUser.fromJson(data.first));
-    }
-
-    return Success(null);
+      return null;
+    });
   }
 
-  Future<Result<bool>> registerUser(
+  Future<Result<List<LocalUser>>> listUsers() async {
+    return await safeSupabaseCall(() async {
+      final res = await _supabase.from('users').select();
+
+      final users = List<LocalUser>.empty(growable: true);
+
+      for (final data in res) {
+        final user = LocalUser.fromJson(data);
+        users.add(user);
+      }
+
+      return users;
+    });
+  }
+
+  Future<Result<void>> registerUser(
     String email,
     String password,
     String nome,
@@ -84,7 +90,7 @@ class UserService {
     String cpf,
   ) async {
     return safeSupabaseCall(() async {
-      final data = await _supabase.rpc(
+      await _supabase.rpc(
         'admin_create_user',
         params: {
           'new_email': email,
@@ -95,8 +101,35 @@ class UserService {
           'new_cpf': cpf,
         },
       );
+    });
+  }
 
-      return data != null ? true : false;
+  Future<Result<void>> deleteUser(String id) async {
+    return safeSupabaseCall(() async {
+      await _supabase.rpc('admin_delete_user', params: {'target_user_id': id});
+    });
+  }
+
+  Future<Result<void>> updateUser(
+    String id,
+    String email,
+    String password,
+    String nome,
+    String telefone,
+    String cpf,
+  ) async {
+    return safeSupabaseCall(() async {
+      await _supabase.rpc(
+        'admin_create_user',
+        params: {
+          'target_user_id': id,
+          'new_email': email,
+          'new_password': password,
+          'new_name': nome,
+          'new_telefone': telefone,
+          'new_cpf': cpf,
+        },
+      );
     });
   }
 
