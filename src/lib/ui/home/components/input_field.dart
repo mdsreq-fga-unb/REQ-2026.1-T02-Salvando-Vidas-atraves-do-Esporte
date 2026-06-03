@@ -7,14 +7,18 @@ class InputField extends StatelessWidget {
     required this.hint,
     required this.validatorMessage,
     this.keyboardType,
+    this.fillColor,
     super.key,
   });
+
+  final Color? fillColor;
 
   final TextEditingController controller;
   final String label;
   final String hint;
   final String validatorMessage;
   final TextInputType? keyboardType;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class InputField extends StatelessWidget {
             hintText: hint,
             hintStyle: const TextStyle(color: Color(0xAA000000), fontSize: 13),
             filled: true,
-            fillColor: const Color(0xFFD8DDE6),
+            fillColor: fillColor ?? const Color(0xFFD8DDE6),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,

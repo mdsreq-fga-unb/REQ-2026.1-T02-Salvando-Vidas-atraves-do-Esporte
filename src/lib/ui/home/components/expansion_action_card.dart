@@ -9,6 +9,7 @@ class ExpansionActionCard extends StatelessWidget {
     required this.expanded,
     required this.onToggle,
     required this.child,
+    this.backgroundColor,
     super.key,
   });
 
@@ -19,19 +20,21 @@ class ExpansionActionCard extends StatelessWidget {
   final bool expanded;
   final VoidCallback onToggle;
   final Widget child;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
+    final bg = backgroundColor ?? const Color(0xFFEAF6FA);
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFD8DDE6),
+        color: bg,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
             color: Color(0x22000000),
-            blurRadius: 16,
+            blurRadius: 12,
             offset: Offset(0, 8),
           ),
         ],
@@ -84,8 +87,16 @@ class ExpansionActionCard extends StatelessWidget {
             ],
           ),
           if (expanded) ...[
-            const SizedBox(height: 18),
-            child,
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: child,
+            ),
           ],
         ],
       ),

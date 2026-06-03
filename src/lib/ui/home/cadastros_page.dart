@@ -22,7 +22,9 @@ class _CadastrosPageState extends State<CadastrosPage> {
   final _studentResponsiblePhoneController = TextEditingController();
   final _studentResponsibleEmailController = TextEditingController();
 
-  bool _studentExpanded = false;
+  bool _studentExpanded = true;
+  String? _selectedTurma;
+  final List<String> _turmas = ['1', '2', '3', '4'];
 
   @override
   void dispose() {
@@ -42,17 +44,104 @@ class _CadastrosPageState extends State<CadastrosPage> {
   }
 
   void _submitStudent() {
+    // executa o cadastro (aqui apenas simula sucesso)
     if (_studentFormKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Aluno e responsável cadastrados.')),
-      );
       _studentFormKey.currentState?.reset();
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            content: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Text('O aluno foi cadastrado com sucesso!', textAlign: TextAlign.center),
+            ),
+            actions: [
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.of(ctx).pop(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF10A9D0),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+                    child: Text('Fechar'),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
     }
+  }
+
+  void _confirmSubmit() {
+    if (!(_studentFormKey.currentState?.validate() ?? false)) return;
+
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          title: const Text('Confirmar Cadastro?'),
+          content: const Text('Deseja confirmar o cadastro deste aluno?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('Cancelar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+                _submitStudent();
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10A9D0)),
+              child: const Text('Confirmar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(64),
+        child: Container(
+          color: const Color(0xFF10A9D0),
+          child: SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Text(
+                      'Logo',
+                      style: TextStyle(
+                          color: Color(0xFF08216F), fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => context.go(Routes.home),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -64,95 +153,20 @@ class _CadastrosPageState extends State<CadastrosPage> {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              padding: EdgeInsets.fromLTRB(18, 18, 18,
+                  MediaQuery.of(context).padding.bottom + kBottomNavigationBarHeight + 12),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 420),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: OutlinedButton.icon(
-                        onPressed: () => context.go(Routes.home),
-                        icon: const Icon(Icons.arrow_back_outlined),
-                        label: const Text('Voltar às seções'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF08216F),
-                          side: const BorderSide(
-                            color: Color(0xFF08216F),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 14,
-                          ),
-                          textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 26,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF08216F),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x2A000000),
-                            blurRadius: 22,
-                            offset: Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: const Column(
-                        children: [
-                          Text(
-                            'Cadastros',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF10A9D0),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Área simples para organizar acessos rápidos e cadastrar alunos.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 22),
-                    _SimpleInfoCard(
-                      title: 'Voluntários',
-                      subtitle: 'Acesso rápido para novos colaboradores.',
-                      accentColor: const Color(0xFF11A6BF),
-                    ),
-                    const SizedBox(height: 16),
-                    _SimpleInfoCard(
-                      title: 'Turmas',
-                      subtitle: 'Cadastro e organização das turmas.',
-                      accentColor: const Color(0xFF2457F0),
-                    ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 6),
                     ExpansionActionCard(
                       title: 'Cadastrar alunos',
                       subtitle: 'Aluno, responsáveis e vínculo inicial',
                       icon: Icons.person_add_alt_1_outlined,
                       accentColor: const Color(0xFF0B7FA5),
+                      backgroundColor: const Color(0xFFEAF6FA),
                       expanded: _studentExpanded,
                       onToggle: _toggleStudentPanel,
                       child: Form(
@@ -161,56 +175,68 @@ class _CadastrosPageState extends State<CadastrosPage> {
                           children: [
                             InputField(
                               controller: _studentNameController,
-                              label: 'Nome do aluno',
+                              label: 'Nome*',
                               hint: 'Digite o nome completo do aluno',
                               validatorMessage: 'Informe o nome do aluno',
-                            ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentBirthDateController,
-                              label: 'Data de nascimento',
-                              hint: 'DD/MM/AAAA',
-                              keyboardType: TextInputType.datetime,
-                              validatorMessage:
-                                  'Informe a data de nascimento do aluno',
+                              fillColor: Colors.white,
                             ),
                             const SizedBox(height: 14),
                             InputField(
                               controller: _studentDocumentController,
-                              label: 'Matrícula ou documento',
-                              hint: 'Número da matrícula ou documento',
-                              validatorMessage:
-                                  'Informe a matrícula ou documento',
-                            ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentResponsibleNameController,
-                              label: 'Responsável legal',
-                              hint: 'Nome do responsável legal',
-                              validatorMessage: 'Informe o responsável legal',
-                            ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentResponsiblePhoneController,
-                              label: 'Telefone do responsável',
-                              hint: 'Telefone para contato',
-                              keyboardType: TextInputType.phone,
-                              validatorMessage:
-                                  'Informe o telefone do responsável',
+                              label: 'CPF*',
+                              hint: '000.000.000-00',
+                              keyboardType: TextInputType.number,
+                              validatorMessage: 'Informe o CPF do aluno',
+                              fillColor: Colors.white,
                             ),
                             const SizedBox(height: 14),
                             InputField(
                               controller: _studentResponsibleEmailController,
-                              label: 'Email do responsável',
-                              hint: 'Email de contato',
+                              label: 'E-mail*',
+                              hint: 'email@exemplo.com',
                               keyboardType: TextInputType.emailAddress,
-                              validatorMessage:
-                                  'Informe o email do responsável',
+                              validatorMessage: 'Informe o e-mail',
+                              fillColor: Colors.white,
+                            ),
+                            const SizedBox(height: 14),
+                            InputField(
+                              controller: _studentResponsiblePhoneController,
+                              label: 'Telefone*',
+                              hint: '(00) 00000-0000',
+                              keyboardType: TextInputType.phone,
+                              validatorMessage: 'Informe o telefone',
+                              fillColor: Colors.white,
+                            ),
+                            const SizedBox(height: 14),
+                            InputField(
+                              controller: _studentBirthDateController,
+                              label: 'Aniversário',
+                              hint: 'DD/MM/AAAA',
+                              keyboardType: TextInputType.datetime,
+                              validatorMessage: '',
+                              fillColor: Colors.white,
+                            ),
+                            const SizedBox(height: 14),
+                            DropdownButtonFormField<String>(
+                              value: _selectedTurma,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide.none,
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              ),
+                              hint: const Text('Turma*'),
+                              items: _turmas.map((t) => DropdownMenuItem(value: t, child: Text('Turma $t'))).toList(),
+                              onChanged: (v) => setState(() => _selectedTurma = v),
+                              validator: (v) => v == null ? 'Informe a turma' : null,
                             ),
                             const SizedBox(height: 18),
                             ActionButton(
-                              label: 'Salvar aluno',
-                              onPressed: _submitStudent,
+                              label: '+ Cadastrar Aluno',
+                              onPressed: _confirmSubmit,
                             ),
                           ],
                         ),
