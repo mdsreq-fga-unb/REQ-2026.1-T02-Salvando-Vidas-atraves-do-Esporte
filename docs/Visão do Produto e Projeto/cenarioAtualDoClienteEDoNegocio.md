@@ -75,7 +75,7 @@ Atualmente, o projeto social de jiu-jitsu sofre com a fragmentação de informa�
 
 A figura apresenta o Diagrama de Ishikawa do projeto Salvando Vidas Através do Esporte, no qual são organizadas as possíveis causas do problema identificado segundo os 6M’s (Método, Mão de Obra, Máquina, Material, Medição e Meio Ambiente). No diagrama, o fator Meio Ambiente é representado apenas como Ambiente, mantendo o mesmo significado.
 
-![Diagrama de Ishikawa](../assets/fishbone.png "Fishbone Ishikawa")
+![Diagrama de Ishikawa](../assets/fishbone2.png "Fishbone Ishikawa")
 **Figura 2:** Diagrama de Ishikawa "Fishbone".
 Fonte: Elaborada por [José Augusto](https://github.com/JAugustoM)
 
