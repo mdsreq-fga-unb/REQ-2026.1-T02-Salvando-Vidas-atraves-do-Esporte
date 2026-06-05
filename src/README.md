@@ -1,5 +1,3 @@
-# Guia Flutter
-
 ## Recursos de Aprendizado
 
 - [Documentação Dart](https://dart.dev/language)
@@ -21,7 +19,7 @@
 │   │   │   ├── themes/  # Pasta com temas comuns a toda a aplicação
 │   │   │   └── widgets/ # Pasta com widgets comuns a toda a aplicação
 │   │   └── */
-│   │       ├── view_models/ # Pasta com a estrutura da página, utiliza a lógica definida em /data
+│   │       ├── views/ # Pasta com a estrutura da página, utiliza a lógica definida em /data
 │   │       └── widgets/     # Pasta com os widgets específicos a uma página
 │   └── main.dart    # Arquivo de entrada do projeto
 ├── linux/           # Pasta de configuração do linux
