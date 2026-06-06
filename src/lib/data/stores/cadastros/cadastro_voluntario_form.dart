@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:salvando_vidas/data/validators.dart';
+import 'package:salvando_vidas/domain/local_user/local_user.dart';
 
 part 'cadastro_voluntario_form.g.dart';
 
@@ -25,6 +26,15 @@ abstract class _CadastroVoluntarioFormStore with Store {
 
   @observable
   String cpf = '';
+
+  LocalUser get voluntario => LocalUser(
+    role: Role.voluntario,
+    nome: nome,
+    telefone: telefone,
+    cpf: cpf,
+    email: email,
+    senha: senha,
+  );
 
   @action
   void validaNome(String nome) {

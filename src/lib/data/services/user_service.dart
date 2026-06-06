@@ -60,7 +60,7 @@ class UserService {
       final data = await _supabase.from('users').select().eq('id', user.id);
 
       if (data.isNotEmpty) {
-        return LocalUser.fromJson(data.first);
+        return LocalUser.fromMap(data.first);
       }
 
       return null;
@@ -74,7 +74,7 @@ class UserService {
       final users = List<LocalUser>.empty(growable: true);
 
       for (final data in res) {
-        final user = LocalUser.fromJson(data);
+        final user = LocalUser.fromMap(data);
         users.add(user);
       }
 
@@ -82,25 +82,10 @@ class UserService {
     });
   }
 
-  Future<Result<void>> registerUser(
-    String email,
-    String password,
-    String nome,
-    String telefone,
-    String cpf,
-  ) async {
+  Future<Result<void>> registerUser(LocalUser user) async {
     return safeSupabaseCall(() async {
-      await _supabase.rpc(
-        'admin_create_user',
-        params: {
-          'new_email': email,
-          'new_password': password,
-          'new_role': 'voluntario',
-          'new_name': nome,
-          'new_telefone': telefone,
-          'new_cpf': cpf,
-        },
-      );
+      final params = user.toMap();
+      await _supabase.rpc('admin_create_user', params: params);
     });
   }
 

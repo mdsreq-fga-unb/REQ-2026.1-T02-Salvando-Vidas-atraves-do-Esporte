@@ -1,13 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-import '../converters.dart';
+import '../helpers.dart';
 
-part 'aluno.g.dart';
+part 'aluno.mapper.dart';
 
 enum Faixa { branca, cinza, amarela, laranja, verde, azul, roxa, marrom, preta }
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
-class Aluno {
+@MappableClass()
+class Aluno with AlunoMappable {
   final BigInt? id;
   final String nome;
   final String cpf;
@@ -22,10 +22,10 @@ class Aluno {
   final bool ativo;
   final bool federado;
 
-  @DateConverter()
+  @MappableClass(hook: HookData())
   final DateTime dataEntrada;
 
-  @DateConverter()
+  @MappableClass(hook: HookData())
   final DateTime nascimento;
 
   Aluno({
@@ -46,6 +46,6 @@ class Aluno {
     this.idTurma,
   });
 
-  factory Aluno.fromJson(Map<String, dynamic> json) => _$AlunoFromJson(json);
-  Map<String, dynamic> toJson() => _$AlunoToJson(this);
+  static final fromMap = AlunoMapper.fromMap;
+  static final fromJson = AlunoMapper.fromJson;
 }

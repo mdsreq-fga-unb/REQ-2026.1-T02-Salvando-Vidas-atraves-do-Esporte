@@ -1,24 +1,25 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-part 'responsavel.g.dart';
+part 'responsavel.mapper.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
-class Responsavel {
+@MappableClass()
+class Responsavel with ResponsavelMappable {
   final BigInt? id;
   final String nome;
   final String cpf;
   final String contato;
   final String email;
+  final bool ativo;
 
   Responsavel({
     required this.nome,
     required this.cpf,
     required this.contato,
     required this.email,
+    required this.ativo,
     this.id,
   });
 
-  factory Responsavel.fromJson(Map<String, dynamic> json) =>
-      _$ResponsavelFromJson(json);
-  Map<String, dynamic> toJson() => _$ResponsavelToJson(this);
+  static final fromMap = ResponsavelMapper.fromMap;
+  static final fromJson = ResponsavelMapper.fromJson;
 }

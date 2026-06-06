@@ -157,43 +157,19 @@ class MockUserService extends _i1.Mock implements _i4.UserService {
           as _i6.Future<_i7.Result<List<_i5.LocalUser>>>);
 
   @override
-  _i6.Future<_i7.Result<void>> registerUser(
-    String? email,
-    String? password,
-    String? nome,
-    String? telefone,
-    String? cpf,
-  ) =>
+  _i6.Future<_i7.Result<void>> registerUser(_i5.LocalUser? user) =>
       (super.noSuchMethod(
-            Invocation.method(#registerUser, [
-              email,
-              password,
-              nome,
-              telefone,
-              cpf,
-            ]),
+            Invocation.method(#registerUser, [user]),
             returnValue: _i6.Future<_i7.Result<void>>.value(
               _i8.dummyValue<_i7.Result<void>>(
                 this,
-                Invocation.method(#registerUser, [
-                  email,
-                  password,
-                  nome,
-                  telefone,
-                  cpf,
-                ]),
+                Invocation.method(#registerUser, [user]),
               ),
             ),
             returnValueForMissingStub: _i6.Future<_i7.Result<void>>.value(
               _i8.dummyValue<_i7.Result<void>>(
                 this,
-                Invocation.method(#registerUser, [
-                  email,
-                  password,
-                  nome,
-                  telefone,
-                  cpf,
-                ]),
+                Invocation.method(#registerUser, [user]),
               ),
             ),
           )

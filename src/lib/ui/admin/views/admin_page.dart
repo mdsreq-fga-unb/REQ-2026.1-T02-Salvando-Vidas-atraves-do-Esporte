@@ -96,31 +96,29 @@ class _AdminPageState extends State<AdminPage> {
   }
 
   void _submitVolunteer() async {
-    if (_cadastroVoluntario.podeCadastrar) {
-      switch (await context.read<UserService>().registerUser(
-        _cadastroVoluntario.email,
-        _cadastroVoluntario.senha,
-        _cadastroVoluntario.nome,
-        _cadastroVoluntario.telefone,
-        _cadastroVoluntario.cpf,
-      )) {
-        case Failure(message: final m, error: final e):
-          context.read<Logger>().e(m, error: e);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(m)));
-        case Success():
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Voluntário cadastrado com sucesso.')),
-          );
-          _volunteerFormKey.currentState?.reset();
-      }
-    } else {
+    if (!_cadastroVoluntario.podeCadastrar) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Algum campo não foi preenchido corretamente.'),
         ),
       );
+      return;
+    }
+
+    final voluntario = _cadastroVoluntario.voluntario;
+    final result = await context.read<UserService>().registerUser(voluntario);
+
+    switch (result) {
+      case Failure(:final message, :final error):
+        context.read<Logger>().e(message, error: error);
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
+      case Success():
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Voluntário cadastrado com sucesso.')),
+        );
+        _volunteerFormKey.currentState?.reset();
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:logger/web.dart';
 import 'package:salvando_vidas/data/supabase_call.dart';
 
 import '../test_imports.dart';
@@ -10,6 +11,7 @@ void main() {
   late MockSupabaseClient supabase;
   late MockGoTrueClient mockAuth;
   late UserService userService;
+  late Logger logger;
 
   // provideDummy<Result<bool>>(Success(false));
 
@@ -17,6 +19,7 @@ void main() {
     supabase = MockSupabaseClient();
     mockAuth = MockGoTrueClient();
     userService = UserService(supabase);
+    logger = Logger();
 
     when(supabase.auth).thenReturn(mockAuth);
   });
@@ -50,23 +53,34 @@ void main() {
           "nome": "João Silva",
           "telefone": "61999999999",
           "cpf": "99999999999",
+          "email": "teste@teste.com",
         },
       ]),
     );
 
     // Act
     final result = await userService.login("teste@teste.com", "SenhaTeste");
+    final user = userService.localUser;
 
-    if (result case Success(value: final v)) {
-      expect(v, isTrue);
-      expect(userService.localUser?.nome, "João Silva");
-      expect(userService.localUser?.role, Role.admin);
-
-      await userService.logout();
-      expect(userService.localUser, isNull);
-    } else {
-      fail("Esperava que o usuário fizesse login com sucesso");
+    // Assert
+    switch (result) {
+      case Success(:final value):
+        expect(value, isTrue);
+      case Failure(:final error):
+        logger.e("Erro detectado", error: error);
+        fail("Esperava que o usuário fizesse login com sucesso");
     }
+
+    switch (user) {
+      case null:
+        fail("Usuário não deve ser nulo");
+      case LocalUser(:final nome, :final role):
+        expect(nome, "João Silva");
+        expect(role, Role.admin);
+    }
+
+    await userService.logout();
+    expect(userService.localUser, isNull);
   });
 
   test(
@@ -84,10 +98,11 @@ void main() {
       final result = await userService.login("teste@teste.com", "SenhaTeste");
 
       // Assert
-      if (result case Failure(message: final m)) {
-        expect(m, isA<String>());
-      } else {
-        fail("Esperava que login falhasse");
+      switch (result) {
+        case Failure(:final message):
+          expect(message, isA<String>());
+        case Success():
+          fail("Esperava que login falhasse");
       }
     },
   );
@@ -112,6 +127,7 @@ void main() {
           "nome": "João Silva",
           "telefone": "61999999999",
           "cpf": "99999999999",
+          "email": "teste@teste.com",
         },
       ]),
     );

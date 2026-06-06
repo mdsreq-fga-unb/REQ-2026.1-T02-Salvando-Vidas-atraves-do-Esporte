@@ -1,27 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:salvando_vidas/domain/converters.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+import '../helpers.dart';
 
-part 'presenca.g.dart';
+part 'presenca.mapper.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
-class Presenca {
+@MappableClass()
+class Presenca with PresencaMappable {
   final BigInt? id;
   final BigInt alunoId;
-  final BigInt? turmaId;
-  final String? userId;
 
-  @DateConverter()
+  @MappableClass(hook: HookData())
   final DateTime data;
 
-  Presenca({
-    required this.alunoId,
-    required this.data,
-    this.id,
-    this.turmaId,
-    this.userId,
-  });
-
-  factory Presenca.fromJson(Map<String, dynamic> json) =>
-      _$PresencaFromJson(json);
-  Map<String, dynamic> toJson() => _$PresencaToJson(this);
+  Presenca({this.id, required this.alunoId, required this.data});
 }

@@ -1,3 +1,5 @@
+import 'package:salvando_vidas/domain/helpers.dart';
+
 import '../supabase_call.dart';
 
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
@@ -12,7 +14,7 @@ class AlunoService {
     return safeSupabaseCall(() async {
       final data = await _supabase
           .from('alunos')
-          .insert(aluno.toJson())
+          .insert(aluno.toMap())
           .select();
 
       return data.isNotEmpty ? aluno : null;
@@ -23,7 +25,7 @@ class AlunoService {
     return safeSupabaseCall(() async {
       final data = await _supabase
           .from('alunos')
-          .insert(responsavel.toJson())
+          .insert(responsavel.toMap())
           .select();
 
       return data.isNotEmpty ? responsavel : null;
@@ -37,7 +39,7 @@ class AlunoService {
       final alunos = List<Aluno>.empty(growable: true);
 
       for (final data in res) {
-        final aluno = Aluno.fromJson(data);
+        final aluno = Aluno.fromMap(data);
         alunos.add(aluno);
       }
 
@@ -52,11 +54,35 @@ class AlunoService {
       final responsaveis = List<Responsavel>.empty(growable: true);
 
       for (final data in res) {
-        final responsavel = Responsavel.fromJson(data);
+        final responsavel = Responsavel.fromMap(data);
         responsaveis.add(responsavel);
       }
 
       return responsaveis;
+    });
+  }
+
+  Future<Result<void>> atualizaAluno(BigInt id, Data diff) {
+    return safeSupabaseCall(() async {
+      await _supabase.from('alunos').update(diff).eq('id', id);
+    });
+  }
+
+  Future<Result<void>> atualizaResponsavel(BigInt id, Data diff) {
+    return safeSupabaseCall(() async {
+      await _supabase.from('responsaveis').update(diff).eq('id', id);
+    });
+  }
+
+  Future<Result<void>> deletaAluno(BigInt id) {
+    return safeSupabaseCall(() async {
+      await _supabase.from('alunos').delete().eq('id', id);
+    });
+  }
+
+  Future<Result<void>> deletaResponsavel(BigInt id) {
+    return safeSupabaseCall(() async {
+      await _supabase.from('responsaveis').delete().eq('id', id);
     });
   }
 }

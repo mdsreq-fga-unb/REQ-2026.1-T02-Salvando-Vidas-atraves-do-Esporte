@@ -1,26 +1,30 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-part 'local_user.g.dart';
+part 'local_user.mapper.dart';
 
+@MappableEnum()
 enum Role { voluntario, admin }
 
-@JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
-class LocalUser {
+@MappableClass()
+class LocalUser with LocalUserMappable {
   final String? id;
   final Role role;
   final String nome;
   final String telefone;
   final String cpf;
+  final String email;
+  final String? senha;
 
   const LocalUser({
+    this.id,
     required this.role,
     required this.nome,
     required this.telefone,
     required this.cpf,
-    this.id,
+    required this.email,
+    this.senha,
   });
 
-  factory LocalUser.fromJson(Map<String, dynamic> json) =>
-      _$LocalUserFromJson(json);
-  Map<String, dynamic> toJson() => _$LocalUserToJson(this);
+  static final fromMap = LocalUserMapper.fromMap;
+  static final fromJson = LocalUserMapper.fromJson;
 }
