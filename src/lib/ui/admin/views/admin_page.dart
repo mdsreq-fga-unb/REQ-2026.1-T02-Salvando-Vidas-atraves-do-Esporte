@@ -2,11 +2,11 @@ import 'package:salvando_vidas/main_imports.dart';
 
 import 'package:salvando_vidas/data/stores/cadastros/cadastro_voluntario_form.dart';
 
-import 'widgets/voluntario_input_field.dart';
+import '../widgets/voluntario_input_field.dart';
 
-import 'components/expansion_action_card.dart';
-import 'components/input_field.dart';
-import 'components/action_button.dart';
+import '../../cadastro_voluntario/widgets/expansion_action_card.dart';
+import '../../cadastro_voluntario/widgets/input_field.dart';
+import '../../cadastro_voluntario/widgets/action_button.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});

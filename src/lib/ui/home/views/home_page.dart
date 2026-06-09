@@ -257,23 +257,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       // Bottom navigation simplified to match mock
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          elevation: 8,
-          selectedItemColor: const Color(0xFF2457F0),
-          unselectedItemColor: const Color(0xFF9AA6C4),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.group), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: ''),
-          ],
-          currentIndex: 1,
-          onTap: (i) {},
-        ),
-      ),
+
     );
   }
 }

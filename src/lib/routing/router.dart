@@ -1,8 +1,8 @@
 import 'package:salvando_vidas/main_imports.dart';
 
-import 'package:salvando_vidas/ui/home/admin_page.dart';
-import 'package:salvando_vidas/ui/home/cadastros_page.dart';
-import 'package:salvando_vidas/ui/home/home_page.dart';
+import 'package:salvando_vidas/ui/admin/views/admin_page.dart';
+import 'package:salvando_vidas/ui/cadastro_voluntario/views/cadastros_page.dart';
+import 'package:salvando_vidas/ui/home/views/home_page.dart';
 import 'package:salvando_vidas/ui/login/views/login_page.dart';
 
 // GoRouter configuration
