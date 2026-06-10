@@ -6,6 +6,7 @@ import 'package:salvando_vidas/ui/global/widgets/topbar.dart';
 import 'package:salvando_vidas/ui/home/views/home_page.dart';
 import 'package:salvando_vidas/ui/login/views/login_page.dart';
 import 'package:salvando_vidas/ui/global/widgets/navbar.dart';
+import 'package:salvando_vidas/ui/turma/views/turma.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -40,6 +41,8 @@ final router = GoRouter(
         GoRoute(path: Routes.cadastros, builder: (context, state) => CadastrosPage(),),
 
         GoRoute(path: Routes.configuracao, builder: (context, state) => Configuracao(),),
+
+        GoRoute(path: Routes.turma, builder: (context, state) => Turma(),),
       ],
     ),
   ],
