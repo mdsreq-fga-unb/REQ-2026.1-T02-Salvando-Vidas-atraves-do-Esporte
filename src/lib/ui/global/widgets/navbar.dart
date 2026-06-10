@@ -18,7 +18,7 @@ class NavBar extends StatelessWidget {
       case Routes.home:
         currentIndex = 0;
         break;
-      case Routes.cadastros:
+      case Routes.turma:
         currentIndex = 1;
         break;
       case Routes.configuracao:
@@ -51,7 +51,7 @@ class NavBar extends StatelessWidget {
         ),
 
         NavigationDestination(
-          icon: Icon(Icons.group),
+          icon: Icon(Icons.school),
           label: '',
         ),
 
@@ -67,8 +67,11 @@ class NavBar extends StatelessWidget {
             context.go(Routes.home);
             break;
           case 1:
-            context.go(Routes.cadastros);
+            context.go(Routes.turma);
             break;
+/*           case 1:
+            context.go(Routes.cadastros);
+            break; */
           case 2:
             context.go(Routes.configuracao);
             break;
