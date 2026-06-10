@@ -33,6 +33,8 @@ class ResponsavelMapper extends ClassMapperBase<Responsavel> {
   );
   static String _$email(Responsavel v) => v.email;
   static const Field<Responsavel, String> _f$email = Field('email', _$email);
+  static bool _$ativo(Responsavel v) => v.ativo;
+  static const Field<Responsavel, bool> _f$ativo = Field('ativo', _$ativo);
   static BigInt? _$id(Responsavel v) => v.id;
   static const Field<Responsavel, BigInt> _f$id = Field('id', _$id, opt: true);
 
@@ -42,6 +44,7 @@ class ResponsavelMapper extends ClassMapperBase<Responsavel> {
     #cpf: _f$cpf,
     #contato: _f$contato,
     #email: _f$email,
+    #ativo: _f$ativo,
     #id: _f$id,
   };
   @override
@@ -53,6 +56,7 @@ class ResponsavelMapper extends ClassMapperBase<Responsavel> {
       cpf: data.dec(_f$cpf),
       contato: data.dec(_f$contato),
       email: data.dec(_f$email),
+      ativo: data.dec(_f$ativo),
       id: data.dec(_f$id),
     );
   }
@@ -122,6 +126,7 @@ abstract class ResponsavelCopyWith<$R, $In extends Responsavel, $Out>
     String? cpf,
     String? contato,
     String? email,
+    bool? ativo,
     BigInt? id,
   });
   ResponsavelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -141,6 +146,7 @@ class _ResponsavelCopyWithImpl<$R, $Out>
     String? cpf,
     String? contato,
     String? email,
+    bool? ativo,
     Object? id = $none,
   }) => $apply(
     FieldCopyWithData({
@@ -148,6 +154,7 @@ class _ResponsavelCopyWithImpl<$R, $Out>
       if (cpf != null) #cpf: cpf,
       if (contato != null) #contato: contato,
       if (email != null) #email: email,
+      if (ativo != null) #ativo: ativo,
       if (id != $none) #id: id,
     }),
   );
@@ -157,6 +164,7 @@ class _ResponsavelCopyWithImpl<$R, $Out>
     cpf: data.get(#cpf, or: $value.cpf),
     contato: data.get(#contato, or: $value.contato),
     email: data.get(#email, or: $value.email),
+    ativo: data.get(#ativo, or: $value.ativo),
     id: data.get(#id, or: $value.id),
   );
 

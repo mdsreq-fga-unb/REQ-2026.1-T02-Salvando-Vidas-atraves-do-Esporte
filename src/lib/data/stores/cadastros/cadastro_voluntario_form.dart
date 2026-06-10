@@ -1,32 +1,71 @@
-import 'package:mobx/mobx.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salvando_vidas/data/validators.dart';
 import 'package:salvando_vidas/domain/local_user/local_user.dart';
 
 part 'cadastro_voluntario_form.g.dart';
 
-// ignore: library_private_types_in_public_api
-class CadastroVoluntarioFormStore = _CadastroVoluntarioFormStore
-    with _$CadastroVoluntarioFormStore;
+// 1. Classe de Estado Imutável
+class CadastroVoluntarioFormState {
+  final String nome;
+  final String email;
+  final String telefone;
+  final String senha;
+  final String cpf;
+  final bool dirty; // Evita que os campos fiquem vermelhos antes da digitação
 
-abstract class _CadastroVoluntarioFormStore with Store {
-  final CadastroVoluntarioFormErrorState error =
-      CadastroVoluntarioFormErrorState();
+  CadastroVoluntarioFormState({
+    this.nome = '',
+    this.email = '',
+    this.telefone = '',
+    this.senha = '',
+    this.cpf = '',
+    this.dirty = false,
+  });
 
-  @observable
-  String nome = '';
+  // Os erros agora são getters calculados sob demanda, substituindo os @actions do MobX
+  String? get nomeError {
+    if (!dirty && nome.isEmpty) return null;
+    return nome.isNotEmpty ? null : 'Não pode estar em branco';
+  }
 
-  @observable
-  String email = '';
+  String? get emailError {
+    if (!dirty && email.isEmpty) return null;
+    return eEmail(email) ? null : 'Não é um email válido';
+  }
 
-  @observable
-  String telefone = '';
+  String? get telefoneError {
+    if (!dirty && telefone.isEmpty) return null;
+    return eTelefone(telefone) ? null : 'Não é um telefone válido';
+  }
 
-  @observable
-  String senha = '';
+  String? get senhaError {
+    if (!dirty && senha.isEmpty) return null;
+    return senha.isNotEmpty ? null : 'Não pode estar em branco';
+  }
 
-  @observable
-  String cpf = '';
+  String? get cpfError {
+    if (!dirty && cpf.isEmpty) return null;
+    return eCPF(cpf) ? null : 'Não é um CPF válido';
+  }
 
+  // Equivalente ao antigo getter temErros do MobX
+  bool get temErros =>
+      nomeError != null ||
+      emailError != null ||
+      telefoneError != null ||
+      senhaError != null ||
+      cpfError != null;
+
+  // Equivalente ao antigo @computed podeCadastrar
+  bool get podeCadastrar =>
+      nome.isNotEmpty &&
+      email.isNotEmpty &&
+      telefone.isNotEmpty &&
+      senha.isNotEmpty &&
+      cpf.isNotEmpty &&
+      !temErros;
+
+  // Mantido o helper para gerar o LocalUser
   LocalUser get voluntario => LocalUser(
     role: Role.voluntario,
     nome: nome,
@@ -36,78 +75,51 @@ abstract class _CadastroVoluntarioFormStore with Store {
     senha: senha,
   );
 
-  @action
-  void validaNome(String nome) {
-    error.nome = nome.isNotEmpty ? null : 'Não pode estar em branco';
+  CadastroVoluntarioFormState copyWith({
+    String? nome,
+    String? email,
+    String? telefone,
+    String? senha,
+    String? cpf,
+    bool? dirty,
+  }) {
+    return CadastroVoluntarioFormState(
+      nome: nome ?? this.nome,
+      email: email ?? this.email,
+      telefone: telefone ?? this.telefone,
+      senha: senha ?? this.senha,
+      cpf: cpf ?? this.cpf,
+      dirty: dirty ?? this.dirty,
+    );
   }
-
-  @action
-  void validaEmail(String email) {
-    error.email = eEmail(email) ? null : 'Não é um email válido';
-  }
-
-  @action
-  void validaTelefone(String telefone) {
-    error.telefone = eTelefone(telefone) ? null : 'Não é um telefone válido';
-  }
-
-  @action
-  void validaSenha(String senha) {
-    error.senha = senha.isNotEmpty ? null : 'Não pode estar em branco';
-  }
-
-  @action
-  void validaCPF(String cpf) {
-    error.cpf = eCPF(cpf) ? null : 'Não é um CPF válido';
-  }
-
-  late List<ReactionDisposer> _disposers;
-
-  void setupValidations() {
-    _disposers = [
-      reaction((_) => nome, validaNome),
-      reaction((_) => email, validaEmail),
-      reaction((_) => telefone, validaTelefone),
-      reaction((_) => senha, validaSenha),
-      reaction((_) => cpf, validaCPF),
-    ];
-  }
-
-  void dispose() {
-    for (final d in _disposers) {
-      d();
-    }
-  }
-
-  @computed
-  bool get podeCadastrar => !error.temErros;
 }
 
-// ignore: library_private_types_in_public_api
-class CadastroVoluntarioFormErrorState = _CadastroVoluntarioFormErrorState
-    with _$CadastroVoluntarioFormErrorState;
+// 2. O Notifier gerenciador do estado
+@riverpod
+class CadastroVoluntarioForm extends _$CadastroVoluntarioForm {
+  @override
+  CadastroVoluntarioFormState build() {
+    return CadastroVoluntarioFormState();
+  }
 
-abstract class _CadastroVoluntarioFormErrorState with Store {
-  @observable
-  String? nome = '';
+  // Métodos de atualização chamados pelos TextFields
+  void updateNome(String value) {
+    state = state.copyWith(nome: value, dirty: true);
+  }
 
-  @observable
-  String? email = '';
+  void updateEmail(String value) {
+    state = state.copyWith(email: value, dirty: true);
+  }
 
-  @observable
-  String? telefone = '';
+  void updateTelefone(String value) {
+    state = state.copyWith(telefone: value, dirty: true);
+  }
 
-  @observable
-  String? senha = '';
+  void updateSenha(String value) {
+    state = state.copyWith(senha: value, dirty: true);
+  }
 
-  @observable
-  String? cpf = '';
-
-  @computed
-  bool get temErros =>
-      nome != null ||
-      email != null ||
-      telefone != null ||
-      senha != null ||
-      cpf != null;
+  void updateCpf(String value) {
+    state = state.copyWith(cpf: value, dirty: true);
+  }
 }

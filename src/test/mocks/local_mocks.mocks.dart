@@ -3,15 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i4;
 
-import 'package:mobx/mobx.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
-import 'package:salvando_vidas/data/services/user_service.dart' as _i4;
-import 'package:salvando_vidas/data/stores/login/login_form.dart' as _i2;
-import 'package:salvando_vidas/data/supabase_call.dart' as _i7;
-import 'package:salvando_vidas/domain/local_user/local_user.dart' as _i5;
+import 'package:salvando_vidas/data/services/user_service/user_service.dart'
+    as _i2;
+import 'package:salvando_vidas/data/supabase_call.dart' as _i5;
+import 'package:salvando_vidas/domain/local_user/local_user.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,22 +26,10 @@ import 'package:salvando_vidas/domain/local_user/local_user.dart' as _i5;
 // ignore_for_file: subtype_of_sealed_class
 // ignore_for_file: invalid_use_of_internal_member
 
-class _FakeLoginFormErrorState_0 extends _i1.SmartFake
-    implements _i2.LoginFormErrorState {
-  _FakeLoginFormErrorState_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeReactiveContext_1 extends _i1.SmartFake
-    implements _i3.ReactiveContext {
-  _FakeReactiveContext_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i4.UserService {
+class MockUserService extends _i1.Mock implements _i2.UserService {
   @override
   bool get isAdmin =>
       (super.noSuchMethod(
@@ -54,148 +40,80 @@ class MockUserService extends _i1.Mock implements _i4.UserService {
           as bool);
 
   @override
-  set localUser(_i5.LocalUser? value) => super.noSuchMethod(
+  set localUser(_i3.LocalUser? value) => super.noSuchMethod(
     Invocation.setter(#localUser, value),
     returnValueForMissingStub: null,
   );
 
   @override
-  _i6.Future<_i7.Result<bool>> login(String? email, String? password) =>
+  _i4.Future<bool> login(String? email, String? password) =>
       (super.noSuchMethod(
             Invocation.method(#login, [email, password]),
-            returnValue: _i6.Future<_i7.Result<bool>>.value(
-              _i8.dummyValue<_i7.Result<bool>>(
-                this,
-                Invocation.method(#login, [email, password]),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<_i7.Result<bool>>.value(
-              _i8.dummyValue<_i7.Result<bool>>(
-                this,
-                Invocation.method(#login, [email, password]),
-              ),
-            ),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i6.Future<_i7.Result<bool>>);
+          as _i4.Future<bool>);
 
   @override
-  _i6.Future<_i7.Result<void>> logout() =>
+  _i4.Future<void> logout() =>
       (super.noSuchMethod(
             Invocation.method(#logout, []),
-            returnValue: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#logout, []),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#logout, []),
-              ),
-            ),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i6.Future<_i7.Result<void>>);
+          as _i4.Future<void>);
 
   @override
-  _i6.Future<_i7.Result<bool>> isLoggedIn() =>
+  _i4.Future<bool> isLoggedIn() =>
       (super.noSuchMethod(
             Invocation.method(#isLoggedIn, []),
-            returnValue: _i6.Future<_i7.Result<bool>>.value(
-              _i8.dummyValue<_i7.Result<bool>>(
-                this,
-                Invocation.method(#isLoggedIn, []),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<_i7.Result<bool>>.value(
-              _i8.dummyValue<_i7.Result<bool>>(
-                this,
-                Invocation.method(#isLoggedIn, []),
-              ),
-            ),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i6.Future<_i7.Result<bool>>);
+          as _i4.Future<bool>);
 
   @override
-  _i6.Future<_i7.Result<_i5.LocalUser?>> getLocalUser(_i7.User? user) =>
+  _i4.Future<_i3.LocalUser?> getLocalUser(_i5.User? user) =>
       (super.noSuchMethod(
             Invocation.method(#getLocalUser, [user]),
-            returnValue: _i6.Future<_i7.Result<_i5.LocalUser?>>.value(
-              _i8.dummyValue<_i7.Result<_i5.LocalUser?>>(
-                this,
-                Invocation.method(#getLocalUser, [user]),
-              ),
-            ),
-            returnValueForMissingStub:
-                _i6.Future<_i7.Result<_i5.LocalUser?>>.value(
-                  _i8.dummyValue<_i7.Result<_i5.LocalUser?>>(
-                    this,
-                    Invocation.method(#getLocalUser, [user]),
-                  ),
-                ),
+            returnValue: _i4.Future<_i3.LocalUser?>.value(),
+            returnValueForMissingStub: _i4.Future<_i3.LocalUser?>.value(),
           )
-          as _i6.Future<_i7.Result<_i5.LocalUser?>>);
+          as _i4.Future<_i3.LocalUser?>);
 
   @override
-  _i6.Future<_i7.Result<List<_i5.LocalUser>>> listUsers() =>
+  _i4.Future<List<_i3.LocalUser>> listUsers() =>
       (super.noSuchMethod(
             Invocation.method(#listUsers, []),
-            returnValue: _i6.Future<_i7.Result<List<_i5.LocalUser>>>.value(
-              _i8.dummyValue<_i7.Result<List<_i5.LocalUser>>>(
-                this,
-                Invocation.method(#listUsers, []),
-              ),
+            returnValue: _i4.Future<List<_i3.LocalUser>>.value(
+              <_i3.LocalUser>[],
             ),
-            returnValueForMissingStub:
-                _i6.Future<_i7.Result<List<_i5.LocalUser>>>.value(
-                  _i8.dummyValue<_i7.Result<List<_i5.LocalUser>>>(
-                    this,
-                    Invocation.method(#listUsers, []),
-                  ),
-                ),
+            returnValueForMissingStub: _i4.Future<List<_i3.LocalUser>>.value(
+              <_i3.LocalUser>[],
+            ),
           )
-          as _i6.Future<_i7.Result<List<_i5.LocalUser>>>);
+          as _i4.Future<List<_i3.LocalUser>>);
 
   @override
-  _i6.Future<_i7.Result<void>> registerUser(_i5.LocalUser? user) =>
+  _i4.Future<void> registerUser(_i3.LocalUser? user) =>
       (super.noSuchMethod(
             Invocation.method(#registerUser, [user]),
-            returnValue: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#registerUser, [user]),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#registerUser, [user]),
-              ),
-            ),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i6.Future<_i7.Result<void>>);
+          as _i4.Future<void>);
 
   @override
-  _i6.Future<_i7.Result<void>> deleteUser(String? id) =>
+  _i4.Future<void> deleteUser(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteUser, [id]),
-            returnValue: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#deleteUser, [id]),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#deleteUser, [id]),
-              ),
-            ),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i6.Future<_i7.Result<void>>);
+          as _i4.Future<void>);
 
   @override
-  _i6.Future<_i7.Result<void>> updateUser({
+  _i4.Future<void> updateUser({
     required String? id,
     String? email,
     String? password,
@@ -212,142 +130,8 @@ class MockUserService extends _i1.Mock implements _i4.UserService {
               #telefone: telefone,
               #cpf: cpf,
             }),
-            returnValue: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#updateUser, [], {
-                  #id: id,
-                  #email: email,
-                  #password: password,
-                  #nome: nome,
-                  #telefone: telefone,
-                  #cpf: cpf,
-                }),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<_i7.Result<void>>.value(
-              _i8.dummyValue<_i7.Result<void>>(
-                this,
-                Invocation.method(#updateUser, [], {
-                  #id: id,
-                  #email: email,
-                  #password: password,
-                  #nome: nome,
-                  #telefone: telefone,
-                  #cpf: cpf,
-                }),
-              ),
-            ),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i6.Future<_i7.Result<void>>);
-}
-
-/// A class which mocks [LoginFormStore].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLoginFormStore extends _i1.Mock implements _i2.LoginFormStore {
-  @override
-  _i2.LoginFormErrorState get error =>
-      (super.noSuchMethod(
-            Invocation.getter(#error),
-            returnValue: _FakeLoginFormErrorState_0(
-              this,
-              Invocation.getter(#error),
-            ),
-            returnValueForMissingStub: _FakeLoginFormErrorState_0(
-              this,
-              Invocation.getter(#error),
-            ),
-          )
-          as _i2.LoginFormErrorState);
-
-  @override
-  String get email =>
-      (super.noSuchMethod(
-            Invocation.getter(#email),
-            returnValue: _i8.dummyValue<String>(
-              this,
-              Invocation.getter(#email),
-            ),
-            returnValueForMissingStub: _i8.dummyValue<String>(
-              this,
-              Invocation.getter(#email),
-            ),
-          )
-          as String);
-
-  @override
-  String get senha =>
-      (super.noSuchMethod(
-            Invocation.getter(#senha),
-            returnValue: _i8.dummyValue<String>(
-              this,
-              Invocation.getter(#senha),
-            ),
-            returnValueForMissingStub: _i8.dummyValue<String>(
-              this,
-              Invocation.getter(#senha),
-            ),
-          )
-          as String);
-
-  @override
-  bool get canLogin =>
-      (super.noSuchMethod(
-            Invocation.getter(#canLogin),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  set email(String? value) => super.noSuchMethod(
-    Invocation.setter(#email, value),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  set senha(String? value) => super.noSuchMethod(
-    Invocation.setter(#senha, value),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  _i3.ReactiveContext get context =>
-      (super.noSuchMethod(
-            Invocation.getter(#context),
-            returnValue: _FakeReactiveContext_1(
-              this,
-              Invocation.getter(#context),
-            ),
-            returnValueForMissingStub: _FakeReactiveContext_1(
-              this,
-              Invocation.getter(#context),
-            ),
-          )
-          as _i3.ReactiveContext);
-
-  @override
-  void validateEmail(String? value) => super.noSuchMethod(
-    Invocation.method(#validateEmail, [value]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void validatePassword(String? value) => super.noSuchMethod(
-    Invocation.method(#validatePassword, [value]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void setupValidations() => super.noSuchMethod(
-    Invocation.method(#setupValidations, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void dispose() => super.noSuchMethod(
-    Invocation.method(#dispose, []),
-    returnValueForMissingStub: null,
-  );
+          as _i4.Future<void>);
 }

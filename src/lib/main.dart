@@ -1,5 +1,6 @@
-import 'main_imports.dart';
 import 'package:device_preview/device_preview.dart';
+
+import 'main_imports.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,13 +10,7 @@ Future<void> main() async {
   runApp(
     DevicePreview(
       enabled: true,
-      builder: (context) => MultiProvider(
-        providers: [
-          Provider<Logger>(create: (_) => Logger()),
-          Provider<UserService>(create: (_) => UserService(supabase)),
-        ],
-        child: const MyApp(),
-      ),
+      builder: (_) => ProviderScope(child: const MyApp()),
     ),
   );
 }

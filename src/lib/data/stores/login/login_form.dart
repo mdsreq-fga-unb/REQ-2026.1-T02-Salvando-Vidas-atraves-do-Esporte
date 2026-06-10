@@ -1,59 +1,51 @@
-import 'package:mobx/mobx.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salvando_vidas/data/validators.dart';
 
 part 'login_form.g.dart';
 
-// ignore: library_private_types_in_public_api
-class LoginFormStore = _LoginFormStore with _$LoginFormStore;
+class LoginFormState {
+  final String email;
+  final String senha;
+  final bool dirty;
 
-abstract class _LoginFormStore with Store {
-  final LoginFormErrorState error = LoginFormErrorState();
+  LoginFormState({this.email = '', this.senha = '', this.dirty = false});
 
-  @observable
-  String email = '';
-
-  @observable
-  String senha = '';
-
-  @computed
-  bool get canLogin => !error.temErros;
-
-  @action
-  void validateEmail(String value) {
-    error.email = eEmail(value) ? null : 'Não é um email válido';
+  String? get emailError {
+    if (!dirty && email.isEmpty) return null;
+    return eEmail(email) ? null : 'Não é um email válido';
   }
 
-  @action
-  void validatePassword(String value) {
-    error.senha = value.isNotEmpty ? null : 'Não pode estar em branco';
+  String? get senhaError {
+    if (!dirty && senha.isEmpty) return null;
+    return senha.isNotEmpty ? null : 'Não pode estar em branco';
   }
 
-  late List<ReactionDisposer> _disposers;
+  bool get temErros => emailError != null || senhaError != null;
+  bool get canLogin => email.isNotEmpty && senha.isNotEmpty && !temErros;
 
-  void setupValidations() {
-    _disposers = [
-      reaction((_) => email, validateEmail),
-      reaction((_) => senha, validatePassword),
-    ];
-  }
-
-  void dispose() {
-    for (final d in _disposers) {
-      d();
-    }
+  LoginFormState copyWith({String? email, String? senha, bool? dirty}) {
+    return LoginFormState(
+      email: email ?? this.email,
+      senha: senha ?? this.senha,
+      dirty: dirty ?? this.dirty,
+    );
   }
 }
 
-// ignore: library_private_types_in_public_api
-class LoginFormErrorState = _LoginFormErrorState with _$LoginFormErrorState;
+@riverpod
+class LoginForm extends _$LoginForm {
+  @override
+  LoginFormState build() {
+    // Inicializa o estado
+    return LoginFormState();
+  }
 
-abstract class _LoginFormErrorState with Store {
-  @observable
-  String? email;
+  // Substitui as @actions
+  void updateEmail(String value) {
+    state = state.copyWith(email: value, dirty: true);
+  }
 
-  @observable
-  String? senha;
-
-  @computed
-  bool get temErros => email != null || senha != null;
+  void updateSenha(String value) {
+    state = state.copyWith(senha: value, dirty: true);
+  }
 }
