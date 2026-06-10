@@ -99,7 +99,12 @@ class TurmaDetail extends StatelessWidget {
                   foregroundColor: Colors.white,
                 ),
                 onPressed: () {
-
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegistrarFrequenciaView(turma: turma),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Registrar Frequência',

@@ -18,49 +18,105 @@ class TurmaCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: const BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          border: Border(
-            bottom: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-          ),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    turma.nome,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF333333),
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Alunos: ${turma.totalAlunos}, Dia e Hora: ${turma.diasHorario}',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF666666),
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ],
+    return Card(
+      // Espaçamento em volta do card
+      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+      elevation: 2, // Sombra suave
+      shadowColor: Colors.black.withOpacity(0.15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      color: Colors.white,
+      surfaceTintColor: Colors.white, 
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Ícone de destaque à esquerda
+              Container(
+                height: 52,
+                width: 52,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00BCD4).withOpacity(0.15), // Fundo ciano clarinho
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.groups_rounded,
+                  color: Color(0xFF00BCD4), // Cor principal
+                  size: 30,
+                ),
               ),
-            ),
-            TurmaOptionsMenuWidget(
-              turmaId: turma.id,
-              onEditar: onEditar,
-              onExcluir: onExcluir,
-            ),
-          ],
+              const SizedBox(width: 16),
+
+              // Textos organizados
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      turma.nome,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF333333),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    
+                    // Linha com ícone de pessoas
+                    Row(
+                      children: [
+                        const Icon(Icons.person_outline, size: 14, color: Color(0xFF666666)),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${turma.totalAlunos} alunos',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF666666),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    
+                    // Linha com ícone de relógio
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 2.0),
+                          child: Icon(Icons.schedule, size: 14, color: Color(0xFF666666)),
+                        ),
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            turma.diasHorario,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Color(0xFF666666),
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              // Menu de opções (3 pontinhos)
+              TurmaOptionsMenuWidget(
+                turmaId: turma.id,
+                onEditar: onEditar,
+                onExcluir: onExcluir,
+              ),
+            ],
+          ),
         ),
       ),
     );
