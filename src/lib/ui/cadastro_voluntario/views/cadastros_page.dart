@@ -1,4 +1,9 @@
-import '../cadastro_imports.dart';
+import 'package:flutter/material.dart';
+import '../cadastro_imports.dart'; 
+import '../widgets/etapa_dados_basicos.dart';
+import '../widgets/etapa_dados_medicos.dart';
+import '../widgets/etapa_dados_responsavel.dart';
+import '../widgets/cadastro_dialogs.dart';
 
 class CadastrosPage extends StatefulWidget {
   const CadastrosPage({super.key});
@@ -8,203 +13,208 @@ class CadastrosPage extends StatefulWidget {
 }
 
 class _CadastrosPageState extends State<CadastrosPage> {
-  final _studentFormKey = GlobalKey<FormState>();
-  final _studentNameController = TextEditingController();
-  final _studentBirthDateController = TextEditingController();
-  final _studentDocumentController = TextEditingController();
-  final _studentResponsibleNameController = TextEditingController();
-  final _studentResponsiblePhoneController = TextEditingController();
-  final _studentResponsibleEmailController = TextEditingController();
-
-  bool _studentExpanded = true;
-  String? _selectedTurma;
-  final List<String> _turmas = ['1', '2', '3', '4'];
+  final PageController _pageController = PageController();
+  int _etapaAtual = 0;
+  final _formKeyEtapa1 = GlobalKey<FormState>();
+  final _formKeyEtapa2 = GlobalKey<FormState>();
+  final _formKeyEtapa3 = GlobalKey<FormState>();
+  late final _formKeys = [_formKeyEtapa1, _formKeyEtapa2, _formKeyEtapa3];
+  // Controllers - Etapa 1
+  final _nomeController = TextEditingController();
+  final _cpfController = TextEditingController();
+  final _telefoneController = TextEditingController();
+  final _dataNascimentoController = TextEditingController();
+  String? _tipoSanguineo;
+  String? _faixa;
+  String? _idFicha; 
+  // Controllers - Etapa 2
+  final _obsMedicasController = TextEditingController();
+  final Map<int, bool?> _respostasMedicas = {1: null, 2: null, 3: null, 4: null, 5: null};
+  // Controllers - Etapa 3
+  final _nomeResponsavelController = TextEditingController();
+  final _cpfResponsavelController = TextEditingController();
+  final _telefoneResponsavelController = TextEditingController();
 
   @override
   void dispose() {
-    _studentNameController.dispose();
-    _studentBirthDateController.dispose();
-    _studentDocumentController.dispose();
-    _studentResponsibleNameController.dispose();
-    _studentResponsiblePhoneController.dispose();
-    _studentResponsibleEmailController.dispose();
+    _pageController.dispose();
+    _nomeController.dispose();
+    _cpfController.dispose();
+    _telefoneController.dispose();
+    _dataNascimentoController.dispose();
+    _obsMedicasController.dispose();
+    _nomeResponsavelController.dispose();
+    _cpfResponsavelController.dispose();
+    _telefoneResponsavelController.dispose();
     super.dispose();
   }
 
-  void _toggleStudentPanel() {
+  void _onStepChanged(int page) {
     setState(() {
-      _studentExpanded = !_studentExpanded;
+      _etapaAtual = page;
     });
   }
 
-  void _submitStudent() {
-    // executa o cadastro (aqui apenas simula sucesso)
-    if (_studentFormKey.currentState?.validate() ?? false) {
-      _studentFormKey.currentState?.reset();
-      showDialog(
-        context: context,
-        builder: (ctx) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            content: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: Text('O aluno foi cadastrado com sucesso!', textAlign: TextAlign.center),
-            ),
-            actions: [
-              Center(
-                child: ElevatedButton(
-                  onPressed: () => Navigator.of(ctx).pop(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF10A9D0),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
-                    child: Text('Fechar'),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
+  void _avancar() {
+    if (_formKeys[_etapaAtual].currentState!.validate()) {
+      if (_etapaAtual < 2) {
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      } else {
+        _mostrarDialogConfirmacao();
+      }
+    }
+  }
+
+  void _voltar() {
+    if (_etapaAtual > 0) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
       );
     }
   }
 
-  void _confirmSubmit() {
-    if (!(_studentFormKey.currentState?.validate() ?? false)) return;
-
-    showDialog(
+  void _mostrarDialogConfirmacao() {
+    showConfirmationDialog(
       context: context,
-      builder: (ctx) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: const Text('Confirmar Cadastro?'),
-          content: const Text('Deseja confirmar o cadastro deste aluno?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(ctx).pop();
-                _submitStudent();
-              },
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10A9D0)),
-              child: const Text('Confirmar'),
-            ),
-          ],
+      onConfirm: () {
+        showSuccessDialog(
+          context: context,
+          onFechar: () {
+            setState(() {
+              _pageController.jumpToPage(0);
+              _etapaAtual = 0;
+              _nomeController.clear();
+              _cpfController.clear();
+              _telefoneController.clear();
+              _dataNascimentoController.clear();
+              _tipoSanguineo = null;
+              _faixa = null;
+              _idFicha = null;
+              _obsMedicasController.clear();
+              _respostasMedicas.updateAll((key, value) => null);
+              _nomeResponsavelController.clear();
+              _cpfResponsavelController.clear();
+              _telefoneResponsavelController.clear();
+            });
+          },
         );
       },
     );
   }
 
+  String _tituloEtapa() {
+    switch (_etapaAtual) {
+      case 0:
+        return 'Cadastrar Aluno:';
+      case 1:
+        return 'Cadastrar Aluno (Observações Médicas):';
+      case 2:
+        return 'Cadastrar Aluno (< 18 anos):';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFFF8F8F8), Color(0xFFE4E4E4)],
+            colors: [Color(0xFFF5F7FB), Color(0xFFE4E4E4)],
           ),
         ),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(18, 18, 18,
-                  MediaQuery.of(context).padding.bottom + kBottomNavigationBarHeight + 12),
+              padding: const EdgeInsets.all(16.0),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 420),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 6),
-                    ExpansionActionCard(
-                      title: 'Cadastrar alunos',
-                      subtitle: 'Aluno, responsáveis e vínculo inicial',
-                      icon: Icons.person_add_alt_1_outlined,
-                      accentColor: const Color(0xFF0B7FA5),
-                      backgroundColor: const Color(0xFFEAF6FA),
-                      expanded: _studentExpanded,
-                      onToggle: _toggleStudentPanel,
-                      child: Form(
-                        key: _studentFormKey,
-                        child: Column(
+                constraints: const BoxConstraints(maxWidth: 450),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(color: Color(0x22000000), blurRadius: 12, offset: Offset(0, 6)),
+                    ],
+                  ),
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        _tituloEtapa(),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF08216F)),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 24),
+                      SizedBox(
+                        height: 520, 
+                        child: PageView(
+                          controller: _pageController,
+                          onPageChanged: _onStepChanged,
+                          physics: const NeverScrollableScrollPhysics(),
                           children: [
-                            InputField(
-                              controller: _studentNameController,
-                              label: 'Nome*',
-                              hint: 'Digite o nome completo do aluno',
-                              validatorMessage: 'Informe o nome do aluno',
-                              fillColor: Colors.white,
+                            EtapaDadosBasicos(
+                              formKey: _formKeyEtapa1,
+                              nomeController: _nomeController,
+                              cpfController: _cpfController,
+                              telefoneController: _telefoneController,
+                              dataNascimentoController: _dataNascimentoController,
+                              tipoSanguineo: _tipoSanguineo,
+                              faixa: _faixa,
+                              idFicha: _idFicha, 
+                              onTipoSanguineoChanged: (v) => setState(() => _tipoSanguineo = v),
+                              onFaixaChanged: (v) => setState(() => _faixa = v),
+                              onIdFichaChanged: (v) => setState(() => _idFicha = v), 
                             ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentDocumentController,
-                              label: 'CPF*',
-                              hint: '000.000.000-00',
-                              keyboardType: TextInputType.number,
-                              validatorMessage: 'Informe o CPF do aluno',
-                              fillColor: Colors.white,
+                            EtapaDadosMedicos(
+                              formKey: _formKeyEtapa2,
+                              respostas: _respostasMedicas,
+                              onRespostaChanged: (id, value) => setState(() => _respostasMedicas[id] = value),
+                              obsController: _obsMedicasController,
                             ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentResponsibleEmailController,
-                              label: 'E-mail*',
-                              hint: 'email@exemplo.com',
-                              keyboardType: TextInputType.emailAddress,
-                              validatorMessage: 'Informe o e-mail',
-                              fillColor: Colors.white,
-                            ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentResponsiblePhoneController,
-                              label: 'Telefone*',
-                              hint: '(00) 00000-0000',
-                              keyboardType: TextInputType.phone,
-                              validatorMessage: 'Informe o telefone',
-                              fillColor: Colors.white,
-                            ),
-                            const SizedBox(height: 14),
-                            InputField(
-                              controller: _studentBirthDateController,
-                              label: 'Aniversário',
-                              hint: 'DD/MM/AAAA',
-                              keyboardType: TextInputType.datetime,
-                              validatorMessage: '',
-                              fillColor: Colors.white,
-                            ),
-                            const SizedBox(height: 14),
-                            DropdownButtonFormField<String>(
-                              value: _selectedTurma,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: BorderSide.none,
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              ),
-                              hint: const Text('Turma*'),
-                              items: _turmas.map((t) => DropdownMenuItem(value: t, child: Text('Turma $t'))).toList(),
-                              onChanged: (v) => setState(() => _selectedTurma = v),
-                              validator: (v) => v == null ? 'Informe a turma' : null,
-                            ),
-                            const SizedBox(height: 18),
-                            ActionButton(
-                              label: '+ Cadastrar Aluno',
-                              onPressed: _confirmSubmit,
+                            EtapaDadosResponsavel(
+                              formKey: _formKeyEtapa3,
+                              nomeController: _nomeResponsavelController,
+                              cpfController: _cpfResponsavelController,
+                              telefoneController: _telefoneResponsavelController,
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 24),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          OutlinedButton(
+                            onPressed: _etapaAtual == 0 ? null : _voltar,
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: const Color(0xFF08216F),
+                              side: BorderSide(color: _etapaAtual == 0 ? Colors.grey : const Color(0xFF08216F)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                            child: const Text('Voltar'),
+                          ),
+                          ElevatedButton(
+                            onPressed: _avancar,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF08216F),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                            child: Text(_etapaAtual == 2 ? 'Cadastrar' : 'Avançar'),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
