@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salvando_vidas/ui/global/widgets/label.dart';
 
 class InputField extends StatelessWidget {
   const InputField({
@@ -28,14 +29,7 @@ class InputField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Color(0xFF10A9D0),
-            fontSize: 14,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        buildLabel(label),
         const SizedBox(height: 6),
         TextFormField(
           onChanged: (value) => update(value),

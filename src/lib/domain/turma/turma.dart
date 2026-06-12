@@ -11,6 +11,7 @@ enum FaixaEtaria { infantil, adulto }
 class Turma with TurmaMappable {
   final int id;
   final String nome;
+  final String descricao;
   final FaixaEtaria faixaEtaria;
 
   @MappableField(hook: HookHorario())
@@ -32,6 +33,7 @@ class Turma with TurmaMappable {
   Turma({
     required this.id,
     required this.nome,
+    required this.descricao,
     required this.faixaEtaria,
     required this.horarioInicio,
     required this.horarioFim,

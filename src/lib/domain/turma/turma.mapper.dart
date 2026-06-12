@@ -73,6 +73,11 @@ class TurmaMapper extends ClassMapperBase<Turma> {
   static const Field<Turma, int> _f$id = Field('id', _$id);
   static String _$nome(Turma v) => v.nome;
   static const Field<Turma, String> _f$nome = Field('nome', _$nome);
+  static String _$descricao(Turma v) => v.descricao;
+  static const Field<Turma, String> _f$descricao = Field(
+    'descricao',
+    _$descricao,
+  );
   static FaixaEtaria _$faixaEtaria(Turma v) => v.faixaEtaria;
   static const Field<Turma, FaixaEtaria> _f$faixaEtaria = Field(
     'faixaEtaria',
@@ -149,6 +154,7 @@ class TurmaMapper extends ClassMapperBase<Turma> {
   final MappableFields<Turma> fields = const {
     #id: _f$id,
     #nome: _f$nome,
+    #descricao: _f$descricao,
     #faixaEtaria: _f$faixaEtaria,
     #horarioInicio: _f$horarioInicio,
     #horarioFim: _f$horarioFim,
@@ -169,6 +175,7 @@ class TurmaMapper extends ClassMapperBase<Turma> {
     return Turma(
       id: data.dec(_f$id),
       nome: data.dec(_f$nome),
+      descricao: data.dec(_f$descricao),
       faixaEtaria: data.dec(_f$faixaEtaria),
       horarioInicio: data.dec(_f$horarioInicio),
       horarioFim: data.dec(_f$horarioFim),
@@ -233,6 +240,7 @@ abstract class TurmaCopyWith<$R, $In extends Turma, $Out>
   $R call({
     int? id,
     String? nome,
+    String? descricao,
     FaixaEtaria? faixaEtaria,
     DateTime? horarioInicio,
     DateTime? horarioFim,
@@ -259,6 +267,7 @@ class _TurmaCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Turma, $Out>
   $R call({
     int? id,
     String? nome,
+    String? descricao,
     FaixaEtaria? faixaEtaria,
     DateTime? horarioInicio,
     DateTime? horarioFim,
@@ -275,6 +284,7 @@ class _TurmaCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Turma, $Out>
     FieldCopyWithData({
       if (id != null) #id: id,
       if (nome != null) #nome: nome,
+      if (descricao != null) #descricao: descricao,
       if (faixaEtaria != null) #faixaEtaria: faixaEtaria,
       if (horarioInicio != null) #horarioInicio: horarioInicio,
       if (horarioFim != null) #horarioFim: horarioFim,
@@ -293,6 +303,7 @@ class _TurmaCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Turma, $Out>
   Turma $make(CopyWithData data) => Turma(
     id: data.get(#id, or: $value.id),
     nome: data.get(#nome, or: $value.nome),
+    descricao: data.get(#descricao, or: $value.descricao),
     faixaEtaria: data.get(#faixaEtaria, or: $value.faixaEtaria),
     horarioInicio: data.get(#horarioInicio, or: $value.horarioInicio),
     horarioFim: data.get(#horarioFim, or: $value.horarioFim),

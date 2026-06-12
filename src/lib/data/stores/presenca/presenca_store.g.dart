@@ -15,7 +15,7 @@ part of 'presenca_store.dart';
 final presencaStoreProvider = PresencaStoreFamily._();
 
 final class PresencaStoreProvider
-    extends $AsyncNotifierProvider<PresencaStore, List<Aluno>> {
+    extends $AsyncNotifierProvider<PresencaStore, PresencaState> {
   PresencaStoreProvider._({
     required PresencaStoreFamily super.from,
     required int super.argument,
@@ -52,15 +52,15 @@ final class PresencaStoreProvider
   }
 }
 
-String _$presencaStoreHash() => r'b9b2be738af90b04ca7abd4b2abcf6df73545e91';
+String _$presencaStoreHash() => r'8202d863c14edad22a56d932fb2f3004fa36ee34';
 
 final class PresencaStoreFamily extends $Family
     with
         $ClassFamilyOverride<
           PresencaStore,
-          AsyncValue<List<Aluno>>,
-          List<Aluno>,
-          FutureOr<List<Aluno>>,
+          AsyncValue<PresencaState>,
+          PresencaState,
+          FutureOr<PresencaState>,
           int
         > {
   PresencaStoreFamily._()
@@ -79,20 +79,20 @@ final class PresencaStoreFamily extends $Family
   String toString() => r'presencaStoreProvider';
 }
 
-abstract class _$PresencaStore extends $AsyncNotifier<List<Aluno>> {
+abstract class _$PresencaStore extends $AsyncNotifier<PresencaState> {
   late final _$args = ref.$arg as int;
   int get id => _$args;
 
-  FutureOr<List<Aluno>> build(int id);
+  FutureOr<PresencaState> build(int id);
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<AsyncValue<List<Aluno>>, List<Aluno>>;
+    final ref = this.ref as $Ref<AsyncValue<PresencaState>, PresencaState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<List<Aluno>>, List<Aluno>>,
-              AsyncValue<List<Aluno>>,
+              AnyNotifier<AsyncValue<PresencaState>, PresencaState>,
+              AsyncValue<PresencaState>,
               Object?,
               Object?
             >;

@@ -1,40 +1,25 @@
+import 'package:salvando_vidas/data/services/presenca_service/presenca_service.dart';
+import 'package:salvando_vidas/data/stores/presenca/presenca_store.dart';
 import 'package:salvando_vidas/domain/turma/turma.dart';
-import 'package:salvando_vidas/ui/turma/turma_imports.dart';
+import 'package:salvando_vidas/main_imports.dart';
 
-class RegistrarFrequenciaView extends StatefulWidget {
+class RegistrarFrequenciaView extends ConsumerStatefulWidget {
   final Turma turma;
 
   const RegistrarFrequenciaView({super.key, required this.turma});
 
   @override
-  State<RegistrarFrequenciaView> createState() =>
+  ConsumerState<RegistrarFrequenciaView> createState() =>
       _RegistrarFrequenciaViewState();
 }
 
-class _RegistrarFrequenciaViewState extends State<RegistrarFrequenciaView> {
+class _RegistrarFrequenciaViewState
+    extends ConsumerState<RegistrarFrequenciaView> {
   final _formKey = GlobalKey<FormState>();
-  final _dataController = TextEditingController();
-  String? _instrutorSelecionado;
-
-  // CORREÇÃO AQUI: Agora usamos o 'index' (int) em vez do nome (String) para ser único
-  final Map<int, bool> _frequencia = {};
-
-  @override
-  void initState() {
-    super.initState();
-    // Inicializa todos os alunos como ausentes (false) usando a posição deles na lista
-    if ([] != null) {
-      for (int i = 0; i < 0; i++) {
-        _frequencia[i] = false;
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _dataController.dispose();
-    super.dispose();
-  }
+  late AsyncValue<PresencaState> state;
+  late PresencaStore notifier;
+  late PresencaService service;
+  late Logger logger;
 
   void _mostrarDialogConfirmacao() {
     if (_formKey.currentState!.validate()) {
@@ -73,9 +58,29 @@ class _RegistrarFrequenciaViewState extends State<RegistrarFrequenciaView> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(ctx).pop(); // Fecha o confirm
-                  _mostrarDialogSucesso(); // Abre o sucesso
+                onPressed: () async {
+                  if (state.value == null || !state.value!.eValido) return;
+                  try {
+                    final presencas = state.value!.presenca;
+                    final alunosPresentes = presencas.entries
+                        .where((entry) => entry.value == true)
+                        .map((entry) => entry.key)
+                        .toList();
+
+                    await service.cadastrarPresenca(
+                      widget.turma.id,
+                      state.value!.data,
+                      state.value!.professor!.id!,
+                      '',
+                      alunosPresentes,
+                    );
+                    Navigator.of(ctx).pop(); // Fecha o confirm
+                    _mostrarDialogSucesso(); // Abre o sucesso
+                  } on AppApiException catch (e) {
+                    logger.e(e.message, error: e);
+                  } catch (e) {
+                    logger.e('', error: e);
+                  }
                 },
                 child: const Text('Confirmar'),
               ),
@@ -126,7 +131,14 @@ class _RegistrarFrequenciaViewState extends State<RegistrarFrequenciaView> {
 
   @override
   Widget build(BuildContext context) {
-    final alunos = [];
+    state = ref.watch(presencaStoreProvider(widget.turma.id));
+    notifier = ref.read(presencaStoreProvider(widget.turma.id).notifier);
+    service = ref.read(presencaServiceProvider);
+    logger = ref.read(loggerProvider);
+
+    final dataFormatada = state.value?.data != null
+        ? "${state.value!.data.day.toString().padLeft(2, '0')}/${state.value!.data.month.toString().padLeft(2, '0')}/${state.value!.data.year}"
+        : '';
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -147,129 +159,134 @@ class _RegistrarFrequenciaViewState extends State<RegistrarFrequenciaView> {
         key: _formKey,
         child: Column(
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Registrar Frequência',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            state.when(
+              data: (state) => Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Registrar Frequência',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      widget.turma.nome,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF666666),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-
-                    // Dropdown Instrutor
-                    _buildLabel('Instrutor/Professor da Aula:*'),
-                    DropdownButtonFormField<String>(
-                      decoration: _inputDecoration(),
-                      value: _instrutorSelecionado,
-                      hint: const Text('Selecione'),
-                      items: ['Professor A', 'Professor B', 'Professor C']
-                          .map(
-                            (i) => DropdownMenuItem(value: i, child: Text(i)),
-                          )
-                          .toList(),
-                      onChanged: (val) =>
-                          setState(() => _instrutorSelecionado = val),
-                      validator: (val) => val == null ? 'Obrigatório' : null,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // DatePicker
-                    _buildLabel('Data:*'),
-                    TextFormField(
-                      controller: _dataController,
-                      readOnly: true,
-                      decoration: _inputDecoration().copyWith(
-                        suffixIcon: const Icon(
-                          Icons.calendar_today,
-                          size: 20,
+                      Text(
+                        widget.turma.nome,
+                        style: const TextStyle(
+                          fontSize: 14,
                           color: Color(0xFF666666),
                         ),
                       ),
-                      validator: (val) =>
-                          val == null || val.isEmpty ? 'Obrigatório' : null,
-                      onTap: () async {
-                        DateTime? picked = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime.now(),
-                        );
-                        if (picked != null) {
-                          setState(() {
-                            _dataController.text =
-                                "${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}";
-                          });
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
-                    // Lista de Alunos com Checkbox
-                    const Text(
-                      'Alunos',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                      buildDropdownField(
+                        label: 'Instrutor/Professor da Aula:*',
+                        value: state.professor,
+                        items: state.usuarios,
+                        labelBuilder: (user) => user.nome,
+                        onChanged: (value) {
+                          if (value != null) {
+                            notifier.updateProfessor(value);
+                          }
+                        },
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: alunos.length,
-                      itemBuilder: (context, index) {
-                        final aluno = alunos[index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            children: [
-                              const CircleAvatar(
-                                backgroundColor: Color(0xFFE0E0E0),
-                                radius: 18,
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  aluno.nome,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
+                      const SizedBox(height: 16),
+
+                      // DatePicker
+                      buildLabel('Data:*'),
+                      TextFormField(
+                        key: ValueKey(state.data),
+                        readOnly: true,
+                        initialValue: dataFormatada,
+                        decoration: _inputDecoration().copyWith(
+                          suffixIcon: const Icon(
+                            Icons.calendar_today,
+                            size: 20,
+                            color: Color(0xFF666666),
+                          ),
+                        ),
+                        validator: (val) =>
+                            val == null || val.isEmpty ? 'Obrigatório' : null,
+                        onTap: () async {
+                          DateTime? picked = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime.now(),
+                          );
+                          if (picked != null) {
+                            notifier.updateData(picked);
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 24),
+
+                      // Lista de Alunos com Checkbox
+                      const Text(
+                        'Alunos',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.alunos.length,
+                        itemBuilder: (context, index) {
+                          final aluno = state.alunos[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Row(
+                              children: [
+                                const CircleAvatar(
+                                  backgroundColor: Color(0xFFE0E0E0),
+                                  radius: 18,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    aluno.nome,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              // CORREÇÃO AQUI: Lemos e escrevemos usando o "index"
-                              Checkbox(
-                                value: _frequencia[index],
-                                activeColor: const Color(0xFF00BCD4),
-                                side: const BorderSide(
-                                  color: Color(0xFF999999),
+                                Checkbox(
+                                  value: state.presenca[aluno.id!],
+                                  activeColor: const Color(0xFF00BCD4),
+                                  side: const BorderSide(
+                                    color: Color(0xFF999999),
+                                  ),
+                                  onChanged: (_) {
+                                    setState(() {
+                                      notifier.togglePresenca(aluno.id!);
+                                    });
+                                  },
                                 ),
-                                onChanged: (val) {
-                                  setState(() {
-                                    _frequencia[index] = val ?? false;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              error: (error, stack) {
+                switch (error) {
+                  case AppApiException(:final message, :final error):
+                    ref.read(loggerProvider).e(message, error: error);
+                  default:
+                    break;
+                }
+                return Center(child: Text('Erro ao carregar os alunos'));
+              },
+              loading: () => Center(child: CircularProgressIndicator()),
             ),
 
             // Botão Inferior Fixo
@@ -295,33 +312,6 @@ class _RegistrarFrequenciaViewState extends State<RegistrarFrequenciaView> {
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // _buildLabel com suporte ao asterisco vermelho
-  Widget _buildLabel(String text) {
-    final bool temAsterisco = text.endsWith('*');
-    final String textoSemAsterisco = text.replaceAll('*', '');
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6.0),
-      child: RichText(
-        text: TextSpan(
-          text: textoSemAsterisco,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-            color: Colors.black, // Cor do texto principal
-          ),
-          children: [
-            if (temAsterisco)
-              const TextSpan(
-                text: '*',
-                style: TextStyle(color: Colors.red), // Asterisco vermelho
-              ),
           ],
         ),
       ),

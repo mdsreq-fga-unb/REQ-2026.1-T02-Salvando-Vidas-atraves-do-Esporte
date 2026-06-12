@@ -10,7 +10,7 @@ class TurmaDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final alunos = ref.watch(presencaStoreProvider(turma.id));
+    final store = ref.watch(presencaStoreProvider(turma.id));
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -44,13 +44,13 @@ class TurmaDetail extends ConsumerWidget {
                 const SizedBox(height: 8),
 
                 Text(
-                  turma.faixaEtaria.name,
+                  turma.descricao,
                   style: const TextStyle(color: Color(0xFF666666)),
                 ),
 
                 const SizedBox(height: 4),
 
-                Text('Alunos: ${alunos.value?.length ?? 0}'),
+                Text('Alunos: ${store.value?.alunos.length ?? 0}'),
 
                 const SizedBox(height: 24),
 
@@ -63,12 +63,12 @@ class TurmaDetail extends ConsumerWidget {
           ),
 
           Expanded(
-            child: alunos.when(
-              data: (alunos) {
+            child: store.when(
+              data: (data) {
                 return ListView.builder(
-                  itemCount: alunos.length,
+                  itemCount: data.alunos.length,
                   itemBuilder: (context, index) {
-                    final aluno = alunos[index];
+                    final aluno = data.alunos[index];
                     return AlunoTileWidget(nome: aluno.nome);
                   },
                 );

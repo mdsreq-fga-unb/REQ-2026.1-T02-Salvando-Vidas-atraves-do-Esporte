@@ -7,7 +7,6 @@ import 'main_imports.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(url: SUPABASE_URL, anonKey: ANON_KEY);
-  final supabase = Supabase.instance.client;
 
   runApp(
     DevicePreview(
