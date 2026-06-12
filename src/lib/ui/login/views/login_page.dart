@@ -2,27 +2,8 @@ import 'package:salvando_vidas/main_imports.dart';
 
 import '../login_imports.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final LoginFormStore store = LoginFormStore();
-
-  @override
-  void initState() {
-    super.initState();
-    store.setupValidations();
-  }
-
-  @override
-  void dispose() {
-    store.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +21,9 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     BannerLogo(),
                     const SizedBox(height: 28),
-                    FormularioLogin(store),
+                    FormularioLogin(),
                     const SizedBox(height: 18),
-                    BotaoEntrar(store),
+                    BotaoEntrar(),
                   ],
                 ),
               ),

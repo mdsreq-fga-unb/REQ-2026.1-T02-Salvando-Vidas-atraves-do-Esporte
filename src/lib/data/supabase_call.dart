@@ -1,22 +1,16 @@
 import 'dart:async';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 export 'package:supabase_flutter/supabase_flutter.dart';
 
-typedef Response = List<Map<String, dynamic>>;
-
-sealed class Result<S> {}
-
-class Success<S> extends Result<S> {
-  final S value;
-  Success(this.value);
-}
-
-class Failure<S> extends Result<S> {
+// Uma exceção customizada para encapsular nossos erros
+class AppApiException implements Exception {
   final String message;
   final Object? error;
 
-  Failure(this.message, [this.error]);
+  AppApiException(this.message, [this.error]);
+
+  @override
+  String toString() => message;
 }
 
 extension FutureTimeout<T> on Future<T> {
@@ -24,21 +18,21 @@ extension FutureTimeout<T> on Future<T> {
     return timeout(
       Duration(seconds: seconds),
       onTimeout: () {
-        throw TimeoutException('A operação demorou demais para responder.');
+        throw AppApiException('A operação demorou demais para responder.');
       },
     );
   }
 }
 
-Future<Result<T>> safeSupabaseCall<T>(Future<T> Function() action) async {
+// Em vez de retornar Result<T>, retornamos T diretamente e lançamos exceções amigáveis
+Future<T> runSupabaseCall<T>(Future<T> Function() action) async {
   try {
-    final result = await action().withDefaultTimeout();
-    return Success(result);
-  } on TimeoutException {
-    return Failure('A conexão expirou.');
-  } on AuthApiException {
-    return Failure('Credenciais incorretas.');
+    return await action().withDefaultTimeout();
+  } on AppApiException {
+    rethrow;
+  } on AuthApiException catch (e) {
+    throw AppApiException('Credenciais incorretas.', e);
   } catch (e) {
-    return Failure('Ocorreu um erro inesperado.', e);
+    throw AppApiException('Ocorreu um erro inesperado.', e);
   }
 }

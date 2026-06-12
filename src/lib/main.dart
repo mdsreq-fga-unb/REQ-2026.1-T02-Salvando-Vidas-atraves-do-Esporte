@@ -1,5 +1,6 @@
-import 'main_imports.dart';
 import 'package:device_preview/device_preview.dart';
+
+import 'main_imports.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,24 +10,18 @@ Future<void> main() async {
   runApp(
     DevicePreview(
       enabled: true,
-      builder: (context) => MultiProvider(
-        providers: [
-          Provider<Logger>(create: (_) => Logger()),
-          Provider<UserService>(create: (_) => UserService(supabase)),
-        ],
-        child: const MyApp(),
-      ),
+      builder: (_) => ProviderScope(child: const MyApp()),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: ref.read(routerProvider),
       title: "Salvando Vidas Através do Esporte",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2457F0)),
