@@ -16,8 +16,6 @@ void main() {
     alunoService = AlunoService(mockSupabaseClient);
   });
 
-  // Criamos uma variável global para o JSON do aluno.
-  // Assim evitamos repetir esse código gigante nos dois testes!
   final alunoSimuladoJson = {
     'id': 1,
     'nome': 'Lucas Oliveira',
@@ -32,10 +30,6 @@ void main() {
     'federado': false,
     'id_turma': 2,
     
-    /* Nota de atenção: Dependendo de como o projeto foi configurado 
-       globalmente, o dart_mappable pode exigir as chaves no formato camelCase 
-       ('tipoSanguineo', 'dataEntrada', 'idTurma'). Se o teste der erro, 
-       basta ajustar o nome da chave. */
   };
 
   group('AlunoService -', () {
