@@ -4,6 +4,24 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 typedef Response = List<Map<String, dynamic>>;
 
+class FakeCountBuilder<T> extends Fake implements ResponsePostgrestBuilder<PostgrestResponse<T>, T, T> {
+  final T _mockData;
+
+  FakeCountBuilder(this._mockData);
+
+  @override
+  Future<R> then<R>(
+    FutureOr<R> Function(PostgrestResponse<T> value) onValue, {
+    Function? onError,
+  }) {
+    final response = PostgrestResponse<T>(
+      data: _mockData,
+      count: (_mockData as List).length,
+    );
+    return Future.value(response).then(onValue, onError: onError);
+  }
+}
+
 class FakeFilterBuilder<T> extends Fake implements PostgrestFilterBuilder<T> {
   final T _mockData;
 
@@ -16,6 +34,11 @@ class FakeFilterBuilder<T> extends Fake implements PostgrestFilterBuilder<T> {
   PostgrestTransformBuilder<PostgrestList> select([String columns = '*']) => this as dynamic;
 
   @override
+  ResponsePostgrestBuilder<PostgrestResponse<T>, T, T> count([CountOption count = CountOption.exact]) {
+    return FakeCountBuilder<T>(_mockData);
+  }
+
+  @override
   Future<R> then<R>(
     FutureOr<R> Function(T value) onValue, {
     Function? onError,
@@ -24,6 +47,7 @@ class FakeFilterBuilder<T> extends Fake implements PostgrestFilterBuilder<T> {
   }
 }
 
+// ... Daqui para baixo, o seu FakeQueryBuilder continua exatamente igual!
 class FakeQueryBuilder extends Fake implements SupabaseQueryBuilder {
   final Response _mockData;
 

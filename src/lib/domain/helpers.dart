@@ -58,7 +58,7 @@ class HookHorario extends MappingHook {
     if (value is DateTime) {
       final hora = value.hour.toString().padLeft(2, '0');
       final minutos = value.minute.toString().padLeft(2, '0');
-      throw '$hora:$minutos';
+      return '$hora:$minutos';
     }
 
     return null;
