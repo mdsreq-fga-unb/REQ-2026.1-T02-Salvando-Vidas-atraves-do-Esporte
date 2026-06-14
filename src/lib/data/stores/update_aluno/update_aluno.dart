@@ -1,0 +1,228 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:salvando_vidas/data/validators.dart';
+import 'package:salvando_vidas/domain/aluno/aluno.dart';
+import 'package:salvando_vidas/domain/responsavel/responsavel.dart';
+
+part 'update_aluno.g.dart';
+part 'update_aluno.mapper.dart';
+
+@MappableClass()
+class UpdateAlunoState with UpdateAlunoStateMappable {
+  final String nome;
+  final String cpf;
+  final String contato;
+  final String email;
+  final DateTime? nascimento;
+  final TipoSanguineo? tipoSanguineo;
+  final Faixa? faixa;
+  final int grau;
+  final String idFicha;
+  final bool dirty;
+
+  final String nomeResponsavel;
+  final String cpfResponsavel;
+  final String contatoResponsavel;
+  final String emailResponsavel;
+
+  UpdateAlunoState({
+    this.nome = '',
+    this.cpf = '',
+    this.contato = '',
+    this.email = '',
+    this.nascimento,
+    this.tipoSanguineo,
+    this.faixa,
+    this.grau = 0,
+    this.idFicha = '',
+    this.nomeResponsavel = '',
+    this.cpfResponsavel = '',
+    this.contatoResponsavel = '',
+    this.emailResponsavel = '',
+    this.dirty = false,
+  });
+
+  String? get nomeError {
+    if (!dirty && nome.isEmpty) return null;
+    return nome.isNotEmpty ? null : 'Não pode estar em branco';
+  }
+
+  String? get nomeResponsavelError {
+    if (!dirty && nomeResponsavel.isEmpty) return null;
+    return nomeResponsavel.isNotEmpty ? null : 'Não pode estar em branco';
+  }
+
+  String? get cpfError {
+    if (!dirty && cpf.isEmpty) return null;
+    return eCPF(cpf) ? null : 'Não é um CPF válido';
+  }
+
+  String? get cpfResponsavelError {
+    if (!dirty && cpfResponsavel.isEmpty) return null;
+    return eCPF(cpfResponsavel) ? null : 'Não é um CPF válido';
+  }
+
+  String? get contatoError {
+    if (!dirty && contato.isEmpty) return null;
+    return eTelefone(contato) ? null : 'Não é um telefone válido';
+  }
+
+  String? get contatoResponsavelError {
+    if (!dirty && contatoResponsavel.isEmpty) return null;
+    return eTelefone(contatoResponsavel) ? null : 'Não é um telefone válido';
+  }
+
+  String? get emailError {
+    if (!dirty && email.isEmpty) return null;
+    return eEmail(email) ? null : 'Não é um email válido';
+  }
+
+  String? get emailResponsavelError {
+    if (!dirty && emailResponsavel.isEmpty) return null;
+    return eEmail(emailResponsavel) ? null : 'Não é um email válido';
+  }
+
+  String? get nascimentoError {
+    if (!dirty && nascimento == null) return null;
+    return nascimento != null ? null : 'Não pode estar em branco';
+  }
+
+  String? get tipoSanguineoError {
+    if (!dirty && tipoSanguineo == null) return null;
+    return tipoSanguineo != null ? null : 'Não pode estar em branco';
+  }
+
+  String? get faixaError {
+    if (!dirty && faixa == null) return null;
+    return faixa != null ? null : 'Não pode estar em branco';
+  }
+
+  String? get idFichaError {
+    if (idFicha.isEmpty) return null;
+    return int.tryParse(idFicha) != null
+        ? null
+        : 'O ID da ficha deve ser um número';
+  }
+
+  bool get temErros =>
+      nomeError != null ||
+      cpfError != null ||
+      contatoError != null ||
+      emailError != null ||
+      nascimentoError != null ||
+      tipoSanguineoError != null ||
+      faixaError != null ||
+      idFichaError != null;
+
+  bool get estaValido =>
+      !temErros &&
+      nome.isNotEmpty &&
+      cpf.isNotEmpty &&
+      contato.isNotEmpty &&
+      email.isNotEmpty;
+
+  int get idade {
+    final agora = DateTime.now().year;
+    return agora - (nascimento?.year ?? agora);
+  }
+
+  bool get temResponsavel {
+    if (idade >= 18) return true;
+    return nomeResponsavelError == null &&
+        cpfResponsavelError == null &&
+        contatoResponsavelError == null;
+  }
+
+  Aluno get aluno => Aluno(
+    nome: nome,
+    cpf: cpf,
+    contato: contato,
+    email: email,
+    nascimento: nascimento!,
+    tipoSanguineo: tipoSanguineo!,
+    faixa: faixa!,
+    grau: grau,
+    ativo: true,
+    federado: false,
+    dataEntrada: DateTime.now(),
+    idFicha: int.tryParse(idFicha),
+  );
+
+  Responsavel get responsavel => Responsavel(
+    nome: nomeResponsavel,
+    cpf: cpfResponsavel,
+    contato: contatoResponsavel,
+    email: emailResponsavel,
+    ativo: true,
+  );
+}
+
+@riverpod
+class UpdateAluno extends _$UpdateAluno {
+  @override
+  UpdateAlunoState build(Aluno aluno, Responsavel? responsavel) {
+    return UpdateAlunoState(
+      nome: aluno.nome,
+      cpf: aluno.cpf,
+      contato: aluno.contato ?? '',
+      email: aluno.email,
+      nascimento: aluno.nascimento,
+      tipoSanguineo: aluno.tipoSanguineo,
+      faixa: aluno.faixa,
+      grau: aluno.grau,
+      idFicha: '${aluno.idFicha ?? ""}',
+      nomeResponsavel: responsavel?.nome ?? '',
+      cpfResponsavel: responsavel?.cpf ?? '',
+      contatoResponsavel: responsavel?.contato ?? '',
+      emailResponsavel: responsavel?.email ?? '',
+    );
+  }
+
+  void updateNome(String value) {
+    state = state.copyWith(nome: value, dirty: true);
+  }
+
+  void updateCPF(String value) {
+    state = state.copyWith(cpf: value, dirty: true);
+  }
+
+  void updateContato(String value) {
+    state = state.copyWith(contato: value, dirty: true);
+  }
+
+  void updateEmail(String value) {
+    state = state.copyWith(email: value, dirty: true);
+  }
+
+  void updateNascimento(DateTime value) {
+    state = state.copyWith(nascimento: value, dirty: true);
+  }
+
+  void updateTipoSanguineo(TipoSanguineo value) {
+    state = state.copyWith(tipoSanguineo: value, dirty: true);
+  }
+
+  void updateFaixa(Faixa value) {
+    state = state.copyWith(faixa: value, dirty: true);
+  }
+
+  void updateIdFicha(String value) {
+    state = state.copyWith(idFicha: value, dirty: true);
+  }
+
+  void updateNomeResponsavel(String value) {
+    state = state.copyWith(nomeResponsavel: value, dirty: true);
+  }
+
+  void updateCPFResponsavel(String value) {
+    state = state.copyWith(cpfResponsavel: value, dirty: true);
+  }
+
+  void updateContatoResponsavel(String value) {
+    state = state.copyWith(contatoResponsavel: value, dirty: true);
+  }
+
+  void updateEmailResponsavel(String value) {
+    state = state.copyWith(emailResponsavel: value, dirty: true);
+  }
+}
