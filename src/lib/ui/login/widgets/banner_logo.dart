@@ -8,10 +8,10 @@ class BannerLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: 148,
       height: 148,
       decoration: BoxDecoration(
-        color: LoginColors.primaryCyan,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(18),
         boxShadow: const [
           BoxShadow(
@@ -22,13 +22,10 @@ class BannerLogo extends StatelessWidget {
         ],
       ),
       alignment: Alignment.center,
-      child: const Text(
-        'Logo',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-        ),
+      child: Image.asset(
+        'assets/images/logoMestre.png',
+        height: 120,
+        fit: BoxFit.contain,
       ),
     );
   }
