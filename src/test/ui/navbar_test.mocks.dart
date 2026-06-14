@@ -113,23 +113,9 @@ class MockUserService extends _i1.Mock implements _i2.UserService {
           as _i4.Future<void>);
 
   @override
-  _i4.Future<void> updateUser({
-    required String? id,
-    String? email,
-    String? password,
-    String? nome,
-    String? telefone,
-    String? cpf,
-  }) =>
+  _i4.Future<void> updateUser(Map<String, dynamic>? diff) =>
       (super.noSuchMethod(
-            Invocation.method(#updateUser, [], {
-              #id: id,
-              #email: email,
-              #password: password,
-              #nome: nome,
-              #telefone: telefone,
-              #cpf: cpf,
-            }),
+            Invocation.method(#updateUser, [diff]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )
