@@ -92,9 +92,15 @@ class _EditarAlunoPageState extends State<EditarAlunoPage> {
               foregroundColor: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(ctx);
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Aluno atualizado com sucesso!')));
+              Navigator.pop(ctx); // Fecha o dialog
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Aluno atualizado com sucesso!')))
+                  .closed
+                  .then((_) {
+                if (context.mounted) {
+                  Navigator.pop(context); // Fecha a página de edição após o SnackBar
+                }
+              });
             },
             child: const Text('Confirmar'),
           ),
