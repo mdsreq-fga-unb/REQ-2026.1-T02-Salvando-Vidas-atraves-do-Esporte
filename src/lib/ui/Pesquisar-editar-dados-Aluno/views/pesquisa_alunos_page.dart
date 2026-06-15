@@ -91,16 +91,16 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
           // Toggle: mostrar alunos inativos
           state.maybeWhen(
             data: (data) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 4.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     'Mostrar inativos',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[700],
-                    ),
+                    style: TextStyle(fontSize: 13, color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 8),
                   Switch(
@@ -130,6 +130,7 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
                         final aluno = data.alunosFiltrados[index];
                         final responsavel = data.responsaveis[aluno.id!];
                         return AlunoExpandableCard(
+                          key: Key('${aluno.nome} - ${aluno.ativo}'),
                           aluno: aluno,
                           responsavel: responsavel,
                         );
