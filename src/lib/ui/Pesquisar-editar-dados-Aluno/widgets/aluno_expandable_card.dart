@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
+import 'package:salvando_vidas/data/stores/pesquisa_aluno/pesquisa_aluno_store.dart';
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/responsavel/responsavel.dart';
 import 'package:salvando_vidas/main_imports.dart';
@@ -34,13 +34,13 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
 
   @override
   Widget build(BuildContext context) {
-    // Se o aluno não estiver ativo, não renderiza o cartão
-    if (!widget.aluno.ativo) return const SizedBox.shrink();
+    final bool isInativo = !widget.aluno.ativo;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 2,
+      elevation: isInativo ? 0 : 2,
+      color: isInativo ? Colors.grey[200] : Colors.white,
       child: InkWell(
         onTap: () => setState(() => _isExpanded = !_isExpanded),
         borderRadius: BorderRadius.circular(12),
@@ -57,26 +57,52 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.aluno.nome,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              widget.aluno.nome,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: isInativo ? Colors.grey[500] : Colors.black,
+                              ),
+                            ),
+                            if (isInativo) ...[
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[400],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Text(
+                                  'Inativo',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Turma: ${widget.aluno.idTurma ?? "N/A"}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: Colors.black87,
+                            color: isInativo ? Colors.grey[400] : Colors.black87,
                           ),
                         ),
                         Text(
                           'Faixa: ${widget.aluno.faixa.nomeVisivel}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: Colors.black87,
+                            color: isInativo ? Colors.grey[400] : Colors.black87,
                           ),
                         ),
                       ],
@@ -86,32 +112,48 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                     PopupMenuButton<String>(
                       icon: const Icon(Icons.more_vert),
                       onSelected: (value) async {
-                        if (value == 'inativar') {
-                          try {
-                            await ref.read(alunoServiceProvider).atualizaAluno(
-                              widget.aluno.id!,
-                              {'ativo': false},
-                            );
-                          } catch (e) {
-                            switch (e) {
-                              case AppApiException(
-                                message: final m,
-                                error: final e,
-                              ):
-                                ref.read(loggerProvider).e(m, error: e);
-                              default:
-                                ref.read(loggerProvider).e('', error: e);
-                            }
+                        final notifier = ref.read(pesquisaAlunoProvider.notifier);
+                        try {
+                          if (value == 'inativar') {
+                            await notifier.inativarAluno(widget.aluno.id!);
+                          } else if (value == 'reativar') {
+                            await notifier.reativarAluno(widget.aluno.id!);
                           }
-
-                          // TODO: Adicionar lógica para inativar o aluno na base de dados
+                        } catch (e) {
+                          switch (e) {
+                            case AppApiException(
+                              message: final m,
+                              error: final err,
+                            ):
+                              ref.read(loggerProvider).e(m, error: err);
+                            default:
+                              ref.read(loggerProvider).e('', error: e);
+                          }
                         }
                       },
                       itemBuilder: (context) => [
-                        const PopupMenuItem(
-                          value: 'inativar',
-                          child: Text('Inativar'),
-                        ),
+                        if (!isInativo)
+                          const PopupMenuItem(
+                            value: 'inativar',
+                            child: Row(
+                              children: [
+                                Icon(Icons.block, size: 18, color: Colors.red),
+                                SizedBox(width: 8),
+                                Text('Inativar'),
+                              ],
+                            ),
+                          ),
+                        if (isInativo)
+                          const PopupMenuItem(
+                            value: 'reativar',
+                            child: Row(
+                              children: [
+                                Icon(Icons.check_circle_outline, size: 18, color: Colors.green),
+                                SizedBox(width: 8),
+                                Text('Reativar'),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                 ],
@@ -159,34 +201,36 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                   ),
                 ],
 
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00BCD4),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                if (!isInativo) ...[
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00BCD4),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditarAlunoPage(
+                              aluno: widget.aluno,
+                              responsavel: widget.responsavel,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Editar Informações',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditarAlunoPage(
-                            aluno: widget.aluno,
-                            responsavel: widget.responsavel,
-                          ),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Editar Informações',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
                   ),
-                ),
+                ],
               ],
             ],
           ),

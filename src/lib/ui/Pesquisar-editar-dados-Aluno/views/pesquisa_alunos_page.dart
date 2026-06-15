@@ -32,7 +32,7 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
               top: 24.0,
               left: 16.0,
               right: 16.0,
-              bottom: 16.0,
+              bottom: 8.0,
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
                   data: (_) => true,
                   orElse: () => false,
                 ),
-                onChanged: notifier.filtrarAlunos, // O filtro é disparado aqui
+                onChanged: notifier.filtrarAlunos,
                 decoration: InputDecoration(
                   hintText: 'Insira o nome do aluno',
                   hintStyle: const TextStyle(
@@ -88,9 +88,35 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
             ),
           ),
 
+          // Toggle: mostrar alunos inativos
+          state.maybeWhen(
+            data: (data) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'Mostrar inativos',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Switch(
+                    value: data.mostrarInativos,
+                    onChanged: (_) => notifier.toggleMostrarInativos(),
+                    activeColor: const Color(0xFF00BCD4),
+                  ),
+                ],
+              ),
+            ),
+            orElse: () => const SizedBox.shrink(),
+          ),
+
           Expanded(
             child: state.when(
-              data: (data) => data.alunos.isEmpty
+              data: (data) => data.alunosFiltrados.isEmpty
                   ? const Center(
                       child: Text(
                         'Nenhum aluno encontrado.',
