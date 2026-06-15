@@ -37,7 +37,6 @@ dependencies:
   go_router: ^17.2.1
   logger: ^2.7.0
   provider: ^6.1.5+1
-  flutter_background_service: ^5.1.0
   supabase_flutter: ^2.12.4
   image_picker: ^1.2.2
   dart_mappable: ^4.8.0
@@ -47,6 +46,7 @@ dependencies:
     sdk: flutter
   intl: any
   mask_text_input_formatter: ^2.9.0
+  flutter_local_notifications: ^22.0.1
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +66,7 @@ dev_dependencies:
   device_preview: ^1.0.0
   dart_mappable_builder: ^4.8.0
   riverpod_generator: ^4.0.4
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -114,3 +115,13 @@ inno_bundle:
   publisher: Na Minha Máquina Funciona
   languages:
     - brazilianportuguese
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/images/logoMestre.png"
+  web:
+    generate: true
+    image_path: "assets/images/logoMestre.png"
+  windows:
+    generate: true
+    image_path: "assets/images/logoMestre.png"
