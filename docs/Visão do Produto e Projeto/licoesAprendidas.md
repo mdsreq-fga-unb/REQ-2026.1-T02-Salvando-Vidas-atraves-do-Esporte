@@ -99,5 +99,61 @@
 === "Unidade 3"
     ## 11.3 Unidade 3
 
+    ### Lições Aprendidas e Melhorias para o Processo
+
+    1. Criação e Manutenção de Testes Automatizados
+
+        **Desafio:** A elaboração dos testes (especialmente de interface e simulação de serviços com mocks) exigiu um esforço muito maior do que o planejado. A equipe enfrentou dificuldades técnicas com configurações e erros difíceis de diagnosticar, o que consumiu bastante tempo e acabou impactando o ritmo de algumas entregas.
+
+        **Lição:** Deixar a criação de testes para a fase final do desenvolvimento gera muito retrabalho e frustração. O código precisa ser construído desde o início já pensando em como ele será testado, integrando essa prática na rotina diária da equipe.
+     
+        **Ação de Melhoria:** Desenvolver os testes em paralelo com a criação das funcionalidades, evitando acumular pendências para o fim da sprint. Focaremos em manter uma base de testes simples e funcional para cada nova tela desenvolvida, em vez de tentar cobrir fluxos complexos de uma só vez no final da unidade.
+
+    2. Aplicação de V&V e Gestão do Tempo para Correções
+        
+        **Desafio:** O maior obstáculo técnico do período foi a janela de tempo extremamente curta que tivemos para processar, compreender e aplicar todas as correções sugeridas pelo grupo revisor no documento de feedback. Absorver os apontamentos de Verificação e Validação deles e readequar nossos artefatos sob forte pressão de prazo exigiu um effort de engenharia muito acima do normal.
+        
+        **Lição:** Quando o prazo para resposta é reduzido, tentar debater ou planejar demais as críticas paralisa a execução. Aprendemos que a melhor saída é aceitar os apontamentos de forma direta, dividindo as correções de forma simplificada e focando a energia apenas em alterar o código e os documentos que foram explicitamente citados como errados.
+
+        **Ação de Melhoria:** Adotar uma abordagem de correção direta e simplificada. Assim que um documento de feedback externo for entregue, cada membro assumirá os erros relacionados às telas ou documentos que já desenvolveu originalmente, executando os ajustes pontuais sem a necessidade de reestruturar o quadro de tarefas ou criar novos fluxos de gestão.
+
+    3. Refinamento de Requisitos e Ajustes no MVP
+        
+        **Desafio:** Tivemos bastante dificuldade para aplicar as correções no MVP do projeto. O grupo precisou evoluir da fragmentação dos requisitos para uma abordagem mais centralizada utilizando Histórias de Usuário (US). Além disso, enfrentamos barreiras no refinamento, pois os critérios de aceitação estavam misturados com as regras de negócio, e foi complexo entender as dependências funcionais entre as USs e identificar a melhor forma de simplificar o cálculo da matriz.
+        
+        **Lição:** Centralizar os requisitos em USs facilita o controle do escopo, mas exige um cuidado extra na separação clara entre o que é o comportamento esperado da tela (critério de aceitação) e o que é a lógica interna do sistema (regra de negócio). Sem mapear as dependências e simplificar as lógicas mais densas antes do código, o desenvolvimento do MVP trava.
+
+        **Ação de Melhoria:** Passar a isolar rigidamente as regras de negócio complexas (como o cálculo da matriz) dos critérios de aceitação visuais no momento de escrever as USs. Para os próximos refinamentos, a prioridade será mapear quais histórias dependem de quais antes de iniciar o desenvolvimento, garantindo que os blocos de código mais independentes sejam entregues primeiro.
+
+    4. Dinâmica do Backlog Vivo em Workshops JAD
+        
+        **Desafio:** Durante a realização dos workshops JAD com o cliente, a equipe percebeu na prática que o backlog planejado inicialmente mudava constantemente à medida que novos cenários eram discutidos, o que exigia rápidas readequações de escopo no momento da dinâmica.
+        
+        **Lição:** Um backlog de requisitos não é um documento estático, mas sim um organismo vivo. O contato direto com o cliente em sessões colaborativas faz surgir necessidades antes não mapeadas, provando que a flexibilidade para priorizar e descartar itens em tempo real é fundamental para o sucesso do projeto.
+
+        **Ação de Melhoria:** Assumir o backlog como uma estrutura iterativa e maleável. Utilizaremos os momentos de refinamento para ajustar as histórias de usuário assim que novos feedbacks do cliente surgirem, mantendo a documentação atualizada sem o receio de alterar o plano original do projeto.
+
+    ### Dificuldades e Ações para Superá-las
+
+    1. Alta curva de aprendizado na escrita de testes
+        
+        **Como superar:** Documentar e salvar exemplos de testes que funcionaram perfeitamente para servirem de modelo (template) para as próximas telas, reduzindo o tempo gasto com a configuração inicial de novos arquivos de teste.
+
+    2. Curto prazo para interpretar e aplicar correções de V&V externas
+
+        **Como superar:** Focar estritamente no que foi apontado no documento de feedback, realizando apenas as alterações necessárias para sanar os erros listados pelo grupo revisor, sem tentar expandir o escopo ou fazer melhorias adicionais.
+
+    3. Dificuldade em organizar a revisão técnica sob pressão de tempo
+    
+        **Como superar:** Realizar checagens rápidas e diretas no próprio código alterado. A "Verificação" será feita visualmente pelo próprio desenvolvedor para garantir que o erro sumiu, e a "Validação" consistirá em rodar o teste localmente para confirmar que a aplicação compila e funciona antes do envio final.
+
+    4. Confusão com regras de negócio e dependências funcionais no MVP
+
+        **Como superar:** Adotar a centralização por USs de forma definitiva, mas forçando a escrita do cálculo da matriz de forma isolada do fluxo principal da interface. Criar diagramas rápidos ou anotações em texto simples para listar qual US bloqueia a outra antes de mexer na estrutura do MVP.
+
+    5. Instabilidade no escopo durante os levantamentos de requisitos
+        
+        **Como superar:** Manter uma postura flexível durante os workshops com o cliente, anotando as novas demandas como possíveis substituições ou refinamentos de histórias já existentes, garantindo que o backlog acompanhe a evolução do entendimento do produto.
+
 === "Unidade 4"
     ## 11.4 Unidade 4
