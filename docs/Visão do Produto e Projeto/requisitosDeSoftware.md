@@ -48,7 +48,7 @@ Os requisitos funcionais descrevem as funcionalidades específicas que o sistema
 | RF40 | Gerenciar níveis de acesso dos usuários | Permitir a configuração e atualização dos permissões e níveis de acesso de cada usuário no sistema. |
 | RF41 | Realizar login (autenticação) | Permitir que usuários cadastrados acessem o sistema mediante validação de credenciais, garantindo que apenas usuários autorizados obtenham acesso às funcionalidades disponíveis conforme seu perfil. |
 | RF42 | Reativar cadastro de aluno e responsável | Permitir a reativação do status de um aluno ou responsável previamente inativado, restaurando-o às listas ativas do sistema e reestabelecendo seu vínculo com as informações registradas. |
-| RF43 | Reativar cadastro de usuário voluntário | Permitir a reativação do status de um usuário voluntário previamente inativado, restabelecendo seu acesso ao sistema e suas atribuições, mantendo o histórico de atuação anterior. |
+| RF43 | Reativar usuário voluntário | Permitir a reativação do status de um usuário voluntário previamente inativado, restabelecendo seu acesso ao sistema e suas atribuições, mantendo o histórico de atuação anterior. |
 | RF44 | Reativar turma | Permitir a reativação do status de uma turma previamente inativada, retomando suas atividades regulares no sistema e mantendo o histórico de aulas e alunos vinculados. |
 
 

@@ -1,6 +1,6 @@
 # 10.3 Critérios de Aceitação do MVP
 
-Os Critérios de Aceitação (CA) definem as condições mínimas para que cada História de Usuário do MVP seja considerada concluída. Os RNFs transversais (LGPD, responsividade) compõem a Definition of Done e se aplicam a todas as histórias. Esses critérios não são estáticos: são continuamente validados e refinados junto aos stakeholders ao longo dos ciclos iterativos.
+Os Critérios de Aceitação (CA) definem as condições mínimas para que cada História de Usuário do MVP seja considerada concluída. Os RNFs transversais compõem a Definition of Done e se aplicam a todas as histórias. Esses critérios não são estáticos: são continuamente validados e refinados junto aos stakeholders ao longo dos ciclos iterativos.
 
 ---
 
@@ -10,7 +10,7 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 
 - Campos obrigatórios do aluno e do responsável devem ser validados antes de salvar.
 - O sistema confirma o cadastro bem-sucedido.
-- O aluno recém-cadastrado é encontrado imediatamente pela busca por nome.
+- O aluno recém-cadastrado é encontrado pela busca por nome.
 
 **US-02** — Cadastro e Manutenção de Dados Cadastrais
 
@@ -20,9 +20,10 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 
 **US-03** — Vínculos entre Aluno e Responsável
 
-- Um responsável cadastrado podem ser vinculado a um ou mais alunos.
-- O perfil do aluno exibe todos os responsáveis vinculados com nome e parentesco.
-- Não é possível vincular um responsável não cadastrado.
+- Um responsável pode ser vinculado a um ou mais alunos.
+- O sistema deve exigir a vinculação de um responsável legal caso a data de nascimento informe que o aluno é menor de 18 anos.
+- O perfil do aluno exibe o responsável vinculado.
+
 
 **US-04** — Vínculos entre Aluno e Responsável
 
@@ -30,21 +31,15 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 - A remoção do vínculo não exclui o cadastro do responsável.
 - O responsável desvinculado deixa de aparecer no perfil do aluno.
 
+**US-36** — Vínculos entre Aluno e Responsável
+- O sistema deve permitir localizar alunos e responsáveis inativos.
+- A reativação deve exigir confirmação do Coordenador.
+- Após a confirmação, o cadastro deve retornar ao status "Ativo" e às listagens do sistema.
+- O histórico do aluno e os vínculos com responsáveis devem ser preservados.
+
+
 ---
-
 ## Gestão de Turmas
-
-**US-05** — Criação e Manutenção de Turmas
-
-- Campos obrigatórios (nome, dias, horário, faixa etária, professor) são validados antes de salvar.
-- Qualquer configuração de uma turma pode ser editada a qualquer momento.
-- Alterações são refletidas imediatamente em todas as visualizações.
-
-**US-06** — Criação e Manutenção de Turmas
-
-- O encerramento de uma turma exige confirmação.
-- Turmas encerradas não aceitam novos registros de presença nem matrículas.
-- Histórico de aulas e alunos da turma é preservado após o encerramento.
 
 **US-08** — Matrículas e Participação em Turmas
 
@@ -57,6 +52,7 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 - O aluno desmatriculado não aparece em chamadas futuras da turma.
 - O histórico de presença anterior ao cancelamento é preservado.
 
+
 ---
 
 ## Controle de Frequência e Evasão
@@ -64,12 +60,12 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 **US-10** — Registro de Presença em Aula
 
 - A lista de alunos matriculados é exibida para registro de chamada.
-- Cada marcação (presente/ausente) é confirmada em menos de 1 segundo.
+- Cada marcação é confirmada em menos de 1 segundo.
 - Não é possível registrar presença em turma encerrada ou data futura.
 
 **US-11** — Registro de Presença em Aula
 
-- O status de presença de um registro já lançado pode ser corrigido.
+- O status de presença de um registro já lançado pode ser alterado pelo Voluntário
 - A correção é refletida imediatamente no histórico do aluno.
 
 **US-13** — Monitoramento e Prevenção à Evasão
@@ -111,6 +107,7 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 
 - A devolução reintegra o kimono ao estoque disponível.
 - Não é possível registrar devolução de kimono que não esteja emprestado.
+- O formulário de devolução deve possuir uma opção (ex: checkbox) para registrar "Devolvido com dano" direcionando o item automaticamente para a baixa, impedindo que volte ao estoque disponível.
 - Cada devolução gera log de auditoria com data e aluno.
 
 ---
@@ -120,7 +117,8 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 **US-19** — Engajamento com a Comunidade
 
 - A lista de aniversariantes da semana é exibida no dashboard em até 3 segundos após o login.
-- A lista exibe nome e data de aniversário; ausência de aniversariantes exibe mensagem informativa.
+- A lista de aniversariantes deve exibir claramente o nome do aluno e a quantidade de dias restantes para o aniversário.
+- Caso não existam aniversariantes na semana, o sistema deve exibir uma mensagem informando.
 
 ---
 
@@ -128,8 +126,8 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 
 **US-30** — Cadastro e Manutenção de Voluntários
 
-- Campos obrigatórios (nome, função, contato, senha) são validados antes de salvar.
-- A senha é armazenada com criptografia AES-256.
+- Campos obrigatórios são validados antes de salvar.
+- A senha é armazenada com criptografia.
 - Os dados do voluntário podem ser editados a qualquer momento.
 
 **US-31** — Cadastro e Manutenção de Voluntários
@@ -137,14 +135,19 @@ Os Critérios de Aceitação (CA) definem as condições mínimas para que cada 
 - A inativação exige confirmação e impede o login do voluntário imediatamente.
 - O histórico de ações do voluntário inativo é preservado e acessível.
 
-**US-32** — Controle de Acesso e Segurança
-
-- O sistema oferece ao menos dois perfis: Coordenador e Voluntário.
-- Cada usuário acessa somente as funcionalidades do seu perfil; tentativas fora do perfil são bloqueadas.
-- Apenas usuários autenticados acessam telas protegidas.
-
 **US-33** — Controle de Acesso e Segurança
 
-- A opção de logout está disponível em todas as telas.
+- O sistema oferece ao menos dois perfis: Coordenador e Voluntário.
+- O sistema não deve exibir no menu ou nas telas as funcionalidades e botões que estejam fora do nível de permissão do usuário autenticado.
+- Apenas usuários autenticados acessam telas protegidas.
+
+**US-34** — Controle de Acesso e Segurança
+
 - O logout invalida a sessão imediatamente e redireciona para a tela de login.
 - Após o logout, nenhuma tela protegida é acessível sem novo login.
+
+**US-35** — Controle de Acesso e Segurança
+
+- O sistema deve solicitar um e-mail e uma senha válidos para a autenticação.
+- Se credenciais corretas, o usuário deve ser autenticado e redirecionado para a tela inicial.
+- Se credenciais incorretas, o sistema deve bloquear o acesso e exibir uma mensagem de erro genérica.
