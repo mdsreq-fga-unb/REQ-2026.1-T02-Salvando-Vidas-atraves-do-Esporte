@@ -4,7 +4,9 @@ Este documento apresenta o resultado da sessão de brainstorming realizada duran
 
 Abaixo, os registros visuais da atividade:
 
+**Figura 5:** Brainstorming 1 - R2.
 ![Brainstorm 1](../assets/brainstorm1.jpeg "Brainstorm 1")
+Fonte: Elaborada por [Pedro Lucas](https://github.com/pwdrinho)
 
 # R3 - Primeira Sessão JAD - Reunião 08/05
 
@@ -15,5 +17,3 @@ O link abaixo leva para os quadros utilizados na sessão JAD realizada no dia 08
 # R7 - Segunda Sessão JAD - Reunião 11/06
 
 O link abaixo leva para os quadros utilizados na sessão JAD realizada no dia 11/06, focada na repriorização do MVP utilizando as _User Stories_:
-
-[Quadro Sessão JAD 11/06](https://miro.com/app/board/uXjVHWbGQMc=/?moveToWidget=3458764674298702616&cot=14)

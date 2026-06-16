@@ -39,8 +39,9 @@
 |  2.2   | 12/06/2026 | Adiciona as reuniões feitas na unidade 3                                                    | José A.                                             |
 |  2.3   | 15/06/2026 | Adiciona um glossário de termos do projeto                                                  | Lucas O.                                            |
 |  2.4   | 15/06/2026 | Adiciona o Pedro Ramos nas tabelas de composição de equipe e README                         | José A.; Pedro R.                                   |
-
-
+| 2.5 | 15/06/2026 | Inclusão da Representação do Processo de Software (RAD) | Pedro Lucas |
+| 2.6 | 15/06/2026 | Adiciona Representação dos Ciclos de desenvolvimento | Pedro Lucas ; Pedro Ramos ; José Augusto |
+| 2.7 | 15/06/2026 | Ajustes no cronograma | Pedro Lucas ; Pedro Ramos ; José Augusto |
 
 # 1. Cenário Atual do Cliente e do Negócio
 

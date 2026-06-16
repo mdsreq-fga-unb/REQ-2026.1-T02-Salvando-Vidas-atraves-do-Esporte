@@ -41,6 +41,7 @@ nav:
       - "Entregas": Entregas/entregas.md
       - "Documentos": Entregas/documentos.md
       - "Glossário de Dados": Entregas/glossario.md
+      - "Representação Processo de Software": Entregas/ciclos.md
   - Atas e Reuniões Gravadas:
       - "Atas":
           - Unidade 1: Atas/unidade-1.md
