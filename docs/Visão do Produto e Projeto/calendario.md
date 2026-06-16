@@ -369,7 +369,6 @@
     **29**
     ```
     Reunião com Clientes
-    Workshop JAD (refinamento)
     ```
     </div>
     <div class="card fase3-card" markdown>**30**</div>
@@ -394,7 +393,11 @@
     Reunião de Equipe
     ```
     </div>
-    <div class="card fase3-card" markdown>**3**</div>
+    <div class="card fase3-card" markdown>**3**
+    ```
+    Reunião com Clientes
+    ```
+    </div>
     <div class="card feriado-card" markdown>**4**</div>
     <div class="card facultativo-card" markdown>**5**</div>
     <div class="card facultativo-card" markdown>**6**</div>
@@ -407,34 +410,26 @@
     Reunião de Equipe
     ```
     </div>
-    <div class="card fase3-card" markdown>
-    **10**
-    ```
-    Reunião com Clientes
-    ```
-    </div>
+    <div class="card fase3-card" markdown>**10**</div>
     <div class="card fase3-card" markdown>
     **11**
     ```
     Reunião de Equipe
     ```
+    ```
+    Reunião com Clientes
+    Workshop JAD (refinamento)
+    ```
     </div>
     <div class="card fase3-card" markdown>**12**</div>
-    <div class="card fase3-card" markdown>
-    **13**
-    ```
-    Gravação da Apresentação
-    ```
-    </div>
-    <div class="card fase3-card" markdown>
-    **14**
-    ```
-    Gravação da Apresentação
-    ```
-    </div>
+    <div class="card fase3-card" markdown>**13**</div>
+    <div class="card fase3-card" markdown>**14**</div>
     <!-- Semana 3 -->
     <div class="card fase3-card" markdown>
     **15**
+    ```
+    Gravação da Apresentação
+    ```
     ```
     Entrega 3
     ```
