@@ -5,6 +5,7 @@ Repositório da equipe **Na Minha Máquina Funciona** dedicado ao desenvolviment
 ## Índice de documentos:
 
 - [Visão do Produto e Projeto](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte/Vis%C3%A3o%20do%20Produto%20e%20Projeto/cenarioAtualDoClienteEDoNegocio/)
+- [Entrega 3](https://jaugustom.github.io/NaMinhaMaquinaFuncionaEntrega3/)
 
 ## Equipe
 
