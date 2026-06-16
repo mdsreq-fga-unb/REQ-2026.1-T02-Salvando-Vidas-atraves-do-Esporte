@@ -36,12 +36,19 @@
 |  1.9   | 17/05/2026 |                         Adiciona seção Lições Aprendidas unidade 2                          | Giovani de O,; Lucas O.                             |
 |  2.0   | 18/05/2026 |                       Ajustes finais + inclusão do vídeo da entrega 2                       | José A.; Pedro L.                                   |
 |  2.1   | 05/06/2026 | Revisa o DoR e DoD baseado no feedback da apresentação da unidade 2                         | José A.                                             |
-|  2.2   | 12/06/2026 | Adiciona as reuniões feitas na unidade 3                                                    | José A.                                             |
-|  2.3   | 15/06/2026 | Adiciona um glossário de termos do projeto                                                  | Lucas O.                                            |
-|  2.4   | 15/06/2026 | Adiciona o Pedro Ramos nas tabelas de composição de equipe e README                         | José A.; Pedro R.                                   |
-| 2.5 | 15/06/2026 | Inclusão da Representação do Processo de Software (RAD) | Pedro Lucas |
-| 2.6 | 15/06/2026 | Adiciona Representação dos Ciclos de desenvolvimento | Pedro Lucas ; Pedro Ramos ; José Augusto |
-| 2.7 | 15/06/2026 | Ajustes no cronograma | Pedro Lucas ; Pedro Ramos ; José Augusto |
+|  2.2   | 12/06/2026 | Adiciona as reuniões feitas na unidade 3                                                    | José A.
+|  2.3   | 14/06/2026 | Documenta correções dos RFs e RNFs                                                          | Júlia ; Lucas                                              |
+|  2.3.1   | 15/06/2026 | Atualiza Árvore de Rastreabilidade                                                 | Júlia
+|  2.4   | 15/06/2026 | Adiciona um glossário de termos do projeto                                                  | Lucas O.                                            |
+|  2.5   | 15/06/2026 | Adiciona o Pedro Ramos nas tabelas de composição de equipe e README                         | José A.; Pedro R.                                   |
+| 2.6 | 15/06/2026 | Inclusão da Representação do Processo de Software (RAD) | Pedro Lucas |
+| 2.7 | 15/06/2026 | Adiciona Representação dos Ciclos de desenvolvimento | Pedro Lucas ; Pedro Ramos ; José Augusto |
+| 2.8 | 15/06/2026 | Ajustes no cronograma | Pedro Lucas ; Pedro Ramos ; José Augusto |
+| 2.9 | 15/06/2026 | Documenta atualizações na priorização MVP | Júlia ; Lucas |
+| 2.9.1 | 15/06/2026 | Documenta Atualizações do Backlog | Júlia ; Lucas |
+| 2.9.2 | 15/06/2026 | Insere Árvore Backlog | Júlia |
+| 3.0 | 16/06/2026 | Atualiza Atas de Reuniões | Júlia |
+| 3.1 | 16/06/2026 | Insere Gravação de Apresentação Unidade 3 | José |
 
 # 1. Cenário Atual do Cliente e do Negócio
 

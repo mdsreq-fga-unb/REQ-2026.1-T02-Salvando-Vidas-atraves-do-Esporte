@@ -163,9 +163,11 @@ Antes do detalhamento granular, apresenta-se a síntese arquitetural do escopo d
 
 ---
  
-### Árvore de Rastreabilidade Backlog
+### 10.2 Árvore de Rastreabilidade Backlog
  
 ![Árvore de Rastreabilidade](../assets/arvoreBacklog.jpg){ width="800" }
 **Figura 5:** Árvore de Rastreabilidade. Fonte: Elaborada por Júlia Gabriella
  
+Disponível em: [Árvore de Rastreabilidade Backlog](https://www.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/SVAdS-FIGJAM?node-id=297-615&p=f&t=1atgk2CdgQM7cyIf-0)
+
 ---

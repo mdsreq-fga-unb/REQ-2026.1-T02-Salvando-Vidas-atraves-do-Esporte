@@ -1,6 +1,6 @@
 # 8 Requisitos de Software
 
-## 8.1 Lista de Requisitos Funcionais
+<!--## 8.1 Lista de Requisitos Funcionais
 
 Os requisitos funcionais descrevem as funcionalidades específicas que o sistema deve implementar para atender às necessidades da instituição Salvando Vidas Através do Esporte, realizado pela Segunda Igreja Batista do Recanto das Emas. A seguir, são apresentados o conjunto preliminar de requisitos.
 
@@ -87,12 +87,14 @@ A matriz a seguir representa a rastreabilidade entre objetivos específicos (OE)
 | OE03 | - | CP07 | VN07 | RF21, RF22 | RNF06 |
 | OE04 | OE01 | CP08 | VN08 | RF23, RF24, RF25 | - |
 | OE04 | OE02 | CP09 | VN09 | RF17, RF26, RF27, RF28 | - |
-
-## 8.4 Árvore de Rastreabilidade
+-->
+## 8.1 Árvore de Rastreabilidade
 
 A árvore de rastreabilidade visual apresenta as conexões entre os objetivos estratégicos, as características do produto, os valores de negócio e os requisitos funcionais e não funcionais, permitindo acompanhar como cada funcionalidade contribui para o valor de negócio do projeto.
 
 ![Árvore de Rastreabilidade](../assets/arvoreRastreabilidade.jpg){ width="800" }
 **Figura 4:** Árvore de Rastreabilidade. Fonte: Elaborada por Pedro Lucas
+
+Disponível em: [Árvore de Rastreabilidade](https://www.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/SVAdS-FIGJAM?node-id=0-1&p=f&t=1atgk2CdgQM7cyIf-0)
 
 <!--<iframe style="border: 2px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/Árvore-de-Rastreabilidade?embed-host=share" allowfullscreen></iframe>-->
