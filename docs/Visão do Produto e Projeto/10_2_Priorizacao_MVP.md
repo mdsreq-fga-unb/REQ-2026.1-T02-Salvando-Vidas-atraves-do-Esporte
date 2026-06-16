@@ -64,9 +64,10 @@ O MVP foi validado e aprovado tanto pela equipe quanto pelos stakeholders.
 
 A matriz abaixo apresenta a distribuição das histórias de usuário segundo os eixos de complexidade técnica e valor de negócio, com destaque para o quadrante correspondente ao MVP aprovado.
 
-![Matriz MVP](../assets/MatrizMVP.jpg){ width="800" }
-**Figura 6:** Matriz MVP. Fonte: Elaborada por Júlia Gabriella
+<!--![Matriz MVP](../assets/MatrizMVP.jpg){ width=800 }
+
+**Figura 6:** Matriz MVP. Fonte: Elaborada por Júlia Gabriella-->
 
 
-<!--<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHT_JmM8=/?focusWidget=3458764647487987076&embedMode=view_only_without_ui&embedId=195967925908" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>-->
+<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHT_JmM8=/?focusWidget=3458764647487987076&embedMode=view_only_without_ui&embedId=195967925908" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
