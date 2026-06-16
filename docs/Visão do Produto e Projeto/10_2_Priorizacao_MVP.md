@@ -57,7 +57,7 @@ O MVP foi validado e aprovado tanto pela equipe quanto pelos stakeholders.
 - 📋 **Workshop JAD adaptado — Sessão 2 (Miro):** classificação MoSCoW realizada com os stakeholders, com a identificação por cores das histórias de usuário.
   [Acessar quadro no Miro](https://miro.com/app/board/uXjVHWbGQMc=/?share_link_id=537692299700)
 - 🃏 **Planning Poker — Tabela de complexidade técnica** (Equipe Na Minha Máquina Funciona):
-  [Planilha de resumo das votações](https://docs.google.com/spreadsheets/d/1A670QqojtJ6ywkf8ptJykHCqmFOEYV0nVuUY2af_jtQ/edit?usp=sharing) · [Sala de votação — Planning Poker](https://app.planitpoker.com/room/Yysv6ThKtJi3A38aSklnc2ORHxQT7WqR)
+  [Planilha de resumo das votações](https://docs.google.com/spreadsheets/d/1dQxS_lAYoNAk5GWnPe9KIyS89q93ol7SqFwbwe0jv1Q/edit?gid=1468318094#gid=1468318094) · [Sala de votação — Planning Poker](https://app.planitpoker.com/room/Yysv6ThKtJi3A38aSklnc2ORHxQT7WqR)
 ---
 
 ## 5. Matriz de Avaliação Técnica × Valor de Negócio
