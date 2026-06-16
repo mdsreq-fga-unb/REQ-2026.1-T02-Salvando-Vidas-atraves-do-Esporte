@@ -35,6 +35,12 @@
 | 1.8.3  | 17/05/2026 |                            Inclui Critérios de Aceitação do MVP                             | Júlia G.                                            |
 |  1.9   | 17/05/2026 |                         Adiciona seção Lições Aprendidas unidade 2                          | Giovani de O,; Lucas O.                             |
 |  2.0   | 18/05/2026 |                       Ajustes finais + inclusão do vídeo da entrega 2                       | José A.; Pedro L.                                   |
+|  2.1   | 05/06/2026 | Revisa o DoR e DoD baseado no feedback da apresentação da unidade 2                         | José A.                                             |
+|  2.2   | 12/06/2026 | Adiciona as reuniões feitas na unidade 3                                                    | José A.                                             |
+|  2.3   | 15/06/2026 | Adiciona um glossário de termos do projeto                                                  | Lucas O.                                            |
+|  2.4   | 15/06/2026 | Adiciona o Pedro Ramos nas tabelas de composição de equipe e README                         | José A.; Pedro R.                                   |
+
+
 
 # 1. Cenário Atual do Cliente e do Negócio
 
