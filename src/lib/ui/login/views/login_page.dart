@@ -1,9 +1,16 @@
 import 'package:salvando_vidas/main_imports.dart';
-
 import '../login_imports.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // MÁGICA 1: Criamos a chave Mestra aqui!
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +28,11 @@ class LoginPage extends StatelessWidget {
                   children: [
                     BannerLogo(),
                     const SizedBox(height: 28),
-                    FormularioLogin(),
+                    // Passamos a chave para o formulário
+                    FormularioLogin(formKey: _formKey),
                     const SizedBox(height: 18),
-                    BotaoEntrar(),
+                    // Passamos a mesma chave para o botão
+                    BotaoEntrar(formKey: _formKey),
                   ],
                 ),
               ),

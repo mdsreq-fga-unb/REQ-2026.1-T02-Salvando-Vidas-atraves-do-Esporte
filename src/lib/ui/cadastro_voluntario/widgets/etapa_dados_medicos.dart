@@ -18,32 +18,38 @@ class EtapaDadosMedicos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPerguntaMedica(1, 'Pergunta médica 1:'),
-            _buildPerguntaMedica(2, 'Pergunta médica 2:'),
-            _buildPerguntaMedica(3, 'Pergunta médica 3:'),
-            _buildPerguntaMedica(4, 'Pergunta médica 4:'),
-            _buildPerguntaMedica(5, 'Pergunta médica N:'),
-            const SizedBox(height: 16),
-            _buildLabel('Observações:'),
-            TextFormField(
-              controller: obsController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: 'Digite as observações aqui...',
-                filled: true,
-                fillColor: const Color(0xFFF5F7FB),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              ),
-            )
-          ],
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildPerguntaMedica(1, 'Pergunta médica 1:'),
+                _buildPerguntaMedica(2, 'Pergunta médica 2:'),
+                _buildPerguntaMedica(3, 'Pergunta médica 3:'),
+                _buildPerguntaMedica(4, 'Pergunta médica 4:'),
+                _buildPerguntaMedica(5, 'Pergunta médica N:'),
+                const SizedBox(height: 16),
+                _buildLabel('Observações:'),
+                TextFormField(
+                  controller: obsController,
+                  maxLines: 4,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    hintText: 'Digite as observações aqui...',
+                    filled: true,
+                    fillColor: const Color(0xFFD8DDE6), // Padronizado com o InputField
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

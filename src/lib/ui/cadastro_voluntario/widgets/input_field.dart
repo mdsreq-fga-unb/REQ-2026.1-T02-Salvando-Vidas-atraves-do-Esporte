@@ -17,7 +17,6 @@ class InputField extends StatelessWidget {
   });
 
   final Color? fillColor;
-
   final void Function(String) update;
   final String? error;
   final String initialValue;
@@ -39,6 +38,7 @@ class InputField extends StatelessWidget {
           initialValue: initialValue,
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           style: const TextStyle(
             color: Color(0xFF24304D),
             fontWeight: FontWeight.w600,
@@ -48,7 +48,7 @@ class InputField extends StatelessWidget {
             errorText: error,
             hintStyle: const TextStyle(color: Color(0xAA000000), fontSize: 13),
             filled: true,
-            fillColor: fillColor ?? const Color(0xFFD8DDE6),
+            fillColor: fillColor ?? const Color(0xFFF5F7FB),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,

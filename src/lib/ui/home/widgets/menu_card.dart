@@ -1,7 +1,5 @@
 import 'package:salvando_vidas/main_imports.dart';
 
-
-// O que é MenuCard
 class MenuCard extends StatelessWidget {
   const MenuCard({
     super.key,
@@ -51,6 +49,7 @@ class MenuCard extends StatelessWidget {
                 child: Icon(icon, color: Colors.white, size: 30),
               ),
               const SizedBox(width: 16),
+              // O Expanded aqui salva o layout de quebrar em telas estreitas
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

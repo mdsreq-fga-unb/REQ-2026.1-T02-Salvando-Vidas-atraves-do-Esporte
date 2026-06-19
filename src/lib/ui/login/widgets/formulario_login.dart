@@ -1,9 +1,10 @@
 import 'package:salvando_vidas/main_imports.dart';
-
 import '../login_imports.dart';
 
 class FormularioLogin extends StatelessWidget {
-  const FormularioLogin({super.key});
+  final GlobalKey<FormState> formKey;
+
+  const FormularioLogin({super.key, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,9 @@ class FormularioLogin extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(18, 24, 18, 20),
       decoration: LoginDecorations.formContainer,
       child: Form(
+        key: formKey,
+        // Só valida automaticamente DEPOIS do primeiro clique no botão entrar
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
