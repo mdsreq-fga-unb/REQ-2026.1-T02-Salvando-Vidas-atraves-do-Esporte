@@ -22,7 +22,7 @@ final class HomeStoreProvider
         argument: null,
         retry: null,
         name: r'homeStoreProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -35,7 +35,7 @@ final class HomeStoreProvider
   HomeStore create() => HomeStore();
 }
 
-String _$homeStoreHash() => r'd9379f906bd16d1f7b25bac83d1c6f1ca869820b';
+String _$homeStoreHash() => r'b9ecd06821b68fb50d8d4d1e88d79ad9cb8f199d';
 
 abstract class _$HomeStore extends $AsyncNotifier<HomeState> {
   FutureOr<HomeState> build();

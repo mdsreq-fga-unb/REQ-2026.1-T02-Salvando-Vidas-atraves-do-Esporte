@@ -33,6 +33,7 @@ class TurmaService {
           .from('alunos')
           .select()
           .eq('id_turma', id)
+          .eq('ativo', true)
           .count();
       return res.count;
     });

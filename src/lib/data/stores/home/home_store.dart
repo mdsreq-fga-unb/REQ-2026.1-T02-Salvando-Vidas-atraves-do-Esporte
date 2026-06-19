@@ -11,7 +11,7 @@ part 'home_store.mapper.dart';
 
 typedef AlunoHome = (String aluno, int? turma, int? ultimaPresenca);
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class HomeStore extends _$HomeStore {
   @override
   Future<HomeState> build() async {

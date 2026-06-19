@@ -51,7 +51,11 @@ class AlunoService {
 
   Future<List<Aluno>> listarAlunosTurma(int id) {
     return runSupabaseCall(() async {
-      final res = await _supabase.from('alunos').select().eq('id_turma', id);
+      final res = await _supabase
+          .from('alunos')
+          .select()
+          .eq('id_turma', id)
+          .eq('ativo', true);
       return res.map((data) => Aluno.fromMap(data)).toList();
     });
   }
