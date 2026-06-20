@@ -12,6 +12,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
   final String nome;
   final String cpf;
   final String contato;
+  final String contatoEmergencia; // NOVA VARIÁVEL
   final String email;
   final DateTime? nascimento;
   final TipoSanguineo? tipoSanguineo;
@@ -29,6 +30,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     this.nome = '',
     this.cpf = '',
     this.contato = '',
+    this.contatoEmergencia = '', 
     this.email = '',
     this.nascimento,
     this.tipoSanguineo,
@@ -65,6 +67,11 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
   String? get contatoError {
     if (!dirty && contato.isEmpty) return null;
     return eTelefone(contato) ? null : 'Não é um telefone válido';
+  }
+
+  String? get contatoEmergenciaError {
+    if (!dirty && contatoEmergencia.isEmpty) return null;
+    return eTelefone(contatoEmergencia) ? null : 'Não é um telefone válido';
   }
 
   String? get contatoResponsavelError {
@@ -108,6 +115,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
       nomeError != null ||
       cpfError != null ||
       contatoError != null ||
+      contatoEmergenciaError != null || 
       emailError != null ||
       nascimentoError != null ||
       tipoSanguineoError != null ||
@@ -119,6 +127,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
       nome.isNotEmpty &&
       cpf.isNotEmpty &&
       contato.isNotEmpty &&
+      contatoEmergencia.isNotEmpty && 
       email.isNotEmpty;
 
   int get idade {
@@ -137,6 +146,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     nome: nome,
     cpf: cpf,
     contato: contato,
+    contatoEmergencia: contatoEmergencia,
     email: email,
     nascimento: nascimento!,
     tipoSanguineo: tipoSanguineo!,
@@ -174,6 +184,10 @@ class CadastroAluno extends _$CadastroAluno {
 
   void updateContato(String value) {
     state = state.copyWith(contato: value, dirty: true);
+  }
+
+  void updateContatoEmergencia(String value) {
+    state = state.copyWith(contatoEmergencia: value, dirty: true);
   }
 
   void updateEmail(String value) {

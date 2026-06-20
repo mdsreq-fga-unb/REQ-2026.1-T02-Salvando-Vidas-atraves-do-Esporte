@@ -6,7 +6,6 @@ import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
-// Certifique-se de ter importado intl se for usar DateFormat futuramente
 
 class EtapaDadosBasicos extends ConsumerStatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -20,6 +19,7 @@ class EtapaDadosBasicos extends ConsumerStatefulWidget {
 class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
   late final MaskTextInputFormatter formatCPF;
   late final MaskTextInputFormatter formatTelefone;
+  late final MaskTextInputFormatter formatTelefoneEmergencia; // Máscara dedicada para evitar conflitos
   late final MaskTextInputFormatter formatData;
   final TextEditingController _dataController = TextEditingController();
 
@@ -28,7 +28,7 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
     super.initState();
     formatCPF = maskCPF();
     formatTelefone = maskTelefone();
-    // Nova máscara para o aniversário
+    formatTelefoneEmergencia = maskTelefone(); // Instância separada para o emergência
     formatData = MaskTextInputFormatter(
       mask: '##/##/####', 
       filter: {"#": RegExp(r'[0-9]')},
@@ -61,7 +61,6 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
       key: widget.formKey,
       child: Center(
         child: ConstrainedBox(
-          // MÁGICA 2: Responsividade! O formulário não estica infinitamente no PC
           constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
             child: Column(
@@ -100,6 +99,22 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                   inputFormatters: [formatTelefone],
                 ),
                 const SizedBox(height: 14),
+                
+                // NOVO CAMPO: Contato de Emergência
+                InputField(
+                  // Assume que o estado retorna uma string vazia se for nulo para não quebrar a máscara
+                  initialValue: formatTelefoneEmergencia.maskText(cadastro.contatoEmergencia ?? ''),
+                  update: (_) =>
+                      notifier.updateContatoEmergencia(formatTelefoneEmergencia.getUnmaskedText()),
+                  error: cadastro.contatoEmergenciaError,
+                  label: 'Contato de Emergência*',
+                  hint: '(00) 00000-0000',
+                  keyboardType: TextInputType.phone,
+                  validatorMessage: 'O contato de emergência é obrigatório',
+                  inputFormatters: [formatTelefoneEmergencia],
+                ),
+                const SizedBox(height: 14),
+
                 InputField(
                   initialValue: cadastro.email,
                   update: notifier.updateEmail,
@@ -111,7 +126,6 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                 ),
                 const SizedBox(height: 14),
                 
-                // MÁGICA 3: Aniversário agora aceita digitação com máscara E clique no calendário
                 buildLabel('Aniversário*'),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -123,7 +137,7 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                     hintText: 'DD/MM/AAAA',
                     errorText: cadastro.nascimentoError,
                     filled: true,
-                    fillColor: const Color(0xFFD8DDE6), // Padronizado com o InputField
+                    fillColor: const Color(0xFFD8DDE6),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -148,7 +162,6 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                     ),
                   ),
                   onChanged: (value) {
-                    // Atualiza o estado apenas se a data estiver completa
                     if (value.length == 10) {
                       try {
                         final partes = value.split('/');
@@ -159,7 +172,7 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                         );
                         notifier.updateNascimento(data);
                       } catch (e) {
-                        // Data inválida ignorada até o usuário corrigir
+                        // Data inválida ignorada
                       }
                     }
                   },

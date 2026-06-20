@@ -12,6 +12,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   final String nome;
   final String cpf;
   final String contato;
+  final String contatoEmergencia; 
   final String email;
   final DateTime? nascimento;
   final TipoSanguineo? tipoSanguineo;
@@ -34,6 +35,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     this.nome = '',
     this.cpf = '',
     this.contato = '',
+    this.contatoEmergencia = '', 
     this.email = '',
     this.nascimento,
     this.tipoSanguineo,
@@ -70,6 +72,11 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   String? get contatoError {
     if (!dirty && contato.isEmpty) return null;
     return eTelefone(contato) ? null : 'Não é um telefone válido';
+  }
+
+  String? get contatoEmergenciaError {
+    if (!dirty && contatoEmergencia.isEmpty) return null;
+    return eTelefone(contatoEmergencia) ? null : 'Não é um telefone válido';
   }
 
   String? get contatoResponsavelError {
@@ -113,6 +120,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
       nomeError != null ||
       cpfError != null ||
       contatoError != null ||
+      contatoEmergenciaError != null || 
       emailError != null ||
       nascimentoError != null ||
       tipoSanguineoError != null ||
@@ -124,6 +132,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
       nome.isNotEmpty &&
       cpf.isNotEmpty &&
       contato.isNotEmpty &&
+      contatoEmergencia.isNotEmpty &&
       email.isNotEmpty;
 
   int get idade {
@@ -142,6 +151,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     nome: nome,
     cpf: cpf,
     contato: contato,
+    contatoEmergencia: contatoEmergencia,
     email: email,
     nascimento: nascimento!,
     tipoSanguineo: tipoSanguineo!,
@@ -166,6 +176,10 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
 
     if (alunoOriginal.contato != aluno.contato) {
       diff['contato'] = aluno.contato;
+    }
+
+    if (alunoOriginal.contatoEmergencia != aluno.contatoEmergencia) {
+      diff['contato_emergencia'] = aluno.contatoEmergencia; 
     }
 
     if (alunoOriginal.email != aluno.email) {
@@ -217,6 +231,7 @@ class UpdateAluno extends _$UpdateAluno {
       nome: aluno.nome,
       cpf: aluno.cpf,
       contato: aluno.contato ?? '',
+      contatoEmergencia: aluno.contatoEmergencia ?? '', 
       email: aluno.email,
       nascimento: aluno.nascimento,
       tipoSanguineo: aluno.tipoSanguineo,
@@ -240,6 +255,10 @@ class UpdateAluno extends _$UpdateAluno {
 
   void updateContato(String value) {
     state = state.copyWith(contato: value, dirty: true);
+  }
+
+  void updateContatoEmergencia(String value) {
+    state = state.copyWith(contatoEmergencia: value, dirty: true);
   }
 
   void updateEmail(String value) {

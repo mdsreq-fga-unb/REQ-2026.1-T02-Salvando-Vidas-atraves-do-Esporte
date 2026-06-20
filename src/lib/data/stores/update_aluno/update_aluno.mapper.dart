@@ -61,6 +61,14 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
     opt: true,
     def: '',
   );
+  static String _$contatoEmergencia(UpdateAlunoState v) => v.contatoEmergencia;
+  static const Field<UpdateAlunoState, String> _f$contatoEmergencia = Field(
+    'contatoEmergencia',
+    _$contatoEmergencia,
+    key: r'contato_emergencia',
+    opt: true,
+    def: '',
+  );
   static String _$email(UpdateAlunoState v) => v.email;
   static const Field<UpdateAlunoState, String> _f$email = Field(
     'email',
@@ -150,6 +158,7 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
     #nome: _f$nome,
     #cpf: _f$cpf,
     #contato: _f$contato,
+    #contatoEmergencia: _f$contatoEmergencia,
     #email: _f$email,
     #nascimento: _f$nascimento,
     #tipoSanguineo: _f$tipoSanguineo,
@@ -172,6 +181,7 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
       nome: data.dec(_f$nome),
       cpf: data.dec(_f$cpf),
       contato: data.dec(_f$contato),
+      contatoEmergencia: data.dec(_f$contatoEmergencia),
       email: data.dec(_f$email),
       nascimento: data.dec(_f$nascimento),
       tipoSanguineo: data.dec(_f$tipoSanguineo),
@@ -256,6 +266,7 @@ abstract class UpdateAlunoStateCopyWith<$R, $In extends UpdateAlunoState, $Out>
     String? nome,
     String? cpf,
     String? contato,
+    String? contatoEmergencia,
     String? email,
     DateTime? nascimento,
     TipoSanguineo? tipoSanguineo,
@@ -296,6 +307,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
     String? nome,
     String? cpf,
     String? contato,
+    String? contatoEmergencia,
     String? email,
     Object? nascimento = $none,
     Object? tipoSanguineo = $none,
@@ -315,6 +327,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
       if (nome != null) #nome: nome,
       if (cpf != null) #cpf: cpf,
       if (contato != null) #contato: contato,
+      if (contatoEmergencia != null) #contatoEmergencia: contatoEmergencia,
       if (email != null) #email: email,
       if (nascimento != $none) #nascimento: nascimento,
       if (tipoSanguineo != $none) #tipoSanguineo: tipoSanguineo,
@@ -338,6 +351,10 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
     nome: data.get(#nome, or: $value.nome),
     cpf: data.get(#cpf, or: $value.cpf),
     contato: data.get(#contato, or: $value.contato),
+    contatoEmergencia: data.get(
+      #contatoEmergencia,
+      or: $value.contatoEmergencia,
+    ),
     email: data.get(#email, or: $value.email),
     nascimento: data.get(#nascimento, or: $value.nascimento),
     tipoSanguineo: data.get(#tipoSanguineo, or: $value.tipoSanguineo),

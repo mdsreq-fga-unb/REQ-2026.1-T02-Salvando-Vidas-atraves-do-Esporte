@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:salvando_vidas/domain/turma/turma.dart';
-import 'turma_options_menu_widget.dart';
 
 class TurmaCardWidget extends StatelessWidget {
   final Turma turma;
   final VoidCallback? onTap;
-  final VoidCallback? onEditar;
-  final VoidCallback? onExcluir;
 
   const TurmaCardWidget({
     super.key,
     required this.turma,
     this.onTap,
-    this.onEditar,
-    this.onExcluir,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Espaçamento em volta do card
       margin: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
-      elevation: 2, // Sombra suave
+      elevation: 2,
       shadowColor: Colors.black.withOpacity(0.15),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: Colors.white,
@@ -34,25 +28,20 @@ class TurmaCardWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Ícone de destaque à esquerda
               Container(
                 height: 52,
                 width: 52,
                 decoration: BoxDecoration(
-                  color: const Color(
-                    0xFF00BCD4,
-                  ).withOpacity(0.15), // Fundo ciano clarinho
+                  color: const Color(0xFF08216F).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
                   Icons.groups_rounded,
-                  color: Color(0xFF00BCD4), // Cor principal
+                  color: Color(0xFF08216F),
                   size: 30,
                 ),
               ),
               const SizedBox(width: 16),
-
-              // Textos organizados
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,12 +51,10 @@ class TurmaCardWidget extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF333333),
+                        color: Color(0xFF08216F),
                       ),
                     ),
                     const SizedBox(height: 8),
-
-                    // Linha com ícone de pessoas
                     Row(
                       children: [
                         const Icon(
@@ -86,8 +73,6 @@ class TurmaCardWidget extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-
-                    // Linha com ícone de relógio
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -116,13 +101,7 @@ class TurmaCardWidget extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Menu de opções (3 pontinhos)
-              TurmaOptionsMenuWidget(
-                turmaId: turma.id,
-                onEditar: onEditar,
-                onExcluir: onExcluir,
-              ),
+              const Icon(Icons.chevron_right, color: Color(0xFF08216F)),
             ],
           ),
         ),
