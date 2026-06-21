@@ -12,7 +12,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   final String nome;
   final String cpf;
   final String contato;
-  final String contatoEmergencia; 
+  final String contatoEmergencia;
   final String email;
   final DateTime? nascimento;
   final TipoSanguineo? tipoSanguineo;
@@ -35,7 +35,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     this.nome = '',
     this.cpf = '',
     this.contato = '',
-    this.contatoEmergencia = '', 
+    this.contatoEmergencia = '',
     this.email = '',
     this.nascimento,
     this.tipoSanguineo,
@@ -120,7 +120,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
       nomeError != null ||
       cpfError != null ||
       contatoError != null ||
-      contatoEmergenciaError != null || 
+      contatoEmergenciaError != null ||
       emailError != null ||
       nascimentoError != null ||
       tipoSanguineoError != null ||
@@ -164,52 +164,16 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   );
 
   Map<String, dynamic> diffAluno(Aluno aluno) {
-    final Map<String, dynamic> diff = {};
+    final original = alunoOriginal.toMap();
+    final novo = aluno.toMap();
 
-    if (alunoOriginal.nome != aluno.nome) {
-      diff['nome'] = aluno.nome;
+    for (final key in original.keys) {
+      if (novo[key] == original[key]) {
+        novo.remove(key);
+      }
     }
 
-    if (alunoOriginal.cpf != aluno.cpf) {
-      diff['cpf'] = aluno.cpf;
-    }
-
-    if (alunoOriginal.contato != aluno.contato) {
-      diff['contato'] = aluno.contato;
-    }
-
-    if (alunoOriginal.contatoEmergencia != aluno.contatoEmergencia) {
-      diff['contato_emergencia'] = aluno.contatoEmergencia; 
-    }
-
-    if (alunoOriginal.email != aluno.email) {
-      diff['email'] = aluno.email;
-    }
-
-    if (alunoOriginal.nascimento != aluno.nascimento) {
-      diff['nascimento'] = aluno.nascimento;
-    }
-
-    if (alunoOriginal.tipoSanguineo != aluno.tipoSanguineo) {
-      diff['tipo_sanguineo'] = aluno.tipoSanguineo.name;
-    }
-
-    if (alunoOriginal.faixa != aluno.faixa) {
-      diff['faixa'] = aluno.faixa.name;
-    }
-
-    if (alunoOriginal.grau != aluno.grau) {
-      diff['grau'] = aluno.grau;
-    }
-
-    if (alunoOriginal.idFicha != aluno.idFicha) {
-      diff['id_ficha'] = aluno.idFicha;
-    }
-
-    if (alunoOriginal.idResponsavel != aluno.idResponsavel) {
-      diff['id_responsavel'] = aluno.idResponsavel;
-    }
-    return diff;
+    return novo;
   }
 
   Responsavel get responsavel => Responsavel(
@@ -231,7 +195,7 @@ class UpdateAluno extends _$UpdateAluno {
       nome: aluno.nome,
       cpf: aluno.cpf,
       contato: aluno.contato ?? '',
-      contatoEmergencia: aluno.contatoEmergencia ?? '', 
+      contatoEmergencia: aluno.contatoEmergencia ?? '',
       email: aluno.email,
       nascimento: aluno.nascimento,
       tipoSanguineo: aluno.tipoSanguineo,

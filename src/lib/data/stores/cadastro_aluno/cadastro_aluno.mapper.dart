@@ -156,8 +156,6 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
     #emailResponsavel: _f$emailResponsavel,
     #dirty: _f$dirty,
   };
-  @override
-  final bool ignoreNull = true;
 
   static CadastroAlunoState _instantiate(DecodingData data) {
     return CadastroAlunoState(

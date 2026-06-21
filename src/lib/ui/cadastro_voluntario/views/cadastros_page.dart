@@ -25,7 +25,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
   final _formKeyEtapa2 = GlobalKey<FormState>();
   final _formKeyEtapa3 = GlobalKey<FormState>();
   late final _formKeys = [_formKeyEtapa1, _formKeyEtapa2, _formKeyEtapa3];
-  
+
   // Controllers - Etapa 2
   final _obsMedicasController = TextEditingController();
   final Map<int, bool?> _respostasMedicas = {
@@ -55,25 +55,24 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
   }
 
   void _avancar() {
-    if (_formKeys[_etapaAtual].currentState?.validate() ?? false) {
-      if (cadastro.estaValido) {
-        if (_etapaAtual == 0 || (_etapaAtual == 1 && cadastro.idade < 18)) {
-          _pageController.nextPage(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.ease,
-          );
-        } else if (cadastro.temResponsavel || cadastro.idade >= 18) {
-          _mostrarDialogConfirmacao();
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Preencha todos os campos obrigatórios corretamente.'),
-            backgroundColor: AppColors.error,
-            behavior: SnackBarBehavior.floating,
-          ),
+    // if (_formKeys[_etapaAtual].currentState?.validate() ?? false) {
+    if (cadastro.estaValido) {
+      if (_etapaAtual == 0 || (_etapaAtual == 1 && cadastro.idade < 18)) {
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
         );
+      } else if (cadastro.temResponsavel || cadastro.idade >= 18) {
+        _mostrarDialogConfirmacao();
       }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Preencha todos os campos obrigatórios corretamente.'),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
@@ -91,18 +90,28 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Confirmar Cadastro', style: TextStyle(color: AppColors.deepNavy)),
-        content: const Text('Deseja realmente salvar as informações deste aluno?'),
+        title: const Text(
+          'Confirmar Cadastro',
+          style: TextStyle(color: AppColors.deepNavy),
+        ),
+        content: const Text(
+          'Deseja realmente salvar as informações deste aluno?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancelar', style: TextStyle(color: AppColors.error)),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: AppColors.error),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.deepNavy,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             onPressed: () {
               Navigator.of(ctx).pop();
@@ -134,7 +143,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
       await service.cadastrarAluno(aluno);
 
       if (!mounted) return;
-      Navigator.of(context).pop(); // Tira o loading da tela
+      Navigator.of(context, rootNavigator: true).pop();
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -149,15 +158,14 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
       if (mounted) {
         notifier.reset();
         // AJUSTE: Redireciona de forma segura para a home page após salvar
-        context.go(Routes.home); 
+        context.go(Routes.home);
       }
-      
     } on AppApiException catch (e) {
       if (!mounted) return;
-      Navigator.of(context).pop();
-      
+      Navigator.of(context, rootNavigator: true).pop();
+
       logger.e(e.message, error: e.error);
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Erro ao cadastrar aluno. Tente novamente.'),
@@ -187,7 +195,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
     notifier = this.ref.read(cadastroAlunoProvider.notifier);
     service = this.ref.read(alunoServiceProvider);
     logger = this.ref.read(loggerProvider);
-    
+
     return Scaffold(
       // AJUSTE: Novo botão customizado de voltar com texto e navegação explícita
       appBar: AppBar(
@@ -196,10 +204,15 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
         leadingWidth: 110, // Abre espaço para o texto "Voltar" não quebrar
         leading: TextButton.icon(
           onPressed: () {
-            FocusManager.instance.primaryFocus?.unfocus(); // Fecha o teclado preventivamente
+            FocusManager.instance.primaryFocus
+                ?.unfocus(); // Fecha o teclado preventivamente
             context.go(Routes.home); // Manda o app direto para a HomePage
           },
-          icon: const Icon(Icons.arrow_back, color: AppColors.deepNavy, size: 22),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.deepNavy,
+            size: 22,
+          ),
           label: const Text(
             'Voltar',
             style: TextStyle(

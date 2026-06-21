@@ -263,8 +263,6 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
     #idTurma: _f$idTurma,
     #idFicha: _f$idFicha,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Aluno _instantiate(DecodingData data) {
     return Aluno(

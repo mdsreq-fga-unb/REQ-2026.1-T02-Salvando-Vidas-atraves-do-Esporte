@@ -56,8 +56,6 @@ class PresencaStateMapper extends ClassMapperBase<PresencaState> {
     #presenca: _f$presenca,
     #data: _f$data,
   };
-  @override
-  final bool ignoreNull = true;
 
   static PresencaState _instantiate(DecodingData data) {
     return PresencaState(

@@ -20,10 +20,9 @@ class AlunoService {
 
   Future<Aluno> cadastrarAluno(Aluno aluno) {
     return runSupabaseCall(() async {
-      final data = await _supabase
-          .from('alunos')
-          .insert(aluno.toMap())
-          .select();
+      final novo = aluno.toMap();
+      novo.remove('id');
+      final data = await _supabase.from('alunos').insert(novo).select();
       final res = Aluno.fromMap(data.first);
 
       return res;

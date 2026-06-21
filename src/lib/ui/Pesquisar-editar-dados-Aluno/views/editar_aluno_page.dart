@@ -102,12 +102,14 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
               Aluno aluno = state.aluno;
               Responsavel responsavel = state.responsavel;
 
+              final diff = state.diffAluno(aluno);
+
               try {
                 if (state.idade < 18) {
                   final res = await service.cadastrarResponsavel(responsavel);
-                  aluno = aluno.copyWith(idResponsavel: res.id!);
+                  diff['id_responsavel'] = res.id;
                 } else {
-                  aluno.copyWith(idResponsavel: null);
+                  diff['id_responsavel'] = null;
                 }
 
                 await service.atualizaAluno(

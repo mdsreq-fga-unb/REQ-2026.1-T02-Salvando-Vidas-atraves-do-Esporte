@@ -82,7 +82,9 @@ class UserService {
 
   Future<void> registerUser(LocalUser user) async {
     return runSupabaseCall(() async {
-      await _supabase.rpc('admin_create_user', params: user.toMap());
+      final novo = user.toMap();
+      novo.remove('id');
+      await _supabase.rpc('admin_create_user', params: novo);
     });
   }
 

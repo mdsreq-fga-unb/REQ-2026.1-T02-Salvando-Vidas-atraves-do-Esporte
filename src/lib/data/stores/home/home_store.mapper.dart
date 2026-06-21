@@ -55,8 +55,6 @@ class HomeStateMapper extends ClassMapperBase<HomeState> {
     #totalTurmas: _f$totalTurmas,
     #kimonosDisponiveis: _f$kimonosDisponiveis,
   };
-  @override
-  final bool ignoreNull = true;
 
   static HomeState _instantiate(DecodingData data) {
     return HomeState(

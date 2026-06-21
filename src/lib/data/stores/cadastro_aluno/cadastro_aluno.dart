@@ -30,7 +30,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     this.nome = '',
     this.cpf = '',
     this.contato = '',
-    this.contatoEmergencia = '', 
+    this.contatoEmergencia = '',
     this.email = '',
     this.nascimento,
     this.tipoSanguineo,
@@ -115,19 +115,18 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
       nomeError != null ||
       cpfError != null ||
       contatoError != null ||
-      contatoEmergenciaError != null || 
+      contatoEmergenciaError != null ||
       emailError != null ||
       nascimentoError != null ||
       tipoSanguineoError != null ||
-      faixaError != null ||
-      idFichaError != null;
+      faixaError != null;
 
   bool get estaValido =>
       !temErros &&
       nome.isNotEmpty &&
       cpf.isNotEmpty &&
       contato.isNotEmpty &&
-      contatoEmergencia.isNotEmpty && 
+      contatoEmergencia.isNotEmpty &&
       email.isNotEmpty;
 
   int get idade {

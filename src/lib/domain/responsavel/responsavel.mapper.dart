@@ -47,8 +47,6 @@ class ResponsavelMapper extends ClassMapperBase<Responsavel> {
     #ativo: _f$ativo,
     #id: _f$id,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Responsavel _instantiate(DecodingData data) {
     return Responsavel(

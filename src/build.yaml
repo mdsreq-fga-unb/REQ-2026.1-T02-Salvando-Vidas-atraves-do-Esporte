@@ -10,4 +10,3 @@ global_options:
   dart_mappable_builder:
     options:
       caseStyle: snakeCase
-      ignoreNull: true

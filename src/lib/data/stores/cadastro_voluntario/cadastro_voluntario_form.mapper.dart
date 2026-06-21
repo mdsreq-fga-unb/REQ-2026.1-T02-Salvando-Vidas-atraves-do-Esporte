@@ -94,8 +94,6 @@ class CadastroVoluntarioStateMapper
     #faixa: _f$faixa,
     #dirty: _f$dirty,
   };
-  @override
-  final bool ignoreNull = true;
 
   static CadastroVoluntarioState _instantiate(DecodingData data) {
     return CadastroVoluntarioState(

@@ -168,8 +168,6 @@ class TurmaMapper extends ClassMapperBase<Turma> {
     #eDomingo: _f$eDomingo,
     #qtdAlunos: _f$qtdAlunos,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Turma _instantiate(DecodingData data) {
     return Turma(
