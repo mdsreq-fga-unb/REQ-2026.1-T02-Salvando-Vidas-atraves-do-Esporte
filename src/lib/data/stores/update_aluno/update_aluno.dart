@@ -191,11 +191,11 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     }
 
     if (alunoOriginal.tipoSanguineo != aluno.tipoSanguineo) {
-      diff['tipo_sanguineo'] = aluno.tipoSanguineo;
+      diff['tipo_sanguineo'] = aluno.tipoSanguineo.name;
     }
 
     if (alunoOriginal.faixa != aluno.faixa) {
-      diff['faixa'] = aluno.faixa;
+      diff['faixa'] = aluno.faixa.name;
     }
 
     if (alunoOriginal.grau != aluno.grau) {
