@@ -50,62 +50,62 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   });
 
   String? get nomeError {
-    if (!dirty && nome.isEmpty) return null;
+    if (nome == alunoOriginal.nome) return null;
     return nome.isNotEmpty ? null : 'Não pode estar em branco';
   }
 
   String? get nomeResponsavelError {
-    if (!dirty && nomeResponsavel.isEmpty) return null;
+    if (nomeResponsavel == responsavelOriginal?.nome) return null;
     return nomeResponsavel.isNotEmpty ? null : 'Não pode estar em branco';
   }
 
   String? get cpfError {
-    if (!dirty && cpf.isEmpty) return null;
+    if (cpf == alunoOriginal.cpf) return null;
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
   String? get cpfResponsavelError {
-    if (!dirty && cpfResponsavel.isEmpty) return null;
+    if (cpfResponsavel == responsavelOriginal?.cpf) return null;
     return eCPF(cpfResponsavel) ? null : 'Não é um CPF válido';
   }
 
   String? get contatoError {
-    if (!dirty && contato.isEmpty) return null;
+    if (contato == alunoOriginal.contato) return null;
     return eTelefone(contato) ? null : 'Não é um telefone válido';
   }
 
   String? get contatoEmergenciaError {
-    if (!dirty && contatoEmergencia.isEmpty) return null;
+    if (contatoEmergencia == alunoOriginal.contatoEmergencia) return null;
     return eTelefone(contatoEmergencia) ? null : 'Não é um telefone válido';
   }
 
   String? get contatoResponsavelError {
-    if (!dirty && contatoResponsavel.isEmpty) return null;
+    if (contatoResponsavel == responsavelOriginal?.contato) return null;
     return eTelefone(contatoResponsavel) ? null : 'Não é um telefone válido';
   }
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email == alunoOriginal.email) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get emailResponsavelError {
-    if (!dirty && emailResponsavel.isEmpty) return null;
+    if (emailResponsavel == responsavelOriginal?.email) return null;
     return eEmail(emailResponsavel) ? null : 'Não é um email válido';
   }
 
   String? get nascimentoError {
-    if (!dirty && nascimento == null) return null;
+    if (!dirty) return null;
     return nascimento != null ? null : 'Não pode estar em branco';
   }
 
   String? get tipoSanguineoError {
-    if (!dirty && tipoSanguineo == null) return null;
+    if (!dirty) return null;
     return tipoSanguineo != null ? null : 'Não pode estar em branco';
   }
 
   String? get faixaError {
-    if (!dirty && faixa == null) return null;
+    if (!dirty) return null;
     return faixa != null ? null : 'Não pode estar em branco';
   }
 
@@ -172,6 +172,8 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
         novo.remove(key);
       }
     }
+
+    novo.remove('id');
 
     return novo;
   }

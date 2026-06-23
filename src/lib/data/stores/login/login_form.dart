@@ -11,12 +11,12 @@ class LoginFormState {
   LoginFormState({this.email = '', this.senha = '', this.dirty = false});
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (!dirty || email.isEmpty) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get senhaError {
-    if (!dirty && senha.isEmpty) return null;
+    if (!dirty || senha.isEmpty) return null;
     return senha.isNotEmpty ? null : 'Não pode estar em branco';
   }
 

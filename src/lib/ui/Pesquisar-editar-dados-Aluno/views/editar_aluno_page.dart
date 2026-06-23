@@ -26,7 +26,10 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
   final _formKey = GlobalKey<FormState>();
 
   late final MaskTextInputFormatter formatCPF;
+  late final MaskTextInputFormatter formatCPFResponsavel;
   late final MaskTextInputFormatter formatTelefone;
+  late final MaskTextInputFormatter formatTelefoneEmergencia;
+  late final MaskTextInputFormatter formatTelefoneResponsavel;
   late final MaskTextInputFormatter formatData;
 
   // Controlador específico para a data (para funcionar com digitação e calendário)
@@ -41,11 +44,11 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
   void initState() {
     super.initState();
     formatCPF = maskCPF();
+    formatCPFResponsavel = maskCPF();
     formatTelefone = maskTelefone();
-    formatData = MaskTextInputFormatter(
-      mask: '##/##/####',
-      filter: {"#": RegExp(r'[0-9]')},
-    );
+    formatTelefoneEmergencia = maskTelefone();
+    formatTelefoneResponsavel = maskTelefone();
+    formatData = maskData();
 
     // Preenche a data inicial do aluno
     final data = widget.aluno.nascimento;
@@ -84,19 +87,27 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         title: const Text(
           'Deseja salvar as\nalterações?',
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.deepNavy),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColors.deepNavy,
+          ),
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: AppColors.error)),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: AppColors.error),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.deepNavy,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             onPressed: () async {
               Aluno aluno = state.aluno;
@@ -121,7 +132,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                 if (!mounted) return;
                 Navigator.pop(ctx);
                 Navigator.pop(context); // Fecha a tela de edição
-                
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Aluno atualizado com sucesso!'),
@@ -143,12 +154,15 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
   @override
   Widget build(BuildContext context) {
     state = ref.watch(updateAlunoProvider(widget.aluno, widget.responsavel));
-    notifier = ref.read(updateAlunoProvider(widget.aluno, widget.responsavel).notifier);
+    notifier = ref.read(
+      updateAlunoProvider(widget.aluno, widget.responsavel).notifier,
+    );
     service = ref.read(alunoServiceProvider);
     logger = ref.read(loggerProvider);
 
     // Condição para mostrar os dados do responsável
-    final mostrarResponsavel = state.idade < 18 || widget.aluno.idResponsavel != null;
+    final mostrarResponsavel =
+        state.idade < 18 || widget.aluno.idResponsavel != null;
 
     return Scaffold(
       backgroundColor: AppColors.platinum,
@@ -161,7 +175,11 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             FocusManager.instance.primaryFocus?.unfocus();
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back, color: AppColors.deepNavy, size: 22),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.deepNavy,
+            size: 22,
+          ),
           label: const Text(
             'Voltar',
             style: TextStyle(
@@ -217,17 +235,41 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _buildSectionTitle('Dados Pessoais'),
-                          _buildTextField('Nome:*', notifier.updateNome, state.nome, state.nomeError),
-                          _buildTextField('CPF:*', notifier.updateCPF, state.cpf, state.cpfError, formatter: formatCPF),
-                          _buildTextField('Telefone:*', notifier.updateContato, state.contato, state.contatoError, formatter: formatTelefone),
-                          
+                          _buildTextField(
+                            'Nome:*',
+                            notifier.updateNome,
+                            state.nome,
+                            state.nomeError,
+                          ),
+                          _buildTextField(
+                            'CPF:*',
+                            (_) =>
+                                notifier.updateCPF(formatCPF.getUnmaskedText()),
+                            formatCPF.maskText(state.cpf),
+                            state.cpfError,
+                            formatter: formatCPF,
+                          ),
+                          _buildTextField(
+                            'Telefone:*',
+                            (_) => notifier.updateContato(
+                              formatTelefone.getUnmaskedText(),
+                            ),
+                            formatTelefone.maskText(state.contato),
+                            state.contatoError,
+                            formatter: formatTelefone,
+                          ),
+
                           // Novo Campo: Contato de Emergência
                           _buildTextField(
-                            'Contato de Emergência:*', 
-                            (_) => notifier.updateContatoEmergencia(formatTelefone.getUnmaskedText()),
-                            state.contatoEmergencia, 
-                            state.contatoEmergenciaError, 
-                            formatter: formatTelefone
+                            'Contato de Emergência:*',
+                            (_) => notifier.updateContatoEmergencia(
+                              formatTelefoneEmergencia.getUnmaskedText(),
+                            ),
+                            formatTelefoneEmergencia.maskText(
+                              state.contatoEmergencia,
+                            ),
+                            state.contatoEmergenciaError,
+                            formatter: formatTelefoneEmergencia,
                           ),
 
                           _buildDateField(),
@@ -235,9 +277,34 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                           if (mostrarResponsavel) ...[
                             const SizedBox(height: 16),
                             _buildSectionTitle('Dados do Responsável'),
-                            _buildTextField('Nome do Responsável:*', notifier.updateNomeResponsavel, state.nomeResponsavel, state.nomeResponsavelError),
-                            _buildTextField('CPF do Responsável:*', notifier.updateCPFResponsavel, state.cpfResponsavel, state.cpfResponsavelError, formatter: formatCPF),
-                            _buildTextField('Telefone do Responsável:*', notifier.updateContatoResponsavel, state.contatoResponsavel, state.contatoResponsavelError, formatter: formatTelefone),
+                            _buildTextField(
+                              'Nome do Responsável:*',
+                              notifier.updateNomeResponsavel,
+                              state.nomeResponsavel,
+                              state.nomeResponsavelError,
+                            ),
+                            _buildTextField(
+                              'CPF do Responsável:*',
+                              (_) => notifier.updateCPFResponsavel(
+                                formatCPFResponsavel.getUnmaskedText(),
+                              ),
+                              formatCPFResponsavel.maskText(
+                                state.cpfResponsavel,
+                              ),
+                              state.cpfResponsavelError,
+                              formatter: formatCPFResponsavel,
+                            ),
+                            _buildTextField(
+                              'Telefone do Responsável:*',
+                              (_) => notifier.updateContatoResponsavel(
+                                formatTelefoneResponsavel.getUnmaskedText(),
+                              ),
+                              formatTelefoneResponsavel.maskText(
+                                state.contatoResponsavel,
+                              ),
+                              state.contatoResponsavelError,
+                              formatter: formatTelefoneResponsavel,
+                            ),
                           ],
 
                           const SizedBox(height: 16),
@@ -248,7 +315,8 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                             items: TipoSanguineo.values,
                             getName: (TipoSanguineo t) => t.nomeVisivel,
                             onChanged: (value) {
-                              if (value != null) notifier.updateTipoSanguineo(value);
+                              if (value != null)
+                                notifier.updateTipoSanguineo(value);
                             },
                           ),
                           _buildDropdownEnum<Faixa>(
@@ -260,15 +328,22 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                               if (value != null) notifier.updateFaixa(value);
                             },
                           ),
-                          _buildTextField('ID da ficha:*', notifier.updateIdFicha, state.idFicha, state.idFichaError),
-                          const SizedBox(height: 20), // Respiro no final do scroll
+                          _buildTextField(
+                            'ID da ficha:*',
+                            notifier.updateIdFicha,
+                            state.idFicha,
+                            state.idFichaError,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ), // Respiro no final do scroll
                         ],
                       ),
                     ),
                   ),
 
                   const SizedBox(height: 16),
-                  
+
                   // Botão de Salvar Único
                   SizedBox(
                     width: double.infinity,
@@ -277,10 +352,18 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.deepNavy,
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       onPressed: _salvarAlteracoes,
-                      child: const Text('Salvar Alterações', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        'Salvar Alterações',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -315,7 +398,11 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         children: [
           const Text(
             'Aniversário:*',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.deepNavy),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              color: AppColors.deepNavy,
+            ),
           ),
           const SizedBox(height: 4),
           TextFormField(
@@ -327,10 +414,19 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
               errorText: state.nascimentoError,
               filled: true,
               fillColor: AppColors.platinum,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
               suffixIcon: IconButton(
-                icon: const Icon(Icons.calendar_today, color: AppColors.deepNavy),
+                icon: const Icon(
+                  Icons.calendar_today,
+                  color: AppColors.deepNavy,
+                ),
                 onPressed: () async {
                   FocusManager.instance.primaryFocus?.unfocus();
                   DateTime? pickedDate = await showDatePicker(
@@ -353,7 +449,11 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
               if (value.length == 10) {
                 try {
                   final partes = value.split('/');
-                  final data = DateTime(int.parse(partes[2]), int.parse(partes[1]), int.parse(partes[0]));
+                  final data = DateTime(
+                    int.parse(partes[2]),
+                    int.parse(partes[1]),
+                    int.parse(partes[0]),
+                  );
                   notifier.updateNascimento(data);
                 } catch (_) {}
               }
@@ -378,20 +478,32 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         children: [
           Text(
             label,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.deepNavy),
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              color: AppColors.deepNavy,
+            ),
           ),
           const SizedBox(height: 4),
           TextFormField(
             initialValue: initialValue,
             onChanged: update,
             inputFormatters: formatter != null ? [formatter] : null,
-            keyboardType: formatter != null ? TextInputType.number : TextInputType.text,
+            keyboardType: formatter != null
+                ? TextInputType.number
+                : TextInputType.text,
             decoration: InputDecoration(
               errorText: error,
               filled: true,
               fillColor: AppColors.platinum, // Padronizado
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
             ),
           ),
         ],
@@ -413,7 +525,11 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         children: [
           Text(
             label,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.deepNavy),
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              color: AppColors.deepNavy,
+            ),
           ),
           const SizedBox(height: 4),
           DropdownButtonFormField<T>(
@@ -422,10 +538,18 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.platinum, // Padronizado
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
             ),
-            items: items.map((e) => DropdownMenuItem(value: e, child: Text(getName(e)))).toList(),
+            items: items
+                .map((e) => DropdownMenuItem(value: e, child: Text(getName(e))))
+                .toList(),
             onChanged: onChanged,
           ),
         ],

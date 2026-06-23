@@ -31,9 +31,12 @@ class AlunoService {
 
   Future<Responsavel> cadastrarResponsavel(Responsavel responsavel) {
     return runSupabaseCall(() async {
+      final map = responsavel.toMap();
+      map.remove('id');
+
       final data = await _supabase
           .from('responsaveis')
-          .upsert(responsavel.toMap(), onConflict: 'cpf')
+          .upsert(map, onConflict: 'cpf')
           .select();
       final res = Responsavel.fromMap(data.first);
 
