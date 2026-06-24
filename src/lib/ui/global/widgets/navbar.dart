@@ -19,7 +19,9 @@ class NavBar extends ConsumerWidget {
       currentIndex = 1;
     } else if (location.startsWith(Routes.turma)) {
       currentIndex = 2;
-    } else if (location.startsWith(Routes.inventario)) {
+    } else if (location.startsWith(Routes.inventario) || 
+               location.startsWith(Routes.doacoesPerdas) || 
+               location.startsWith(Routes.emprestimoDevolucao)) {
       currentIndex = 3;
     } else if (location.startsWith(Routes.configuracao)) {
       currentIndex = 4;
