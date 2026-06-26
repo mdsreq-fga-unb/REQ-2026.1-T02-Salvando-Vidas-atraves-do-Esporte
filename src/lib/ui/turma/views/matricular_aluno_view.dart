@@ -3,7 +3,6 @@ import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
 import 'package:salvando_vidas/data/stores/pesquisa_aluno/pesquisa_aluno_store.dart';
 import 'package:salvando_vidas/data/stores/presenca/presenca_store.dart';
 import 'package:salvando_vidas/domain/turma/turma.dart';
-import 'package:salvando_vidas/ui/turma/turma_imports.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class MatricularAlunoView extends ConsumerStatefulWidget {

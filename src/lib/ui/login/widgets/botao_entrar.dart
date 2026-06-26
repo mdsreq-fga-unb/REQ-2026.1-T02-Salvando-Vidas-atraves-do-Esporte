@@ -1,7 +1,7 @@
 import 'package:salvando_vidas/data/services/global/global_service.dart';
 import 'package:salvando_vidas/data/stores/login/login_controller.dart';
 import 'package:salvando_vidas/main_imports.dart';
-import '../login_imports.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class BotaoEntrar extends ConsumerWidget {
   final GlobalKey<FormState> formKey; // Exigimos a chave
@@ -25,25 +25,23 @@ class BotaoEntrar extends ConsumerWidget {
 
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 50,
       child: ElevatedButton(
-        // MÁGICA 3: Se não estiver carregando, o botão fica SEMPRE ativo!
         onPressed: loginState.isLoading
             ? null
             : () {
-                // MÁGICA 4: Ao clicar, ele grita para os TextFields: "Tem erro aí?!"
                 if (formKey.currentState?.validate() ?? false) {
-                  // Se não tem erro visual, manda pro backend
                   ref.read(loginControllerProvider.notifier).submitLogin();
                 }
               },
         style: ElevatedButton.styleFrom(
-          backgroundColor: LoginColors.primaryBlue,
+          backgroundColor: AppColors.cyanPrimary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: LoginTextStyles.buttonText,
+          elevation: 4,
+          shadowColor: Colors.black45,
         ),
         child: loginState.isLoading
             ? const SizedBox(
@@ -54,7 +52,14 @@ class BotaoEntrar extends ConsumerWidget {
                   strokeWidth: 2,
                 ),
               )
-            : const Text('Entrar'),
+            : const Text(
+                'Entrar',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
+              ),
       ),
     );
   }

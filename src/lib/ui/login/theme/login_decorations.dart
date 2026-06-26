@@ -3,22 +3,17 @@ import 'package:salvando_vidas/ui/login/theme/login_colors.dart';
 
 class LoginDecorations {
   static const BoxDecoration pageBackground = BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [LoginColors.pageBgStart, LoginColors.pageBgEnd],
-    ),
+    color: Color(0xFFCAD8DF), // Cor de fundo azulada conforme a imagem
   );
 
   static final BoxDecoration formContainer = BoxDecoration(
-    color: LoginColors.darkBlueBg,
+    color: Colors.white,
     borderRadius: BorderRadius.circular(16),
-    border: Border.all(color: LoginColors.borderLightBlue),
     boxShadow: const [
       BoxShadow(
-        color: LoginColors.shadowDark,
-        blurRadius: 22,
-        offset: Offset(0, 10),
+        color: Colors.black12,
+        blurRadius: 12,
+        offset: Offset(0, 8),
       ),
     ],
   );
@@ -27,9 +22,9 @@ class LoginDecorations {
     borderRadius: BorderRadius.circular(34),
     boxShadow: const [
       BoxShadow(
-        color: LoginColors.shadowMedium,
-        blurRadius: 16,
-        offset: Offset(0, 8),
+        color: Colors.black12,
+        blurRadius: 4,
+        offset: Offset(0, 2),
       ),
     ],
   );
@@ -44,22 +39,22 @@ class LoginDecorations {
   );
 
   static InputDecoration baseInputDecoration = InputDecoration(
-    hintStyle: const TextStyle(color: LoginColors.hintText, fontSize: 13),
+    hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
     filled: true,
-    fillColor: LoginColors.inputFill,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
-    prefixIconConstraints: const BoxConstraints(minWidth: 54, minHeight: 56),
+    fillColor: const Color(0xFFEBEBEB), // Cor cinza claro conforme a imagem
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+    prefixIconConstraints: const BoxConstraints(minWidth: 54, minHeight: 48),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(34),
-      borderSide: BorderSide.none,
+      borderSide: const BorderSide(color: Colors.grey, width: 0.5),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(34),
-      borderSide: BorderSide.none,
+      borderSide: const BorderSide(color: Colors.grey, width: 0.5),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(34),
-      borderSide: const BorderSide(color: LoginColors.primaryBlue, width: 1.5),
+      borderSide: const BorderSide(color: LoginColors.primaryCyan, width: 1.5),
     ),
   );
 }

@@ -26,12 +26,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    BannerLogo(),
-                    const SizedBox(height: 28),
-                    // Passamos a chave para o formulário
+                    const BannerLogo(),
+                    const SizedBox(height: 40),
                     FormularioLogin(formKey: _formKey),
-                    const SizedBox(height: 18),
-                    // Passamos a mesma chave para o botão
+                    const SizedBox(height: 24),
                     BotaoEntrar(formKey: _formKey),
                   ],
                 ),

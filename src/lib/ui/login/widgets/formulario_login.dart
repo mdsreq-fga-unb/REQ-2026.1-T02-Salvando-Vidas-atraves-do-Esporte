@@ -22,17 +22,38 @@ class FormularioLogin extends StatelessWidget {
             const SizedBox(
               width: double.infinity,
               child: Center(
-                child: Text('Login', style: LoginTextStyles.formTitle),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 28),
-            const Text('Email', style: LoginTextStyles.formLabel),
-            const SizedBox(height: 6),
-            EmailTextField(),
-            const SizedBox(height: 18),
-            const Text('Senha', style: LoginTextStyles.formLabel),
-            const SizedBox(height: 6),
-            SenhaTextField(),
+            const SizedBox(height: 24),
+            const Text(
+              'E-mail:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const EmailTextField(),
+            const SizedBox(height: 24),
+            const Text(
+              'Senha:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const SenhaTextField(),
             const SizedBox(height: 10),
           ],
         ),
