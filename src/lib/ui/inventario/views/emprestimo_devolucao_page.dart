@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:salvando_vidas/data/services/global/global_service.dart';
+import 'package:salvando_vidas/data/services/kimono_service/kimono_service.dart';
+import 'package:salvando_vidas/data/stores/gestao_emprestimos/gestao_emprestimos_store.dart';
+import 'package:salvando_vidas/data/stores/gestao_kimonos/gestao_kimonos_store.dart';
+import 'package:salvando_vidas/data/supabase_call.dart';
+import 'package:salvando_vidas/domain/aluno/aluno.dart';
+import 'package:salvando_vidas/domain/kimono/kimono.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
 import 'package:go_router/go_router.dart';
+import 'package:collection/collection.dart';
 
 class EmprestimoDevolucaoPage extends ConsumerStatefulWidget {
   const EmprestimoDevolucaoPage({super.key});
 
   @override
-  ConsumerState<EmprestimoDevolucaoPage> createState() => _EmprestimoDevolucaoPageState();
+  ConsumerState<EmprestimoDevolucaoPage> createState() =>
+      _EmprestimoDevolucaoPageState();
 }
 
-class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPage> {
+class _EmprestimoDevolucaoPageState
+    extends ConsumerState<EmprestimoDevolucaoPage> {
   // Mock de dados
   final List<String> alunos = [
     'Pedro Ramos Sousa Reis',
@@ -32,7 +42,7 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
   String searchQuery = '';
   String? alunoSelecionado;
   Map<String, String>? kimonoSelecionado;
-  
+
   String? filtroTamanho;
   String? filtroCor;
 
@@ -73,6 +83,11 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
 
   @override
   Widget build(BuildContext context) {
+    final estoque = ref.watch(gestaoKimonosStoreProvider);
+
+    final state = ref.watch(gestaoEmprestimosStoreProvider);
+    final store = ref.read(gestaoEmprestimosStoreProvider.notifier);
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -82,9 +97,7 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
             colors: [AppColors.platinum, AppColors.bgGradientEnd],
           ),
         ),
-        child: SafeArea(
-          child: _buildCurrentView(),
-        ),
+        child: SafeArea(child: _buildCurrentView()),
       ),
     );
   }
@@ -117,7 +130,8 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Centraliza verticalmente
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Centraliza verticalmente
               children: [
                 _buildMenuButton(
                   title: 'Emprestar Kimono',
@@ -138,20 +152,30 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
     );
   }
 
-  Widget _buildMenuButton({required String title, required Color color, required VoidCallback onTap}) {
+  Widget _buildMenuButton({
+    required String title,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
     return SizedBox(
       width: double.infinity,
       height: 80,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           elevation: 4,
         ),
         onPressed: onTap,
         child: Text(
           title,
-          style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
@@ -159,149 +183,280 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
 
   // --- VIEW: SELEÇÃO DE ALUNO ---
   Widget _buildSelecaoAlunoView({required bool isEmprestar}) {
-    final filteredAlunos = alunos.where((a) => a.toLowerCase().contains(searchQuery.toLowerCase())).toList();
+    final filteredAlunos = alunos
+        .where((a) => a.toLowerCase().contains(searchQuery.toLowerCase()))
+        .toList();
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildBackButton(onPressed: () => setState(() => viewState = 'escolha')),
-          const SizedBox(height: 16),
-          Text(
-            isEmprestar ? 'Emprestar Kimono para:' : 'Pegar kimono de:',
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Buscar aluno...',
-              prefixIcon: const Icon(Icons.search),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-            ),
-            onChanged: (val) => setState(() => searchQuery = val),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+    return Consumer(
+      builder: (context, ref, child) {
+        final state = ref.watch(gestaoEmprestimosStoreProvider);
+        final store = ref.read(gestaoEmprestimosStoreProvider.notifier);
+
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildBackButton(
+                onPressed: () => setState(() => viewState = 'escolha'),
               ),
-              child: ListView.separated(
-                padding: const EdgeInsets.all(8),
-                itemCount: filteredAlunos.length,
-                separatorBuilder: (_, __) => const Divider(),
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: CircleAvatar(backgroundColor: Colors.grey.shade300),
-                    title: Text(filteredAlunos[index], style: const TextStyle(fontWeight: FontWeight.w500)),
-                    onTap: () {
-                      alunoSelecionado = filteredAlunos[index];
+              const SizedBox(height: 16),
+              Text(
+                isEmprestar ? 'Emprestar Kimono para:' : 'Pegar kimono de:',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Buscar aluno...',
+                  prefixIcon: const Icon(Icons.search),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                onChanged: (val) => store.updateFiltroAluno(val),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: state.when(
+                    data: (data) {
+                      final alunosEmprestimos = data.emprestimos.map((e) {
+                        if (e.dataDevolucao == null) return e.alunoId;
+                      }).toList();
+                      late final List<Aluno> alunos;
                       if (isEmprestar) {
-                        _showPopUpSelecaoKimono();
+                        alunos = data.alunosFiltrados
+                            .where((a) => !alunosEmprestimos.contains(a.id))
+                            .toList();
                       } else {
-                        _showPopUpConfirmacaoRecuperar();
+                        alunos = data.alunosFiltrados
+                            .where((a) => alunosEmprestimos.contains(a.id))
+                            .toList();
                       }
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  // --- POP-UPS: EMPRESTAR ---
-  void _showPopUpSelecaoKimono() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setPopupState) {
-            return AlertDialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              title: const Text('Escolha um kimono para emprestar:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              content: SizedBox(
-                width: double.maxFinite,
-                height: 400,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            hint: const Text('Tamanho'),
-                            value: filtroTamanho,
-                            items: tamanhos.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
-                            onChanged: (val) => setPopupState(() => filtroTamanho = val),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            hint: const Text('Cor'),
-                            value: filtroCor,
-                            items: cores.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
-                            onChanged: (val) => setPopupState(() => filtroCor = val),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: kimonosDisponiveis.length,
+                      return ListView.separated(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: alunos.length,
+                        separatorBuilder: (_, _) => const Divider(),
                         itemBuilder: (context, index) {
-                          final k = kimonosDisponiveis[index];
-                          if (filtroTamanho != null && k['tamanho'] != filtroTamanho) return const SizedBox.shrink();
-                          if (filtroCor != null && k['cor'] != filtroCor) return const SizedBox.shrink();
-
-                          final isSelected = kimonoSelecionado == k;
                           return ListTile(
-                            leading: const Icon(Icons.checkroom, color: AppColors.royalAzure),
-                            title: Text('${k['tamanho']}, ${k['cor']}'),
-                            trailing: Radio<Map<String, String>>(
-                              value: k,
-                              groupValue: kimonoSelecionado,
-                              onChanged: (val) => setPopupState(() => kimonoSelecionado = val),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.grey.shade300,
                             ),
-                            onTap: () => setPopupState(() => kimonoSelecionado = k),
+                            title: Text(
+                              alunos[index].nome,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            onTap: () {
+                              final aluno = alunos[index];
+                              final emprestimo = data.emprestimos
+                                  .firstWhereOrNull(
+                                    (e) =>
+                                        e.dataDevolucao == null &&
+                                        e.alunoId == aluno.id,
+                                  );
+                              if (isEmprestar) {
+                                _showPopUpSelecaoKimono(aluno);
+                              } else {
+                                _showPopUpConfirmacaoRecuperar(
+                                  aluno,
+                                  emprestimo!,
+                                );
+                              }
+                            },
                           );
                         },
-                      ),
-                    ),
-                  ],
+                      );
+                    },
+                    error: (error, stack) {
+                      if (error is AppApiException) {
+                        ref
+                            .read(loggerProvider)
+                            .e(error.message, error: error.error);
+                      }
+                      return const Center(
+                        child: Text(
+                          'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
+                        ),
+                      );
+                    },
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                  ),
                 ),
               ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancelar', style: TextStyle(color: Colors.grey)),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.cyanPrimary),
-                  onPressed: kimonoSelecionado == null ? null : () {
-                    Navigator.pop(context);
-                    _showPopUpConfirmacaoEmprestimo();
-                  },
-                  child: const Text('Avançar', style: TextStyle(color: Colors.white)),
-                ),
-              ],
-            );
-          }
+            ],
+          ),
         );
       },
     );
   }
 
-  void _showPopUpConfirmacaoEmprestimo() {
+  // --- POP-UPS: EMPRESTAR ---
+  void _showPopUpSelecaoKimono(Aluno aluno) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Consumer(
+          builder: (context, dialogRef, child) {
+            final state = dialogRef.watch(gestaoEmprestimosStoreProvider);
+            final store = dialogRef.read(
+              gestaoEmprestimosStoreProvider.notifier,
+            );
+            return StatefulBuilder(
+              builder: (context, setPopupState) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  title: const Text(
+                    'Escolha um kimono para emprestar:',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  content: SizedBox(
+                    width: double.maxFinite,
+                    height: 400,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DropdownButton<TamanhoKimono?>(
+                                isExpanded: true,
+                                hint: const Text('Tamanho'),
+                                value: state.value!.tamanho,
+                                items: [
+                                  const DropdownMenuItem<TamanhoKimono?>(
+                                    value: null,
+                                    child: Text('Qualquer tamanho'),
+                                  ),
+                                  ...TamanhoKimono.values.map(
+                                    (t) => DropdownMenuItem(
+                                      value: t,
+                                      child: Text(t.nomeVisivel),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (v) => store.updateFiltroTamanho(v),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: DropdownButton<CorKimono?>(
+                                isExpanded: true,
+                                hint: const Text('Cor'),
+                                value: state.value!.cor,
+                                items: [
+                                  const DropdownMenuItem<CorKimono?>(
+                                    value: null,
+                                    child: Text('Qualquer cor'),
+                                  ),
+                                  ...CorKimono.values.map(
+                                    (c) => DropdownMenuItem(
+                                      value: c,
+                                      child: Text(c.nomeVisivel),
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (v) => store.updateFiltroCor(v),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Expanded(
+                          child: state.when(
+                            data: (data) => ListView.builder(
+                              itemCount: data.estoqueFiltrado.length,
+                              itemBuilder: (context, index) {
+                                final k = data.estoqueFiltrado[index];
+
+                                return ListTile(
+                                  leading: const Icon(
+                                    Icons.checkroom,
+                                    color: AppColors.royalAzure,
+                                  ),
+                                  title: Text(
+                                    '${k.tamanho.nomeVisivel}, ${k.cor.nomeVisivel}',
+                                  ),
+                                  trailing: RadioGroup<Estoque>(
+                                    groupValue: state.value!.kimono,
+                                    child: Radio<Estoque>(value: k),
+                                    onChanged: (v) => store.updateKimono(v!),
+                                  ),
+                                );
+                              },
+                            ),
+                            error: (error, stack) {
+                              if (error is AppApiException) {
+                                ref
+                                    .read(loggerProvider)
+                                    .e(error.message, error: error.error);
+                              }
+                              return const Center(
+                                child: Text(
+                                  'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
+                                ),
+                              );
+                            },
+                            loading: () => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'Cancelar',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.cyanPrimary,
+                      ),
+                      onPressed: state.value?.kimono == null
+                          ? null
+                          : () {
+                              Navigator.pop(context);
+                              _showPopUpConfirmacaoEmprestimo(
+                                aluno,
+                                state.value!.kimono!,
+                              );
+                            },
+                      child: const Text(
+                        'Avançar',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _showPopUpConfirmacaoEmprestimo(Aluno aluno, Estoque kimono) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -311,7 +466,7 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
           children: [
             const SizedBox(height: 16),
             Text(
-              'Deseja emprestar este kimono para o aluno $alunoSelecionado?',
+              'Deseja emprestar este kimono para o aluno ${aluno.nome}?',
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -322,7 +477,7 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      _showPopUpSelecaoKimono();
+                      _showPopUpSelecaoKimono(aluno);
                     },
                     child: const Text('Cancelar'),
                   ),
@@ -330,23 +485,46 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.cyanPrimary),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      _showPopUpSucesso('O kimono foi emprestado com sucesso!');
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.cyanPrimary,
+                    ),
+                    onPressed: () async {
+                      try {
+                        final emprestimo = Emprestimo(
+                          alunoId: aluno.id!,
+                          cor: kimono.cor,
+                          tamanho: kimono.tamanho,
+                          data: DateTime.now(),
+                        );
+
+                        ref
+                            .read(kimonoServiceProvider)
+                            .cadastrarEmprestimo(emprestimo);
+                        ref.refresh(gestaoKimonosStoreProvider.future);
+                        ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        Navigator.pop(context);
+                        _showPopUpSucesso(
+                          'O kimono foi emprestado com sucesso!',
+                        );
+                      } on AppApiException catch (e) {
+                        ref.read(loggerProvider).e(e.message, error: e.error);
+                      }
                     },
-                    child: const Text('Confirmar', style: TextStyle(color: Colors.white)),
+                    child: const Text(
+                      'Confirmar',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  void _showPopUpConfirmacaoRecuperar() {
+  void _showPopUpConfirmacaoRecuperar(Aluno aluno, Emprestimo emprestimo) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -356,7 +534,7 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
           children: [
             const SizedBox(height: 16),
             Text(
-              'Deseja pegar o kimono de $alunoSelecionado?',
+              'Deseja pegar o kimono de ${aluno.nome}?',
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -372,16 +550,31 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.cyanPrimary),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.cyanPrimary,
+                    ),
                     onPressed: () {
-                      Navigator.pop(context);
-                      _showPopUpSucesso('O kimono foi recuperado com sucesso!');
+                      try {
+                        final service = ref.read(kimonoServiceProvider);
+                        service.retornarEmprestimo(emprestimo);
+                        Navigator.pop(context);
+                        _showPopUpSucesso(
+                          'O kimono foi recuperado com sucesso!',
+                        );
+                        ref.refresh(gestaoKimonosStoreProvider);
+                        ref.refresh(gestaoEmprestimosStoreProvider.future);
+                      } on AppApiException catch (e) {
+                        ref.read(loggerProvider).e(e.message, error: e.error);
+                      }
                     },
-                    child: const Text('Confirmar', style: TextStyle(color: Colors.white)),
+                    child: const Text(
+                      'Confirmar',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -404,14 +597,20 @@ class _EmprestimoDevolucaoPageState extends ConsumerState<EmprestimoDevolucaoPag
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.cyanPrimary, minimumSize: const Size(120, 40)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.cyanPrimary,
+                minimumSize: const Size(120, 40),
+              ),
               onPressed: () {
                 Navigator.pop(context);
                 _resetSelection();
                 setState(() => viewState = 'escolha');
               },
-              child: const Text('Fechar', style: TextStyle(color: Colors.white)),
-            )
+              child: const Text(
+                'Fechar',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),

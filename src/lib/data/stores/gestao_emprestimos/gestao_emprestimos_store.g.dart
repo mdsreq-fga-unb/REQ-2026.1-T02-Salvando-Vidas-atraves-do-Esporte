@@ -23,7 +23,7 @@ final class GestaoEmprestimosStoreProvider
         argument: null,
         retry: null,
         name: r'gestaoEmprestimosStoreProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -37,7 +37,7 @@ final class GestaoEmprestimosStoreProvider
 }
 
 String _$gestaoEmprestimosStoreHash() =>
-    r'1cfa56a7a275dafc5e6c9357f06a71341577c081';
+    r'648772c90dd7c73d2066e1fc9422c6de391ecaa6';
 
 abstract class _$GestaoEmprestimosStore
     extends $AsyncNotifier<GestaoEmprestimosState> {

@@ -76,4 +76,17 @@ class KimonoService {
       return res.map((data) => Estoque.fromMap(data)).toList();
     });
   }
+
+  Future<void> retornarEmprestimo(Emprestimo emprestimo) {
+    return runSupabaseCall(() async {
+      final hoje = DateTime.now();
+      final diaDevolucao =
+          "${hoje.year.toString().padLeft(4, '0')}-${hoje.month.toString().padLeft(2, '0')}-${hoje.day.toString().padLeft(2, '0')}";
+
+      await _supabase
+          .from('emprestimos')
+          .update({'data_devolucao': diaDevolucao})
+          .eq('id', emprestimo.id!);
+    });
+  }
 }

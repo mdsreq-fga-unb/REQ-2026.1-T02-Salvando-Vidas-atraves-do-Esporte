@@ -19,6 +19,8 @@ class GestaoEmprestimosStateMapper
       AlunoMapper.ensureInitialized();
       EmprestimoMapper.ensureInitialized();
       EstoqueMapper.ensureInitialized();
+      TamanhoKimonoMapper.ensureInitialized();
+      CorKimonoMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -48,6 +50,24 @@ class GestaoEmprestimosStateMapper
       v.estoqueFiltrado;
   static const Field<GestaoEmprestimosState, List<Estoque>> _f$estoqueFiltrado =
       Field('estoqueFiltrado', _$estoqueFiltrado, key: r'estoque_filtrado');
+  static TamanhoKimono? _$tamanho(GestaoEmprestimosState v) => v.tamanho;
+  static const Field<GestaoEmprestimosState, TamanhoKimono> _f$tamanho = Field(
+    'tamanho',
+    _$tamanho,
+    opt: true,
+  );
+  static CorKimono? _$cor(GestaoEmprestimosState v) => v.cor;
+  static const Field<GestaoEmprestimosState, CorKimono> _f$cor = Field(
+    'cor',
+    _$cor,
+    opt: true,
+  );
+  static Estoque? _$kimono(GestaoEmprestimosState v) => v.kimono;
+  static const Field<GestaoEmprestimosState, Estoque> _f$kimono = Field(
+    'kimono',
+    _$kimono,
+    opt: true,
+  );
 
   @override
   final MappableFields<GestaoEmprestimosState> fields = const {
@@ -56,6 +76,9 @@ class GestaoEmprestimosStateMapper
     #emprestimos: _f$emprestimos,
     #estoque: _f$estoque,
     #estoqueFiltrado: _f$estoqueFiltrado,
+    #tamanho: _f$tamanho,
+    #cor: _f$cor,
+    #kimono: _f$kimono,
   };
 
   static GestaoEmprestimosState _instantiate(DecodingData data) {
@@ -65,6 +88,9 @@ class GestaoEmprestimosStateMapper
       emprestimos: data.dec(_f$emprestimos),
       estoque: data.dec(_f$estoque),
       estoqueFiltrado: data.dec(_f$estoqueFiltrado),
+      tamanho: data.dec(_f$tamanho),
+      cor: data.dec(_f$cor),
+      kimono: data.dec(_f$kimono),
     );
   }
 
@@ -145,12 +171,16 @@ abstract class GestaoEmprestimosStateCopyWith<
   ListCopyWith<$R, Estoque, EstoqueCopyWith<$R, Estoque, Estoque>> get estoque;
   ListCopyWith<$R, Estoque, EstoqueCopyWith<$R, Estoque, Estoque>>
   get estoqueFiltrado;
+  EstoqueCopyWith<$R, Estoque, Estoque>? get kimono;
   $R call({
     List<Aluno>? alunos,
     List<Aluno>? alunosFiltrados,
     List<Emprestimo>? emprestimos,
     List<Estoque>? estoque,
     List<Estoque>? estoqueFiltrado,
+    TamanhoKimono? tamanho,
+    CorKimono? cor,
+    Estoque? kimono,
   });
   GestaoEmprestimosStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -202,12 +232,18 @@ class _GestaoEmprestimosStateCopyWithImpl<$R, $Out>
     (v) => call(estoqueFiltrado: v),
   );
   @override
+  EstoqueCopyWith<$R, Estoque, Estoque>? get kimono =>
+      $value.kimono?.copyWith.$chain((v) => call(kimono: v));
+  @override
   $R call({
     List<Aluno>? alunos,
     List<Aluno>? alunosFiltrados,
     List<Emprestimo>? emprestimos,
     List<Estoque>? estoque,
     List<Estoque>? estoqueFiltrado,
+    Object? tamanho = $none,
+    Object? cor = $none,
+    Object? kimono = $none,
   }) => $apply(
     FieldCopyWithData({
       if (alunos != null) #alunos: alunos,
@@ -215,6 +251,9 @@ class _GestaoEmprestimosStateCopyWithImpl<$R, $Out>
       if (emprestimos != null) #emprestimos: emprestimos,
       if (estoque != null) #estoque: estoque,
       if (estoqueFiltrado != null) #estoqueFiltrado: estoqueFiltrado,
+      if (tamanho != $none) #tamanho: tamanho,
+      if (cor != $none) #cor: cor,
+      if (kimono != $none) #kimono: kimono,
     }),
   );
   @override
@@ -224,6 +263,9 @@ class _GestaoEmprestimosStateCopyWithImpl<$R, $Out>
     emprestimos: data.get(#emprestimos, or: $value.emprestimos),
     estoque: data.get(#estoque, or: $value.estoque),
     estoqueFiltrado: data.get(#estoqueFiltrado, or: $value.estoqueFiltrado),
+    tamanho: data.get(#tamanho, or: $value.tamanho),
+    cor: data.get(#cor, or: $value.cor),
+    kimono: data.get(#kimono, or: $value.kimono),
   );
 
   @override

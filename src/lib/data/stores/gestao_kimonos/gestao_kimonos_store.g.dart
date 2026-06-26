@@ -36,7 +36,7 @@ final class GestaoKimonosStoreProvider
 }
 
 String _$gestaoKimonosStoreHash() =>
-    r'6f5b99bb506eb81b6c0afadc1ff5eedca76ca5bf';
+    r'cf3a986d5ddd34aebb42796d63597f66a8751ed3';
 
 abstract class _$GestaoKimonosStore extends $AsyncNotifier<GestaoKimonosState> {
   FutureOr<GestaoKimonosState> build();

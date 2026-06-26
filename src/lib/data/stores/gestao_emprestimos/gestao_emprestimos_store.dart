@@ -10,11 +10,14 @@ part 'gestao_emprestimos_store.mapper.dart';
 
 @MappableClass()
 class GestaoEmprestimosState with GestaoEmprestimosStateMappable {
-  List<Aluno> alunos;
-  List<Aluno> alunosFiltrados;
-  List<Emprestimo> emprestimos;
-  List<Estoque> estoque;
-  List<Estoque> estoqueFiltrado;
+  final List<Aluno> alunos;
+  final List<Aluno> alunosFiltrados;
+  final List<Emprestimo> emprestimos;
+  final List<Estoque> estoque;
+  final List<Estoque> estoqueFiltrado;
+  final TamanhoKimono? tamanho;
+  final CorKimono? cor;
+  final Estoque? kimono;
 
   GestaoEmprestimosState({
     required this.alunos,
@@ -22,10 +25,13 @@ class GestaoEmprestimosState with GestaoEmprestimosStateMappable {
     required this.emprestimos,
     required this.estoque,
     required this.estoqueFiltrado,
+    this.tamanho,
+    this.cor,
+    this.kimono,
   });
 }
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class GestaoEmprestimosStore extends _$GestaoEmprestimosStore {
   String _filtroAluno = '';
   CorKimono? _filtroCor;
@@ -62,11 +68,15 @@ class GestaoEmprestimosStore extends _$GestaoEmprestimosStore {
 
   void updateFiltroCor(CorKimono? cor) {
     _filtroCor = cor;
+    final data = state.value!;
+    state = AsyncValue.data(data.copyWith(cor: cor));
     _filtrarEstoque();
   }
 
   void updateFiltroTamanho(TamanhoKimono? tamanho) {
     _filtroTamanho = tamanho;
+    final data = state.value!;
+    state = AsyncValue.data(data.copyWith(tamanho: tamanho));
     _filtrarEstoque();
   }
 
@@ -86,5 +96,11 @@ class GestaoEmprestimosStore extends _$GestaoEmprestimosStore {
     }).toList();
 
     state = AsyncValue.data(data.copyWith(estoqueFiltrado: filtrado));
+  }
+
+  void updateKimono(Estoque kimono) {
+    print(kimono.tamanho.nomeVisivel);
+    final data = state.value!;
+    state = AsyncValue.data(data.copyWith(kimono: kimono));
   }
 }

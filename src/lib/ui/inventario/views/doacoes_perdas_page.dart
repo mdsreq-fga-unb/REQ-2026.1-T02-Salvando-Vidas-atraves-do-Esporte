@@ -17,39 +17,8 @@ class DoacoesPerdasPage extends ConsumerStatefulWidget {
 }
 
 class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
-  // Variáveis para o formulário de Doação
-  String? tamanhoDoacao;
-  String? corDoacao;
-  final TextEditingController _nomeDoadorController = TextEditingController();
-  final TextEditingController _quantidadeDoadaController =
-      TextEditingController();
-
-  final List<String> tamanhos = ['A0', 'A1', 'A2', 'A3', 'A4', 'A5'];
-  final List<String> cores = ['Branco', 'Azul', 'Preto', 'Rosa'];
   late RegistroKimonosState state;
   late RegistroKimonosStore store;
-
-  // Variáveis para o formulário de Perda
-  final List<String> kimonosParaPerda = [
-    'A3, Branco',
-    'A2, Azul',
-    'A4, Preto',
-    'A1, Rosa',
-    'A0, Branco',
-  ];
-  int? _kimonoSelecionadoIndex;
-  final TextEditingController _motivoPerdaController = TextEditingController();
-  final TextEditingController _quantidadePerdidaController =
-      TextEditingController();
-
-  @override
-  void dispose() {
-    _nomeDoadorController.dispose();
-    _quantidadeDoadaController.dispose();
-    _motivoPerdaController.dispose();
-    _quantidadePerdidaController.dispose();
-    super.dispose();
-  }
 
   // --- MÉTODOS DOS POP-UPS ---
 
@@ -129,12 +98,6 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  tamanhoDoacao = null;
-                  corDoacao = null;
-                  _nomeDoadorController.clear();
-                  _quantidadeDoadaController.clear();
-                });
                 Navigator.pop(context);
               },
               child: const Text('Fechar'),
@@ -222,11 +185,6 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {
-                  _kimonoSelecionadoIndex = null;
-                  _motivoPerdaController.clear();
-                  _quantidadePerdidaController.clear();
-                });
                 Navigator.pop(context);
               },
               child: const Text('Fechar'),
