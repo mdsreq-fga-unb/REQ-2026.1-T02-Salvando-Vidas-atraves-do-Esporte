@@ -89,8 +89,6 @@ class RegistroKimonosStateMapper extends ClassMapperBase<RegistroKimonosState> {
     #motivo: _f$motivo,
     #qtdPerdida: _f$qtdPerdida,
   };
-  @override
-  final bool ignoreNull = true;
 
   static RegistroKimonosState _instantiate(DecodingData data) {
     return RegistroKimonosState(

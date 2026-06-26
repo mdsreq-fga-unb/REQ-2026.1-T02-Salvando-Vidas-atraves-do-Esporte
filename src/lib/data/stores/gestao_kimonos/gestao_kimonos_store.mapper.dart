@@ -59,8 +59,6 @@ class GestaoKimonosStateMapper extends ClassMapperBase<GestaoKimonosState> {
     #emprestimos: _f$emprestimos,
     #alunos: _f$alunos,
   };
-  @override
-  final bool ignoreNull = true;
 
   static GestaoKimonosState _instantiate(DecodingData data) {
     return GestaoKimonosState(

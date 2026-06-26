@@ -168,8 +168,6 @@ class DoacaoMapper extends ClassMapperBase<Doacao> {
     #quantidade: _f$quantidade,
     #data: _f$data,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Doacao _instantiate(DecodingData data) {
     return Doacao(
@@ -322,8 +320,6 @@ class PerdaMapper extends ClassMapperBase<Perda> {
     #motivo: _f$motivo,
     #data: _f$data,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Perda _instantiate(DecodingData data) {
     return Perda(
@@ -488,8 +484,6 @@ class EmprestimoMapper extends ClassMapperBase<Emprestimo> {
     #data: _f$data,
     #dataDevolucao: _f$dataDevolucao,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Emprestimo _instantiate(DecodingData data) {
     return Emprestimo(
@@ -655,8 +649,6 @@ class EstoqueMapper extends ClassMapperBase<Estoque> {
     #tamanho: _f$tamanho,
     #quantidade: _f$quantidade,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Estoque _instantiate(DecodingData data) {
     return Estoque(
