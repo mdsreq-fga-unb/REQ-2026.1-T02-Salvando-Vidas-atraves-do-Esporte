@@ -1,5 +1,7 @@
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/data/stores/presenca/presenca_store.dart';
+import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
+import 'package:salvando_vidas/data/stores/pesquisa_aluno/pesquisa_aluno_store.dart';
 import 'package:salvando_vidas/domain/turma/turma.dart';
 import 'package:salvando_vidas/ui/turma/turma_imports.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
@@ -8,6 +10,76 @@ class TurmaDetail extends ConsumerWidget {
   final Turma turma;
 
   const TurmaDetail({super.key, required this.turma});
+
+  void _confirmarDesmatricula(BuildContext context, WidgetRef ref, String nomeAluno, int alunoId) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          'Deseja desmatricular o(a) aluno(a) $nomeAluno dessa turma?',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
+        actionsAlignment: MainAxisAlignment.spaceEvenly,
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 53, 188, 229),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            onPressed: () async {
+              Navigator.pop(ctx);
+              await _desmatricularAluno(context, ref, alunoId);
+            },
+            child: const Text('Confirmar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _desmatricularAluno(BuildContext context, WidgetRef ref, int alunoId) async {
+    try {
+      final alunoService = ref.read(alunoServiceProvider);
+      await alunoService.atualizaAluno(alunoId, {'id_turma': null});
+      
+      // Refresh stores
+      ref.invalidate(presencaStoreProvider(turma.id));
+      await ref.refresh(pesquisaAlunoProvider.future);
+      
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Aluno desmatriculado com sucesso!'),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao desmatricular: $e'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -91,13 +163,16 @@ class TurmaDetail extends ConsumerWidget {
               Expanded(
                 child: store.when(
                   data: (data) {
-                    return ListView.builder(
-                      itemCount: data.alunos.length,
-                      itemBuilder: (context, index) {
-                        final aluno = data.alunos[index];
-                        return AlunoTileWidget(nome: aluno.nome);
-                      },
-                    );
+	                    return ListView.builder(
+	                      itemCount: data.alunos.length,
+	                      itemBuilder: (context, index) {
+	                        final aluno = data.alunos[index];
+	                        return AlunoTileWidget(
+                            nome: aluno.nome,
+                            onRemover: () => _confirmarDesmatricula(context, ref, aluno.nome, aluno.id!),
+                          );
+	                      },
+	                    );
                   },
                   error: (error, stack) {
                     if (error is AppApiException) {

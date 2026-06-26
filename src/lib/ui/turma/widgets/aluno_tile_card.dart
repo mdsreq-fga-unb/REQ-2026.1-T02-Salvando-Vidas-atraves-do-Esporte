@@ -3,8 +3,9 @@ import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class AlunoTileWidget extends StatelessWidget {
   final String nome;
+  final VoidCallback? onRemover;
 
-  const AlunoTileWidget({super.key, required this.nome});
+  const AlunoTileWidget({super.key, required this.nome, this.onRemover});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,18 @@ class AlunoTileWidget extends StatelessWidget {
           color: AppColors.deepNavy, // Texto no Azul Principal
         ),
       ),
+      trailing: onRemover != null
+          ? TextButton(
+              onPressed: onRemover,
+              child: const Text(
+                'Remover',
+                style: TextStyle(
+                  color: AppColors.error,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          : null,
       shape: const Border(
         bottom: BorderSide(color: AppColors.divider, width: 1), // Linha divisória suave entre os alunos
       ),
