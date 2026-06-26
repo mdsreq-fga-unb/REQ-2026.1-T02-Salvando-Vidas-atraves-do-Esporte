@@ -110,6 +110,13 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
     opt: true,
     def: '',
   );
+  static int? _$idTurma(UpdateAlunoState v) => v.idTurma;
+  static const Field<UpdateAlunoState, int> _f$idTurma = Field(
+    'idTurma',
+    _$idTurma,
+    key: r'id_turma',
+    opt: true,
+  );
   static String _$nomeResponsavel(UpdateAlunoState v) => v.nomeResponsavel;
   static const Field<UpdateAlunoState, String> _f$nomeResponsavel = Field(
     'nomeResponsavel',
@@ -165,6 +172,7 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
     #faixa: _f$faixa,
     #grau: _f$grau,
     #idFicha: _f$idFicha,
+    #idTurma: _f$idTurma,
     #nomeResponsavel: _f$nomeResponsavel,
     #cpfResponsavel: _f$cpfResponsavel,
     #contatoResponsavel: _f$contatoResponsavel,
@@ -186,6 +194,7 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
       faixa: data.dec(_f$faixa),
       grau: data.dec(_f$grau),
       idFicha: data.dec(_f$idFicha),
+      idTurma: data.dec(_f$idTurma),
       nomeResponsavel: data.dec(_f$nomeResponsavel),
       cpfResponsavel: data.dec(_f$cpfResponsavel),
       contatoResponsavel: data.dec(_f$contatoResponsavel),
@@ -271,6 +280,7 @@ abstract class UpdateAlunoStateCopyWith<$R, $In extends UpdateAlunoState, $Out>
     Faixa? faixa,
     int? grau,
     String? idFicha,
+    int? idTurma,
     String? nomeResponsavel,
     String? cpfResponsavel,
     String? contatoResponsavel,
@@ -312,6 +322,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
     Object? faixa = $none,
     int? grau,
     String? idFicha,
+    Object? idTurma = $none,
     String? nomeResponsavel,
     String? cpfResponsavel,
     String? contatoResponsavel,
@@ -332,6 +343,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
       if (faixa != $none) #faixa: faixa,
       if (grau != null) #grau: grau,
       if (idFicha != null) #idFicha: idFicha,
+      if (idTurma != $none) #idTurma: idTurma,
       if (nomeResponsavel != null) #nomeResponsavel: nomeResponsavel,
       if (cpfResponsavel != null) #cpfResponsavel: cpfResponsavel,
       if (contatoResponsavel != null) #contatoResponsavel: contatoResponsavel,
@@ -359,6 +371,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
     faixa: data.get(#faixa, or: $value.faixa),
     grau: data.get(#grau, or: $value.grau),
     idFicha: data.get(#idFicha, or: $value.idFicha),
+    idTurma: data.get(#idTurma, or: $value.idTurma),
     nomeResponsavel: data.get(#nomeResponsavel, or: $value.nomeResponsavel),
     cpfResponsavel: data.get(#cpfResponsavel, or: $value.cpfResponsavel),
     contatoResponsavel: data.get(

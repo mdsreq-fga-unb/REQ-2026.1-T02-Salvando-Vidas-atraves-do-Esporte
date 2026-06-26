@@ -19,6 +19,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   final Faixa? faixa;
   final int grau;
   final String idFicha;
+  final int? idTurma;
   final bool dirty;
 
   final String nomeResponsavel;
@@ -42,6 +43,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     this.faixa,
     this.grau = 0,
     this.idFicha = '',
+    this.idTurma,
     this.nomeResponsavel = '',
     this.cpfResponsavel = '',
     this.contatoResponsavel = '',
@@ -161,6 +163,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     federado: false,
     dataEntrada: DateTime.now(),
     idFicha: int.tryParse(idFicha),
+    idTurma: idTurma,
   );
 
   Map<String, dynamic> diffAluno(Aluno aluno) {
@@ -187,29 +190,30 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   );
 }
 
-@riverpod
-class UpdateAluno extends _$UpdateAluno {
-  @override
-  UpdateAlunoState build(Aluno aluno, Responsavel? responsavel) {
-    return UpdateAlunoState(
-      alunoOriginal: aluno,
-      responsavelOriginal: responsavel,
-      nome: aluno.nome,
-      cpf: aluno.cpf,
-      contato: aluno.contato ?? '',
-      contatoEmergencia: aluno.contatoEmergencia ?? '',
-      email: aluno.email,
-      nascimento: aluno.nascimento,
-      tipoSanguineo: aluno.tipoSanguineo,
-      faixa: aluno.faixa,
-      grau: aluno.grau,
-      idFicha: '${aluno.idFicha ?? ""}',
-      nomeResponsavel: responsavel?.nome ?? '',
-      cpfResponsavel: responsavel?.cpf ?? '',
-      contatoResponsavel: responsavel?.contato ?? '',
-      emailResponsavel: responsavel?.email ?? '',
-    );
-  }
+  @riverpod
+  class UpdateAluno extends _$UpdateAluno {
+    @override
+    UpdateAlunoState build(Aluno aluno, Responsavel? responsavel) {
+      return UpdateAlunoState(
+        alunoOriginal: aluno,
+        responsavelOriginal: responsavel,
+        nome: aluno.nome,
+        cpf: aluno.cpf,
+        contato: aluno.contato ?? '',
+        contatoEmergencia: aluno.contatoEmergencia ?? '',
+        email: aluno.email,
+        nascimento: aluno.nascimento,
+        tipoSanguineo: aluno.tipoSanguineo,
+        faixa: aluno.faixa,
+        grau: aluno.grau,
+        idFicha: '${aluno.idFicha ?? ""}',
+        idTurma: aluno.idTurma,
+        nomeResponsavel: responsavel?.nome ?? '',
+        cpfResponsavel: responsavel?.cpf ?? '',
+        contatoResponsavel: responsavel?.contato ?? '',
+        emailResponsavel: responsavel?.email ?? '',
+      );
+    }
 
   void updateNome(String value) {
     state = state.copyWith(nome: value, dirty: true);
@@ -245,6 +249,10 @@ class UpdateAluno extends _$UpdateAluno {
 
   void updateIdFicha(String value) {
     state = state.copyWith(idFicha: value, dirty: true);
+  }
+
+  void updateIdTurma(int? value) {
+    state = state.copyWith(idTurma: value, dirty: true);
   }
 
   void updateNomeResponsavel(String value) {

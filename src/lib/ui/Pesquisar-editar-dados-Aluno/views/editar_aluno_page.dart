@@ -1,9 +1,11 @@
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
 import 'package:salvando_vidas/data/stores/pesquisa_aluno/pesquisa_aluno_store.dart';
+import 'package:salvando_vidas/data/stores/turmas/turmas_store.dart';
 import 'package:salvando_vidas/data/stores/update_aluno/update_aluno.dart';
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/responsavel/responsavel.dart';
+import 'package:salvando_vidas/domain/turma/turma.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
@@ -334,6 +336,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                             state.idFicha,
                             state.idFichaError,
                           ),
+                          _buildTurmaDropdown(),
                           const SizedBox(
                             height: 20,
                           ), // Respiro no final do scroll
@@ -508,6 +511,108 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTurmaDropdown() {
+    final turmasAsync = ref.watch(turmasStoreProvider);
+    
+    return turmasAsync.when(
+      data: (turmas) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Turma:',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                  color: AppColors.deepNavy,
+                ),
+              ),
+              const SizedBox(height: 4),
+              DropdownButtonFormField<int?>(
+                value: state.idTurma,
+                icon: const Icon(Icons.arrow_drop_down, color: AppColors.deepNavy),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppColors.platinum,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                items: [
+                  const DropdownMenuItem<int?>(
+                    value: null,
+                    child: Text('Sem turma'),
+                  ),
+                  ...turmas.map(
+                    (turma) => DropdownMenuItem<int?>(
+                      value: turma.id,
+                      child: Text(turma.nome),
+                    ),
+                  ),
+                ],
+                onChanged: (value) {
+                  notifier.updateIdTurma(value);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+      error: (error, stack) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Text(
+            'Erro ao carregar turmas',
+            style: TextStyle(
+              color: AppColors.error,
+              fontSize: 13,
+            ),
+          ),
+        );
+      },
+      loading: () {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Turma:',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                  color: AppColors.deepNavy,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Container(
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.platinum,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Center(
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
