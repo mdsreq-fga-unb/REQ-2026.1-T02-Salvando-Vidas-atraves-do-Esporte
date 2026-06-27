@@ -9,10 +9,15 @@ import 'package:salvando_vidas/domain/aluno/aluno.dart';
 part 'home_store.g.dart';
 part 'home_store.mapper.dart';
 
-typedef AlunoHome = (String aluno, int? turma, int? ultimaPresenca);
+typedef AlunoHome = (Aluno aluno, int? turma, int? ultimaPresenca);
 
-@Riverpod(keepAlive: true)
+enum OrderBy { nome, ultimaPresenca }
+
+@Riverpod()
 class HomeStore extends _$HomeStore {
+  OrderBy _orderBy = OrderBy.ultimaPresenca;
+  bool _ascending = false;
+
   @override
   Future<HomeState> build() async {
     state = const AsyncLoading();
@@ -23,10 +28,15 @@ class HomeStore extends _$HomeStore {
         .read(presencaServiceProvider)
         .obterUltimasPresencas();
 
-    final alunosHome = alunos
+    // Contagem de ativos e inativos
+    final alunosAtivos = alunos.where((a) => a.ativo).toList();
+    final totalAtivos = alunosAtivos.length;
+    final totalInativos = alunos.where((a) => !a.ativo).length;
+
+    final alunosHome = alunosAtivos
         .map<AlunoHome>(
           (aluno) => (
-            aluno.nome,
+            aluno,
             aluno.idTurma,
             presencas
                 .firstWhereOrNull((presenca) => presenca.alunoId == aluno.id)
@@ -34,14 +44,60 @@ class HomeStore extends _$HomeStore {
           ),
         )
         .toList();
-    alunosHome.sort((a, b) => (b.$3 ?? 1000).compareTo(a.$3 ?? 1000));
+    
+    _sortAlunos(alunosHome);
+
+    // Alunos em evasão: 14 dias ou mais sem presença OU nunca tiveram presença
+    final alertasEvasao = alunosHome.where((a) {
+      final dias = a.$3;
+      return (dias == null) || (dias >= 14);
+    }).length;
 
     return HomeState(
-      alunos: alunos,
+      alunos: alunosAtivos,
       alunosHome: alunosHome,
       totalTurmas: turmas.length,
+      totalAlunos: alunos.length,
+      totalAtivos: totalAtivos,
+      totalInativos: totalInativos,
       kimonosDisponiveis: 0,
+      alertasEvasao: alertasEvasao,
+      orderBy: _orderBy,
+      ascending: _ascending,
     );
+  }
+
+  void toggleOrder(OrderBy field) {
+    if (_orderBy == field) {
+      _ascending = !_ascending;
+    } else {
+      _orderBy = field;
+      _ascending = field == OrderBy.nome; // Nome padrão ascendente, Presença padrão descendente
+    }
+    
+    if (state.hasValue) {
+      final currentAlunos = List<AlunoHome>.from(state.value!.alunosHome);
+      _sortAlunos(currentAlunos);
+      state = AsyncData(state.value!.copyWith(
+        alunosHome: currentAlunos,
+        orderBy: _orderBy,
+        ascending: _ascending,
+      ));
+    }
+  }
+
+  void _sortAlunos(List<AlunoHome> list) {
+    if (_orderBy == OrderBy.nome) {
+      list.sort((a, b) => _ascending 
+        ? a.$1.nome.compareTo(b.$1.nome)
+        : b.$1.nome.compareTo(a.$1.nome));
+    } else {
+      list.sort((a, b) {
+        final valA = a.$3 ?? 1000;
+        final valB = b.$3 ?? 1000;
+        return _ascending ? valA.compareTo(valB) : valB.compareTo(valA);
+      });
+    }
   }
 }
 
@@ -50,13 +106,25 @@ class HomeState with HomeStateMappable {
   final List<Aluno> alunos;
   final List<AlunoHome> alunosHome;
   final int totalTurmas;
+  final int totalAlunos;
+  final int totalAtivos;
+  final int totalInativos;
   final int kimonosDisponiveis;
+  final int alertasEvasao;
+  final OrderBy orderBy;
+  final bool ascending;
 
   HomeState({
     required this.alunos,
     required this.alunosHome,
     required this.totalTurmas,
-    required this.kimonosDisponiveis,
+    this.totalAlunos = 0,
+    this.totalAtivos = 0,
+    this.totalInativos = 0,
+    this.kimonosDisponiveis = 0,
+    this.alertasEvasao = 0,
+    this.orderBy = OrderBy.ultimaPresenca,
+    this.ascending = false,
   });
 
   List<({Aluno aluno, int dias})> get proximoAniversariante {

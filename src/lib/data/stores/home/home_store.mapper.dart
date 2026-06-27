@@ -47,6 +47,29 @@ class HomeStateMapper extends ClassMapperBase<HomeState> {
     _$kimonosDisponiveis,
     key: r'kimonos_disponiveis',
   );
+  static int _$alertasEvasao(HomeState v) => v.alertasEvasao;
+  static const Field<HomeState, int> _f$alertasEvasao = Field(
+    'alertasEvasao',
+    _$alertasEvasao,
+    key: r'alertas_evasao',
+    opt: true,
+    def: 0,
+  );
+  static OrderBy _$orderBy(HomeState v) => v.orderBy;
+  static const Field<HomeState, OrderBy> _f$orderBy = Field(
+    'orderBy',
+    _$orderBy,
+    key: r'order_by',
+    opt: true,
+    def: OrderBy.ultimaPresenca,
+  );
+  static bool _$ascending(HomeState v) => v.ascending;
+  static const Field<HomeState, bool> _f$ascending = Field(
+    'ascending',
+    _$ascending,
+    opt: true,
+    def: false,
+  );
 
   @override
   final MappableFields<HomeState> fields = const {
@@ -54,6 +77,9 @@ class HomeStateMapper extends ClassMapperBase<HomeState> {
     #alunosHome: _f$alunosHome,
     #totalTurmas: _f$totalTurmas,
     #kimonosDisponiveis: _f$kimonosDisponiveis,
+    #alertasEvasao: _f$alertasEvasao,
+    #orderBy: _f$orderBy,
+    #ascending: _f$ascending,
   };
 
   static HomeState _instantiate(DecodingData data) {
@@ -62,6 +88,9 @@ class HomeStateMapper extends ClassMapperBase<HomeState> {
       alunosHome: data.dec(_f$alunosHome),
       totalTurmas: data.dec(_f$totalTurmas),
       kimonosDisponiveis: data.dec(_f$kimonosDisponiveis),
+      alertasEvasao: data.dec(_f$alertasEvasao),
+      orderBy: data.dec(_f$orderBy),
+      ascending: data.dec(_f$ascending),
     );
   }
 
@@ -132,6 +161,9 @@ abstract class HomeStateCopyWith<$R, $In extends HomeState, $Out>
     List<AlunoHome>? alunosHome,
     int? totalTurmas,
     int? kimonosDisponiveis,
+    int? alertasEvasao,
+    OrderBy? orderBy,
+    bool? ascending,
   });
   HomeStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -164,12 +196,18 @@ class _HomeStateCopyWithImpl<$R, $Out>
     List<AlunoHome>? alunosHome,
     int? totalTurmas,
     int? kimonosDisponiveis,
+    int? alertasEvasao,
+    OrderBy? orderBy,
+    bool? ascending,
   }) => $apply(
     FieldCopyWithData({
       if (alunos != null) #alunos: alunos,
       if (alunosHome != null) #alunosHome: alunosHome,
       if (totalTurmas != null) #totalTurmas: totalTurmas,
       if (kimonosDisponiveis != null) #kimonosDisponiveis: kimonosDisponiveis,
+      if (alertasEvasao != null) #alertasEvasao: alertasEvasao,
+      if (orderBy != null) #orderBy: orderBy,
+      if (ascending != null) #ascending: ascending,
     }),
   );
   @override
@@ -181,6 +219,9 @@ class _HomeStateCopyWithImpl<$R, $Out>
       #kimonosDisponiveis,
       or: $value.kimonosDisponiveis,
     ),
+    alertasEvasao: data.get(#alertasEvasao, or: $value.alertasEvasao),
+    orderBy: data.get(#orderBy, or: $value.orderBy),
+    ascending: data.get(#ascending, or: $value.ascending),
   );
 
   @override

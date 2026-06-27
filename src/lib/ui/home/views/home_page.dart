@@ -1,10 +1,79 @@
+import 'package:collection/collection.dart';
+import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
 import 'package:salvando_vidas/data/stores/home/home_store.dart';
+import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import '../home_page_imports.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
+
+  void _mostrarDetalhesAluno(BuildContext context, WidgetRef ref, Aluno aluno) async {
+    final responsaveis = await ref.read(alunoServiceProvider).listarResponsaveis();
+    final responsavel = responsaveis.firstWhereOrNull((r) => r.id == aluno.idResponsavel);
+
+    if (!context.mounted) return;
+
+    final dateFormat = DateFormat('dd/MM/yyyy');
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text(
+          'Informações do Aluno',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.deepNavy),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildInfoRow('Nome:', aluno.nome),
+              _buildInfoRow('CPF:', aluno.cpf),
+              _buildInfoRow('Telefone:', aluno.contato ?? 'N/A'),
+              _buildInfoRow('Aniversário:', dateFormat.format(aluno.nascimento)),
+              _buildInfoRow('Tipo Sanguíneo:', aluno.tipoSanguineo.nomeVisivel),
+              _buildInfoRow('ID da Ficha:', aluno.idFicha?.toString() ?? 'N/A'),
+              if (responsavel != null) ...[
+                const Divider(height: 24),
+                const Text('Responsável:', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.cyanPrimary)),
+                _buildInfoRow('Nome:', responsavel.nome),
+                _buildInfoRow('CPF:', responsavel.cpf),
+                _buildInfoRow('Telefone:', responsavel.contato),
+              ],
+            ],
+          ),
+        ),
+        actions: [
+          Center(
+            child: TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Fechar', style: TextStyle(color: AppColors.deepNavy, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: RichText(
+        text: TextSpan(
+          style: const TextStyle(color: Colors.black, fontSize: 14),
+          children: [
+            TextSpan(text: '$label ', style: const TextStyle(fontWeight: FontWeight.bold)),
+            TextSpan(text: value),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -157,17 +226,18 @@ class HomePage extends ConsumerWidget {
                                 // O Expanded interno garante que os dois cards dividam a altura da coluna igualmente
                                 Expanded(
                                   child: MetricCard(
-                                    title: 'Total de Alunos',
-                                    value: '${homeState.value?.alunos.length ?? "..."}',
+                                    title: 'Alunos Ativos',
+                                    value: '${homeState.value?.totalAtivos ?? "..."}',
+                                    subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
                                     color: AppColors.royalAzure,
                                   ),
                                 ),
                                 const SizedBox(height: 12),
                                 Expanded(
                                   child: MetricCard(
-                                    title: 'Kimonos Disponíveis',
-                                    value: '${homeState.value?.kimonosDisponiveis ?? "..."}',
-                                    color: AppColors.cyanPrimary,
+                                    title: 'Alertas de Evasão:',
+                                    value: '${homeState.value?.alertasEvasao ?? "..."}',
+                                    color: const Color(0xFFFFB348),
                                   ),
                                 ),
                               ],
@@ -220,22 +290,41 @@ class HomePage extends ConsumerWidget {
                                     border: Border(bottom: BorderSide(color: AppColors.divider)),
                                   ),
                                   child: Row(
-                                    children: const [
+                                    children: [
                                       Expanded(
                                         flex: 4,
-                                        child: Text('Nome', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                        child: InkWell(
+                                          onTap: () => ref.read(homeStoreProvider.notifier).toggleOrder(OrderBy.nome),
+                                          child: Row(
+                                            children: [
+                                              const Text('Nome', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                              if (homeState.value?.orderBy == OrderBy.nome)
+                                                Icon(homeState.value!.ascending ? Icons.arrow_drop_up : Icons.arrow_drop_down, size: 14, color: AppColors.textSecondary),
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         flex: 1,
                                         child: Text('Turma', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         flex: 2,
                                         child: Text('Kimono', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Text('Última\npresença', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                        child: InkWell(
+                                          onTap: () => ref.read(homeStoreProvider.notifier).toggleOrder(OrderBy.ultimaPresenca),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              const Text('Última\npresença', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                              if (homeState.value?.orderBy == OrderBy.ultimaPresenca)
+                                                Icon(homeState.value!.ascending ? Icons.arrow_drop_up : Icons.arrow_drop_down, size: 14, color: AppColors.textSecondary),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -252,39 +341,52 @@ class HomePage extends ConsumerWidget {
                                         child: ListView.builder(
                                           itemCount: state.alunosHome.length,
                                           itemBuilder: (_, index) {
-                                            final aluno = state.alunosHome[index];
-                                            return Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                                              decoration: const BoxDecoration(
-                                                border: Border(bottom: BorderSide(color: AppColors.divider)),
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 4,
-                                                    child: Text(aluno.$1, overflow: TextOverflow.ellipsis),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Text('${aluno.$2 ?? "N/A"}', textAlign: TextAlign.center),
-                                                  ),
-                                                  const Expanded(
-                                                    flex: 2,
-                                                    child: Text('Não', textAlign: TextAlign.center),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: Text(
-                                                      switch (aluno.$3) {
-                                                        null => "Nunca",
-                                                        0 => "Hoje",
-                                                        1 => "Ontem",
-                                                        int dias => "Há $dias dias",
-                                                      },
-                                                      textAlign: TextAlign.center,
+                                            final alunoHome = state.alunosHome[index];
+                                            final aluno = alunoHome.$1;
+                                            return InkWell(
+                                              onTap: () => _mostrarDetalhesAluno(context, ref, aluno),
+                                              child: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                                                decoration: const BoxDecoration(
+                                                  border: Border(bottom: BorderSide(color: AppColors.divider)),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child: Text(aluno.nome, overflow: TextOverflow.ellipsis),
                                                     ),
-                                                  ),
-                                                ],
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Text('${alunoHome.$2 ?? "N/A"}', textAlign: TextAlign.center),
+                                                    ),
+                                                    const Expanded(
+                                                      flex: 2,
+                                                      child: Text('Não', textAlign: TextAlign.center),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                        switch (alunoHome.$3) {
+                                                          null => "Nunca",
+                                                          0 => "Hoje",
+                                                          1 => "Ontem",
+                                                          int dias => "Há $dias dias",
+                                                        },
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontSize: 11,
+                                                          color: (alunoHome.$3 ?? 1000) >= 14
+                                                              ? AppColors.error
+                                                              : Colors.black,
+                                                          fontWeight: (alunoHome.$3 ?? 1000) >= 14
+                                                              ? FontWeight.w700
+                                                              : FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             );
                                           },
