@@ -305,15 +305,11 @@ class HomePage extends ConsumerWidget {
                                         ),
                                       ),
                                       const Expanded(
-                                        flex: 1,
+                                        flex: 2,
                                         child: Text('Turma', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
                                       ),
-                                      const Expanded(
-                                        flex: 2,
-                                        child: Text('Kimono', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
-                                      ),
                                       Expanded(
-                                        flex: 2,
+                                        flex: 3,
                                         child: InkWell(
                                           onTap: () => ref.read(homeStoreProvider.notifier).toggleOrder(OrderBy.ultimaPresenca),
                                           child: Row(
@@ -357,15 +353,11 @@ class HomePage extends ConsumerWidget {
                                                       child: Text(aluno.nome, overflow: TextOverflow.ellipsis),
                                                     ),
                                                     Expanded(
-                                                      flex: 1,
+                                                      flex: 2,
                                                       child: Text('${alunoHome.$2 ?? "N/A"}', textAlign: TextAlign.center),
                                                     ),
-                                                    const Expanded(
-                                                      flex: 2,
-                                                      child: Text('Não', textAlign: TextAlign.center),
-                                                    ),
                                                     Expanded(
-                                                      flex: 2,
+                                                      flex: 3,
                                                       child: Text(
                                                         switch (alunoHome.$3) {
                                                           null => "Nunca",
