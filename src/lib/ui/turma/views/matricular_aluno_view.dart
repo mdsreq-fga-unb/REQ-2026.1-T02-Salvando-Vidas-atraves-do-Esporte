@@ -204,7 +204,7 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text(
-          'Confirmar Matrícula',
+          'Tem certeza?',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -212,7 +212,7 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
           ),
         ),
         content: Text(
-          'Deseja matricular ${aluno.nome} na turma ${widget.turma.nome}?',
+          'Tem certeza que quer colocar o aluno ${aluno.nome} na turma ${widget.turma.nome}?',
           textAlign: TextAlign.center,
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,

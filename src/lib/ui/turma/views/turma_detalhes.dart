@@ -134,14 +134,6 @@ class TurmaDetail extends ConsumerWidget {
                         ),
                         TurmaOptionsMenuWidget(
                           turmaId: turma.id,
-                          onEditar: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditarTurmaView(turma: turma),
-                              ),
-                            );
-                          },
                         ),
                       ],
                     ),
