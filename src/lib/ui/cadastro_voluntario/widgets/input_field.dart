@@ -29,6 +29,11 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final defaultFillColor = isDark ? AppColors.darkSurface : AppColors.platinum;
+    final hintColor = isDark ? Colors.white54 : AppColors.textSecondary;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,16 +45,16 @@ class InputField extends StatelessWidget {
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          style: const TextStyle(
-            color: AppColors.deepNavy,
+          style: TextStyle(
+            color: textColor,
             fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             hintText: hint,
             errorText: error,
-            hintStyle: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+            hintStyle: TextStyle(color: hintColor, fontSize: 13),
             filled: true,
-            fillColor: fillColor ?? AppColors.platinum,
+            fillColor: fillColor ?? defaultFillColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,

@@ -25,18 +25,23 @@ class ExpansionActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = backgroundColor ?? AppColors.cyanPastel.withOpacity(0.2);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = backgroundColor ?? (isDark ? AppColors.darkSurface : AppColors.cyanPastel.withValues(alpha: 0.2));
+    final titleColor = isDark ? Colors.white : AppColors.deepNavy;
+    final subColor = isDark ? Colors.white70 : AppColors.deepNavy;
+    final expandedBg = isDark ? const Color(0xFF161B22) : Colors.white;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: AppColors.shadowMedium,
+            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.08),
             blurRadius: 12,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -61,8 +66,8 @@ class ExpansionActionCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: AppColors.deepNavy,
+                      style: TextStyle(
+                        color: titleColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -70,8 +75,8 @@ class ExpansionActionCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: AppColors.deepNavy,
+                      style: TextStyle(
+                        color: subColor,
                         fontSize: 13,
                       ),
                     ),
@@ -93,7 +98,7 @@ class ExpansionActionCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: expandedBg,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: child,

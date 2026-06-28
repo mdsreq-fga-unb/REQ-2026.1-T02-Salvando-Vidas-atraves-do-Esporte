@@ -13,9 +13,14 @@ class TurmaOptionsMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final menuBg = isDark ? AppColors.darkSurface : Colors.white;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final iconColor = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
     return PopupMenuButton<TurmaMenuOption>(
       icon: const Icon(Icons.more_vert, color: AppColors.textSecondary),
-      color: Colors.white,
+      color: menuBg,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onSelected: (TurmaMenuOption option) {
         switch (option) {
@@ -29,13 +34,13 @@ class TurmaOptionsMenuWidget extends StatelessWidget {
           value: TurmaMenuOption.historico,
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.history,
-                color: AppColors.deepNavy,
+                color: iconColor,
                 size: 18,
               ),
               const SizedBox(width: 8),
-              const Text('Histórico de Frequência'),
+              Text('Histórico de Frequência', style: TextStyle(color: textColor)),
             ],
           ),
         ),

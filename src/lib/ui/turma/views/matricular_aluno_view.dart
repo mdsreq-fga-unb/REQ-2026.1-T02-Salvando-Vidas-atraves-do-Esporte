@@ -203,21 +203,28 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
   }
 
   void _confirmarMatricula(dynamic aluno) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final btnBg = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+        backgroundColor: dialogBg,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
+        title: Text(
           'Tem certeza?',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: AppColors.deepNavy,
+            color: textColor,
           ),
         ),
         content: Text(
           'Tem certeza que quer colocar o aluno ${aluno.nome} na turma ${widget.turma.nome}?',
           textAlign: TextAlign.center,
+          style: TextStyle(color: isDark ? Colors.white70 : Colors.black87),
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: [
@@ -230,7 +237,7 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.deepNavy,
+              backgroundColor: btnBg,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -244,12 +251,13 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                 );
 
                 // Atualizar a lista de alunos e a presença da turma
-                await ref.refresh(pesquisaAlunoProvider.future);
+                ref.invalidate(pesquisaAlunoProvider);
                 ref.invalidate(presencaStoreProvider(widget.turma.id));
 
-                if (!mounted) return;
+                if (!ctx.mounted) return;
                 Navigator.pop(ctx);
 
+                if (!mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('${aluno.nome} matriculado com sucesso!'),
@@ -259,9 +267,10 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                 );
               } on AppApiException catch (e) {
                 logger.e(e.message, error: e.error);
-                if (!mounted) return;
+                if (!ctx.mounted) return;
                 Navigator.pop(ctx);
 
+                if (!mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Erro ao matricular aluno: ${e.message}'),

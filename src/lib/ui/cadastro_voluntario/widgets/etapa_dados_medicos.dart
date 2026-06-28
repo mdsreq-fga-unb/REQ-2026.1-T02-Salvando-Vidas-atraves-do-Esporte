@@ -17,6 +17,11 @@ class EtapaDadosMedicos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final fillColor = isDark ? AppColors.darkSurface : AppColors.inputFill;
+    final hintColor = isDark ? Colors.white54 : Colors.black54;
+
     return Form(
       key: formKey,
       child: Center(
@@ -26,21 +31,23 @@ class EtapaDadosMedicos extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildPerguntaMedica(1, 'Pergunta médica 1:'),
-                _buildPerguntaMedica(2, 'Pergunta médica 2:'),
-                _buildPerguntaMedica(3, 'Pergunta médica 3:'),
-                _buildPerguntaMedica(4, 'Pergunta médica 4:'),
-                _buildPerguntaMedica(5, 'Pergunta médica N:'),
+                _buildPerguntaMedica(1, 'Pergunta médica 1:', isDark, textColor),
+                _buildPerguntaMedica(2, 'Pergunta médica 2:', isDark, textColor),
+                _buildPerguntaMedica(3, 'Pergunta médica 3:', isDark, textColor),
+                _buildPerguntaMedica(4, 'Pergunta médica 4:', isDark, textColor),
+                _buildPerguntaMedica(5, 'Pergunta médica N:', isDark, textColor),
                 const SizedBox(height: 16),
-                _buildLabel('Observações:'),
+                _buildLabel('Observações:', textColor),
                 TextFormField(
                   controller: obsController,
                   maxLines: 4,
+                  style: TextStyle(color: textColor),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
                     hintText: 'Digite as observações aqui...',
+                    hintStyle: TextStyle(color: hintColor),
                     filled: true,
-                    fillColor: AppColors.inputFill, // Padronizado com o InputField
+                    fillColor: fillColor, // Padronizado com o InputField
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -56,13 +63,13 @@ class EtapaDadosMedicos extends StatelessWidget {
     );
   }
 
-  Widget _buildLabel(String text) {
+  Widget _buildLabel(String text, Color textColor) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Text(
         text,
-        style: const TextStyle(
-          color: AppColors.deepNavy,
+        style: TextStyle(
+          color: textColor,
           fontWeight: FontWeight.w700,
           fontSize: 14,
         ),
@@ -70,18 +77,18 @@ class EtapaDadosMedicos extends StatelessWidget {
     );
   }
 
-  Widget _buildPerguntaMedica(int id, String pergunta) {
+  Widget _buildPerguntaMedica(int id, String pergunta, bool isDark, Color textColor) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildLabel(pergunta),
+          _buildLabel(pergunta, textColor),
           Row(
             children: [
-              _buildRadioOption(id, true, 'Sim'),
+              _buildRadioOption(id, true, 'Sim', isDark, textColor),
               const SizedBox(width: 16),
-              _buildRadioOption(id, false, 'Não'),
+              _buildRadioOption(id, false, 'Não', isDark, textColor),
             ],
           ),
         ],
@@ -89,7 +96,7 @@ class EtapaDadosMedicos extends StatelessWidget {
     );
   }
 
-  Widget _buildRadioOption(int id, bool value, String label) {
+  Widget _buildRadioOption(int id, bool value, String label, bool isDark, Color textColor) {
     return InkWell(
       onTap: () => onRespostaChanged(id, value),
       borderRadius: BorderRadius.circular(8),
@@ -99,9 +106,9 @@ class EtapaDadosMedicos extends StatelessWidget {
             value: value,
             groupValue: respostas[id],
             onChanged: (bool? v) => onRespostaChanged(id, v),
-            activeColor: AppColors.deepNavy,
+            activeColor: isDark ? AppColors.cyanPrimary : AppColors.deepNavy,
           ),
-          Text(label, style: const TextStyle(fontSize: 14)),
+          Text(label, style: TextStyle(fontSize: 14, color: textColor)),
         ],
       ),
     );

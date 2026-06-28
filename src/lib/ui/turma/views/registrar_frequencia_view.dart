@@ -64,11 +64,17 @@ class _RegistrarFrequenciaViewState
 
       final presencas = state.value?.presenca ?? {};
       final temPresenca = presencas.values.any((presente) => presente == true);
+      final isDark = Theme.of(context).brightness == Brightness.dark;
+      final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+      final textColor = isDark ? Colors.white : AppColors.deepNavy;
+      final btnBg = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
       if (!temPresenca) {
         showDialog(
           context: context,
           builder: (BuildContext ctx) {
             return AlertDialog(
+              backgroundColor: dialogBg,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -81,15 +87,16 @@ class _RegistrarFrequenciaViewState
                   color: AppColors.error,
                 ),
               ),
-              content: const Text(
+              content: Text(
                 'Ao menos uma presença tem que ser marcada para salvar a frequência.',
                 textAlign: TextAlign.center,
+                style: TextStyle(color: isDark ? Colors.white70 : Colors.black87),
               ),
               actionsAlignment: MainAxisAlignment.center,
               actions: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.deepNavy,
+                    backgroundColor: btnBg,
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
@@ -111,13 +118,14 @@ class _RegistrarFrequenciaViewState
         context: context,
         builder: (BuildContext ctx) {
           return AlertDialog(
+            backgroundColor: dialogBg,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: const Text(
+            title: Text(
               'Registrar Frequência?',
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.deepNavy),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
             ),
             actionsAlignment: MainAxisAlignment.spaceEvenly,
             actions: [
@@ -127,7 +135,7 @@ class _RegistrarFrequenciaViewState
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.deepNavy,
+                  backgroundColor: btnBg,
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -151,7 +159,9 @@ class _RegistrarFrequenciaViewState
                       '',
                       alunosPresentes,
                     );
+                    if (!ctx.mounted) return;
                     Navigator.of(ctx).pop(); 
+                    if (!context.mounted) return;
                     _mostrarDialogSucesso(); 
                   } on AppApiException catch (e) {
                     logger.e(e.message, error: e);
@@ -169,11 +179,16 @@ class _RegistrarFrequenciaViewState
   }
 
   void _mostrarDialogSucesso() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+    final btnBg = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext ctx) {
         return AlertDialog(
+          backgroundColor: dialogBg,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -186,7 +201,7 @@ class _RegistrarFrequenciaViewState
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.deepNavy,
+                backgroundColor: btnBg,
                 foregroundColor: Colors.white,
                 elevation: 0,
                 shape: RoundedRectangleBorder(

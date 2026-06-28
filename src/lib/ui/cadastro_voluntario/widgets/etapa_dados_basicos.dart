@@ -127,57 +127,67 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                 
                 buildLabel('Aniversário*'),
                 const SizedBox(height: 6),
-                TextFormField(
-                  controller: _dataController,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [formatData],
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    hintText: 'DD/MM/AAAA',
-                    errorText: cadastro.nascimentoError,
-                    filled: true,
-                    fillColor: AppColors.inputFill,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 12,
-                    ),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.calendar_today, color: AppColors.deepNavy),
-                      onPressed: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: cadastro.nascimento ?? DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                        );
-                        if (pickedDate != null) {
-                          notifier.updateNascimento(pickedDate);
+                Builder(
+                  builder: (context) {
+                    final isDark = Theme.of(context).brightness == Brightness.dark;
+                    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+                    final fill = isDark ? AppColors.darkSurface : AppColors.inputFill;
+                    final hint = isDark ? Colors.white54 : Colors.black54;
+                    return TextFormField(
+                      controller: _dataController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [formatData],
+                      style: TextStyle(color: textColor, fontWeight: FontWeight.w600),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: InputDecoration(
+                        hintText: 'DD/MM/AAAA',
+                        hintStyle: TextStyle(color: hint),
+                        errorText: cadastro.nascimentoError,
+                        filled: true,
+                        fillColor: fill,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.calendar_today, color: isDark ? AppColors.cyanPrimary : AppColors.deepNavy),
+                          onPressed: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: cadastro.nascimento ?? DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
+                            if (pickedDate != null) {
+                              notifier.updateNascimento(pickedDate);
+                            }
+                          },
+                        ),
+                      ),
+                      onChanged: (value) {
+                        if (value.length == 10) {
+                          try {
+                            final partes = value.split('/');
+                            final data = DateTime(
+                              int.parse(partes[2]),
+                              int.parse(partes[1]),
+                              int.parse(partes[0]),
+                            );
+                            notifier.updateNascimento(data);
+                          } catch (e) {
+                            // Data inválida ignorada
+                          }
                         }
                       },
-                    ),
-                  ),
-                  onChanged: (value) {
-                    if (value.length == 10) {
-                      try {
-                        final partes = value.split('/');
-                        final data = DateTime(
-                          int.parse(partes[2]),
-                          int.parse(partes[1]),
-                          int.parse(partes[0]),
-                        );
-                        notifier.updateNascimento(data);
-                      } catch (e) {
-                        // Data inválida ignorada
-                      }
-                    }
-                  },
-                  validator: (value) => (value == null || value.isEmpty || value.length < 10)
-                      ? 'A data é obrigatória e deve ser válida'
-                      : null,
+                      validator: (value) => (value == null || value.isEmpty || value.length < 10)
+                          ? 'A data é obrigatória e deve ser válida'
+                          : null,
+                    );
+                  }
                 ),
                 const SizedBox(height: 14),
                 buildDropdownField(

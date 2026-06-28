@@ -12,30 +12,37 @@ class TurmaDetail extends ConsumerWidget {
   const TurmaDetail({super.key, required this.turma});
 
   void _confirmarDesmatricula(BuildContext context, WidgetRef ref, String nomeAluno, int alunoId) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final cancelColor = isDark ? Colors.white70 : AppColors.error;
+    final btnBg = isDark ? AppColors.cyanPrimary : const Color.fromARGB(255, 53, 188, 229);
+
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+        backgroundColor: dialogBg,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(
           'Deseja desmatricular o(a) aluno(a) $nomeAluno dessa turma?',
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: textColor,
           ),
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text(
+            child: Text(
               'Cancelar',
-              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+              style: TextStyle(color: cancelColor),
             ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 53, 188, 229),
+              backgroundColor: btnBg,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -59,7 +66,7 @@ class TurmaDetail extends ConsumerWidget {
       
       // Refresh stores
       ref.invalidate(presencaStoreProvider(turma.id));
-      await ref.refresh(pesquisaAlunoProvider.future);
+      ref.invalidate(pesquisaAlunoProvider);
       
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

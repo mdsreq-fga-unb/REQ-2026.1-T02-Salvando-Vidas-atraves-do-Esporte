@@ -209,17 +209,17 @@ class _AdminPageState extends ConsumerState<AdminPage> {
                         key: _volunteerFormKey,
                         child: Column(
                           children: [
-                            CadastroTextField(InputTypes.nome),
+                            const VoluntarioInputField(type: InputTypes.nome, label: 'Nome completo'),
                             const SizedBox(height: 14),
-                            CadastroTextField(InputTypes.email),
+                            const VoluntarioInputField(type: InputTypes.email, label: 'E-mail'),
                             const SizedBox(height: 14),
-                            CadastroTextField(InputTypes.senha),
+                            const VoluntarioInputField(type: InputTypes.senha, label: 'Senha'),
                             const SizedBox(height: 14),
-                            CadastroTextField(InputTypes.telefone),
+                            const VoluntarioInputField(type: InputTypes.telefone, label: 'Telefone'),
                             const SizedBox(height: 14),
-                            CadastroTextField(InputTypes.cpf),
+                            const VoluntarioInputField(type: InputTypes.cpf, label: 'CPF'),
                             const SizedBox(height: 14),
-                            CadastroTextField(InputTypes.funcao),
+                            const VoluntarioInputField(type: InputTypes.funcao, label: 'Função no projeto'),
                             const SizedBox(height: 18),
                             ActionButton(
                               label: 'Salvar voluntário',
