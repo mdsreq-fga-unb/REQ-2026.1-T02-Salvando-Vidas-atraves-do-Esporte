@@ -230,9 +230,14 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
 
   void updateApelido(String? value) {
     final ap = (value != null && value.trim().isNotEmpty) ? value.trim() : null;
+    final novoUsarReferencia = ap == null
+        ? false
+        : ((state.apelido == null || state.apelido!.isEmpty)
+            ? true
+            : state.usarApelidoComoReferencia);
     state = state.copyWith(
       apelido: ap,
-      usarApelidoComoReferencia: ap != null ? true : false,
+      usarApelidoComoReferencia: novoUsarReferencia,
       dirty: true,
     );
   }

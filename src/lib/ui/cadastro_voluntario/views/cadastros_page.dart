@@ -35,6 +35,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
     4: null,
     5: null,
   };
+  bool _termoResponsabilidadeAceito = false;
 
   late CadastroAlunoState cadastro;
   late CadastroAluno notifier;
@@ -55,7 +56,19 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
   }
 
   void _avancar() {
-    // if (_formKeys[_etapaAtual].currentState?.validate() ?? false) {
+    if (_etapaAtual == 1) {
+      if (_respostasMedicas.values.contains(null) || !_termoResponsabilidadeAceito) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Responda todas as perguntas médicas e aceite o Termo de Responsabilidade para continuar.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+    }
+
     if (cadastro.estaValido) {
       if (_etapaAtual == 0 || (_etapaAtual == 1 && cadastro.idade < 18)) {
         _pageController.nextPage(
@@ -271,7 +284,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                       ),
                       const SizedBox(height: 24),
                       SizedBox(
-                        height: 520,
+                        height: 580,
                         child: PageView(
                           controller: _pageController,
                           onPageChanged: _onStepChanged,
@@ -284,6 +297,8 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                               onRespostaChanged: (id, value) =>
                                   setState(() => _respostasMedicas[id] = value),
                               obsController: _obsMedicasController,
+                              termoAceito: _termoResponsabilidadeAceito,
+                              onTermoChanged: (val) => setState(() => _termoResponsabilidadeAceito = val ?? false),
                             ),
                             EtapaDadosResponsavel(formKey: _formKeyEtapa3),
                           ],
