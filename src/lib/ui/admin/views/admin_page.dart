@@ -23,9 +23,10 @@ class AdminPage extends ConsumerWidget {
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: Column(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _AdminCard(
@@ -50,6 +51,7 @@ class AdminPage extends ConsumerWidget {
                   ),
                 ],
               ),
+            ),
             ),
           ),
         ),

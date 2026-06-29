@@ -254,12 +254,15 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
               ),
 
               Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
-                  ),
-                  child: Column(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 800),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
+                      child: Column(
                     children: [
                       // Cards de Totais
                       Row(
@@ -528,11 +531,13 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
-    );
+    ),
+  ),
+);
   }
 
   // Widget auxiliar para construir as áreas expansíveis mantendo o estilo de Card branco com sombra

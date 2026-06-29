@@ -51,9 +51,12 @@ class Inventario extends ConsumerWidget {
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
               children: [
                 // Linha Superior: Cards de Estatísticas
                 Row(
@@ -209,6 +212,8 @@ class Inventario extends ConsumerWidget {
                   ],
                 ),
               ],
+            ),
+          ),
             ),
           ),
         ),

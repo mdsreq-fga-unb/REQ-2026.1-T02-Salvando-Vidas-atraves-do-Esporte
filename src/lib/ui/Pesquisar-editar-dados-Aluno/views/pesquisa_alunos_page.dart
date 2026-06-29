@@ -30,7 +30,10 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
 
     return Scaffold(
       backgroundColor: bg,
-      body: Column(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -161,6 +164,8 @@ class _PesquisaAlunosPageState extends ConsumerState<PesquisaAlunosPage> {
             ),
           ),
         ],
+      ),
+        ),
       ),
     );
   }

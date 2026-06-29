@@ -122,147 +122,8 @@ class HomePage extends ConsumerWidget {
                   children: [
                     const SizedBox(height: 8),
 
-                    // ATUALIZAÇÃO: Grid de métricas e aniversariantes responsivo usando Flexbox (Expanded)
-                    SizedBox(
-                      height: 192, // Altura total fixa para as duas colunas se alinharem perfeitamente
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Coluna Esquerda: Aniversariantes (Ocupa exatamente 50% do espaço da Row)
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: cardBg,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.08),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.all(12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Próximos aniversariantes',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: subColor,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Expanded(
-                                    child: homeState.when(
-                                      data: (state) {
-                                        final lista = state.proximoAniversariante;
-                                        if (lista.isEmpty) {
-                                          return const Center(
-                                            child: Text(
-                                              'Nenhum nos próximos 7 dias',
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                color: AppColors.textSecondary,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          );
-                                        }
-                                        return ListView.builder(
-                                          padding: EdgeInsets.zero,
-                                          itemCount: lista.length,
-                                          itemBuilder: (_, i) {
-                                            final item = lista[i];
-                                            final diasTexto = item.dias == 0
-                                                ? 'Hoje! 🎉'
-                                                : item.dias == 1
-                                                    ? 'Amanhã'
-                                                    : '${item.dias} dias';
-                                            return Padding(
-                                              padding: const EdgeInsets.symmetric(vertical: 3),
-                                              child: Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.cake_outlined,
-                                                    size: 14,
-                                                    color: AppColors.cyanPrimary,
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Expanded(
-                                                    child: Text(
-                                                      item.aluno.nome,
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: isDark ? Colors.white : Colors.black87,
-                                                      ),
-                                                      overflow: TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    diasTexto,
-                                                    style: TextStyle(
-                                                      fontSize: 11,
-                                                      color: item.dias == 0
-                                                          ? AppColors.royalAzure
-                                                          : subColor,
-                                                      fontWeight: item.dias == 0
-                                                          ? FontWeight.w700
-                                                          : FontWeight.normal,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                      error: (_, __) => const Center(child: Text('Erro')),
-                                      loading: () => const Center(
-                                        child: SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(strokeWidth: 2),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(width: 12),
-
-                          // Coluna Direita: Cards (Ocupa os outros 50% do espaço da Row)
-                          Expanded(
-                            child: Column(
-                              children: [
-                                // O Expanded interno garante que os dois cards dividam a altura da coluna igualmente
-                                Expanded(
-                                  child: MetricCard(
-                                    title: 'Alunos Ativos',
-                                    value: '${homeState.value?.totalAtivos ?? "..."}',
-                                    subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
-                                    color: AppColors.royalAzure,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                Expanded(
-                                  child: MetricCard(
-                                    title: 'Alertas de Evasão:',
-                                    value: '${homeState.value?.alertasEvasao ?? "..."}',
-                                    color: const Color(0xFFFFB348),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Grid de métricas e aniversariantes responsivo (celulares e tablets)
+                    _buildTopSection(context, homeState, isDark, cardBg, subColor),
                     const SizedBox(height: 16),
 
                     // Card com a lista de alunos
@@ -446,6 +307,189 @@ class HomePage extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTopSection(
+    BuildContext context,
+    AsyncValue<HomeState> homeState,
+    bool isDark,
+    Color cardBg,
+    Color subColor,
+  ) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+
+        final aniversariantesBox = Container(
+          height: isMobile ? 180 : double.infinity,
+          decoration: BoxDecoration(
+            color: cardBg,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.08),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Próximos aniversariantes',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: subColor,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Expanded(
+                child: homeState.when(
+                  data: (state) {
+                    final lista = state.proximoAniversariante;
+                    if (lista.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          'Nenhum nos próximos 7 dias',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textSecondary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: lista.length,
+                      itemBuilder: (_, i) {
+                        final item = lista[i];
+                        final diasTexto = item.dias == 0
+                            ? 'Hoje! 🎉'
+                            : item.dias == 1
+                                ? 'Amanhã'
+                                : '${item.dias} dias';
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.cake_outlined,
+                                size: 14,
+                                color: AppColors.cyanPrimary,
+                              ),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: Text(
+                                  item.aluno.nome,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: isDark ? Colors.white : Colors.black87,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Text(
+                                diasTexto,
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: item.dias == 0
+                                      ? AppColors.royalAzure
+                                      : subColor,
+                                  fontWeight: item.dias == 0
+                                      ? FontWeight.w700
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  error: (_, __) => const Center(child: Text('Erro')),
+                  loading: () => const Center(
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+
+        final cardsBox = Column(
+          children: [
+            if (isMobile)
+              SizedBox(
+                height: 90,
+                child: MetricCard(
+                  title: 'Alunos Ativos',
+                  value: '${homeState.value?.totalAtivos ?? "..."}',
+                  subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
+                  color: AppColors.royalAzure,
+                ),
+              )
+            else
+              Expanded(
+                child: MetricCard(
+                  title: 'Alunos Ativos',
+                  value: '${homeState.value?.totalAtivos ?? "..."}',
+                  subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
+                  color: AppColors.royalAzure,
+                ),
+              ),
+            const SizedBox(height: 12),
+            if (isMobile)
+              SizedBox(
+                height: 90,
+                child: MetricCard(
+                  title: 'Alertas de Evasão:',
+                  value: '${homeState.value?.alertasEvasao ?? "..."}',
+                  color: const Color(0xFFFFB348),
+                ),
+              )
+            else
+              Expanded(
+                child: MetricCard(
+                  title: 'Alertas de Evasão:',
+                  value: '${homeState.value?.alertasEvasao ?? "..."}',
+                  color: const Color(0xFFFFB348),
+                ),
+              ),
+          ],
+        );
+
+        if (isMobile) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              aniversariantesBox,
+              const SizedBox(height: 12),
+              cardsBox,
+            ],
+          );
+        }
+
+        return SizedBox(
+          height: 192,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: aniversariantesBox),
+              const SizedBox(width: 12),
+              Expanded(child: cardsBox),
+            ],
+          ),
+        );
+      },
     );
   }
 }

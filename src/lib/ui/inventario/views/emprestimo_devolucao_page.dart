@@ -138,9 +138,11 @@ class _EmprestimoDevolucaoPageState
         ),
         // Conteúdo Centralizado
         Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
               mainAxisAlignment:
                   MainAxisAlignment.center, // Centraliza verticalmente
               children: [
@@ -157,6 +159,7 @@ class _EmprestimoDevolucaoPageState
                 ),
               ],
             ),
+          ),
           ),
         ),
       ],
@@ -207,9 +210,12 @@ class _EmprestimoDevolucaoPageState
         final listBg = isDark ? AppColors.darkSurface : Colors.white;
         final textColor = isDark ? Colors.white : Colors.black87;
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
+        return Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildBackButton(
@@ -317,6 +323,8 @@ class _EmprestimoDevolucaoPageState
                 ),
               ),
             ],
+          ),
+            ),
           ),
         );
       },

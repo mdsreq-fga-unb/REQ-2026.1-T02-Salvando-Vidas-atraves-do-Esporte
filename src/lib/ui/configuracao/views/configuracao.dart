@@ -20,9 +20,12 @@ class Configuracao extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -141,6 +144,8 @@ class Configuracao extends ConsumerWidget {
               ),
               const SizedBox(height: 5),
             ],
+          ),
+        ),
           ),
         ),
       ),
