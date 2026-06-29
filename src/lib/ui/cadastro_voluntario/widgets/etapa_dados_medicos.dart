@@ -33,94 +33,94 @@ class EtapaDadosMedicos extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                _buildPerguntaMedica(
-                  '1. Você possui alguma condição de saúde crônica (ex: problemas cardíacos, hipertensão, diabetes, asma)?',
-                  isDark,
-                  textColor,
-                  cadastro.pMedica1,
-                  notifier.updatePMedica1,
-                ),
-                _buildPerguntaMedica(
-                  '2. Você sente dores no peito, tonturas frequentes ou já sofreu desmaios durante ou após esforço físico?',
-                  isDark,
-                  textColor,
-                  cadastro.pMedica2,
-                  notifier.updatePMedica2,
-                ),
-                _buildPerguntaMedica(
-                  '3. Você possui alguma lesão óssea, articular ou passou por cirurgia recente que possa ser agravada pelo treino de Jiu-Jitsu?',
-                  isDark,
-                  textColor,
-                  cadastro.pMedica3,
-                  notifier.updatePMedica3,
-                ),
-                _buildPerguntaMedica(
-                  '4. Você tem alergia a algum medicamento ou faz uso de medicação de uso contínuo?',
-                  isDark,
-                  textColor,
-                  cadastro.pMedica4,
-                  notifier.updatePMedica4,
-                ),
-                _buildPerguntaMedica(
-                  '5. Sabe de alguma outra razão ou limitação física não mencionada pela qual a prática de atividade física possa comprometer sua saúde?',
-                  isDark,
-                  textColor,
-                  cadastro.pMedica5,
-                  notifier.updatePMedica5,
-                ),
-                const SizedBox(height: 16),
-                _buildLabel('Observações:', textColor),
-                TextFormField(
-                  initialValue: cadastro.observacaoMedica,
-                  onChanged: notifier.updateObservacaoMedica,
-                  maxLines: 3,
-                  style: TextStyle(color: textColor),
-                  autovalidateMode: AutovalidateMode.disabled,
-                  decoration: InputDecoration(
-                    hintText: 'Digite as observações aqui...',
-                    hintStyle: TextStyle(color: hintColor),
-                    filled: true,
-                    fillColor: fillColor,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? Colors.white.withOpacity(0.05)
-                        : AppColors.royalAzure.withOpacity(0.05),
+              _buildPerguntaMedica(
+                '1. Você possui alguma condição de saúde crônica (ex: problemas cardíacos, hipertensão, diabetes, asma)?',
+                isDark,
+                textColor,
+                cadastro.pMedica1,
+                notifier.updatePMedica1,
+              ),
+              _buildPerguntaMedica(
+                '2. Você sente dores no peito, tonturas frequentes ou já sofreu desmaios durante ou após esforço físico?',
+                isDark,
+                textColor,
+                cadastro.pMedica2,
+                notifier.updatePMedica2,
+              ),
+              _buildPerguntaMedica(
+                '3. Você possui alguma lesão óssea, articular ou passou por cirurgia recente que possa ser agravada pelo treino de Jiu-Jitsu?',
+                isDark,
+                textColor,
+                cadastro.pMedica3,
+                notifier.updatePMedica3,
+              ),
+              _buildPerguntaMedica(
+                '4. Você tem alergia a algum medicamento ou faz uso de medicação de uso contínuo?',
+                isDark,
+                textColor,
+                cadastro.pMedica4,
+                notifier.updatePMedica4,
+              ),
+              _buildPerguntaMedica(
+                '5. Sabe de alguma outra razão ou limitação física não mencionada pela qual a prática de atividade física possa comprometer sua saúde?',
+                isDark,
+                textColor,
+                cadastro.pMedica5,
+                notifier.updatePMedica5,
+              ),
+              const SizedBox(height: 16),
+              _buildLabel('Observações:', textColor),
+              TextFormField(
+                initialValue: cadastro.observacaoMedica,
+                onChanged: notifier.updateObservacaoMedica,
+                maxLines: 3,
+                style: TextStyle(color: textColor),
+                autovalidateMode: AutovalidateMode.disabled,
+                decoration: InputDecoration(
+                  hintText: 'Digite as observações aqui...',
+                  hintStyle: TextStyle(color: hintColor),
+                  filled: true,
+                  fillColor: fillColor,
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: isDark
-                          ? Colors.white24
-                          : AppColors.royalAzure.withOpacity(0.2),
-                    ),
+                    borderSide: BorderSide.none,
                   ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: CheckboxListTile(
-                      contentPadding: EdgeInsets.zero,
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: isDark
-                          ? AppColors.cyanPrimary
-                          : AppColors.deepNavy,
-                      title: Text(
-                        'Termo de Responsabilidade*',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: textColor,
-                        ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white.withOpacity(0.05)
+                      : AppColors.royalAzure.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isDark
+                        ? Colors.white24
+                        : AppColors.royalAzure.withOpacity(0.2),
+                  ),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: CheckboxListTile(
+                    contentPadding: EdgeInsets.zero,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: isDark
+                        ? AppColors.cyanPrimary
+                        : AppColors.deepNavy,
+                    title: Text(
+                      'Termo de Responsabilidade*',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: textColor,
                       ),
+                    ),
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Text(
@@ -137,10 +137,10 @@ class EtapaDadosMedicos extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              ],
-            ),
+            ],
           ),
         ),
+      ),
     );
   }
 

@@ -128,7 +128,9 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
                     child: TextField(
                       controller: _searchCtrl,
                       onChanged: _filtrar,
-                      style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Buscar por nome ou email',
                         hintStyle: const TextStyle(
@@ -164,7 +166,10 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 4,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -207,10 +212,14 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
                       : ListView.separated(
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                           itemCount: _filtrados.length,
-                          separatorBuilder: (_, _) => const SizedBox(height: 10),
+                          separatorBuilder: (_, _) =>
+                              const SizedBox(height: 10),
                           itemBuilder: (context, i) {
                             final user = _filtrados[i];
-                            return _VoluntarioTile(user: user, onEditado: _carregar);
+                            return _VoluntarioTile(
+                              user: user,
+                              onEditado: _carregar,
+                            );
                           },
                         ),
                 ),
@@ -337,7 +346,9 @@ class _VoluntarioTile extends ConsumerWidget {
                       onEditado();
                     }
                   } catch (e) {
-                    ref.read(loggerProvider).e('Erro ao atualizar status do voluntário', error: e);
+                    ref
+                        .read(loggerProvider)
+                        .e('Erro ao atualizar status do voluntário', error: e);
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -493,7 +504,9 @@ class _EditarVoluntarioFormState extends ConsumerState<_EditarVoluntarioForm> {
     } catch (e) {
       if (!mounted) return;
       Navigator.of(context, rootNavigator: true).pop();
-      ref.read(loggerProvider).e('Erro inesperado ao atualizar voluntário', error: e);
+      ref
+          .read(loggerProvider)
+          .e('Erro inesperado ao atualizar voluntário', error: e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Erro ao atualizar voluntário.'),
@@ -646,8 +659,7 @@ class _EditarVoluntarioFormState extends ConsumerState<_EditarVoluntarioForm> {
                         hint: '000.000.000-00',
                         formatter: formatCpf,
                         keyboardType: TextInputType.number,
-                        onChanged: (_) =>
-                            _cpf = formatCpf.getUnmaskedText(),
+                        onChanged: (_) => _cpf = formatCpf.getUnmaskedText(),
                         validator: (v) =>
                             (v == null ||
                                 !eCPF(

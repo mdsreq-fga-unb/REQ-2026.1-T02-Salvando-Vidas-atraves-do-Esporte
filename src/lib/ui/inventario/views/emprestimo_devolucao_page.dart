@@ -146,7 +146,10 @@ class _EmprestimoDevolucaoPageState
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 24,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -293,8 +296,12 @@ class _EmprestimoDevolucaoPageState
                                 return ListTile(
                                   leading: CircleAvatar(
                                     backgroundColor: isEmprestar
-                                        ? AppColors.royalAzure.withValues(alpha: 0.15)
-                                        : AppColors.cyanPrimary.withValues(alpha: 0.15),
+                                        ? AppColors.royalAzure.withValues(
+                                            alpha: 0.15,
+                                          )
+                                        : AppColors.cyanPrimary.withValues(
+                                            alpha: 0.15,
+                                          ),
                                     child: Icon(
                                       isEmprestar
                                           ? Icons.person_outline
@@ -555,7 +562,9 @@ class _EmprestimoDevolucaoPageState
                             .read(kimonoServiceProvider)
                             .cadastrarEmprestimo(emprestimo);
                         await ref.refresh(gestaoKimonosStoreProvider.future);
-                        await ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        await ref.refresh(
+                          gestaoEmprestimosStoreProvider.future,
+                        );
                         if (context.mounted) {
                           Navigator.pop(context);
                           _showPopUpSucesso(
@@ -635,7 +644,9 @@ class _EmprestimoDevolucaoPageState
                         final service = ref.read(kimonoServiceProvider);
                         await service.retornarEmprestimo(emprestimo);
                         await ref.refresh(gestaoKimonosStoreProvider.future);
-                        await ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        await ref.refresh(
+                          gestaoEmprestimosStoreProvider.future,
+                        );
                         if (context.mounted) {
                           Navigator.pop(context);
                           _showPopUpSucesso(

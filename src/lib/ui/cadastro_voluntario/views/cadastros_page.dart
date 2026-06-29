@@ -55,9 +55,8 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
         return EtapaDadosMedicos(
           formKey: _formKeyEtapa2,
           termoAceito: _termoResponsabilidadeAceito,
-          onTermoChanged: (val) => setState(
-            () => _termoResponsabilidadeAceito = val ?? false,
-          ),
+          onTermoChanged: (val) =>
+              setState(() => _termoResponsabilidadeAceito = val ?? false),
         );
       case 2:
         return EtapaDadosResponsavel(formKey: _formKeyEtapa3);
@@ -73,7 +72,9 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
       if (!formValido || !cadastro.estaValido) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Preencha todos os campos obrigatórios corretamente.'),
+            content: Text(
+              'Preencha todos os campos obrigatórios corretamente.',
+            ),
             backgroundColor: AppColors.error,
             behavior: SnackBarBehavior.floating,
           ),

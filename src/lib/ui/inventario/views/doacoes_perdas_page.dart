@@ -119,10 +119,9 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                   );
                 }
               } catch (e) {
-                ref.read(loggerProvider).e(
-                  'Erro inesperado ao registrar doação',
-                  error: e,
-                );
+                ref
+                    .read(loggerProvider)
+                    .e('Erro inesperado ao registrar doação', error: e);
                 if (context.mounted) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -245,10 +244,9 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                   );
                 }
               } catch (e) {
-                ref.read(loggerProvider).e(
-                  'Erro inesperado ao registrar perda',
-                  error: e,
-                );
+                ref
+                    .read(loggerProvider)
+                    .e('Erro inesperado ao registrar perda', error: e);
                 if (context.mounted) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
