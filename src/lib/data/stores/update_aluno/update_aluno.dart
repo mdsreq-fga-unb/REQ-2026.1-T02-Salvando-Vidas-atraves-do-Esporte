@@ -11,7 +11,7 @@ part 'update_aluno.mapper.dart';
 class UpdateAlunoState with UpdateAlunoStateMappable {
   final String nome;
   final String? apelido;
-  final bool usarApelidoComoReferencia;
+  final bool usarApelido;
   final String cpf;
   final String contato;
   final String contatoEmergencia;
@@ -37,7 +37,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     required this.responsavelOriginal,
     this.nome = '',
     this.apelido,
-    this.usarApelidoComoReferencia = false,
+    this.usarApelido = false,
     this.cpf = '',
     this.contato = '',
     this.contatoEmergencia = '',
@@ -157,7 +157,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     id: alunoOriginal.id,
     nome: nome,
     apelido: apelido,
-    usarApelidoComoReferencia: usarApelidoComoReferencia,
+    usarApelido: usarApelido,
     cpf: cpf,
     contato: contato,
     contatoEmergencia: contatoEmergencia,
@@ -171,6 +171,12 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     dataEntrada: alunoOriginal.dataEntrada,
     idFicha: int.tryParse(idFicha),
     idTurma: idTurma,
+    pMedica1: alunoOriginal.pMedica1,
+    pMedica2: alunoOriginal.pMedica2,
+    pMedica3: alunoOriginal.pMedica3,
+    pMedica4: alunoOriginal.pMedica4,
+    pMedica5: alunoOriginal.pMedica5,
+    observacaoMedica: alunoOriginal.observacaoMedica,
   );
 
   Map<String, dynamic> diffAluno(Aluno aluno) {
@@ -197,32 +203,32 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   );
 }
 
-  @riverpod
-  class UpdateAluno extends _$UpdateAluno {
-    @override
-    UpdateAlunoState build(Aluno aluno, Responsavel? responsavel) {
-      return UpdateAlunoState(
-        alunoOriginal: aluno,
-        responsavelOriginal: responsavel,
-        nome: aluno.nome,
-        apelido: aluno.apelido,
-        usarApelidoComoReferencia: aluno.usarApelidoComoReferencia,
-        cpf: aluno.cpf,
-        contato: aluno.contato ?? '',
-        contatoEmergencia: aluno.contatoEmergencia ?? '',
-        email: aluno.email,
-        nascimento: aluno.nascimento,
-        tipoSanguineo: aluno.tipoSanguineo,
-        faixa: aluno.faixa,
-        grau: aluno.grau,
-        idFicha: '${aluno.idFicha ?? ""}',
-        idTurma: aluno.idTurma,
-        nomeResponsavel: responsavel?.nome ?? '',
-        cpfResponsavel: responsavel?.cpf ?? '',
-        contatoResponsavel: responsavel?.contato ?? '',
-        emailResponsavel: responsavel?.email ?? '',
-      );
-    }
+@riverpod
+class UpdateAluno extends _$UpdateAluno {
+  @override
+  UpdateAlunoState build(Aluno aluno, Responsavel? responsavel) {
+    return UpdateAlunoState(
+      alunoOriginal: aluno,
+      responsavelOriginal: responsavel,
+      nome: aluno.nome,
+      apelido: aluno.apelido,
+      usarApelido: aluno.usarApelido,
+      cpf: aluno.cpf,
+      contato: aluno.contato ?? '',
+      contatoEmergencia: aluno.contatoEmergencia ?? '',
+      email: aluno.email,
+      nascimento: aluno.nascimento,
+      tipoSanguineo: aluno.tipoSanguineo,
+      faixa: aluno.faixa,
+      grau: aluno.grau,
+      idFicha: '${aluno.idFicha ?? ""}',
+      idTurma: aluno.idTurma,
+      nomeResponsavel: responsavel?.nome ?? '',
+      cpfResponsavel: responsavel?.cpf ?? '',
+      contatoResponsavel: responsavel?.contato ?? '',
+      emailResponsavel: responsavel?.email ?? '',
+    );
+  }
 
   void updateNome(String value) {
     state = state.copyWith(nome: value, dirty: true);
@@ -233,17 +239,17 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     final novoUsarReferencia = ap == null
         ? false
         : ((state.apelido == null || state.apelido!.isEmpty)
-            ? true
-            : state.usarApelidoComoReferencia);
+              ? true
+              : state.usarApelido);
     state = state.copyWith(
       apelido: ap,
-      usarApelidoComoReferencia: novoUsarReferencia,
+      usarApelido: novoUsarReferencia,
       dirty: true,
     );
   }
 
   void updateUsarApelidoComoReferencia(bool value) {
-    state = state.copyWith(usarApelidoComoReferencia: value, dirty: true);
+    state = state.copyWith(usarApelido: value, dirty: true);
   }
 
   void updateCPF(String value) {

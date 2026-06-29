@@ -1,3 +1,4 @@
+import 'package:salvando_vidas/data/stores/turmas/turmas_store.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
 import 'package:salvando_vidas/data/stores/pesquisa_aluno/pesquisa_aluno_store.dart';
@@ -11,7 +12,8 @@ class MatricularAlunoView extends ConsumerStatefulWidget {
   const MatricularAlunoView({super.key, required this.turma});
 
   @override
-  ConsumerState<MatricularAlunoView> createState() => _MatricularAlunoViewState();
+  ConsumerState<MatricularAlunoView> createState() =>
+      _MatricularAlunoViewState();
 }
 
 class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
@@ -81,12 +83,16 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.cyanPastel : AppColors.cyanPrimary,
+                        color: isDark
+                            ? AppColors.cyanPastel
+                            : AppColors.cyanPrimary,
                       ),
                     ),
                     const SizedBox(height: 16),
                     TextField(
-                      style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                       onChanged: (value) {
                         setState(() {
                           _searchQuery = value.toLowerCase();
@@ -94,7 +100,9 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Buscar aluno...',
-                        hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.black54),
+                        hintStyle: TextStyle(
+                          color: isDark ? Colors.white54 : Colors.black54,
+                        ),
                         prefixIcon: Icon(Icons.search, color: textColor),
                         filled: true,
                         fillColor: inputBg,
@@ -111,21 +119,32 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                 child: alunosAsync.when(
                   data: (data) {
                     // Filtrar alunos sem turma ou com turma diferente
-                    final alunosFiltrados = data.alunos
-                        .where((aluno) =>
-                            (aluno.idTurma == null || aluno.idTurma != widget.turma.id) &&
-                            aluno.ativo &&
-                            (aluno.nome.toLowerCase().contains(_searchQuery) ||
-                                (aluno.apelido?.toLowerCase().contains(_searchQuery) ?? false) ||
-                                aluno.cpf.contains(_searchQuery)))
-                        .toList();
+                    final alunosFiltrados = data.alunos.where((aluno) {
+                      if (!aluno.ativo || aluno.idTurma == widget.turma.id) {
+                        return false;
+                      }
+
+                      int idade = DateTime.now().year - aluno.nascimento.year;
+
+                      switch (widget.turma.faixaEtaria) {
+                        case FaixaEtaria.infantil:
+                          if (idade >= 18) return false;
+                        case FaixaEtaria.adulto:
+                          if (idade < 18) return false;
+                      }
+
+                      return (aluno.nome.toLowerCase().contains(_searchQuery) ||
+                          aluno.cpf.contains(_searchQuery));
+                    }).toList();
 
                     if (alunosFiltrados.isEmpty) {
                       return Center(
                         child: Text(
                           'Nenhum aluno elegível encontrado',
                           style: TextStyle(
-                            color: isDark ? Colors.white70 : AppColors.textSecondary,
+                            color: isDark
+                                ? Colors.white70
+                                : AppColors.textSecondary,
                             fontSize: 16,
                           ),
                         ),
@@ -137,16 +156,16 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                       itemBuilder: (context, index) {
                         final aluno = alunosFiltrados[index];
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           child: Card(
                             elevation: 0,
                             color: cardBg,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(
-                                color: dividerColor,
-                                width: 1,
-                              ),
+                              side: BorderSide(color: dividerColor, width: 1),
                             ),
                             child: ListTile(
                               title: Text(
@@ -191,9 +210,12 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                     if (error is AppApiException) {
                       logger.e(error.message, error: error.error);
                     }
-                    return const Center(child: Text('Erro ao carregar os alunos'));
+                    return const Center(
+                      child: Text('Erro ao carregar os alunos'),
+                    );
                   },
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                 ),
               ),
             ],
@@ -217,10 +239,7 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
         title: Text(
           'Tem certeza?',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: textColor,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
         ),
         content: Text(
           'Tem certeza que quer colocar o aluno ${aluno.nomeReferencia} na turma ${widget.turma.nome}?',
@@ -246,12 +265,12 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
             ),
             onPressed: () async {
               try {
-                await service.atualizaAluno(
-                  aluno.id!,
-                  {'id_turma': widget.turma.id},
-                );
+                await service.atualizaAluno(aluno.id!, {
+                  'id_turma': widget.turma.id,
+                });
 
                 // Atualizar a lista de alunos e a presença da turma
+                ref.refresh(turmasStoreProvider.future);
                 ref.invalidate(pesquisaAlunoProvider);
                 ref.invalidate(presencaStoreProvider(widget.turma.id));
 
@@ -261,7 +280,9 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                 if (!mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('${aluno.nomeReferencia} matriculado com sucesso!'),
+                    content: Text(
+                      '${aluno.nomeReferencia} matriculado com sucesso!',
+                    ),
                     backgroundColor: AppColors.success,
                     behavior: SnackBarBehavior.floating,
                   ),

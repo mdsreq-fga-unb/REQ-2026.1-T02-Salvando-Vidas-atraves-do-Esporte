@@ -60,10 +60,12 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
       _filtrados = q.isEmpty
           ? _todos
           : _todos
-              .where((u) =>
-                  u.nome.toLowerCase().contains(q) ||
-                  u.email.toLowerCase().contains(q))
-              .toList();
+                .where(
+                  (u) =>
+                      u.nome.toLowerCase().contains(q) ||
+                      u.email.toLowerCase().contains(q),
+                )
+                .toList();
     });
   }
 
@@ -85,8 +87,7 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
             FocusManager.instance.primaryFocus?.unfocus();
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back,
-              color: textColor, size: 22),
+          icon: Icon(Icons.arrow_back, color: textColor, size: 22),
           label: Text(
             'Voltar',
             style: TextStyle(
@@ -130,7 +131,9 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
                   filled: true,
                   fillColor: Colors.transparent,
                   contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 14),
+                    horizontal: 20,
+                    vertical: 14,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
@@ -142,8 +145,11 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
                         color: AppColors.cyanPrimary,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.search,
-                          color: Colors.white, size: 20),
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -154,28 +160,28 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
             child: _carregando
                 ? const Center(child: CircularProgressIndicator())
                 : _erro != null
-                    ? Center(
-                        child: Text(_erro!,
-                            style:
-                                const TextStyle(color: AppColors.error)))
-                    : _filtrados.isEmpty
-                        ? const Center(
-                            child: Text('Nenhum voluntário encontrado.',
-                                style: TextStyle(
-                                    color: AppColors.textSecondary)))
-                        : ListView.separated(
-                            padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                            itemCount: _filtrados.length,
-                            separatorBuilder: (_, __) =>
-                                const SizedBox(height: 10),
-                            itemBuilder: (context, i) {
-                              final user = _filtrados[i];
-                              return _VoluntarioTile(
-                                user: user,
-                                onEditado: _carregar,
-                              );
-                            },
-                          ),
+                ? Center(
+                    child: Text(
+                      _erro!,
+                      style: const TextStyle(color: AppColors.error),
+                    ),
+                  )
+                : _filtrados.isEmpty
+                ? const Center(
+                    child: Text(
+                      'Nenhum voluntário encontrado.',
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
+                  )
+                : ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+                    itemCount: _filtrados.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (context, i) {
+                      final user = _filtrados[i];
+                      return _VoluntarioTile(user: user, onEditado: _carregar);
+                    },
+                  ),
           ),
         ],
       ),
@@ -225,8 +231,11 @@ class _VoluntarioTile extends StatelessWidget {
                   color: AppColors.cyanPrimary.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.person_outline,
-                    color: AppColors.cyanPrimary, size: 24),
+                child: const Icon(
+                  Icons.person_outline,
+                  color: AppColors.cyanPrimary,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -252,8 +261,11 @@ class _VoluntarioTile extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right,
-                  color: AppColors.cyanPrimary, size: 24),
+              const Icon(
+                Icons.chevron_right,
+                color: AppColors.cyanPrimary,
+                size: 24,
+              ),
             ],
           ),
         ),
@@ -276,8 +288,7 @@ class _EditarVoluntarioForm extends ConsumerStatefulWidget {
       _EditarVoluntarioFormState();
 }
 
-class _EditarVoluntarioFormState
-    extends ConsumerState<_EditarVoluntarioForm> {
+class _EditarVoluntarioFormState extends ConsumerState<_EditarVoluntarioForm> {
   final _formKey = GlobalKey<FormState>();
 
   late final MaskTextInputFormatter formatCPF;
@@ -333,6 +344,7 @@ class _EditarVoluntarioFormState
       'p_telefone': _telefone,
       'p_cpf': _cpf,
       'p_funcao': _funcao,
+      'p_faixa': _faixa.name,
       if (_senha.isNotEmpty) 'p_senha': _senha,
     };
 
@@ -370,26 +382,32 @@ class _EditarVoluntarioFormState
           builder: (ctx) => AlertDialog(
             backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16)),
+              borderRadius: BorderRadius.circular(16),
+            ),
             title: Text(
               'Deseja salvar as\nalterações?',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.deepNavy),
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.white : AppColors.deepNavy,
+              ),
             ),
             actionsAlignment: MainAxisAlignment.spaceEvenly,
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('Cancelar',
-                    style: TextStyle(color: AppColors.error)),
+                child: const Text(
+                  'Cancelar',
+                  style: TextStyle(color: AppColors.error),
+                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.deepNavy,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 onPressed: () => Navigator.pop(ctx, true),
                 child: const Text('Confirmar'),
@@ -418,8 +436,7 @@ class _EditarVoluntarioFormState
             FocusManager.instance.primaryFocus?.unfocus();
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back,
-              color: textColor, size: 22),
+          icon: Icon(Icons.arrow_back, color: textColor, size: 22),
           label: Text(
             'Voltar',
             style: TextStyle(
@@ -478,10 +495,9 @@ class _EditarVoluntarioFormState
                             initial: _nome,
                             hint: 'Digite o nome completo',
                             onChanged: (v) => _nome = v,
-                            validator: (v) =>
-                                (v == null || v.trim().isEmpty)
-                                    ? 'O nome é obrigatório'
-                                    : null,
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? 'O nome é obrigatório'
+                                : null,
                           ),
                           const SizedBox(height: 12),
                           _buildMaskedField(
@@ -491,10 +507,9 @@ class _EditarVoluntarioFormState
                             formatter: formatCPF,
                             onChanged: (_) =>
                                 _cpf = formatCPF.getUnmaskedText(),
-                            validator: (v) =>
-                                (v == null || v.trim().isEmpty)
-                                    ? 'O CPF é obrigatório'
-                                    : null,
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? 'O CPF é obrigatório'
+                                : null,
                           ),
                           const SizedBox(height: 12),
                           _buildMaskedField(
@@ -505,10 +520,9 @@ class _EditarVoluntarioFormState
                             keyboardType: TextInputType.phone,
                             onChanged: (_) =>
                                 _telefone = formatTelefone.getUnmaskedText(),
-                            validator: (v) =>
-                                (v == null || v.trim().isEmpty)
-                                    ? 'O telefone é obrigatório'
-                                    : null,
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? 'O telefone é obrigatório'
+                                : null,
                           ),
                           const SizedBox(height: 20),
                           _buildSectionTitle('Acesso ao Sistema'),
@@ -518,10 +532,9 @@ class _EditarVoluntarioFormState
                             hint: 'email@exemplo.com',
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (v) => _email = v,
-                            validator: (v) =>
-                                (v == null || v.trim().isEmpty)
-                                    ? 'O email é obrigatório'
-                                    : null,
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? 'O email é obrigatório'
+                                : null,
                           ),
                           const SizedBox(height: 12),
                           _buildField(
@@ -537,10 +550,9 @@ class _EditarVoluntarioFormState
                             initial: _funcao,
                             hint: 'Ex.: professor, monitor, apoio',
                             onChanged: (v) => _funcao = v,
-                            validator: (v) =>
-                                (v == null || v.trim().isEmpty)
-                                    ? 'A função é obrigatória'
-                                    : null,
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? 'A função é obrigatória'
+                                : null,
                           ),
                           const SizedBox(height: 12),
                           _buildFaixaDropdown(),
@@ -565,7 +577,9 @@ class _EditarVoluntarioFormState
                       child: const Text(
                         'Salvar Alterações',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -621,16 +635,20 @@ class _EditarVoluntarioFormState
               hintText: hint,
               filled: true,
               fillColor: fillColor,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    const BorderSide(color: AppColors.royalAzure, width: 1.2),
+                borderSide: const BorderSide(
+                  color: AppColors.royalAzure,
+                  width: 1.2,
+                ),
               ),
             ),
           ),
@@ -670,16 +688,20 @@ class _EditarVoluntarioFormState
               hintText: hint,
               filled: true,
               fillColor: fillColor,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    const BorderSide(color: AppColors.royalAzure, width: 1.2),
+                borderSide: const BorderSide(
+                  color: AppColors.royalAzure,
+                  width: 1.2,
+                ),
               ),
             ),
           ),
@@ -707,15 +729,25 @@ class _EditarVoluntarioFormState
             decoration: InputDecoration(
               filled: true,
               fillColor: fillColor,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
             ),
             items: Faixa.values
-                .map((f) => DropdownMenuItem(value: f, child: Text(f.nomeVisivel, style: TextStyle(color: textColor))))
+                .map(
+                  (f) => DropdownMenuItem(
+                    value: f,
+                    child: Text(
+                      f.nomeVisivel,
+                      style: TextStyle(color: textColor),
+                    ),
+                  ),
+                )
                 .toList(),
             onChanged: (value) {
               if (value != null) setState(() => _faixa = value);

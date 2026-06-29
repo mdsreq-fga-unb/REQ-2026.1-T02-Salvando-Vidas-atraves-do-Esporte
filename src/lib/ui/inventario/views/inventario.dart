@@ -36,7 +36,9 @@ class Inventario extends ConsumerWidget {
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+    final gradientColors = isDark
+        ? AppColors.bgGradientDark
+        : AppColors.bgGradientLight;
     final cardBg = isDark ? AppColors.darkSurface : Colors.white;
 
     return Scaffold(
@@ -55,157 +57,158 @@ class Inventario extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-              children: [
-                // Linha Superior: Cards de Estatísticas
-                Row(
                   children: [
-                    Expanded(
-                      child: _StatCard(
-                        title: 'Kimonos\nDisponíveis',
-                        value: '$kimonoDisponives',
-                        onTap: () => _abrirPopUpKimonos(context),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _StatCard(
-                        title: 'Kimonos\nEmprestados',
-                        value: '$kimonosEmprestados',
-                        onTap: () {
-                          // TODO: Implementar depois, se necessário
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-
-                // Seção Central: Lista de Alunos
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: cardBg,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: AppColors.cardShadow(isDark),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    // Linha Superior: Cards de Estatísticas
+                    Row(
                       children: [
-                        const Text(
-                          'Alunos com kimonos:',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                        Expanded(
+                          child: _StatCard(
+                            title: 'Kimonos\nDisponíveis',
+                            value: '$kimonoDisponives',
+                            onTap: () => _abrirPopUpKimonos(context),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(width: 16),
                         Expanded(
-                          child: store.when(
-                            data: ((data) {
-                              final emprestimos = data.emprestimos
-                                  .where((e) => e.dataDevolucao == null)
-                                  .toList();
-
-                              return RefreshIndicator(
-                                onRefresh: () => ref.refresh(
-                                  gestaoKimonosStoreProvider.future,
-                                ),
-                                child: ListView.builder(
-                                  itemCount: emprestimos.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 16.0,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 24,
-                                            backgroundColor:
-                                                Colors.grey.shade300,
-                                          ),
-                                          const SizedBox(width: 12),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  data
-                                                      .alunos[emprestimos[index]
-                                                          .alunoId]!
-                                                      .nome,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '${emprestimos[index].tamanho.nomeVisivel}, ${emprestimos[index].cor.nomeVisivel}',
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                            }),
-                            error: (error, stack) {
-                              if (error is AppApiException) {
-                                ref
-                                    .read(loggerProvider)
-                                    .e(error.message, error: error.error);
-                              }
-                              return const Center(
-                                child: Text(
-                                  'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
-                                ),
-                              );
+                          child: _StatCard(
+                            title: 'Kimonos\nEmprestados',
+                            value: '$kimonosEmprestados',
+                            onTap: () {
+                              // TODO: Implementar depois, se necessário
                             },
-                            loading: () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                const SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
-                // Linha Inferior: Botões de Ação
-                Row(
-                  children: [
+                    // Seção Central: Lista de Alunos
                     Expanded(
-                      child: _ActionCard(
-                        title: 'Doações &\nPerdas',
-                        onTap: () {
-                          context.push(Routes.doacoesPerdas);
-                        },
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: cardBg,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: AppColors.cardShadow(isDark),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Alunos com kimonos:',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Expanded(
+                              child: store.when(
+                                data: ((data) {
+                                  final emprestimos = data.emprestimos
+                                      .where((e) => e.dataDevolucao == null)
+                                      .toList();
+
+                                  return RefreshIndicator(
+                                    onRefresh: () => ref.refresh(
+                                      gestaoKimonosStoreProvider.future,
+                                    ),
+                                    child: ListView.builder(
+                                      itemCount: emprestimos.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 16.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 24,
+                                                backgroundColor:
+                                                    Colors.grey.shade300,
+                                              ),
+                                              const SizedBox(width: 12),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      data
+                                                          .alunos[emprestimos[index]
+                                                              .alunoId]!
+                                                          .nome,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '${emprestimos[index].tamanho.nomeVisivel}, ${emprestimos[index].cor.nomeVisivel}',
+                                                      style: TextStyle(
+                                                        color: Colors.black87,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }),
+                                error: (error, stack) {
+                                  if (error is AppApiException) {
+                                    ref
+                                        .read(loggerProvider)
+                                        .e(error.message, error: error.error);
+                                  }
+                                  return const Center(
+                                    child: Text(
+                                      'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
+                                    ),
+                                  );
+                                },
+                                loading: () => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _ActionCard(
-                        title: 'Emprestar/\nPegar de volta',
-                        onTap: () {
-                          context.push(Routes.emprestimoDevolucao);
-                        },
-                      ),
+                    const SizedBox(height: 16),
+
+                    // Linha Inferior: Botões de Ação
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _ActionCard(
+                            title: 'Doações &\nPerdas',
+                            onTap: () {
+                              context.push(Routes.doacoesPerdas);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _ActionCard(
+                            title: 'Emprestar/\nPegar de volta',
+                            onTap: () {
+                              context.push(Routes.emprestimoDevolucao);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
             ),
           ),
         ),
@@ -308,23 +311,27 @@ class _ActionCard extends StatelessWidget {
   }
 }
 
-class _PopUpKimonosDisponiveis extends StatefulWidget {
+class _PopUpKimonosDisponiveis extends ConsumerStatefulWidget {
   const _PopUpKimonosDisponiveis();
 
   @override
-  State<_PopUpKimonosDisponiveis> createState() =>
+  ConsumerState<_PopUpKimonosDisponiveis> createState() =>
       _PopUpKimonosDisponiveisState();
 }
 
-class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
+class _PopUpKimonosDisponiveisState
+    extends ConsumerState<_PopUpKimonosDisponiveis> {
   String? tamanhoSelecionado;
   String? corSelecionada;
 
   final List<String> tamanhos = ['A0', 'A1', 'A2', 'A3', 'A4', 'A5'];
   final List<String> cores = ['Branco', 'Azul', 'Preto', 'Rosa'];
+  TamanhoKimono? _tamanho;
+  CorKimono? _cor;
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(gestaoKimonosStoreProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final innerBg = isDark ? AppColors.darkBg : Colors.blueGrey.shade50;
     final dropBg = isDark ? AppColors.darkInputFill : Colors.white;
@@ -358,20 +365,35 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
+                              child: DropdownButton<TamanhoKimono?>(
                                 isExpanded: true,
-                                dropdownColor: isDark ? AppColors.darkSurface : Colors.white,
-                                hint: Text('Tamanho', style: TextStyle(color: isDark ? Colors.white70 : Colors.black54)),
-                                value: tamanhoSelecionado,
-                                items: tamanhos.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value, style: TextStyle(color: isDark ? Colors.white : Colors.black87)),
-                                  );
-                                }).toList(),
+                                dropdownColor: isDark
+                                    ? AppColors.darkSurface
+                                    : Colors.white,
+                                hint: Text(
+                                  'Tamanho',
+                                  style: TextStyle(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black54,
+                                  ),
+                                ),
+                                value: _tamanho,
+                                items: [
+                                  const DropdownMenuItem<TamanhoKimono?>(
+                                    value: null,
+                                    child: Text('Qualquer Tamanho'),
+                                  ),
+                                  ...TamanhoKimono.values.map(
+                                    (t) => DropdownMenuItem(
+                                      value: t,
+                                      child: Text(t.nomeVisivel),
+                                    ),
+                                  ),
+                                ],
                                 onChanged: (newValue) {
                                   setState(() {
-                                    tamanhoSelecionado = newValue;
+                                    _tamanho = newValue;
                                   });
                                 },
                               ),
@@ -387,20 +409,35 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
+                              child: DropdownButton<CorKimono?>(
                                 isExpanded: true,
-                                dropdownColor: isDark ? AppColors.darkSurface : Colors.white,
-                                hint: Text('Cor', style: TextStyle(color: isDark ? Colors.white70 : Colors.black54)),
-                                value: corSelecionada,
-                                items: cores.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value, style: TextStyle(color: isDark ? Colors.white : Colors.black87)),
-                                  );
-                                }).toList(),
+                                dropdownColor: isDark
+                                    ? AppColors.darkSurface
+                                    : Colors.white,
+                                hint: Text(
+                                  'Cor',
+                                  style: TextStyle(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black54,
+                                  ),
+                                ),
+                                value: _cor,
+                                items: [
+                                  const DropdownMenuItem<CorKimono?>(
+                                    value: null,
+                                    child: Text('Qualquer Cor'),
+                                  ),
+                                  ...CorKimono.values.map(
+                                    (c) => DropdownMenuItem(
+                                      value: c,
+                                      child: Text(c.nomeVisivel),
+                                    ),
+                                  ),
+                                ],
                                 onChanged: (newValue) {
                                   setState(() {
-                                    corSelecionada = newValue;
+                                    _cor = newValue;
                                   });
                                 },
                               ),
@@ -413,27 +450,67 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
 
                     // Lista de Kimonos disponíveis
                     Expanded(
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              children: [
-                                Icon(Icons.sports_martial_arts, size: 28, color: isDark ? Colors.white : Colors.black87),
-                                const SizedBox(width: 16),
-                                Text(
-                                  'A3, Branco',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: isDark ? Colors.white : Colors.black87,
-                                  ),
+                      child: state.when(
+                        data: (data) {
+                          final estoque = data.estoque.where((e) {
+                            if (_tamanho != null && e.tamanho != _tamanho) {
+                              return false;
+                            }
+
+                            if (_cor != null && e.cor != _cor) {
+                              return false;
+                            }
+
+                            return true;
+                          }).toList();
+                          return ListView.builder(
+                            itemCount: estoque.length,
+                            itemBuilder: (context, index) {
+                              final kimono = estoque[index];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
                                 ),
-                              ],
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.sports_martial_arts,
+                                      size: 28,
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.black87,
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Text(
+                                      '${kimono.tamanho.nomeVisivel}, ${kimono.cor.nomeVisivel}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: isDark
+                                            ? Colors.white
+                                            : Colors.black87,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        error: (error, stack) {
+                          if (error is AppApiException) {
+                            ref
+                                .read(loggerProvider)
+                                .e(error.message, error: error.error);
+                          }
+                          return const Center(
+                            child: Text(
+                              'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
                             ),
                           );
                         },
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
                       ),
                     ),
                   ],

@@ -95,7 +95,9 @@ class _EmprestimoDevolucaoPageState
     final store = ref.read(gestaoEmprestimosStoreProvider.notifier);
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+    final gradientColors = isDark
+        ? AppColors.bgGradientDark
+        : AppColors.bgGradientLight;
 
     return Scaffold(
       body: Container(
@@ -141,23 +143,23 @@ class _EmprestimoDevolucaoPageState
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Centraliza verticalmente
-              children: [
-                _buildMenuButton(
-                  title: 'Emprestar Kimono',
-                  color: AppColors.royalAzure,
-                  onTap: () => setState(() => viewState = 'emprestar_aluno'),
-                ),
-                const SizedBox(height: 24),
-                _buildMenuButton(
-                  title: 'Recuperar Kimono',
-                  color: AppColors.cyanPrimary,
-                  onTap: () => setState(() => viewState = 'recuperar_aluno'),
-                ),
-              ],
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // Centraliza verticalmente
+                children: [
+                  _buildMenuButton(
+                    title: 'Emprestar Kimono',
+                    color: AppColors.royalAzure,
+                    onTap: () => setState(() => viewState = 'emprestar_aluno'),
+                  ),
+                  const SizedBox(height: 24),
+                  _buildMenuButton(
+                    title: 'Recuperar Kimono',
+                    color: AppColors.cyanPrimary,
+                    onTap: () => setState(() => viewState = 'recuperar_aluno'),
+                  ),
+                ],
+              ),
             ),
-          ),
           ),
         ),
       ],
@@ -214,115 +216,117 @@ class _EmprestimoDevolucaoPageState
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildBackButton(
-                onPressed: () => setState(() => viewState = 'escolha'),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                isEmprestar ? 'Emprestar Kimono para:' : 'Pegar kimono de:',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                style: TextStyle(color: textColor),
-                decoration: InputDecoration(
-                  hintText: 'Buscar aluno...',
-                  hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.black54),
-                  prefixIcon: Icon(Icons.search, color: textColor),
-                  filled: true,
-                  fillColor: inputBg,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildBackButton(
+                    onPressed: () => setState(() => viewState = 'escolha'),
                   ),
-                ),
-                onChanged: (val) => store.updateFiltroAluno(val),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: listBg,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: AppColors.cardShadow(isDark),
+                  const SizedBox(height: 16),
+                  Text(
+                    isEmprestar ? 'Emprestar Kimono para:' : 'Pegar kimono de:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
                   ),
-                  child: state.when(
-                    data: (data) {
-                      final alunosEmprestimos = data.emprestimos.map((e) {
-                        if (e.dataDevolucao == null) return e.alunoId;
-                      }).toList();
-                      late final List<Aluno> alunos;
-                      if (isEmprestar) {
-                        alunos = data.alunosFiltrados
-                            .where((a) => !alunosEmprestimos.contains(a.id))
-                            .toList();
-                      } else {
-                        alunos = data.alunosFiltrados
-                            .where((a) => alunosEmprestimos.contains(a.id))
-                            .toList();
-                      }
+                  const SizedBox(height: 16),
+                  TextField(
+                    style: TextStyle(color: textColor),
+                    decoration: InputDecoration(
+                      hintText: 'Buscar aluno...',
+                      hintStyle: TextStyle(
+                        color: isDark ? Colors.white54 : Colors.black54,
+                      ),
+                      prefixIcon: Icon(Icons.search, color: textColor),
+                      filled: true,
+                      fillColor: inputBg,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    onChanged: (val) => store.updateFiltroAluno(val),
+                  ),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: listBg,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: AppColors.cardShadow(isDark),
+                      ),
+                      child: state.when(
+                        data: (data) {
+                          final alunosEmprestimos = data.emprestimos.map((e) {
+                            if (e.dataDevolucao == null) return e.alunoId;
+                          }).toList();
+                          late final List<Aluno> alunos;
+                          if (isEmprestar) {
+                            alunos = data.alunosFiltrados
+                                .where((a) => !alunosEmprestimos.contains(a.id))
+                                .toList();
+                          } else {
+                            alunos = data.alunosFiltrados
+                                .where((a) => alunosEmprestimos.contains(a.id))
+                                .toList();
+                          }
 
-                      return ListView.separated(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: alunos.length,
-                        separatorBuilder: (_, _) => const Divider(),
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.grey.shade300,
-                            ),
-                            title: Text(
-                              alunos[index].nome,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            onTap: () {
-                              final aluno = alunos[index];
-                              final emprestimo = data.emprestimos
-                                  .firstWhereOrNull(
-                                    (e) =>
-                                        e.dataDevolucao == null &&
-                                        e.alunoId == aluno.id,
-                                  );
-                              if (isEmprestar) {
-                                _showPopUpSelecaoKimono(aluno);
-                              } else {
-                                _showPopUpConfirmacaoRecuperar(
-                                  aluno,
-                                  emprestimo!,
-                                );
-                              }
+                          return ListView.separated(
+                            padding: const EdgeInsets.all(8),
+                            itemCount: alunos.length,
+                            separatorBuilder: (_, _) => const Divider(),
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor: Colors.grey.shade300,
+                                ),
+                                title: Text(
+                                  alunos[index].nome,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                onTap: () {
+                                  final aluno = alunos[index];
+                                  final emprestimo = data.emprestimos
+                                      .firstWhereOrNull(
+                                        (e) =>
+                                            e.dataDevolucao == null &&
+                                            e.alunoId == aluno.id,
+                                      );
+                                  if (isEmprestar) {
+                                    _showPopUpSelecaoKimono(aluno);
+                                  } else {
+                                    _showPopUpConfirmacaoRecuperar(
+                                      aluno,
+                                      emprestimo!,
+                                    );
+                                  }
+                                },
+                              );
                             },
                           );
                         },
-                      );
-                    },
-                    error: (error, stack) {
-                      if (error is AppApiException) {
-                        ref
-                            .read(loggerProvider)
-                            .e(error.message, error: error.error);
-                      }
-                      return const Center(
-                        child: Text(
-                          'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
-                        ),
-                      );
-                    },
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
+                        error: (error, stack) {
+                          if (error is AppApiException) {
+                            ref
+                                .read(loggerProvider)
+                                .e(error.message, error: error.error);
+                          }
+                          return const Center(
+                            child: Text(
+                              'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
+                            ),
+                          );
+                        },
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
             ),
           ),
         );
@@ -366,7 +370,7 @@ class _EmprestimoDevolucaoPageState
                                 items: [
                                   const DropdownMenuItem<TamanhoKimono?>(
                                     value: null,
-                                    child: Text('Qualquer tamanho'),
+                                    child: Text('Qualquer'),
                                   ),
                                   ...TamanhoKimono.values.map(
                                     (t) => DropdownMenuItem(
@@ -387,7 +391,7 @@ class _EmprestimoDevolucaoPageState
                                 items: [
                                   const DropdownMenuItem<CorKimono?>(
                                     value: null,
-                                    child: Text('Qualquer cor'),
+                                    child: Text('Qualquer'),
                                   ),
                                   ...CorKimono.values.map(
                                     (c) => DropdownMenuItem(

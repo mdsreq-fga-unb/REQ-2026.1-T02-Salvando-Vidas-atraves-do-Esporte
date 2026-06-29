@@ -41,7 +41,7 @@ class UserService {
         email: email,
         password: password,
       );
-    });
+    }, timeout: 5);
 
     if (authResponse.user == null) return false;
 
@@ -74,7 +74,7 @@ class UserService {
         return LocalUser.fromMap(data.first);
       }
       return null;
-    });
+    }, timeout: 5);
   }
 
   Future<List<LocalUser>> listUsers() async {

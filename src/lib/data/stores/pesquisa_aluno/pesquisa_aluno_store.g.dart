@@ -35,7 +35,7 @@ final class PesquisaAlunoProvider
   PesquisaAluno create() => PesquisaAluno();
 }
 
-String _$pesquisaAlunoHash() => r'4be95cf270bed3eaa3c2bbd2bdb542ef974954ee';
+String _$pesquisaAlunoHash() => r'0e44938e8be851b261c552e9117dd98a67cd3ca1';
 
 abstract class _$PesquisaAluno extends $AsyncNotifier<PesquisaAlunoState> {
   FutureOr<PesquisaAlunoState> build();

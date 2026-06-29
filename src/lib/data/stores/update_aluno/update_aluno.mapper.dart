@@ -53,16 +53,14 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
     _$apelido,
     opt: true,
   );
-  static bool _$usarApelidoComoReferencia(UpdateAlunoState v) =>
-      v.usarApelidoComoReferencia;
-  static const Field<UpdateAlunoState, bool> _f$usarApelidoComoReferencia =
-      Field(
-        'usarApelidoComoReferencia',
-        _$usarApelidoComoReferencia,
-        key: r'usar_apelido_como_referencia',
-        opt: true,
-        def: false,
-      );
+  static bool _$usarApelido(UpdateAlunoState v) => v.usarApelido;
+  static const Field<UpdateAlunoState, bool> _f$usarApelido = Field(
+    'usarApelido',
+    _$usarApelido,
+    key: r'usar_apelido',
+    opt: true,
+    def: false,
+  );
   static String _$cpf(UpdateAlunoState v) => v.cpf;
   static const Field<UpdateAlunoState, String> _f$cpf = Field(
     'cpf',
@@ -180,7 +178,7 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
     #responsavelOriginal: _f$responsavelOriginal,
     #nome: _f$nome,
     #apelido: _f$apelido,
-    #usarApelidoComoReferencia: _f$usarApelidoComoReferencia,
+    #usarApelido: _f$usarApelido,
     #cpf: _f$cpf,
     #contato: _f$contato,
     #contatoEmergencia: _f$contatoEmergencia,
@@ -204,7 +202,7 @@ class UpdateAlunoStateMapper extends ClassMapperBase<UpdateAlunoState> {
       responsavelOriginal: data.dec(_f$responsavelOriginal),
       nome: data.dec(_f$nome),
       apelido: data.dec(_f$apelido),
-      usarApelidoComoReferencia: data.dec(_f$usarApelidoComoReferencia),
+      usarApelido: data.dec(_f$usarApelido),
       cpf: data.dec(_f$cpf),
       contato: data.dec(_f$contato),
       contatoEmergencia: data.dec(_f$contatoEmergencia),
@@ -292,7 +290,7 @@ abstract class UpdateAlunoStateCopyWith<$R, $In extends UpdateAlunoState, $Out>
     Responsavel? responsavelOriginal,
     String? nome,
     String? apelido,
-    bool? usarApelidoComoReferencia,
+    bool? usarApelido,
     String? cpf,
     String? contato,
     String? contatoEmergencia,
@@ -336,7 +334,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
     Object? responsavelOriginal = $none,
     String? nome,
     Object? apelido = $none,
-    bool? usarApelidoComoReferencia,
+    bool? usarApelido,
     String? cpf,
     String? contato,
     String? contatoEmergencia,
@@ -359,8 +357,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
         #responsavelOriginal: responsavelOriginal,
       if (nome != null) #nome: nome,
       if (apelido != $none) #apelido: apelido,
-      if (usarApelidoComoReferencia != null)
-        #usarApelidoComoReferencia: usarApelidoComoReferencia,
+      if (usarApelido != null) #usarApelido: usarApelido,
       if (cpf != null) #cpf: cpf,
       if (contato != null) #contato: contato,
       if (contatoEmergencia != null) #contatoEmergencia: contatoEmergencia,
@@ -387,10 +384,7 @@ class _UpdateAlunoStateCopyWithImpl<$R, $Out>
     ),
     nome: data.get(#nome, or: $value.nome),
     apelido: data.get(#apelido, or: $value.apelido),
-    usarApelidoComoReferencia: data.get(
-      #usarApelidoComoReferencia,
-      or: $value.usarApelidoComoReferencia,
-    ),
+    usarApelido: data.get(#usarApelido, or: $value.usarApelido),
     cpf: data.get(#cpf, or: $value.cpf),
     contato: data.get(#contato, or: $value.contato),
     contatoEmergencia: data.get(

@@ -25,9 +25,12 @@ extension FutureTimeout<T> on Future<T> {
 }
 
 // Em vez de retornar Result<T>, retornamos T diretamente e lançamos exceções amigáveis
-Future<T> runSupabaseCall<T>(Future<T> Function() action) async {
+Future<T> runSupabaseCall<T>(
+  Future<T> Function() action, {
+  int timeout = 3,
+}) async {
   try {
-    return await action().withDefaultTimeout();
+    return await action().withDefaultTimeout(seconds: timeout);
   } on AppApiException {
     rethrow;
   } on AuthApiException catch (e) {

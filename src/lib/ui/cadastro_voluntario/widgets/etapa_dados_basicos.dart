@@ -18,7 +18,8 @@ class EtapaDadosBasicos extends ConsumerStatefulWidget {
 class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
   late final MaskTextInputFormatter formatCPF;
   late final MaskTextInputFormatter formatTelefone;
-  late final MaskTextInputFormatter formatTelefoneEmergencia; // Máscara dedicada para evitar conflitos
+  late final MaskTextInputFormatter
+  formatTelefoneEmergencia; // Máscara dedicada para evitar conflitos
   late final MaskTextInputFormatter formatData;
   final TextEditingController _dataController = TextEditingController();
 
@@ -27,9 +28,10 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
     super.initState();
     formatCPF = maskCPF();
     formatTelefone = maskTelefone();
-    formatTelefoneEmergencia = maskTelefone(); // Instância separada para o emergência
+    formatTelefoneEmergencia =
+        maskTelefone(); // Instância separada para o emergência
     formatData = MaskTextInputFormatter(
-      mask: '##/##/####', 
+      mask: '##/##/####',
       filter: {"#": RegExp(r'[0-9]')},
     );
   }
@@ -82,23 +84,28 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                   label: 'Apelido (opcional)',
                   hint: 'Como o aluno gosta de ser chamado',
                 ),
-                if (cadastro.apelido != null && cadastro.apelido!.isNotEmpty) ...[
+                if (cadastro.apelido != null &&
+                    cadastro.apelido!.isNotEmpty) ...[
                   const SizedBox(height: 6),
                   SwitchListTile(
                     contentPadding: EdgeInsets.zero,
                     title: const Text(
                       'Usar apelido como referência principal nas chamadas e listas',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    value: cadastro.usarApelidoComoReferencia,
-                    onChanged: notifier.updateUsarApelidoComoReferencia,
+                    value: cadastro.usarApelido,
+                    onChanged: notifier.updateUsarApelido,
                     activeColor: AppColors.royalAzure,
                   ),
                 ],
                 const SizedBox(height: 14),
                 InputField(
                   initialValue: formatCPF.maskText(cadastro.cpf),
-                  update: (_) => notifier.updateCPF(formatCPF.getUnmaskedText()),
+                  update: (_) =>
+                      notifier.updateCPF(formatCPF.getUnmaskedText()),
                   error: cadastro.cpfError,
                   label: 'CPF*',
                   hint: '000.000.000-00',
@@ -119,13 +126,16 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                   inputFormatters: [formatTelefone],
                 ),
                 const SizedBox(height: 14),
-                
+
                 // NOVO CAMPO: Contato de Emergência
                 InputField(
                   // Assume que o estado retorna uma string vazia se for nulo para não quebrar a máscara
-                  initialValue: formatTelefoneEmergencia.maskText(cadastro.contatoEmergencia ?? ''),
-                  update: (_) =>
-                      notifier.updateContatoEmergencia(formatTelefoneEmergencia.getUnmaskedText()),
+                  initialValue: formatTelefoneEmergencia.maskText(
+                    cadastro.contatoEmergencia ?? '',
+                  ),
+                  update: (_) => notifier.updateContatoEmergencia(
+                    formatTelefoneEmergencia.getUnmaskedText(),
+                  ),
                   error: cadastro.contatoEmergenciaError,
                   label: 'Contato de Emergência*',
                   hint: '(00) 00000-0000',
@@ -145,20 +155,28 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                   validatorMessage: 'O email é obrigatório',
                 ),
                 const SizedBox(height: 14),
-                
+
                 buildLabel('Aniversário*'),
                 const SizedBox(height: 6),
                 Builder(
                   builder: (context) {
-                    final isDark = Theme.of(context).brightness == Brightness.dark;
-                    final textColor = isDark ? Colors.white : AppColors.deepNavy;
-                    final fill = isDark ? AppColors.darkSurface : AppColors.inputFill;
+                    final isDark =
+                        Theme.of(context).brightness == Brightness.dark;
+                    final textColor = isDark
+                        ? Colors.white
+                        : AppColors.deepNavy;
+                    final fill = isDark
+                        ? AppColors.darkSurface
+                        : AppColors.inputFill;
                     final hint = isDark ? Colors.white54 : Colors.black54;
                     return TextFormField(
                       controller: _dataController,
                       keyboardType: TextInputType.number,
                       inputFormatters: [formatData],
-                      style: TextStyle(color: textColor, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        color: textColor,
+                        fontWeight: FontWeight.w600,
+                      ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         hintText: 'DD/MM/AAAA',
@@ -175,11 +193,17 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                           vertical: 12,
                         ),
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.calendar_today, color: isDark ? AppColors.cyanPrimary : AppColors.deepNavy),
+                          icon: Icon(
+                            Icons.calendar_today,
+                            color: isDark
+                                ? AppColors.cyanPrimary
+                                : AppColors.deepNavy,
+                          ),
                           onPressed: () async {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: cadastro.nascimento ?? DateTime.now(),
+                              initialDate:
+                                  cadastro.nascimento ?? DateTime.now(),
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                             );
@@ -204,11 +228,12 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                           }
                         }
                       },
-                      validator: (value) => (value == null || value.isEmpty || value.length < 10)
+                      validator: (value) =>
+                          (value == null || value.isEmpty || value.length < 10)
                           ? 'A data é obrigatória e deve ser válida'
                           : null,
                     );
-                  }
+                  },
                 ),
                 const SizedBox(height: 14),
                 buildDropdownField(

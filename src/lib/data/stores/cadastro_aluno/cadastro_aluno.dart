@@ -11,7 +11,7 @@ part 'cadastro_aluno.mapper.dart';
 class CadastroAlunoState with CadastroAlunoStateMappable {
   final String nome;
   final String? apelido;
-  final bool usarApelidoComoReferencia;
+  final bool usarApelido;
   final String cpf;
   final String contato;
   final String contatoEmergencia; // NOVA VARIÁVEL
@@ -23,6 +23,14 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
   final String idFicha;
   final bool dirty;
 
+  final bool pMedica1;
+  final bool pMedica2;
+  final bool pMedica3;
+  final bool pMedica4;
+  final bool pMedica5;
+
+  final String? observacaoMedica;
+
   final String nomeResponsavel;
   final String cpfResponsavel;
   final String contatoResponsavel;
@@ -31,7 +39,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
   CadastroAlunoState({
     this.nome = '',
     this.apelido,
-    this.usarApelidoComoReferencia = false,
+    this.usarApelido = false,
     this.cpf = '',
     this.contato = '',
     this.contatoEmergencia = '',
@@ -41,6 +49,12 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     this.faixa,
     this.grau = 0,
     this.idFicha = '',
+    this.pMedica1 = false,
+    this.pMedica2 = false,
+    this.pMedica3 = false,
+    this.pMedica4 = false,
+    this.pMedica5 = false,
+    this.observacaoMedica = '',
     this.nomeResponsavel = '',
     this.cpfResponsavel = '',
     this.contatoResponsavel = '',
@@ -148,7 +162,7 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
   Aluno get aluno => Aluno(
     nome: nome,
     apelido: apelido,
-    usarApelidoComoReferencia: usarApelidoComoReferencia,
+    usarApelido: usarApelido,
     cpf: cpf,
     contato: contato,
     contatoEmergencia: contatoEmergencia,
@@ -161,6 +175,12 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     federado: false,
     dataEntrada: DateTime.now(),
     idFicha: int.tryParse(idFicha),
+    pMedica1: pMedica1,
+    pMedica2: pMedica2,
+    pMedica3: pMedica3,
+    pMedica4: pMedica4,
+    pMedica5: pMedica5,
+    observacaoMedica: observacaoMedica,
   );
 
   Responsavel get responsavel => Responsavel(
@@ -188,17 +208,17 @@ class CadastroAluno extends _$CadastroAluno {
     final novoUsarReferencia = ap == null
         ? false
         : ((state.apelido == null || state.apelido!.isEmpty)
-            ? true
-            : state.usarApelidoComoReferencia);
+              ? true
+              : state.usarApelido);
     state = state.copyWith(
       apelido: ap,
-      usarApelidoComoReferencia: novoUsarReferencia,
+      usarApelido: novoUsarReferencia,
       dirty: true,
     );
   }
 
-  void updateUsarApelidoComoReferencia(bool value) {
-    state = state.copyWith(usarApelidoComoReferencia: value, dirty: true);
+  void updateUsarApelido(bool value) {
+    state = state.copyWith(usarApelido: value, dirty: true);
   }
 
   void updateCPF(String value) {
@@ -247,6 +267,30 @@ class CadastroAluno extends _$CadastroAluno {
 
   void updateEmailResponsavel(String value) {
     state = state.copyWith(emailResponsavel: value, dirty: true);
+  }
+
+  void updatePMedica1(bool value) {
+    state = state.copyWith(pMedica1: value);
+  }
+
+  void updatePMedica2(bool value) {
+    state = state.copyWith(pMedica2: value);
+  }
+
+  void updatePMedica3(bool value) {
+    state = state.copyWith(pMedica3: value);
+  }
+
+  void updatePMedica4(bool value) {
+    state = state.copyWith(pMedica4: value);
+  }
+
+  void updatePMedica5(bool value) {
+    state = state.copyWith(pMedica5: value);
+  }
+
+  void updateObservacaoMedica(String? value) {
+    state = state.copyWith(observacaoMedica: value);
   }
 
   void reset() {

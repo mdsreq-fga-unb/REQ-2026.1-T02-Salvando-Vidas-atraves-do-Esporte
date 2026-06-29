@@ -1,3 +1,4 @@
+import 'package:salvando_vidas/data/stores/turmas/turmas_store.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/data/stores/presenca/presenca_store.dart';
 import 'package:salvando_vidas/data/services/aluno_service/aluno_service.dart';
@@ -12,12 +13,19 @@ class TurmaDetail extends ConsumerWidget {
 
   const TurmaDetail({super.key, required this.turma});
 
-  void _confirmarDesmatricula(BuildContext context, WidgetRef ref, String nomeAluno, int alunoId) {
+  void _confirmarDesmatricula(
+    BuildContext context,
+    WidgetRef ref,
+    String nomeAluno,
+    int alunoId,
+  ) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
     final textColor = isDark ? Colors.white : AppColors.deepNavy;
     final cancelColor = isDark ? Colors.white70 : AppColors.error;
-    final btnBg = isDark ? AppColors.cyanPrimary : const Color.fromARGB(255, 53, 188, 229);
+    final btnBg = isDark
+        ? AppColors.cyanPrimary
+        : const Color.fromARGB(255, 53, 188, 229);
 
     showDialog(
       context: context,
@@ -27,19 +35,13 @@ class TurmaDetail extends ConsumerWidget {
         title: Text(
           'Deseja desmatricular o(a) aluno(a) $nomeAluno dessa turma?',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: textColor,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(
-              'Cancelar',
-              style: TextStyle(color: cancelColor),
-            ),
+            child: Text('Cancelar', style: TextStyle(color: cancelColor)),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -60,15 +62,20 @@ class TurmaDetail extends ConsumerWidget {
     );
   }
 
-  Future<void> _desmatricularAluno(BuildContext context, WidgetRef ref, int alunoId) async {
+  Future<void> _desmatricularAluno(
+    BuildContext context,
+    WidgetRef ref,
+    int alunoId,
+  ) async {
     try {
       final alunoService = ref.read(alunoServiceProvider);
       await alunoService.atualizaAluno(alunoId, {'id_turma': null});
-      
+
       // Refresh stores
+      ref.refresh(turmasStoreProvider.future);
       ref.invalidate(presencaStoreProvider(turma.id));
       ref.invalidate(pesquisaAlunoProvider);
-      
+
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -145,9 +152,7 @@ class TurmaDetail extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        TurmaOptionsMenuWidget(
-                          turmaId: turma.id,
-                        ),
+                        TurmaOptionsMenuWidget(turmaId: turma.id),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -156,11 +161,20 @@ class TurmaDetail extends ConsumerWidget {
                       style: const TextStyle(color: AppColors.textSecondary),
                     ),
                     const SizedBox(height: 4),
-                    Text('Alunos matriculados: ${store.value?.alunos.length ?? 0}', style: TextStyle(color: isDark ? Colors.white70 : Colors.black87)),
+                    Text(
+                      'Alunos matriculados: ${store.value?.alunos.length ?? 0}',
+                      style: TextStyle(
+                        color: isDark ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
                     const SizedBox(height: 24),
                     Text(
                       'Alunos',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textColor),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: textColor,
+                      ),
                     ),
                   ],
                 ),
@@ -168,25 +182,38 @@ class TurmaDetail extends ConsumerWidget {
               Expanded(
                 child: store.when(
                   data: (data) {
-	                    return ListView.builder(
-	                      itemCount: data.alunos.length,
-	                      itemBuilder: (context, index) {
-	                        final aluno = data.alunos[index];
-	                        return AlunoTileWidget(
-                            nome: aluno.nomeReferencia,
-                            onTap: () => mostrarHistoricoFrequenciaAlunoDialog(context, aluno),
-                            onRemover: () => _confirmarDesmatricula(context, ref, aluno.nomeReferencia, aluno.id!),
-                          );
-	                      },
-	                    );
+                    return ListView.builder(
+                      itemCount: data.alunos.length,
+                      itemBuilder: (context, index) {
+                        final aluno = data.alunos[index];
+                        return AlunoTileWidget(
+                          nome: aluno.nomeReferencia,
+                          onTap: () => mostrarHistoricoFrequenciaAlunoDialog(
+                            context,
+                            aluno,
+                          ),
+                          onRemover: () => _confirmarDesmatricula(
+                            context,
+                            ref,
+                            aluno.nomeReferencia,
+                            aluno.id!,
+                          ),
+                        );
+                      },
+                    );
                   },
                   error: (error, stack) {
                     if (error is AppApiException) {
-                      ref.read(loggerProvider).e(error.message, error: error.error);
+                      ref
+                          .read(loggerProvider)
+                          .e(error.message, error: error.error);
                     }
-                    return const Center(child: Text('Erro ao carregar os alunos'));
+                    return const Center(
+                      child: Text('Erro ao carregar os alunos'),
+                    );
                   },
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                 ),
               ),
               Padding(
@@ -215,7 +242,10 @@ class TurmaDetail extends ConsumerWidget {
                         },
                         child: const Text(
                           'Matricular Aluno',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
@@ -226,10 +256,7 @@ class TurmaDetail extends ConsumerWidget {
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
                           foregroundColor: outlineColor,
-                          side: BorderSide(
-                            color: outlineColor,
-                            width: 2,
-                          ),
+                          side: BorderSide(color: outlineColor, width: 2),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -245,7 +272,10 @@ class TurmaDetail extends ConsumerWidget {
                         },
                         child: const Text(
                           'Registrar Frequência',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),

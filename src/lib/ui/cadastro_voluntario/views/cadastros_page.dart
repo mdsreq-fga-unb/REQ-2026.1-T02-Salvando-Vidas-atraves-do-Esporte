@@ -57,10 +57,12 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
 
   void _avancar() {
     if (_etapaAtual == 1) {
-      if (_respostasMedicas.values.contains(null) || !_termoResponsabilidadeAceito) {
+      if (!_termoResponsabilidadeAceito) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Responda todas as perguntas médicas e aceite o Termo de Responsabilidade para continuar.'),
+            content: Text(
+              'Responda todas as perguntas médicas e aceite o Termo de Responsabilidade para continuar.',
+            ),
             backgroundColor: AppColors.error,
             behavior: SnackBarBehavior.floating,
           ),
@@ -123,7 +125,9 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: isDark ? AppColors.cyanPrimary : AppColors.deepNavy,
+              backgroundColor: isDark
+                  ? AppColors.cyanPrimary
+                  : AppColors.deepNavy,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -215,7 +219,9 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = isDark ? Colors.white : AppColors.deepNavy;
     final cardBg = isDark ? AppColors.darkSurface : Colors.white;
-    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+    final gradientColors = isDark
+        ? AppColors.bgGradientDark
+        : AppColors.bgGradientLight;
 
     return Scaffold(
       // AJUSTE: Novo botão customizado de voltar com texto e navegação explícita
@@ -229,11 +235,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                 ?.unfocus(); // Fecha o teclado preventivamente
             context.go(Routes.home); // Manda o app direto para a HomePage
           },
-          icon: Icon(
-            Icons.arrow_back,
-            color: primaryColor,
-            size: 22,
-          ),
+          icon: Icon(Icons.arrow_back, color: primaryColor, size: 22),
           label: Text(
             'Voltar',
             style: TextStyle(
@@ -293,12 +295,11 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                             EtapaDadosBasicos(formKey: _formKeyEtapa1),
                             EtapaDadosMedicos(
                               formKey: _formKeyEtapa2,
-                              respostas: _respostasMedicas,
-                              onRespostaChanged: (id, value) =>
-                                  setState(() => _respostasMedicas[id] = value),
-                              obsController: _obsMedicasController,
                               termoAceito: _termoResponsabilidadeAceito,
-                              onTermoChanged: (val) => setState(() => _termoResponsabilidadeAceito = val ?? false),
+                              onTermoChanged: (val) => setState(
+                                () =>
+                                    _termoResponsabilidadeAceito = val ?? false,
+                              ),
                             ),
                             EtapaDadosResponsavel(formKey: _formKeyEtapa3),
                           ],
@@ -326,8 +327,12 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                           ElevatedButton(
                             onPressed: _avancar,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: isDark ? AppColors.cyanPrimary : AppColors.deepNavy,
-                              foregroundColor: isDark ? Colors.black : Colors.white,
+                              backgroundColor: isDark
+                                  ? AppColors.cyanPrimary
+                                  : AppColors.deepNavy,
+                              foregroundColor: isDark
+                                  ? Colors.black
+                                  : Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),

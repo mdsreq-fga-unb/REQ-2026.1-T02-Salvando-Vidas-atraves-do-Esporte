@@ -99,10 +99,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         title: Text(
           'Deseja salvar as\nalterações?',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: textColor,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: [
@@ -187,11 +184,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             FocusManager.instance.primaryFocus?.unfocus();
             Navigator.pop(context);
           },
-          icon: Icon(
-            Icons.arrow_back,
-            color: textColor,
-            size: 22,
-          ),
+          icon: Icon(Icons.arrow_back, color: textColor, size: 22),
           label: Text(
             'Voltar',
             style: TextStyle(
@@ -217,7 +210,9 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: isDark ? Colors.black.withValues(alpha: 0.3) : AppColors.shadowLight,
+                  color: isDark
+                      ? Colors.black.withValues(alpha: 0.3)
+                      : AppColors.shadowLight,
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -259,7 +254,8 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                             state.apelido ?? '',
                             null,
                           ),
-                          if (state.apelido != null && state.apelido!.isNotEmpty) ...[
+                          if (state.apelido != null &&
+                              state.apelido!.isNotEmpty) ...[
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12.0),
                               child: SwitchListTile(
@@ -272,8 +268,9 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                                     color: textColor,
                                   ),
                                 ),
-                                value: state.usarApelidoComoReferencia,
-                                onChanged: notifier.updateUsarApelidoComoReferencia,
+                                value: state.usarApelido,
+                                onChanged:
+                                    notifier.updateUsarApelidoComoReferencia,
                                 activeColor: AppColors.royalAzure,
                               ),
                             ),
@@ -463,10 +460,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                 vertical: 14,
               ),
               suffixIcon: IconButton(
-                icon: Icon(
-                  Icons.calendar_today,
-                  color: textColor,
-                ),
+                icon: Icon(Icons.calendar_today, color: textColor),
                 onPressed: () async {
                   FocusManager.instance.primaryFocus?.unfocus();
                   DateTime? pickedDate = await showDatePicker(
@@ -554,7 +548,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
 
   Widget _buildTurmaDropdown() {
     final turmasAsync = ref.watch(turmasStoreProvider);
-    
+
     return turmasAsync.when(
       data: (turmas) {
         return Padding(
@@ -591,12 +585,18 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                 items: [
                   DropdownMenuItem<int?>(
                     value: null,
-                    child: Text('Sem turma', style: TextStyle(color: textColor)),
+                    child: Text(
+                      'Sem turma',
+                      style: TextStyle(color: textColor),
+                    ),
                   ),
                   ...turmas.map(
                     (turma) => DropdownMenuItem<int?>(
                       value: turma.id,
-                      child: Text(turma.nome, style: TextStyle(color: textColor)),
+                      child: Text(
+                        turma.nome,
+                        style: TextStyle(color: textColor),
+                      ),
                     ),
                   ),
                 ],
@@ -613,10 +613,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
           padding: const EdgeInsets.only(bottom: 12.0),
           child: Text(
             'Erro ao carregar turmas',
-            style: TextStyle(
-              color: AppColors.error,
-              fontSize: 13,
-            ),
+            style: TextStyle(color: AppColors.error, fontSize: 13),
           ),
         );
       },
@@ -695,7 +692,12 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
               ),
             ),
             items: items
-                .map((e) => DropdownMenuItem(value: e, child: Text(getName(e), style: TextStyle(color: textColor))))
+                .map(
+                  (e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(getName(e), style: TextStyle(color: textColor)),
+                  ),
+                )
                 .toList(),
             onChanged: onChanged,
           ),

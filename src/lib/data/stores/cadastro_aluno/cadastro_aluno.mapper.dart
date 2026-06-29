@@ -37,16 +37,14 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
     _$apelido,
     opt: true,
   );
-  static bool _$usarApelidoComoReferencia(CadastroAlunoState v) =>
-      v.usarApelidoComoReferencia;
-  static const Field<CadastroAlunoState, bool> _f$usarApelidoComoReferencia =
-      Field(
-        'usarApelidoComoReferencia',
-        _$usarApelidoComoReferencia,
-        key: r'usar_apelido_como_referencia',
-        opt: true,
-        def: false,
-      );
+  static bool _$usarApelido(CadastroAlunoState v) => v.usarApelido;
+  static const Field<CadastroAlunoState, bool> _f$usarApelido = Field(
+    'usarApelido',
+    _$usarApelido,
+    key: r'usar_apelido',
+    opt: true,
+    def: false,
+  );
   static String _$cpf(CadastroAlunoState v) => v.cpf;
   static const Field<CadastroAlunoState, String> _f$cpf = Field(
     'cpf',
@@ -113,6 +111,54 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
     opt: true,
     def: '',
   );
+  static bool _$pMedica1(CadastroAlunoState v) => v.pMedica1;
+  static const Field<CadastroAlunoState, bool> _f$pMedica1 = Field(
+    'pMedica1',
+    _$pMedica1,
+    key: r'p_medica1',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica2(CadastroAlunoState v) => v.pMedica2;
+  static const Field<CadastroAlunoState, bool> _f$pMedica2 = Field(
+    'pMedica2',
+    _$pMedica2,
+    key: r'p_medica2',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica3(CadastroAlunoState v) => v.pMedica3;
+  static const Field<CadastroAlunoState, bool> _f$pMedica3 = Field(
+    'pMedica3',
+    _$pMedica3,
+    key: r'p_medica3',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica4(CadastroAlunoState v) => v.pMedica4;
+  static const Field<CadastroAlunoState, bool> _f$pMedica4 = Field(
+    'pMedica4',
+    _$pMedica4,
+    key: r'p_medica4',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica5(CadastroAlunoState v) => v.pMedica5;
+  static const Field<CadastroAlunoState, bool> _f$pMedica5 = Field(
+    'pMedica5',
+    _$pMedica5,
+    key: r'p_medica5',
+    opt: true,
+    def: false,
+  );
+  static String? _$observacaoMedica(CadastroAlunoState v) => v.observacaoMedica;
+  static const Field<CadastroAlunoState, String> _f$observacaoMedica = Field(
+    'observacaoMedica',
+    _$observacaoMedica,
+    key: r'observacao_medica',
+    opt: true,
+    def: '',
+  );
   static String _$nomeResponsavel(CadastroAlunoState v) => v.nomeResponsavel;
   static const Field<CadastroAlunoState, String> _f$nomeResponsavel = Field(
     'nomeResponsavel',
@@ -158,7 +204,7 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
   final MappableFields<CadastroAlunoState> fields = const {
     #nome: _f$nome,
     #apelido: _f$apelido,
-    #usarApelidoComoReferencia: _f$usarApelidoComoReferencia,
+    #usarApelido: _f$usarApelido,
     #cpf: _f$cpf,
     #contato: _f$contato,
     #contatoEmergencia: _f$contatoEmergencia,
@@ -168,6 +214,12 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
     #faixa: _f$faixa,
     #grau: _f$grau,
     #idFicha: _f$idFicha,
+    #pMedica1: _f$pMedica1,
+    #pMedica2: _f$pMedica2,
+    #pMedica3: _f$pMedica3,
+    #pMedica4: _f$pMedica4,
+    #pMedica5: _f$pMedica5,
+    #observacaoMedica: _f$observacaoMedica,
     #nomeResponsavel: _f$nomeResponsavel,
     #cpfResponsavel: _f$cpfResponsavel,
     #contatoResponsavel: _f$contatoResponsavel,
@@ -179,7 +231,7 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
     return CadastroAlunoState(
       nome: data.dec(_f$nome),
       apelido: data.dec(_f$apelido),
-      usarApelidoComoReferencia: data.dec(_f$usarApelidoComoReferencia),
+      usarApelido: data.dec(_f$usarApelido),
       cpf: data.dec(_f$cpf),
       contato: data.dec(_f$contato),
       contatoEmergencia: data.dec(_f$contatoEmergencia),
@@ -189,6 +241,12 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
       faixa: data.dec(_f$faixa),
       grau: data.dec(_f$grau),
       idFicha: data.dec(_f$idFicha),
+      pMedica1: data.dec(_f$pMedica1),
+      pMedica2: data.dec(_f$pMedica2),
+      pMedica3: data.dec(_f$pMedica3),
+      pMedica4: data.dec(_f$pMedica4),
+      pMedica5: data.dec(_f$pMedica5),
+      observacaoMedica: data.dec(_f$observacaoMedica),
       nomeResponsavel: data.dec(_f$nomeResponsavel),
       cpfResponsavel: data.dec(_f$cpfResponsavel),
       contatoResponsavel: data.dec(_f$contatoResponsavel),
@@ -271,7 +329,7 @@ abstract class CadastroAlunoStateCopyWith<
   $R call({
     String? nome,
     String? apelido,
-    bool? usarApelidoComoReferencia,
+    bool? usarApelido,
     String? cpf,
     String? contato,
     String? contatoEmergencia,
@@ -281,6 +339,12 @@ abstract class CadastroAlunoStateCopyWith<
     Faixa? faixa,
     int? grau,
     String? idFicha,
+    bool? pMedica1,
+    bool? pMedica2,
+    bool? pMedica3,
+    bool? pMedica4,
+    bool? pMedica5,
+    String? observacaoMedica,
     String? nomeResponsavel,
     String? cpfResponsavel,
     String? contatoResponsavel,
@@ -304,7 +368,7 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
   $R call({
     String? nome,
     Object? apelido = $none,
-    bool? usarApelidoComoReferencia,
+    bool? usarApelido,
     String? cpf,
     String? contato,
     String? contatoEmergencia,
@@ -314,6 +378,12 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
     Object? faixa = $none,
     int? grau,
     String? idFicha,
+    bool? pMedica1,
+    bool? pMedica2,
+    bool? pMedica3,
+    bool? pMedica4,
+    bool? pMedica5,
+    Object? observacaoMedica = $none,
     String? nomeResponsavel,
     String? cpfResponsavel,
     String? contatoResponsavel,
@@ -323,8 +393,7 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
     FieldCopyWithData({
       if (nome != null) #nome: nome,
       if (apelido != $none) #apelido: apelido,
-      if (usarApelidoComoReferencia != null)
-        #usarApelidoComoReferencia: usarApelidoComoReferencia,
+      if (usarApelido != null) #usarApelido: usarApelido,
       if (cpf != null) #cpf: cpf,
       if (contato != null) #contato: contato,
       if (contatoEmergencia != null) #contatoEmergencia: contatoEmergencia,
@@ -334,6 +403,12 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
       if (faixa != $none) #faixa: faixa,
       if (grau != null) #grau: grau,
       if (idFicha != null) #idFicha: idFicha,
+      if (pMedica1 != null) #pMedica1: pMedica1,
+      if (pMedica2 != null) #pMedica2: pMedica2,
+      if (pMedica3 != null) #pMedica3: pMedica3,
+      if (pMedica4 != null) #pMedica4: pMedica4,
+      if (pMedica5 != null) #pMedica5: pMedica5,
+      if (observacaoMedica != $none) #observacaoMedica: observacaoMedica,
       if (nomeResponsavel != null) #nomeResponsavel: nomeResponsavel,
       if (cpfResponsavel != null) #cpfResponsavel: cpfResponsavel,
       if (contatoResponsavel != null) #contatoResponsavel: contatoResponsavel,
@@ -345,10 +420,7 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
   CadastroAlunoState $make(CopyWithData data) => CadastroAlunoState(
     nome: data.get(#nome, or: $value.nome),
     apelido: data.get(#apelido, or: $value.apelido),
-    usarApelidoComoReferencia: data.get(
-      #usarApelidoComoReferencia,
-      or: $value.usarApelidoComoReferencia,
-    ),
+    usarApelido: data.get(#usarApelido, or: $value.usarApelido),
     cpf: data.get(#cpf, or: $value.cpf),
     contato: data.get(#contato, or: $value.contato),
     contatoEmergencia: data.get(
@@ -361,6 +433,12 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
     faixa: data.get(#faixa, or: $value.faixa),
     grau: data.get(#grau, or: $value.grau),
     idFicha: data.get(#idFicha, or: $value.idFicha),
+    pMedica1: data.get(#pMedica1, or: $value.pMedica1),
+    pMedica2: data.get(#pMedica2, or: $value.pMedica2),
+    pMedica3: data.get(#pMedica3, or: $value.pMedica3),
+    pMedica4: data.get(#pMedica4, or: $value.pMedica4),
+    pMedica5: data.get(#pMedica5, or: $value.pMedica5),
+    observacaoMedica: data.get(#observacaoMedica, or: $value.observacaoMedica),
     nomeResponsavel: data.get(#nomeResponsavel, or: $value.nomeResponsavel),
     cpfResponsavel: data.get(#cpfResponsavel, or: $value.cpfResponsavel),
     contatoResponsavel: data.get(
