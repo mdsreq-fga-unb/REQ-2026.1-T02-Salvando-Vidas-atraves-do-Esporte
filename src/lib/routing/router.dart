@@ -2,6 +2,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salvando_vidas/data/services/user_service/user_service.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/admin/views/admin_page.dart';
+import 'package:salvando_vidas/ui/admin/views/cadastrar_voluntario_page.dart';
+import 'package:salvando_vidas/ui/admin/views/editar_voluntario_page.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/views/cadastros_page.dart';
 import 'package:salvando_vidas/ui/configuracao/views/configuracao.dart';
 import 'package:salvando_vidas/ui/global/widgets/navbar.dart';
@@ -56,6 +58,16 @@ GoRouter router(Ref ref) {
           ),
 
           GoRoute(path: Routes.admin, builder: (context, state) => AdminPage()),
+
+          GoRoute(
+            path: Routes.cadastrarVoluntario,
+            builder: (context, state) => const CadastrarVoluntarioPage(),
+          ),
+
+          GoRoute(
+            path: Routes.editarVoluntario,
+            builder: (context, state) => const EditarVoluntarioPage(),
+          ),
 
           GoRoute(
             path: Routes.cadastros,
