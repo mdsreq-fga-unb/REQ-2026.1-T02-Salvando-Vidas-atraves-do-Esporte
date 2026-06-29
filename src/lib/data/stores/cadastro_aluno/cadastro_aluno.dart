@@ -10,6 +10,8 @@ part 'cadastro_aluno.mapper.dart';
 @MappableClass()
 class CadastroAlunoState with CadastroAlunoStateMappable {
   final String nome;
+  final String? apelido;
+  final bool usarApelidoComoReferencia;
   final String cpf;
   final String contato;
   final String contatoEmergencia; // NOVA VARIÁVEL
@@ -28,6 +30,8 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
 
   CadastroAlunoState({
     this.nome = '',
+    this.apelido,
+    this.usarApelidoComoReferencia = false,
     this.cpf = '',
     this.contato = '',
     this.contatoEmergencia = '',
@@ -143,6 +147,8 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
 
   Aluno get aluno => Aluno(
     nome: nome,
+    apelido: apelido,
+    usarApelidoComoReferencia: usarApelidoComoReferencia,
     cpf: cpf,
     contato: contato,
     contatoEmergencia: contatoEmergencia,
@@ -175,6 +181,24 @@ class CadastroAluno extends _$CadastroAluno {
 
   void updateNome(String value) {
     state = state.copyWith(nome: value, dirty: true);
+  }
+
+  void updateApelido(String? value) {
+    final ap = (value != null && value.trim().isNotEmpty) ? value.trim() : null;
+    final novoUsarReferencia = ap == null
+        ? false
+        : ((state.apelido == null || state.apelido!.isEmpty)
+            ? true
+            : state.usarApelidoComoReferencia);
+    state = state.copyWith(
+      apelido: ap,
+      usarApelidoComoReferencia: novoUsarReferencia,
+      dirty: true,
+    );
+  }
+
+  void updateUsarApelidoComoReferencia(bool value) {
+    state = state.copyWith(usarApelidoComoReferencia: value, dirty: true);
   }
 
   void updateCPF(String value) {

@@ -71,6 +71,8 @@ extension TipoSanguineoExt on TipoSanguineo {
 class Aluno with AlunoMappable {
   final int? id;
   final String nome;
+  final String? apelido;
+  final bool usarApelidoComoReferencia;
   final String cpf;
   final String? contato;
   final String? contatoEmergencia;
@@ -91,6 +93,13 @@ class Aluno with AlunoMappable {
   @MappableClass(hook: HookData())
   final DateTime nascimento;
 
+  String get nomeReferencia {
+    if (usarApelidoComoReferencia && apelido != null && apelido!.trim().isNotEmpty) {
+      return apelido!.trim();
+    }
+    return nome;
+  }
+
   Aluno({
     required this.nome,
     required this.cpf,
@@ -102,6 +111,8 @@ class Aluno with AlunoMappable {
     required this.dataEntrada,
     required this.ativo,
     required this.federado,
+    this.apelido,
+    this.usarApelidoComoReferencia = false,
     this.id,
     this.contato,
     this.contatoEmergencia,

@@ -70,7 +70,8 @@ class PesquisaAluno extends _$PesquisaAluno {
 
     final filtrado = data.alunos.where((aluno) {
       final nomeAluno = aluno.nome.toLowerCase();
-      final nomeOk = nomeAluno.contains(busca);
+      final apelidoAluno = aluno.apelido?.toLowerCase() ?? '';
+      final nomeOk = nomeAluno.contains(busca) || apelidoAluno.contains(busca);
       final ativoOk = data.mostrarInativos ? true : aluno.ativo;
       return nomeOk && ativoOk;
     }).toList();

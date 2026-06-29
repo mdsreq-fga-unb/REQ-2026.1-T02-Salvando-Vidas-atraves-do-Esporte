@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 Future<void> showConfirmationDialog({
   required BuildContext context,
@@ -7,15 +8,20 @@ Future<void> showConfirmationDialog({
   return showDialog<void>(
     context: context,
     builder: (BuildContext ctx) {
+      final isDark = Theme.of(ctx).brightness == Brightness.dark;
+      final textColor = isDark ? Colors.white : Colors.black;
+      final bg = isDark ? AppColors.darkSurface : Colors.white;
+
       return AlertDialog(
+        backgroundColor: bg,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: const Text('Confirmar Cadastro?', textAlign: TextAlign.center),
+        title: Text('Confirmar Cadastro?', textAlign: TextAlign.center, style: TextStyle(color: textColor)),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         actions: <Widget>[
           OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.black,
-              side: const BorderSide(color: Colors.black),
+              foregroundColor: textColor,
+              side: BorderSide(color: textColor),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -25,8 +31,8 @@ Future<void> showConfirmationDialog({
           ),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.black,
-              side: const BorderSide(color: Colors.black),
+              foregroundColor: textColor,
+              side: BorderSide(color: textColor),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -51,19 +57,24 @@ Future<void> showSuccessDialog({
     context: context,
     barrierDismissible: false,
     builder: (BuildContext ctx) {
+      final isDark = Theme.of(ctx).brightness == Brightness.dark;
+      final textColor = isDark ? Colors.white : Colors.black;
+      final bg = isDark ? AppColors.darkSurface : Colors.white;
+
       return AlertDialog(
+        backgroundColor: bg,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: const Text(
+        title: Text(
           'O aluno foi cadastrado\ncom sucesso!',
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
         ),
         actionsAlignment: MainAxisAlignment.center,
         actions: <Widget>[
           OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.black,
-              side: const BorderSide(color: Colors.black),
+              foregroundColor: textColor,
+              side: BorderSide(color: textColor),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -91,19 +102,24 @@ Future<void> showFailureDialog({
     context: context,
     barrierDismissible: false,
     builder: (BuildContext ctx) {
+      final isDark = Theme.of(ctx).brightness == Brightness.dark;
+      final textColor = isDark ? Colors.white : Colors.black;
+      final bg = isDark ? AppColors.darkSurface : Colors.white;
+
       return AlertDialog(
+        backgroundColor: bg,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: const Text(
+        title: Text(
           'Algum erro ocorreu ao\ncadastrar o aluno!',
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
         ),
         actionsAlignment: MainAxisAlignment.center,
         actions: <Widget>[
           OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.black,
-              side: const BorderSide(color: Colors.black),
+              foregroundColor: textColor,
+              side: BorderSide(color: textColor),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

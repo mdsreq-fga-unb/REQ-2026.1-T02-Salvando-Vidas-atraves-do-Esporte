@@ -35,23 +35,26 @@ class Inventario extends ConsumerWidget {
           .length;
     }
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+    final cardBg = isDark ? AppColors.darkSurface : Colors.white;
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              AppColors.platinum,
-              AppColors
-                  .bgGradientEnd, // Caso não tenha essa, use Color(0xFFB0BEC5) provisoriamente
-            ],
+            colors: gradientColors,
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
               children: [
                 // Linha Superior: Cards de Estatísticas
                 Row(
@@ -82,15 +85,9 @@ class Inventario extends ConsumerWidget {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: cardBg,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
+                      boxShadow: AppColors.cardShadow(isDark),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,6 +206,8 @@ class Inventario extends ConsumerWidget {
               ],
             ),
           ),
+            ),
+          ),
         ),
       ),
     );
@@ -232,17 +231,20 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? AppColors.darkSurface : Colors.white;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: cardBg,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -275,17 +277,20 @@ class _ActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? AppColors.darkSurface : Colors.white;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: cardBg,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -320,7 +325,12 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final innerBg = isDark ? AppColors.darkBg : Colors.blueGrey.shade50;
+    final dropBg = isDark ? AppColors.darkInputFill : Colors.white;
+
     return Dialog(
+      backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -332,7 +342,7 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey.shade50,
+                  color: innerBg,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -344,18 +354,19 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: dropBg,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                hint: const Text('Tamanho'),
+                                dropdownColor: isDark ? AppColors.darkSurface : Colors.white,
+                                hint: Text('Tamanho', style: TextStyle(color: isDark ? Colors.white70 : Colors.black54)),
                                 value: tamanhoSelecionado,
                                 items: tamanhos.map((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(value, style: TextStyle(color: isDark ? Colors.white : Colors.black87)),
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
@@ -372,18 +383,19 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: dropBg,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                hint: const Text('Cor'),
+                                dropdownColor: isDark ? AppColors.darkSurface : Colors.white,
+                                hint: Text('Cor', style: TextStyle(color: isDark ? Colors.white70 : Colors.black54)),
                                 value: corSelecionada,
                                 items: cores.map((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(value, style: TextStyle(color: isDark ? Colors.white : Colors.black87)),
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
@@ -404,17 +416,18 @@ class _PopUpKimonosDisponiveisState extends State<_PopUpKimonosDisponiveis> {
                       child: ListView.builder(
                         itemCount: 5,
                         itemBuilder: (context, index) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Row(
                               children: [
-                                Icon(Icons.sports_martial_arts, size: 28),
-                                SizedBox(width: 16),
+                                Icon(Icons.sports_martial_arts, size: 28, color: isDark ? Colors.white : Colors.black87),
+                                const SizedBox(width: 16),
                                 Text(
                                   'A3, Branco',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
+                                    color: isDark ? Colors.white : Colors.black87,
                                   ),
                                 ),
                               ],

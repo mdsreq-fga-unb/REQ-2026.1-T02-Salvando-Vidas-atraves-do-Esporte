@@ -17,6 +17,13 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: AppColors.platinum,
     cardColor: Colors.white,
+    cardTheme: CardThemeData(
+      color: Colors.white,
+      elevation: 6,
+      shadowColor: AppColors.royalAzure.withOpacity(0.18),
+      surfaceTintColor: Colors.transparent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
     dividerColor: AppColors.divider,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -68,6 +75,16 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: AppColors.darkBg,
     cardColor: AppColors.darkSurface,
+    
+    // AQUI ESTAVA O ÚLTIMO ERRO! Agora está como CardThemeData :)
+    cardTheme: CardThemeData(
+      color: AppColors.darkSurface,
+      elevation: 6,
+      shadowColor: AppColors.royalAzure.withOpacity(0.35),
+      surfaceTintColor: Colors.transparent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    
     dividerColor: AppColors.darkDivider,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,

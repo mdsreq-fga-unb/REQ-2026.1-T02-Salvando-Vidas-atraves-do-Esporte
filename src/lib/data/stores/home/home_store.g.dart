@@ -35,7 +35,7 @@ final class HomeStoreProvider
   HomeStore create() => HomeStore();
 }
 
-String _$homeStoreHash() => r'b9ecd06821b68fb50d8d4d1e88d79ad9cb8f199d';
+String _$homeStoreHash() => r'dd036a7cdb3810fa7d1527638e9ec62f591c7498';
 
 abstract class _$HomeStore extends $AsyncNotifier<HomeState> {
   FutureOr<HomeState> build();

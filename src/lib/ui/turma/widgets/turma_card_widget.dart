@@ -14,13 +14,19 @@ class TurmaCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? AppColors.darkSurface : Colors.white;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final iconBg = isDark ? AppColors.royalAzure.withValues(alpha: 0.2) : AppColors.deepNavy.withValues(alpha: 0.1);
+    final iconColor = isDark ? AppColors.cyanPastel : AppColors.deepNavy;
+
     return Card(
       margin: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
-      elevation: 2,
-      shadowColor: Colors.black.withOpacity(0.15),
+      elevation: 4,
+      shadowColor: AppColors.royalAzure.withOpacity(isDark ? 0.35 : 0.18),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: Colors.white,
-      surfaceTintColor: Colors.white,
+      color: cardBg,
+      surfaceTintColor: cardBg,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
@@ -33,12 +39,12 @@ class TurmaCardWidget extends StatelessWidget {
                 height: 52,
                 width: 52,
                 decoration: BoxDecoration(
-                  color: AppColors.deepNavy.withOpacity(0.1),
+                  color: iconBg,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.groups_rounded,
-                  color: AppColors.deepNavy,
+                  color: iconColor,
                   size: 30,
                 ),
               ),
@@ -49,10 +55,10 @@ class TurmaCardWidget extends StatelessWidget {
                   children: [
                     Text(
                       turma.nome,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.deepNavy,
+                        color: textColor,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -102,7 +108,7 @@ class TurmaCardWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppColors.deepNavy),
+              Icon(Icons.chevron_right, color: iconColor),
             ],
           ),
         ),

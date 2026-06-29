@@ -38,4 +38,10 @@ class TurmaService {
       return res.count;
     });
   }
+
+  Future<void> atualizaTurma(int id, Map<String, dynamic> diff) {
+    return runSupabaseCall(() async {
+      await _supabase.from('turmas').update(diff).eq('id', id);
+    });
+  }
 }

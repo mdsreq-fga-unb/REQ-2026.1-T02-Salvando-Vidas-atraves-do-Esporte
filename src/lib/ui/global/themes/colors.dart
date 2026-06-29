@@ -47,9 +47,21 @@ class AppColors {
   static const Color darkTopbar    = Color(0xFF001B5F); // Topbar dark (Deep Navy)
   static const Color darkInputFill = Color(0xFF161B22); // Input fill dark
   static const Color darkDivider   = Color(0xFF21262D); // Divisores dark
-  static const Color darkShadow    = Color(0x44000000); // Sombra dark
   static const Color darkTextPrimary   = white1;        // Texto principal dark
   static const Color darkTextSecondary = Color(0xFF8B949E); // Texto secundário dark
+
+  // ── Gradients & Card Glow ──────────────────────────────────────────────────
+  static const List<Color> bgGradientDark  = [darkBg, Color(0xFF0D1B2A)];
+  static const List<Color> bgGradientLight = [Color(0xFFF0F8FF), Color(0xFFD8ECFF)];
+
+  static List<BoxShadow> cardShadow(bool isDark) => [
+        BoxShadow(
+          color: royalAzure.withOpacity(isDark ? 0.35 : 0.18),
+          blurRadius: 16,
+          spreadRadius: 1,
+          offset: const Offset(0, 4),
+        ),
+      ];
 }
 
 // Aliases legados

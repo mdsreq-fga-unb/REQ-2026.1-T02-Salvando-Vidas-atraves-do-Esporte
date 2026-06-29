@@ -27,8 +27,12 @@ class UserService {
 
   LocalUser? get localUser => _ref.read(localUserProvider);
 
-  void _setLocalUser(LocalUser? user) {
+  set localUser(LocalUser? user) {
     _ref.read(localUserProvider.notifier).set(user);
+  }
+
+  void _setLocalUser(LocalUser? user) {
+    localUser = user;
   }
 
   Future<bool> login(String email, String password) async {

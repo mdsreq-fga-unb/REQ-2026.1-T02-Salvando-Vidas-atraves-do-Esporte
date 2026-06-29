@@ -10,6 +10,8 @@ part 'update_aluno.mapper.dart';
 @MappableClass()
 class UpdateAlunoState with UpdateAlunoStateMappable {
   final String nome;
+  final String? apelido;
+  final bool usarApelidoComoReferencia;
   final String cpf;
   final String contato;
   final String contatoEmergencia;
@@ -34,6 +36,8 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     required this.alunoOriginal,
     required this.responsavelOriginal,
     this.nome = '',
+    this.apelido,
+    this.usarApelidoComoReferencia = false,
     this.cpf = '',
     this.contato = '',
     this.contatoEmergencia = '',
@@ -150,7 +154,10 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
   }
 
   Aluno get aluno => Aluno(
+    id: alunoOriginal.id,
     nome: nome,
+    apelido: apelido,
+    usarApelidoComoReferencia: usarApelidoComoReferencia,
     cpf: cpf,
     contato: contato,
     contatoEmergencia: contatoEmergencia,
@@ -159,9 +166,9 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     tipoSanguineo: tipoSanguineo!,
     faixa: faixa!,
     grau: grau,
-    ativo: true,
-    federado: false,
-    dataEntrada: DateTime.now(),
+    ativo: alunoOriginal.ativo,
+    federado: alunoOriginal.federado,
+    dataEntrada: alunoOriginal.dataEntrada,
     idFicha: int.tryParse(idFicha),
     idTurma: idTurma,
   );
@@ -198,6 +205,8 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
         alunoOriginal: aluno,
         responsavelOriginal: responsavel,
         nome: aluno.nome,
+        apelido: aluno.apelido,
+        usarApelidoComoReferencia: aluno.usarApelidoComoReferencia,
         cpf: aluno.cpf,
         contato: aluno.contato ?? '',
         contatoEmergencia: aluno.contatoEmergencia ?? '',
@@ -217,6 +226,24 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
 
   void updateNome(String value) {
     state = state.copyWith(nome: value, dirty: true);
+  }
+
+  void updateApelido(String? value) {
+    final ap = (value != null && value.trim().isNotEmpty) ? value.trim() : null;
+    final novoUsarReferencia = ap == null
+        ? false
+        : ((state.apelido == null || state.apelido!.isEmpty)
+            ? true
+            : state.usarApelidoComoReferencia);
+    state = state.copyWith(
+      apelido: ap,
+      usarApelidoComoReferencia: novoUsarReferencia,
+      dirty: true,
+    );
+  }
+
+  void updateUsarApelidoComoReferencia(bool value) {
+    state = state.copyWith(usarApelidoComoReferencia: value, dirty: true);
   }
 
   void updateCPF(String value) {

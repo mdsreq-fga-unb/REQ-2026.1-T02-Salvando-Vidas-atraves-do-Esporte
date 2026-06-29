@@ -35,6 +35,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
     4: null,
     5: null,
   };
+  bool _termoResponsabilidadeAceito = false;
 
   late CadastroAlunoState cadastro;
   late CadastroAluno notifier;
@@ -55,7 +56,19 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
   }
 
   void _avancar() {
-    // if (_formKeys[_etapaAtual].currentState?.validate() ?? false) {
+    if (_etapaAtual == 1) {
+      if (_respostasMedicas.values.contains(null) || !_termoResponsabilidadeAceito) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Responda todas as perguntas médicas e aceite o Termo de Responsabilidade para continuar.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+    }
+
     if (cadastro.estaValido) {
       if (_etapaAtual == 0 || (_etapaAtual == 1 && cadastro.idade < 18)) {
         _pageController.nextPage(
@@ -86,16 +99,19 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
   }
 
   void _mostrarDialogConfirmacao() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+        backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
+        title: Text(
           'Confirmar Cadastro',
-          style: TextStyle(color: AppColors.deepNavy),
+          style: TextStyle(color: isDark ? Colors.white : AppColors.deepNavy),
         ),
-        content: const Text(
+        content: Text(
           'Deseja realmente salvar as informações deste aluno?',
+          style: TextStyle(color: isDark ? Colors.white70 : Colors.black87),
         ),
         actions: [
           TextButton(
@@ -107,7 +123,7 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.deepNavy,
+              backgroundColor: isDark ? AppColors.cyanPrimary : AppColors.deepNavy,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -196,10 +212,15 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
     service = this.ref.read(alunoServiceProvider);
     logger = this.ref.read(loggerProvider);
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = isDark ? Colors.white : AppColors.deepNavy;
+    final cardBg = isDark ? AppColors.darkSurface : Colors.white;
+    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+
     return Scaffold(
       // AJUSTE: Novo botão customizado de voltar com texto e navegação explícita
       appBar: AppBar(
-        backgroundColor: AppColors.platinum,
+        backgroundColor: isDark ? AppColors.darkNavbar : AppColors.platinum,
         elevation: 0,
         leadingWidth: 110, // Abre espaço para o texto "Voltar" não quebrar
         leading: TextButton.icon(
@@ -208,15 +229,15 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                 ?.unfocus(); // Fecha o teclado preventivamente
             context.go(Routes.home); // Manda o app direto para a HomePage
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: AppColors.deepNavy,
+            color: primaryColor,
             size: 22,
           ),
-          label: const Text(
+          label: Text(
             'Voltar',
             style: TextStyle(
-              color: AppColors.deepNavy,
+              color: primaryColor,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -229,11 +250,11 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
       ),
       body: Container(
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppColors.platinum, AppColors.bgGradientEnd],
+            colors: gradientColors,
           ),
         ),
         child: SafeArea(
@@ -244,15 +265,9 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                 constraints: const BoxConstraints(maxWidth: 450),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: cardBg,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: AppColors.shadowMedium,
-                        blurRadius: 12,
-                        offset: Offset(0, 6),
-                      ),
-                    ],
+                    boxShadow: AppColors.cardShadow(isDark),
                   ),
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
@@ -260,16 +275,16 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                     children: [
                       Text(
                         _tituloEtapa(),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.deepNavy,
+                          color: primaryColor,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 24),
                       SizedBox(
-                        height: 520,
+                        height: 580,
                         child: PageView(
                           controller: _pageController,
                           onPageChanged: _onStepChanged,
@@ -282,6 +297,8 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                               onRespostaChanged: (id, value) =>
                                   setState(() => _respostasMedicas[id] = value),
                               obsController: _obsMedicasController,
+                              termoAceito: _termoResponsabilidadeAceito,
+                              onTermoChanged: (val) => setState(() => _termoResponsabilidadeAceito = val ?? false),
                             ),
                             EtapaDadosResponsavel(formKey: _formKeyEtapa3),
                           ],
@@ -294,11 +311,11 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                           OutlinedButton(
                             onPressed: _etapaAtual == 0 ? null : _voltar,
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: AppColors.deepNavy,
+                              foregroundColor: primaryColor,
                               side: BorderSide(
                                 color: _etapaAtual == 0
                                     ? AppColors.textSecondary
-                                    : AppColors.deepNavy,
+                                    : primaryColor,
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -309,8 +326,8 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                           ElevatedButton(
                             onPressed: _avancar,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.deepNavy,
-                              foregroundColor: Colors.white,
+                              backgroundColor: isDark ? AppColors.cyanPrimary : AppColors.deepNavy,
+                              foregroundColor: isDark ? Colors.black : Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),

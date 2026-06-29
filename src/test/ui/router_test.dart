@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salvando_vidas/ui/global/widgets/navbar2.dart';
+import 'package:salvando_vidas/ui/global/widgets/navbar.dart';
 import 'package:salvando_vidas/ui/global/widgets/topbar.dart';
 import 'package:salvando_vidas/routing/router.dart';
 import 'package:mockito/annotations.dart';

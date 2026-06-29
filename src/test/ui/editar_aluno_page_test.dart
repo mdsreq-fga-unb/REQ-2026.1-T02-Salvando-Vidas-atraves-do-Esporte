@@ -78,7 +78,7 @@ void main() {
 
       // Verifica apenas a existência da página e os componentes primários
       expect(find.byType(EditarAlunoPage), findsOneWidget);
-      expect(find.text('Editar Aluno:'), findsWidgets);
+      expect(find.text('Editar Aluno'), findsWidgets);
       expect(find.byType(TextField), findsWidgets);
     });
 

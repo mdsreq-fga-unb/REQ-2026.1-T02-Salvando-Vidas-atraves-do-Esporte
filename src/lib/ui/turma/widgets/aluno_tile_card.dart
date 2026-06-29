@@ -3,26 +3,47 @@ import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class AlunoTileWidget extends StatelessWidget {
   final String nome;
+  final VoidCallback? onRemover;
+  final VoidCallback? onTap;
 
-  const AlunoTileWidget({super.key, required this.nome});
+  const AlunoTileWidget({super.key, required this.nome, this.onRemover, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final avatarBg = isDark ? AppColors.darkInputFill : AppColors.inputFill;
+    final iconColor = isDark ? AppColors.cyanPastel : AppColors.deepNavy;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final dividerColor = isDark ? AppColors.darkDivider : AppColors.divider;
+
     return ListTile(
+      onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      leading: const CircleAvatar(
-        backgroundColor: AppColors.inputFill, // Azul/Cinza clarinho padrão do projeto
-        child: Icon(Icons.person, color: AppColors.deepNavy, size: 20), // Ícone adicionado
+      leading: CircleAvatar(
+        backgroundColor: avatarBg,
+        child: Icon(Icons.person, color: iconColor, size: 20),
       ),
       title: Text(
         nome, 
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.w600,
-          color: AppColors.deepNavy, // Texto no Azul Principal
+          color: textColor,
         ),
       ),
-      shape: const Border(
-        bottom: BorderSide(color: AppColors.divider, width: 1), // Linha divisória suave entre os alunos
+      trailing: onRemover != null
+          ? TextButton(
+              onPressed: onRemover,
+              child: const Text(
+                'Remover',
+                style: TextStyle(
+                  color: AppColors.error,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          : null,
+      shape: Border(
+        bottom: BorderSide(color: dividerColor, width: 1),
       ),
     );
   }

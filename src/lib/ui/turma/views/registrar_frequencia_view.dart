@@ -62,17 +62,70 @@ class _RegistrarFrequenciaViewState
         return;
       }
 
+      final presencas = state.value?.presenca ?? {};
+      final temPresenca = presencas.values.any((presente) => presente == true);
+      final isDark = Theme.of(context).brightness == Brightness.dark;
+      final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+      final textColor = isDark ? Colors.white : AppColors.deepNavy;
+      final btnBg = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
+      if (!temPresenca) {
+        showDialog(
+          context: context,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              backgroundColor: dialogBg,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: const Text(
+                'Atenção',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: AppColors.error,
+                ),
+              ),
+              content: Text(
+                'Ao menos uma presença tem que ser marcada para salvar a frequência.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: isDark ? Colors.white70 : Colors.black87),
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: btnBg,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                  ),
+                  onPressed: () => Navigator.of(ctx).pop(),
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
       showDialog(
         context: context,
         builder: (BuildContext ctx) {
           return AlertDialog(
+            backgroundColor: dialogBg,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: const Text(
+            title: Text(
               'Registrar Frequência?',
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.deepNavy),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor),
             ),
             actionsAlignment: MainAxisAlignment.spaceEvenly,
             actions: [
@@ -82,7 +135,7 @@ class _RegistrarFrequenciaViewState
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.deepNavy,
+                  backgroundColor: btnBg,
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -106,7 +159,9 @@ class _RegistrarFrequenciaViewState
                       '',
                       alunosPresentes,
                     );
+                    if (!ctx.mounted) return;
                     Navigator.of(ctx).pop(); 
+                    if (!context.mounted) return;
                     _mostrarDialogSucesso(); 
                   } on AppApiException catch (e) {
                     logger.e(e.message, error: e);
@@ -124,11 +179,16 @@ class _RegistrarFrequenciaViewState
   }
 
   void _mostrarDialogSucesso() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+    final btnBg = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext ctx) {
         return AlertDialog(
+          backgroundColor: dialogBg,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -141,7 +201,7 @@ class _RegistrarFrequenciaViewState
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.deepNavy,
+                backgroundColor: btnBg,
                 foregroundColor: Colors.white,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
@@ -192,10 +252,17 @@ class _RegistrarFrequenciaViewState
       }
     }
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = isDark ? AppColors.darkBg : Colors.white;
+    final appBarBg = isDark ? AppColors.darkTopbar : AppColors.platinum;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final inputBg = isDark ? AppColors.darkInputFill : AppColors.platinum;
+    final avatarBg = isDark ? AppColors.darkInputFill : AppColors.inputFill;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bg,
       appBar: AppBar(
-        backgroundColor: AppColors.platinum,
+        backgroundColor: appBarBg,
         elevation: 0,
         leadingWidth: 110,
         leading: TextButton.icon(
@@ -203,11 +270,11 @@ class _RegistrarFrequenciaViewState
             FocusManager.instance.primaryFocus?.unfocus();
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back, color: AppColors.deepNavy, size: 22),
-          label: const Text(
+          icon: Icon(Icons.arrow_back, color: textColor, size: 22),
+          label: Text(
             'Voltar',
             style: TextStyle(
-              color: AppColors.deepNavy,
+              color: textColor,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -232,12 +299,12 @@ class _RegistrarFrequenciaViewState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Registrar Frequência',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.deepNavy,
+                            color: textColor,
                           ),
                         ),
                         Text(
@@ -273,10 +340,12 @@ class _RegistrarFrequenciaViewState
                           controller: _dataController,
                           keyboardType: TextInputType.number,
                           inputFormatters: [formatData],
+                          style: TextStyle(color: isDark ? Colors.white : Colors.black),
                           decoration: InputDecoration(
                             hintText: 'DD/MM/AAAA',
+                            hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.black54),
                             filled: true,
-                            fillColor: AppColors.platinum,
+                            fillColor: inputBg,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide.none,
@@ -286,7 +355,7 @@ class _RegistrarFrequenciaViewState
                               vertical: 14,
                             ),
                             suffixIcon: IconButton(
-                              icon: const Icon(Icons.calendar_today, color: AppColors.deepNavy),
+                              icon: Icon(Icons.calendar_today, color: textColor),
                               onPressed: () async {
                                 FocusManager.instance.primaryFocus?.unfocus(); 
                                 DateTime? picked = await showDatePicker(
@@ -333,12 +402,12 @@ class _RegistrarFrequenciaViewState
                         ),
                         const SizedBox(height: 24),
 
-                        const Text(
+                        Text(
                           'Alunos',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: AppColors.deepNavy,
+                            color: textColor,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -353,22 +422,24 @@ class _RegistrarFrequenciaViewState
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Row(
                                   children: [
-                                    const CircleAvatar(
-                                      backgroundColor: AppColors.inputFill,
+                                    CircleAvatar(
+                                      backgroundColor: avatarBg,
                                       radius: 18,
+                                      child: Icon(Icons.person, color: textColor, size: 20),
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
-                                        aluno.nome,
-                                        style: const TextStyle(
+                                        aluno.nomeReferencia,
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w500,
+                                          color: isDark ? Colors.white : Colors.black87,
                                         ),
                                       ),
                                     ),
                                     Checkbox(
                                       value: state.presenca[aluno.id!],
-                                      activeColor: AppColors.deepNavy,
+                                      activeColor: AppColors.royalAzure,
                                       side: const BorderSide(
                                         color: AppColors.textSecondary,
                                       ),

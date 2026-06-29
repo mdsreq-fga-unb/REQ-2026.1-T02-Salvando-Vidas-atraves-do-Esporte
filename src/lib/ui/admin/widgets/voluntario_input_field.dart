@@ -30,6 +30,11 @@ class CadastroTextField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final fillColor = isDark ? AppColors.darkInputFill : AppColors.inputFill;
+    final hintColor = isDark ? Colors.white54 : AppColors.textSecondary;
+
     final notifier = ref.read(cadastroVoluntarioProvider.notifier);
     final cadastro = ref.watch(cadastroVoluntarioProvider);
     return TextFormField(
@@ -47,11 +52,13 @@ class CadastroTextField extends ConsumerWidget {
         InputTypes.cpf => (cpf) => notifier.updateCpf(cpf),
         InputTypes.funcao => (funcao) => notifier.updateFuncao(funcao),
       },
-      style: const TextStyle(
-        color: AppColors.deepNavy,
+      style: TextStyle(
+        color: textColor,
         fontWeight: FontWeight.w600,
       ),
       decoration: voluntarioInputDecoration.copyWith(
+        fillColor: fillColor,
+        hintStyle: TextStyle(color: hintColor, fontSize: 13),
         hintText: switch (type) {
           InputTypes.nome => 'Digite o nome completo',
           InputTypes.email => 'Digite o email do voluntário',
@@ -85,13 +92,16 @@ class VoluntarioInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final labelColor = isDark ? Colors.white : AppColors.cyanPrimary;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: AppColors.cyanPrimary,
+          style: TextStyle(
+            color: labelColor,
             fontSize: 14,
             fontWeight: FontWeight.w700,
           ),

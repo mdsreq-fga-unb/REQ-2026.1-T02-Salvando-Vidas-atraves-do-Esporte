@@ -199,6 +199,21 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
   static const Field<Aluno, bool> _f$ativo = Field('ativo', _$ativo);
   static bool _$federado(Aluno v) => v.federado;
   static const Field<Aluno, bool> _f$federado = Field('federado', _$federado);
+  static String? _$apelido(Aluno v) => v.apelido;
+  static const Field<Aluno, String> _f$apelido = Field(
+    'apelido',
+    _$apelido,
+    opt: true,
+  );
+  static bool _$usarApelidoComoReferencia(Aluno v) =>
+      v.usarApelidoComoReferencia;
+  static const Field<Aluno, bool> _f$usarApelidoComoReferencia = Field(
+    'usarApelidoComoReferencia',
+    _$usarApelidoComoReferencia,
+    key: r'usar_apelido_como_referencia',
+    opt: true,
+    def: false,
+  );
   static int? _$id(Aluno v) => v.id;
   static const Field<Aluno, int> _f$id = Field('id', _$id, opt: true);
   static String? _$contato(Aluno v) => v.contato;
@@ -255,6 +270,8 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
     #dataEntrada: _f$dataEntrada,
     #ativo: _f$ativo,
     #federado: _f$federado,
+    #apelido: _f$apelido,
+    #usarApelidoComoReferencia: _f$usarApelidoComoReferencia,
     #id: _f$id,
     #contato: _f$contato,
     #contatoEmergencia: _f$contatoEmergencia,
@@ -276,6 +293,8 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
       dataEntrada: data.dec(_f$dataEntrada),
       ativo: data.dec(_f$ativo),
       federado: data.dec(_f$federado),
+      apelido: data.dec(_f$apelido),
+      usarApelidoComoReferencia: data.dec(_f$usarApelidoComoReferencia),
       id: data.dec(_f$id),
       contato: data.dec(_f$contato),
       contatoEmergencia: data.dec(_f$contatoEmergencia),
@@ -343,6 +362,8 @@ abstract class AlunoCopyWith<$R, $In extends Aluno, $Out>
     DateTime? dataEntrada,
     bool? ativo,
     bool? federado,
+    String? apelido,
+    bool? usarApelidoComoReferencia,
     int? id,
     String? contato,
     String? contatoEmergencia,
@@ -372,6 +393,8 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
     DateTime? dataEntrada,
     bool? ativo,
     bool? federado,
+    Object? apelido = $none,
+    bool? usarApelidoComoReferencia,
     Object? id = $none,
     Object? contato = $none,
     Object? contatoEmergencia = $none,
@@ -391,6 +414,9 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
       if (dataEntrada != null) #dataEntrada: dataEntrada,
       if (ativo != null) #ativo: ativo,
       if (federado != null) #federado: federado,
+      if (apelido != $none) #apelido: apelido,
+      if (usarApelidoComoReferencia != null)
+        #usarApelidoComoReferencia: usarApelidoComoReferencia,
       if (id != $none) #id: id,
       if (contato != $none) #contato: contato,
       if (contatoEmergencia != $none) #contatoEmergencia: contatoEmergencia,
@@ -412,6 +438,11 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
     dataEntrada: data.get(#dataEntrada, or: $value.dataEntrada),
     ativo: data.get(#ativo, or: $value.ativo),
     federado: data.get(#federado, or: $value.federado),
+    apelido: data.get(#apelido, or: $value.apelido),
+    usarApelidoComoReferencia: data.get(
+      #usarApelidoComoReferencia,
+      or: $value.usarApelidoComoReferencia,
+    ),
     id: data.get(#id, or: $value.id),
     contato: data.get(#contato, or: $value.contato),
     contatoEmergencia: data.get(

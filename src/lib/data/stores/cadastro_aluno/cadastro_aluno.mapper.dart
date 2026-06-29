@@ -31,6 +31,22 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
     opt: true,
     def: '',
   );
+  static String? _$apelido(CadastroAlunoState v) => v.apelido;
+  static const Field<CadastroAlunoState, String> _f$apelido = Field(
+    'apelido',
+    _$apelido,
+    opt: true,
+  );
+  static bool _$usarApelidoComoReferencia(CadastroAlunoState v) =>
+      v.usarApelidoComoReferencia;
+  static const Field<CadastroAlunoState, bool> _f$usarApelidoComoReferencia =
+      Field(
+        'usarApelidoComoReferencia',
+        _$usarApelidoComoReferencia,
+        key: r'usar_apelido_como_referencia',
+        opt: true,
+        def: false,
+      );
   static String _$cpf(CadastroAlunoState v) => v.cpf;
   static const Field<CadastroAlunoState, String> _f$cpf = Field(
     'cpf',
@@ -141,6 +157,8 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
   @override
   final MappableFields<CadastroAlunoState> fields = const {
     #nome: _f$nome,
+    #apelido: _f$apelido,
+    #usarApelidoComoReferencia: _f$usarApelidoComoReferencia,
     #cpf: _f$cpf,
     #contato: _f$contato,
     #contatoEmergencia: _f$contatoEmergencia,
@@ -160,6 +178,8 @@ class CadastroAlunoStateMapper extends ClassMapperBase<CadastroAlunoState> {
   static CadastroAlunoState _instantiate(DecodingData data) {
     return CadastroAlunoState(
       nome: data.dec(_f$nome),
+      apelido: data.dec(_f$apelido),
+      usarApelidoComoReferencia: data.dec(_f$usarApelidoComoReferencia),
       cpf: data.dec(_f$cpf),
       contato: data.dec(_f$contato),
       contatoEmergencia: data.dec(_f$contatoEmergencia),
@@ -250,6 +270,8 @@ abstract class CadastroAlunoStateCopyWith<
     implements ClassCopyWith<$R, $In, $Out> {
   $R call({
     String? nome,
+    String? apelido,
+    bool? usarApelidoComoReferencia,
     String? cpf,
     String? contato,
     String? contatoEmergencia,
@@ -281,6 +303,8 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
   @override
   $R call({
     String? nome,
+    Object? apelido = $none,
+    bool? usarApelidoComoReferencia,
     String? cpf,
     String? contato,
     String? contatoEmergencia,
@@ -298,6 +322,9 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
   }) => $apply(
     FieldCopyWithData({
       if (nome != null) #nome: nome,
+      if (apelido != $none) #apelido: apelido,
+      if (usarApelidoComoReferencia != null)
+        #usarApelidoComoReferencia: usarApelidoComoReferencia,
       if (cpf != null) #cpf: cpf,
       if (contato != null) #contato: contato,
       if (contatoEmergencia != null) #contatoEmergencia: contatoEmergencia,
@@ -317,6 +344,11 @@ class _CadastroAlunoStateCopyWithImpl<$R, $Out>
   @override
   CadastroAlunoState $make(CopyWithData data) => CadastroAlunoState(
     nome: data.get(#nome, or: $value.nome),
+    apelido: data.get(#apelido, or: $value.apelido),
+    usarApelidoComoReferencia: data.get(
+      #usarApelidoComoReferencia,
+      or: $value.usarApelidoComoReferencia,
+    ),
     cpf: data.get(#cpf, or: $value.cpf),
     contato: data.get(#contato, or: $value.contato),
     contatoEmergencia: data.get(

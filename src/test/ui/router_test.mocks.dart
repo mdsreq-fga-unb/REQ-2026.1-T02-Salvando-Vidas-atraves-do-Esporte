@@ -3,13 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:salvando_vidas/data/services/user_service/user_service.dart'
     as _i2;
 import 'package:salvando_vidas/data/supabase_call.dart' as _i5;
-import 'package:salvando_vidas/domain/local_user/local_user.dart' as _i4;
+import 'package:salvando_vidas/domain/local_user/local_user.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -40,78 +40,84 @@ class MockUserService extends _i1.Mock implements _i2.UserService {
           as bool);
 
   @override
-  _i3.Future<bool> login(String? email, String? password) =>
+  set localUser(_i3.LocalUser? user) => super.noSuchMethod(
+    Invocation.setter(#localUser, user),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i4.Future<bool> login(String? email, String? password) =>
       (super.noSuchMethod(
             Invocation.method(#login, [email, password]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i4.Future<bool>);
 
   @override
-  _i3.Future<void> logout() =>
+  _i4.Future<void> logout() =>
       (super.noSuchMethod(
             Invocation.method(#logout, []),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i4.Future<void>);
 
   @override
-  _i3.Future<bool> isLoggedIn() =>
+  _i4.Future<bool> isLoggedIn() =>
       (super.noSuchMethod(
             Invocation.method(#isLoggedIn, []),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i4.Future<bool>);
 
   @override
-  _i3.Future<_i4.LocalUser?> getLocalUser(_i5.User? user) =>
+  _i4.Future<_i3.LocalUser?> getLocalUser(_i5.User? user) =>
       (super.noSuchMethod(
             Invocation.method(#getLocalUser, [user]),
-            returnValue: _i3.Future<_i4.LocalUser?>.value(),
-            returnValueForMissingStub: _i3.Future<_i4.LocalUser?>.value(),
+            returnValue: _i4.Future<_i3.LocalUser?>.value(),
+            returnValueForMissingStub: _i4.Future<_i3.LocalUser?>.value(),
           )
-          as _i3.Future<_i4.LocalUser?>);
+          as _i4.Future<_i3.LocalUser?>);
 
   @override
-  _i3.Future<List<_i4.LocalUser>> listUsers() =>
+  _i4.Future<List<_i3.LocalUser>> listUsers() =>
       (super.noSuchMethod(
             Invocation.method(#listUsers, []),
-            returnValue: _i3.Future<List<_i4.LocalUser>>.value(
-              <_i4.LocalUser>[],
+            returnValue: _i4.Future<List<_i3.LocalUser>>.value(
+              <_i3.LocalUser>[],
             ),
-            returnValueForMissingStub: _i3.Future<List<_i4.LocalUser>>.value(
-              <_i4.LocalUser>[],
+            returnValueForMissingStub: _i4.Future<List<_i3.LocalUser>>.value(
+              <_i3.LocalUser>[],
             ),
           )
-          as _i3.Future<List<_i4.LocalUser>>);
+          as _i4.Future<List<_i3.LocalUser>>);
 
   @override
-  _i3.Future<void> registerUser(_i4.LocalUser? user) =>
+  _i4.Future<void> registerUser(_i3.LocalUser? user) =>
       (super.noSuchMethod(
             Invocation.method(#registerUser, [user]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i4.Future<void>);
 
   @override
-  _i3.Future<void> deleteUser(String? id) =>
+  _i4.Future<void> deleteUser(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteUser, [id]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i4.Future<void>);
 
   @override
-  _i3.Future<void> updateUser(Map<String, dynamic>? diff) =>
+  _i4.Future<void> updateUser(Map<String, dynamic>? diff) =>
       (super.noSuchMethod(
             Invocation.method(#updateUser, [diff]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i4.Future<void>);
 }

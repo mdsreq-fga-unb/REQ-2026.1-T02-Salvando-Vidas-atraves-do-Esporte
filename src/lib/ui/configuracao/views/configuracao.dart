@@ -20,9 +20,12 @@ class Configuracao extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -89,10 +92,46 @@ class Configuracao extends ConsumerWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: () async {
-                    await ref.read(userServiceProvider).logout();
-                    if (!context.mounted) return;
-                    context.go(Routes.login);
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) {
+                        final dialogBg = isDark ? AppColors.darkSurface : Colors.white;
+                        final textColor = isDark ? Colors.white : AppColors.deepNavy;
+                        final cancelColor = isDark ? Colors.white70 : AppColors.textSecondary;
+
+                        return AlertDialog(
+                          backgroundColor: dialogBg,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          title: Text(
+                            'Deseja deslogar do sistema?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
+                          ),
+                          actionsAlignment: MainAxisAlignment.spaceEvenly,
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(ctx),
+                              child: Text('Cancelar', style: TextStyle(color: cancelColor)),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.error,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              ),
+                              onPressed: () async {
+                                await ref.read(userServiceProvider).logout();
+                                if (!context.mounted) return;
+                                Navigator.pop(ctx);
+                                context.go(Routes.login);
+                              },
+                              child: const Text('Deslogar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   icon: const Icon(Icons.logout),
                   label: const Text('Deslogar'),
@@ -105,6 +144,8 @@ class Configuracao extends ConsumerWidget {
               ),
               const SizedBox(height: 5),
             ],
+          ),
+        ),
           ),
         ),
       ),

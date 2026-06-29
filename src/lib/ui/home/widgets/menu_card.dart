@@ -19,6 +19,11 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? AppColors.darkSurface : AppColors.inputFill;
+    final titleColor = isDark ? Colors.white : AppColors.deepNavy;
+    final subColor = isDark ? Colors.white70 : AppColors.deepNavy;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -28,15 +33,9 @@ class MenuCard extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: AppColors.inputFill,
+            color: cardBg,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(
-                color: AppColors.shadowMedium,
-                blurRadius: 16,
-                offset: Offset(0, 8),
-              ),
-            ],
+            boxShadow: AppColors.cardShadow(isDark),
           ),
           child: Row(
             children: [
@@ -57,8 +56,8 @@ class MenuCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: AppColors.deepNavy,
+                      style: TextStyle(
+                        color: titleColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       ),
@@ -66,8 +65,8 @@ class MenuCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: AppColors.deepNavy,
+                      style: TextStyle(
+                        color: subColor,
                         fontSize: 13,
                       ),
                     ),

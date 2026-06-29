@@ -42,6 +42,15 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
   late AlunoService service;
   late Logger logger;
 
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+  Color get bg => isDark ? AppColors.darkBg : AppColors.platinum;
+  Color get cardBg => isDark ? AppColors.darkSurface : Colors.white;
+  Color get textColor => isDark ? Colors.white : AppColors.deepNavy;
+  Color get inputFill => isDark ? AppColors.darkInputFill : AppColors.platinum;
+  Color get hintColor => isDark ? Colors.white54 : Colors.black54;
+  Color get buttonBg => isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+  Color get buttonText => isDark ? Colors.black : Colors.white;
+
   @override
   void initState() {
     super.initState();
@@ -85,13 +94,14 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+        backgroundColor: cardBg,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
+        title: Text(
           'Deseja salvar as\nalterações?',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: AppColors.deepNavy,
+            color: textColor,
           ),
         ),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
@@ -105,8 +115,8 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.deepNavy,
-              foregroundColor: Colors.white,
+              backgroundColor: buttonBg,
+              foregroundColor: buttonText,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -167,9 +177,9 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         state.idade < 18 || widget.aluno.idResponsavel != null;
 
     return Scaffold(
-      backgroundColor: AppColors.platinum,
+      backgroundColor: bg,
       appBar: AppBar(
-        backgroundColor: AppColors.platinum,
+        backgroundColor: bg,
         elevation: 0,
         leadingWidth: 110,
         leading: TextButton.icon(
@@ -177,15 +187,15 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             FocusManager.instance.primaryFocus?.unfocus();
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: AppColors.deepNavy,
+            color: textColor,
             size: 22,
           ),
-          label: const Text(
+          label: Text(
             'Voltar',
             style: TextStyle(
-              color: AppColors.deepNavy,
+              color: textColor,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -203,13 +213,13 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: cardBg,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: AppColors.shadowLight,
+                  color: isDark ? Colors.black.withValues(alpha: 0.3) : AppColors.shadowLight,
                   blurRadius: 12,
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
@@ -220,12 +230,12 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Editar Aluno',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.deepNavy,
+                      color: textColor,
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -243,6 +253,31 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                             state.nome,
                             state.nomeError,
                           ),
+                          _buildTextField(
+                            'Apelido (opcional):',
+                            notifier.updateApelido,
+                            state.apelido ?? '',
+                            null,
+                          ),
+                          if (state.apelido != null && state.apelido!.isNotEmpty) ...[
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: SwitchListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  'Usar apelido como referência principal nas chamadas e listas',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: textColor,
+                                  ),
+                                ),
+                                value: state.usarApelidoComoReferencia,
+                                onChanged: notifier.updateUsarApelidoComoReferencia,
+                                activeColor: AppColors.royalAzure,
+                              ),
+                            ),
+                          ],
                           _buildTextField(
                             'CPF:*',
                             (_) =>
@@ -353,8 +388,8 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                     height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.deepNavy,
-                        foregroundColor: Colors.white,
+                        backgroundColor: buttonBg,
+                        foregroundColor: buttonText,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -399,12 +434,12 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Aniversário:*',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
-              color: AppColors.deepNavy,
+              color: textColor,
             ),
           ),
           const SizedBox(height: 4),
@@ -412,11 +447,13 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             controller: _aniversarioCtrl,
             keyboardType: TextInputType.number,
             inputFormatters: [formatData],
+            style: TextStyle(color: textColor),
             decoration: InputDecoration(
               hintText: 'DD/MM/AAAA',
+              hintStyle: TextStyle(color: hintColor),
               errorText: state.nascimentoError,
               filled: true,
-              fillColor: AppColors.platinum,
+              fillColor: inputFill,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -426,9 +463,9 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                 vertical: 14,
               ),
               suffixIcon: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.calendar_today,
-                  color: AppColors.deepNavy,
+                  color: textColor,
                 ),
                 onPressed: () async {
                   FocusManager.instance.primaryFocus?.unfocus();
@@ -481,10 +518,10 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
-              color: AppColors.deepNavy,
+              color: textColor,
             ),
           ),
           const SizedBox(height: 4),
@@ -495,10 +532,11 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
             keyboardType: formatter != null
                 ? TextInputType.number
                 : TextInputType.text,
+            style: TextStyle(color: textColor),
             decoration: InputDecoration(
               errorText: error,
               filled: true,
-              fillColor: AppColors.platinum, // Padronizado
+              fillColor: inputFill,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 14,
@@ -524,21 +562,23 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Turma:',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 13,
-                  color: AppColors.deepNavy,
+                  color: textColor,
                 ),
               ),
               const SizedBox(height: 4),
               DropdownButtonFormField<int?>(
                 value: state.idTurma,
-                icon: const Icon(Icons.arrow_drop_down, color: AppColors.deepNavy),
+                dropdownColor: cardBg,
+                style: TextStyle(color: textColor, fontSize: 16),
+                icon: Icon(Icons.arrow_drop_down, color: textColor),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: AppColors.platinum,
+                  fillColor: inputFill,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 14,
@@ -549,14 +589,14 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                   ),
                 ),
                 items: [
-                  const DropdownMenuItem<int?>(
+                  DropdownMenuItem<int?>(
                     value: null,
-                    child: Text('Sem turma'),
+                    child: Text('Sem turma', style: TextStyle(color: textColor)),
                   ),
                   ...turmas.map(
                     (turma) => DropdownMenuItem<int?>(
                       value: turma.id,
-                      child: Text(turma.nome),
+                      child: Text(turma.nome, style: TextStyle(color: textColor)),
                     ),
                   ),
                 ],
@@ -586,19 +626,19 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Turma:',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 13,
-                  color: AppColors.deepNavy,
+                  color: textColor,
                 ),
               ),
               const SizedBox(height: 4),
               Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: AppColors.platinum,
+                  color: inputFill,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(
@@ -630,19 +670,21 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 13,
-              color: AppColors.deepNavy,
+              color: textColor,
             ),
           ),
           const SizedBox(height: 4),
           DropdownButtonFormField<T>(
             value: value,
-            icon: const Icon(Icons.arrow_drop_down, color: AppColors.deepNavy),
+            dropdownColor: cardBg,
+            style: TextStyle(color: textColor, fontSize: 16),
+            icon: Icon(Icons.arrow_drop_down, color: textColor),
             decoration: InputDecoration(
               filled: true,
-              fillColor: AppColors.platinum, // Padronizado
+              fillColor: inputFill,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 14,
@@ -653,7 +695,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
               ),
             ),
             items: items
-                .map((e) => DropdownMenuItem(value: e, child: Text(getName(e))))
+                .map((e) => DropdownMenuItem(value: e, child: Text(getName(e), style: TextStyle(color: textColor))))
                 .toList(),
             onChanged: onChanged,
           ),
