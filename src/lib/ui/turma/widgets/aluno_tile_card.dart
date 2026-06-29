@@ -4,8 +4,9 @@ import 'package:salvando_vidas/ui/global/themes/colors.dart';
 class AlunoTileWidget extends StatelessWidget {
   final String nome;
   final VoidCallback? onRemover;
+  final VoidCallback? onTap;
 
-  const AlunoTileWidget({super.key, required this.nome, this.onRemover});
+  const AlunoTileWidget({super.key, required this.nome, this.onRemover, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class AlunoTileWidget extends StatelessWidget {
     final dividerColor = isDark ? AppColors.darkDivider : AppColors.divider;
 
     return ListTile(
+      onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       leading: CircleAvatar(
         backgroundColor: avatarBg,

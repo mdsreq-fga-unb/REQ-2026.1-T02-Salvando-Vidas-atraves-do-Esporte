@@ -7,6 +7,7 @@ import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/Pesquisar-editar-dados-Aluno/views/editar_aluno_page.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/turma/widgets/historico_frequencia_aluno_dialog.dart';
 
 class AlunoExpandableCard extends ConsumerStatefulWidget {
   final Aluno aluno;
@@ -211,6 +212,25 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
 
                 if (!isInativo) ...[
                   const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.cyanPrimary,
+                        side: const BorderSide(color: AppColors.cyanPrimary, width: 1.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      icon: const Icon(Icons.history, size: 18),
+                      onPressed: () => mostrarHistoricoFrequenciaAlunoDialog(context, widget.aluno),
+                      label: const Text(
+                        'Ver Histórico de Frequência',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(

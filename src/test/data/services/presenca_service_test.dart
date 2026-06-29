@@ -80,5 +80,34 @@ void main() {
       expect(list.length, 1);
       expect(list.first.alunoNome, 'Gabriel');
     });
+
+    test('listarPresencasPorAluno', () async {
+      when(mockSupabaseClient.from('presencas'))
+          .thenAnswer((_) => FakeQueryBuilder([presencaJson]));
+
+      final list = await presencaService.listarPresencasPorAluno(10);
+      expect(list.length, 1);
+      expect(list.first.alunoId, 10);
+    });
+
+    test('listarObservacoesPorTurma', () async {
+      when(mockSupabaseClient.from('observacoes'))
+          .thenAnswer((_) => FakeQueryBuilder([obsJson]));
+
+      final list = await presencaService.listarObservacoesPorTurma(20);
+      expect(list.length, 1);
+      expect(list.first.voluntario, 'Voluntário Teste');
+    });
+
+    test('listarTodasPresencasPorTurma', () async {
+      when(mockSupabaseClient.from('presencas'))
+          .thenAnswer((_) => FakeQueryBuilder([presencaJson]));
+
+      final list = await presencaService.listarTodasPresencasPorTurma(20);
+      expect(list.length, 1);
+      expect(list.first.turmaId, 20);
+    });
   });
 }
+
+

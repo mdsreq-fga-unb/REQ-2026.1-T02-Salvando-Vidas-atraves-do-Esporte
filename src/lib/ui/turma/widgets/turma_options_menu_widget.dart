@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/turma/views/historico_frequencia_turma_view.dart';
 
 enum TurmaMenuOption { historico }
 
@@ -25,7 +26,12 @@ class TurmaOptionsMenuWidget extends StatelessWidget {
       onSelected: (TurmaMenuOption option) {
         switch (option) {
           case TurmaMenuOption.historico:
-            // Futura implementação
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => HistoricoFrequenciaTurmaView(turmaId: turmaId),
+              ),
+            );
             break;
         }
       },

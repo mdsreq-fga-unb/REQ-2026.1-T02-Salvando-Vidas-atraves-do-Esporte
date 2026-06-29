@@ -5,6 +5,7 @@ import 'package:salvando_vidas/data/stores/pesquisa_aluno/pesquisa_aluno_store.d
 import 'package:salvando_vidas/domain/turma/turma.dart';
 import 'package:salvando_vidas/ui/turma/turma_imports.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/turma/widgets/historico_frequencia_aluno_dialog.dart';
 
 class TurmaDetail extends ConsumerWidget {
   final Turma turma;
@@ -173,6 +174,7 @@ class TurmaDetail extends ConsumerWidget {
 	                        final aluno = data.alunos[index];
 	                        return AlunoTileWidget(
                             nome: aluno.nome,
+                            onTap: () => mostrarHistoricoFrequenciaAlunoDialog(context, aluno),
                             onRemover: () => _confirmarDesmatricula(context, ref, aluno.nome, aluno.id!),
                           );
 	                      },
