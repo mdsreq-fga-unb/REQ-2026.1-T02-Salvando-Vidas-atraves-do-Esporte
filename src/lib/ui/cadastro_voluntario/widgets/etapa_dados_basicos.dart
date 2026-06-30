@@ -5,6 +5,7 @@ import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 
 class EtapaDadosBasicos extends ConsumerStatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -224,17 +225,14 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                   validatorMessage: 'Selecione o tipo sanguíneo',
                 ),
                 const SizedBox(height: 14),
-                buildDropdownField(
-                  label: 'Faixa/Grau*',
+                FaixaDropdownField(
                   value: cadastro.faixa,
-                  items: Faixa.values,
-                  labelBuilder: (faixa) => faixa.nomeVisivel,
                   onChanged: (value) {
                     if (value != null) {
                       notifier.updateFaixa(value);
                     }
                   },
-                  validatorMessage: 'Selecione a faixa',
+                  validator: (v) => v == null ? 'Selecione a faixa' : null,
                 ),
                 const SizedBox(height: 14),
                 InputField(

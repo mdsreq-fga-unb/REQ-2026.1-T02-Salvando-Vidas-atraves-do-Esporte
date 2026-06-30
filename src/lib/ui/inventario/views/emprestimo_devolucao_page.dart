@@ -8,6 +8,7 @@ import 'package:salvando_vidas/data/supabase_call.dart';
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 import 'package:go_router/go_router.dart';
 import 'package:collection/collection.dart';
 
@@ -21,7 +22,6 @@ class EmprestimoDevolucaoPage extends ConsumerStatefulWidget {
 
 class _EmprestimoDevolucaoPageState
     extends ConsumerState<EmprestimoDevolucaoPage> {
-  // Mock de dados
   final List<String> alunos = [
     'Pedro Ramos Sousa Reis',
     'João Silva Oliveira',
@@ -60,42 +60,42 @@ class _EmprestimoDevolucaoPageState
     });
   }
 
-  // Widget de botão voltar padronizado
-  Widget _buildBackButton({required VoidCallback onPressed}) {
-    return Builder(
-      builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-        final textColor = isDark ? Colors.white : AppColors.deepNavy;
-        return InkWell(
-          onTap: onPressed,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.arrow_back_ios, size: 18, color: textColor),
-              Text(
-                'Voltar',
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+  AppBar _buildAppBar({
+    required BuildContext context,
+    required VoidCallback onBack,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final appBarBg = isDark ? AppColors.darkTopbar : AppColors.platinum;
+
+    return AppBar(
+      backgroundColor: appBarBg,
+      elevation: 0,
+      leadingWidth: 110,
+      leading: TextButton.icon(
+        onPressed: onBack,
+        icon: Icon(Icons.arrow_back, color: textColor, size: 22),
+        label: Text(
+          'Voltar',
+          style: TextStyle(
+            color: textColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
-        );
-      },
+        ),
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.only(left: 8),
+          alignment: Alignment.centerLeft,
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final estoque = ref.watch(gestaoKimonosStoreProvider);
-
-    final state = ref.watch(gestaoEmprestimosStoreProvider);
-    final store = ref.read(gestaoEmprestimosStoreProvider.notifier);
-
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+    final gradientColors =
+        isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
 
     return Scaffold(
       body: Container(
@@ -124,25 +124,20 @@ class _EmprestimoDevolucaoPageState
     }
   }
 
-  // --- VIEW: ESCOLHA INICIAL (CENTRALIZADA) ---
   Widget _buildEscolhaView() {
-    return Stack(
-      children: [
-        // Botão Voltar no topo
-        Positioned(
-          top: 16,
-          left: 16,
-          child: _buildBackButton(onPressed: () => context.pop()),
-        ),
-        // Conteúdo Centralizado
-        Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Centraliza verticalmente
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: _buildAppBar(
+        context: context,
+        onBack: () => context.pop(),
+      ),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildMenuButton(
                   title: 'Emprestar Kimono',
@@ -158,9 +153,8 @@ class _EmprestimoDevolucaoPageState
               ],
             ),
           ),
-          ),
         ),
-      ],
+      ),
     );
   }
 
@@ -193,144 +187,153 @@ class _EmprestimoDevolucaoPageState
     );
   }
 
-  // --- VIEW: SELEÇÃO DE ALUNO ---
   Widget _buildSelecaoAlunoView({required bool isEmprestar}) {
-    final filteredAlunos = alunos
-        .where((a) => a.toLowerCase().contains(searchQuery.toLowerCase()))
-        .toList();
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: _buildAppBar(
+        context: context,
+        onBack: () => setState(() => viewState = 'escolha'),
+      ),
+      body: Consumer(
+        builder: (context, ref, child) {
+          final state = ref.watch(gestaoEmprestimosStoreProvider);
+          final store = ref.read(gestaoEmprestimosStoreProvider.notifier);
+          final isDark = Theme.of(context).brightness == Brightness.dark;
+          final inputBg = isDark ? AppColors.darkInputFill : Colors.white;
+          final listBg = isDark ? AppColors.darkSurface : Colors.white;
+          final textColor = isDark ? Colors.white : Colors.black87;
 
-    return Consumer(
-      builder: (context, ref, child) {
-        final state = ref.watch(gestaoEmprestimosStoreProvider);
-        final store = ref.read(gestaoEmprestimosStoreProvider.notifier);
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-        final inputBg = isDark ? AppColors.darkInputFill : Colors.white;
-        final listBg = isDark ? AppColors.darkSurface : Colors.white;
-        final textColor = isDark ? Colors.white : Colors.black87;
-
-        return Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildBackButton(
-                onPressed: () => setState(() => viewState = 'escolha'),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                isEmprestar ? 'Emprestar Kimono para:' : 'Pegar kimono de:',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                style: TextStyle(color: textColor),
-                decoration: InputDecoration(
-                  hintText: 'Buscar aluno...',
-                  hintStyle: TextStyle(color: isDark ? Colors.white54 : Colors.black54),
-                  prefixIcon: Icon(Icons.search, color: textColor),
-                  filled: true,
-                  fillColor: inputBg,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                onChanged: (val) => store.updateFiltroAluno(val),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: listBg,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: AppColors.cardShadow(isDark),
-                  ),
-                  child: state.when(
-                    data: (data) {
-                      final alunosEmprestimos = data.emprestimos.map((e) {
-                        if (e.dataDevolucao == null) return e.alunoId;
-                      }).toList();
-                      late final List<Aluno> alunos;
-                      if (isEmprestar) {
-                        alunos = data.alunosFiltrados
-                            .where((a) => !alunosEmprestimos.contains(a.id))
-                            .toList();
-                      } else {
-                        alunos = data.alunosFiltrados
-                            .where((a) => alunosEmprestimos.contains(a.id))
-                            .toList();
-                      }
-
-                      return ListView.separated(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: alunos.length,
-                        separatorBuilder: (_, _) => const Divider(),
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.grey.shade300,
-                            ),
-                            title: Text(
-                              alunos[index].nome,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            onTap: () {
-                              final aluno = alunos[index];
-                              final emprestimo = data.emprestimos
-                                  .firstWhereOrNull(
-                                    (e) =>
-                                        e.dataDevolucao == null &&
-                                        e.alunoId == aluno.id,
-                                  );
-                              if (isEmprestar) {
-                                _showPopUpSelecaoKimono(aluno);
-                              } else {
-                                _showPopUpConfirmacaoRecuperar(
-                                  aluno,
-                                  emprestimo!,
-                                );
-                              }
-                            },
-                          );
-                        },
-                      );
-                    },
-                    error: (error, stack) {
-                      if (error is AppApiException) {
-                        ref
-                            .read(loggerProvider)
-                            .e(error.message, error: error.error);
-                      }
-                      return const Center(
-                        child: Text(
-                          'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isEmprestar
+                          ? 'Emprestar Kimono para:'
+                          : 'Pegar kimono de:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      style: TextStyle(color: textColor),
+                      decoration: InputDecoration(
+                        hintText: 'Buscar aluno...',
+                        hintStyle: TextStyle(
+                          color: isDark ? Colors.white54 : Colors.black54,
                         ),
-                      );
-                    },
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                  ),
+                        prefixIcon: Icon(Icons.search, color: textColor),
+                        filled: true,
+                        fillColor: inputBg,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      onChanged: (val) => store.updateFiltroAluno(val),
+                    ),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: listBg,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: AppColors.cardShadow(isDark),
+                        ),
+                        child: state.when(
+                          data: (data) {
+                            final alunosEmprestimos =
+                                data.emprestimos.map((e) {
+                              if (e.dataDevolucao == null) return e.alunoId;
+                            }).toList();
+                            late final List<Aluno> alunos;
+                            if (isEmprestar) {
+                              alunos = data.alunosFiltrados
+                                  .where(
+                                    (a) =>
+                                        !alunosEmprestimos.contains(a.id),
+                                  )
+                                  .toList();
+                            } else {
+                              alunos = data.alunosFiltrados
+                                  .where(
+                                    (a) =>
+                                        alunosEmprestimos.contains(a.id),
+                                  )
+                                  .toList();
+                            }
+
+                            return ListView.separated(
+                              padding: const EdgeInsets.all(8),
+                              itemCount: alunos.length,
+                              separatorBuilder: (_, _) => const Divider(),
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundColor: Colors.grey.shade300,
+                                  ),
+                                  title: Text(
+                                    alunos[index].nome,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    final aluno = alunos[index];
+                                    final emprestimo = data.emprestimos
+                                        .firstWhereOrNull(
+                                          (e) =>
+                                              e.dataDevolucao == null &&
+                                              e.alunoId == aluno.id,
+                                        );
+                                    if (isEmprestar) {
+                                      _showPopUpSelecaoKimono(aluno);
+                                    } else {
+                                      _showPopUpConfirmacaoRecuperar(
+                                        aluno,
+                                        emprestimo!,
+                                      );
+                                    }
+                                  },
+                                );
+                              },
+                            );
+                          },
+                          error: (error, stack) {
+                            if (error is AppApiException) {
+                              ref
+                                  .read(loggerProvider)
+                                  .e(error.message, error: error.error);
+                            }
+                            return const Center(
+                              child: Text(
+                                'Ocorreu algum erro inesperado ao carregar o estoque de kimonos',
+                              ),
+                            );
+                          },
+                          loading: () =>
+                              const Center(child: CircularProgressIndicator()),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                 ),
               ),
-            ],
-          ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
-  // --- POP-UPS: EMPRESTAR ---
   void _showPopUpSelecaoKimono(Aluno aluno) {
     showDialog(
       context: context,
@@ -375,7 +378,8 @@ class _EmprestimoDevolucaoPageState
                                     ),
                                   ),
                                 ],
-                                onChanged: (v) => store.updateFiltroTamanho(v),
+                                onChanged: (v) =>
+                                    store.updateFiltroTamanho(v),
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -408,7 +412,6 @@ class _EmprestimoDevolucaoPageState
                               itemCount: data.estoqueFiltrado.length,
                               itemBuilder: (context, index) {
                                 final k = data.estoqueFiltrado[index];
-
                                 return ListTile(
                                   leading: const Icon(
                                     Icons.checkroom,
@@ -420,7 +423,8 @@ class _EmprestimoDevolucaoPageState
                                   trailing: RadioGroup<Estoque>(
                                     groupValue: state.value!.kimono,
                                     child: Radio<Estoque>(value: k),
-                                    onChanged: (v) => store.updateKimono(v!),
+                                    onChanged: (v) =>
+                                        store.updateKimono(v!),
                                   ),
                                 );
                               },
@@ -493,7 +497,10 @@ class _EmprestimoDevolucaoPageState
             Text(
               'Deseja emprestar este kimono para o aluno ${aluno.nome}?',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 24),
             Row(
@@ -521,7 +528,6 @@ class _EmprestimoDevolucaoPageState
                           tamanho: kimono.tamanho,
                           data: DateTime.now(),
                         );
-
                         ref
                             .read(kimonoServiceProvider)
                             .cadastrarEmprestimo(emprestimo);
@@ -561,7 +567,10 @@ class _EmprestimoDevolucaoPageState
             Text(
               'Deseja pegar o kimono de ${aluno.nome}?',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 24),
             Row(
@@ -618,7 +627,10 @@ class _EmprestimoDevolucaoPageState
             Text(
               mensagem,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 24),
             ElevatedButton(

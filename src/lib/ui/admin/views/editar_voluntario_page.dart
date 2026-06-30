@@ -6,6 +6,7 @@ import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Tela de busca de voluntários
@@ -103,53 +104,6 @@ class _EditarVoluntarioPageState extends ConsumerState<EditarVoluntarioPage> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-            child: Container(
-              decoration: BoxDecoration(
-                color: containerBg,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(isDark ? 0.4 : 0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: _searchCtrl,
-                onChanged: _filtrar,
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                decoration: InputDecoration(
-                  hintText: 'Buscar por nome ou email',
-                  hintStyle: const TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 14,
-                  ),
-                  filled: true,
-                  fillColor: Colors.transparent,
-                  contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 14),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.cyanPrimary,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.search,
-                          color: Colors.white, size: 20),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
           Expanded(
             child: _carregando
                 ? const Center(child: CircularProgressIndicator())
@@ -689,39 +643,14 @@ class _EditarVoluntarioFormState
   }
 
   Widget _buildFaixaDropdown() {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final fillColor = isDark ? AppColors.darkInputFill : AppColors.platinum;
-    final textColor = isDark ? Colors.white : AppColors.deepNavy;
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 4.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildLabel('Faixa/Grau*'),
-          const SizedBox(height: 6),
-          DropdownButtonFormField<Faixa>(
-            value: _faixa,
-            dropdownColor: isDark ? AppColors.darkSurface : Colors.white,
-            icon: Icon(Icons.arrow_drop_down, color: textColor),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: fillColor,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            items: Faixa.values
-                .map((f) => DropdownMenuItem(value: f, child: Text(f.nomeVisivel, style: TextStyle(color: textColor))))
-                .toList(),
-            onChanged: (value) {
-              if (value != null) setState(() => _faixa = value);
-            },
-          ),
-        ],
+      child: FaixaDropdownField(
+        value: _faixa,
+        onChanged: (value) {
+          if (value != null) setState(() => _faixa = value);
+        },
+        validator: (v) => v == null ? 'Selecione uma faixa' : null,
       ),
     );
   }

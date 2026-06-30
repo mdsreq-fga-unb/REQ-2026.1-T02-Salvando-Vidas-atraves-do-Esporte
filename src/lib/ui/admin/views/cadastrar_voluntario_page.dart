@@ -6,6 +6,7 @@ import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 
 class CadastrarVoluntarioPage extends ConsumerStatefulWidget {
   const CadastrarVoluntarioPage({super.key});
@@ -315,40 +316,14 @@ class _CadastrarVoluntarioPageState
 
   Widget _buildFaixaDropdown(
       CadastroVoluntarioState cadastro, CadastroVoluntario notifier) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final fillColor = isDark ? AppColors.darkInputFill : AppColors.platinum;
-    final textColor = isDark ? Colors.white : AppColors.deepNavy;
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildLabel('Faixa/Grau*'),
-          const SizedBox(height: 6),
-          DropdownButtonFormField<Faixa>(
-            value: cadastro.faixa,
-            dropdownColor: isDark ? AppColors.darkSurface : Colors.white,
-            icon: Icon(Icons.arrow_drop_down, color: textColor),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: fillColor,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            items: Faixa.values
-                .map((f) =>
-                    DropdownMenuItem(value: f, child: Text(f.nomeVisivel, style: TextStyle(color: textColor))))
-                .toList(),
-            onChanged: (value) {
-              if (value != null) notifier.updateFaixa(value);
-            },
-          ),
-        ],
+      child: FaixaDropdownField(
+        value: cadastro.faixa,
+        onChanged: (value) {
+          if (value != null) notifier.updateFaixa(value);
+        },
+        validator: (v) => v == null ? 'Selecione uma faixa' : null,
       ),
     );
   }

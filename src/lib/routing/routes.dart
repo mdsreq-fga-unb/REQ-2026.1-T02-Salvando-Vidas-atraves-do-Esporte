@@ -12,4 +12,5 @@ abstract final class Routes {
   static const emprestimoDevolucao = '/emprestimo-devolucao';
   static const cadastrarVoluntario = '/admin/cadastrar-voluntario';
   static const editarVoluntario = '/admin/editar-voluntario';
+  static const historicoEmprestimos = '/admin/historico-emprestimos';
 }

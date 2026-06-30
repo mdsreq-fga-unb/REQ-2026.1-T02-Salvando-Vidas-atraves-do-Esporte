@@ -11,40 +11,37 @@ class AlunoTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final avatarBg = isDark ? AppColors.darkInputFill : AppColors.inputFill;
-    final iconColor = isDark ? AppColors.cyanPastel : AppColors.deepNavy;
     final textColor = isDark ? Colors.white : AppColors.deepNavy;
     final dividerColor = isDark ? AppColors.darkDivider : AppColors.divider;
+    final avatarBg = isDark ? AppColors.darkInputFill : AppColors.inputFill;
+    final iconColor = isDark ? AppColors.cyanPastel : AppColors.deepNavy;
 
-    return ListTile(
-      onTap: onTap,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-      leading: CircleAvatar(
-        backgroundColor: avatarBg,
-        child: Icon(Icons.person, color: iconColor, size: 20),
-      ),
-      title: Text(
-        nome, 
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          color: textColor,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ListTile(
+          onTap: onTap,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+          leading: CircleAvatar(
+            backgroundColor: avatarBg,
+            child: Icon(Icons.person, color: iconColor, size: 20),
+          ),
+          title: Text(
+            nome,
+            style: TextStyle(fontWeight: FontWeight.w600, color: textColor),
+          ),
+          trailing: onRemover != null
+              ? TextButton(
+                  onPressed: onRemover,
+                  child: const Text(
+                    'Remover',
+                    style: TextStyle(color: AppColors.error, fontWeight: FontWeight.bold),
+                  ),
+                )
+              : null,
         ),
-      ),
-      trailing: onRemover != null
-          ? TextButton(
-              onPressed: onRemover,
-              child: const Text(
-                'Remover',
-                style: TextStyle(
-                  color: AppColors.error,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          : null,
-      shape: Border(
-        bottom: BorderSide(color: dividerColor, width: 1),
-      ),
+        Divider(height: 1, thickness: 1, color: dividerColor),
+      ],
     );
   }
 }

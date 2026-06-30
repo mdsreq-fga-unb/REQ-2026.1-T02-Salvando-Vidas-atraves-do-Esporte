@@ -97,6 +97,10 @@ GoRouter router(Ref ref) {
             path: Routes.emprestimoDevolucao,
             builder: (context, state) => const EmprestimoDevolucaoPage(),
           ),
+          GoRoute(
+            path: Routes.historicoEmprestimos,
+            builder: (context, state) => const HistoricoEmprestimosPage(),
+          ),
         ],
       ),
     ],
