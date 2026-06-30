@@ -426,46 +426,32 @@ class HomePage extends ConsumerWidget {
           ),
         );
 
-        final cardsBox = Column(
-          children: [
-            if (isMobile)
-              SizedBox(
-                height: 90,
-                child: MetricCard(
-                  title: 'Alunos Ativos',
-                  value: '${homeState.value?.totalAtivos ?? "..."}',
-                  subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
-                  color: AppColors.royalAzure,
-                ),
-              )
-            else
+        final cardsBox = IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
               Expanded(
                 child: MetricCard(
                   title: 'Alunos Ativos',
                   value: '${homeState.value?.totalAtivos ?? "..."}',
                   subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
-                  color: AppColors.royalAzure,
+                  gradientColors: isDark
+                      ? const [Color(0xFF041E42), Color(0xFF006680)] // Escuro vibrante
+                      : const [Color(0xFF1976D2), Color(0xFF26C6DA)], // Claro vivo
                 ),
               ),
-            const SizedBox(height: 12),
-            if (isMobile)
-              SizedBox(
-                height: 90,
-                child: MetricCard(
-                  title: 'Alertas de Evasão:',
-                  value: '${homeState.value?.alertasEvasao ?? "..."}',
-                  color: const Color(0xFFFFB348),
-                ),
-              )
-            else
+              const SizedBox(width: 12),
               Expanded(
                 child: MetricCard(
                   title: 'Alertas de Evasão:',
                   value: '${homeState.value?.alertasEvasao ?? "..."}',
-                  color: const Color(0xFFFFB348),
+                  gradientColors: isDark
+                      ? const [Color(0xFF5C1D00), Color(0xFFD9534F)] // Escuro vibrante
+                      : const [Color(0xFFF57C00), Color(0xFFFFB74D)], // Claro vivo
                 ),
               ),
-          ],
+            ],
+          ),
         );
 
         if (isMobile) {
@@ -479,16 +465,13 @@ class HomePage extends ConsumerWidget {
           );
         }
 
-        return SizedBox(
-          height: 192,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(child: aniversariantesBox),
-              const SizedBox(width: 12),
-              Expanded(child: cardsBox),
-            ],
-          ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            cardsBox,
+            const SizedBox(height: 12),
+            aniversariantesBox,
+          ],
         );
       },
     );

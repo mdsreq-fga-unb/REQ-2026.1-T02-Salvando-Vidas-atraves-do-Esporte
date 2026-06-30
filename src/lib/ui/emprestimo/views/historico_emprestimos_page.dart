@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvando_vidas/data/stores/emprestimo/historico_emprestimos_store.dart';
 import 'package:salvando_vidas/data/supabase_call.dart';
+import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
+import 'package:salvando_vidas/ui/emprestimo/widgets/historico_emprestimo_aluno_dialog.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class HistoricoEmprestimosPage extends ConsumerStatefulWidget {
@@ -16,6 +18,7 @@ class HistoricoEmprestimosPage extends ConsumerStatefulWidget {
 class _HistoricoEmprestimosPageState extends ConsumerState<HistoricoEmprestimosPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  String _filtroNome = '';
 
   @override
   void initState() {
@@ -60,7 +63,7 @@ class _HistoricoEmprestimosPageState extends ConsumerState<HistoricoEmprestimosP
           ),
         ),
         title: Text(
-          'Histórico de Empréstimos',
+          'Histórico de Empréstimos e Devoluções',
           style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 18),
         ),
         bottom: TabBar(
@@ -212,131 +215,157 @@ class _HistoricoEmprestimosPageState extends ConsumerState<HistoricoEmprestimosP
   Widget _buildAbaAlunos(List<HistoricoItem> itens, bool isDark) {
     final Map<int, List<HistoricoItem>> porAluno = {};
     for (final item in itens) {
-      porAluno.putIfAbsent(item.emprestimo.alunoId, () => []).add(item);
+      if (item.aluno != null) {
+        porAluno.putIfAbsent(item.emprestimo.alunoId, () => []).add(item);
+      }
     }
 
-    if (porAluno.isEmpty) {
-      return Center(
-        child: Text(
-          'Nenhum registro encontrado',
-          style: TextStyle(color: AppColors.textSecondary),
-        ),
-      );
-    }
-
-    final entries = porAluno.entries.toList()
+    final entries = porAluno.entries.where((entry) {
+      final aluno = entry.value.first.aluno!;
+      return aluno.nome.toLowerCase().contains(_filtroNome.toLowerCase()) ||
+          (aluno.apelido?.toLowerCase().contains(_filtroNome.toLowerCase()) ?? false);
+    }).toList()
       ..sort((a, b) {
         final nomeA = a.value.first.aluno?.nome ?? '';
         final nomeB = b.value.first.aluno?.nome ?? '';
         return nomeA.compareTo(nomeB);
       });
 
-    return RefreshIndicator(
-      color: AppColors.cyanPrimary,
-      onRefresh: () => ref.refresh(historicoEmprestimosStoreProvider.future),
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        itemCount: entries.length,
-        itemBuilder: (context, index) {
-          final entry = entries[index];
-          final listaAluno = entry.value;
-          final aluno = listaAluno.first.aluno;
-          final nome = aluno?.nome ?? 'Aluno #${entry.key}';
-          final qtdAtivos = listaAluno.where((i) => i.emprestimo.dataDevolucao == null).length;
-          final cardBg = isDark ? AppColors.darkSurface : Colors.white;
-          final textColor = isDark ? Colors.white : AppColors.deepNavy;
-
-          return Card(
-            color: cardBg,
-            margin: const EdgeInsets.only(bottom: 10),
-            elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              leading: CircleAvatar(
-                backgroundColor: AppColors.royalAzure.withOpacity(0.15),
-                child: const Icon(Icons.person, color: AppColors.royalAzure),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: TextField(
+            style: TextStyle(color: isDark ? Colors.white : Colors.black87),
+            onChanged: (val) => setState(() => _filtroNome = val),
+            decoration: InputDecoration(
+              hintText: 'Pesquisar aluno por nome...',
+              hintStyle: const TextStyle(color: AppColors.textSecondary),
+              prefixIcon: const Icon(Icons.search, color: AppColors.cyanPrimary),
+              filled: true,
+              fillColor: isDark ? AppColors.darkInputFill : Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
               ),
-              title: Text(nome, style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
-              subtitle: Text(
-                '${listaAluno.length} registro(s) • $qtdAtivos ativo(s)',
-                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-              ),
-              trailing: const Icon(Icons.chevron_right, color: AppColors.cyanPrimary),
-              onTap: () => _mostrarDialogHistoricoAluno(context, nome, listaAluno, isDark),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),
-          );
-        },
-      ),
+          ),
+        ),
+        Expanded(
+          child: entries.isEmpty
+              ? Center(
+                  child: Text(
+                    'Nenhum aluno encontrado.',
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 15),
+                  ),
+                )
+              : RefreshIndicator(
+                  color: AppColors.cyanPrimary,
+                  onRefresh: () => ref.refresh(historicoEmprestimosStoreProvider.future),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: entries.length,
+                    itemBuilder: (context, index) {
+                      final listaAluno = entries[index].value;
+                      final aluno = listaAluno.first.aluno!;
+                      return _buildAlunoCard(aluno, listaAluno, isDark);
+                    },
+                  ),
+                ),
+        ),
+      ],
     );
   }
 
-  void _mostrarDialogHistoricoAluno(BuildContext context, String nome, List<HistoricoItem> itens, bool isDark) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(
-          'Histórico: $nome',
-          style: TextStyle(
-            color: isDark ? Colors.white : AppColors.deepNavy,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemCount: itens.length,
-            separatorBuilder: (_, __) => const Divider(),
-            itemBuilder: (_, i) {
-              final item = itens[i];
-              final isDevolvido = item.emprestimo.dataDevolucao != null;
-              final data = item.emprestimo.data;
-              final dataFormatada = '${data.day.toString().padLeft(2, '0')}/${data.month.toString().padLeft(2, '0')}/${data.year}';
-              
-              String devFormatada = 'Em aberto';
-              if (isDevolvido) {
-                final dev = item.emprestimo.dataDevolucao!;
-                devFormatada = '${dev.day.toString().padLeft(2, '0')}/${dev.month.toString().padLeft(2, '0')}/${dev.year}';
-              }
+  Widget _buildAlunoCard(Aluno aluno, List<HistoricoItem> listaAluno, bool isDark) {
+    final total = listaAluno.length;
+    final ativos = listaAluno.where((i) => i.emprestimo.dataDevolucao == null).length;
+    final devolvidos = listaAluno.where((i) => i.emprestimo.dataDevolucao != null).length;
 
-              return ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: Icon(
-                  isDevolvido ? Icons.check_circle_outline : Icons.pending_actions,
-                  color: isDevolvido ? AppColors.success : AppColors.warning,
-                ),
-                title: Text(
-                  'Kimono ${item.emprestimo.tamanho.nomeVisivel} - ${item.emprestimo.cor.nomeVisivel}',
-                  style: TextStyle(
-                    color: isDark ? Colors.white : AppColors.deepNavy,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
+    final cor = ativos > 0 ? AppColors.warning : AppColors.success;
+    final cardBg = isDark ? AppColors.darkSurface : Colors.white;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      color: cardBg,
+      elevation: 2,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: () => mostrarHistoricoEmprestimoAlunoDialog(context, aluno),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      aluno.nomeReferencia,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
+                    ),
                   ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: cor.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      ativos > 0 ? '$ativos em aberto' : 'Tudo devolvido',
+                      style: TextStyle(color: cor, fontWeight: FontWeight.bold, fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: LinearProgressIndicator(
+                  value: total > 0 ? (devolvidos / total) : 1.0,
+                  backgroundColor: isDark ? Colors.white12 : Colors.grey[200],
+                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.success),
+                  minHeight: 6,
                 ),
-                subtitle: Text(
-                  'Empréstimo: $dataFormatada\nDevolução: $devFormatada',
-                  style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-                ),
-              );
-            },
+              ),
+              const SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.check_circle, size: 16, color: AppColors.success),
+                      const SizedBox(width: 4),
+                      Text('$devolvidos Devolvidos', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      const SizedBox(width: 12),
+                      const Icon(Icons.pending_actions, size: 16, color: AppColors.warning),
+                      const SizedBox(width: 4),
+                      Text('$ativos Em Aberto', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                    ],
+                  ),
+                  const Row(
+                    children: [
+                      Text(
+                        'Detalhes',
+                        style: TextStyle(color: AppColors.cyanPrimary, fontWeight: FontWeight.w600, fontSize: 13),
+                      ),
+                      SizedBox(width: 2),
+                      Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.cyanPrimary),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: Text(
-              'Fechar',
-              style: TextStyle(
-                color: isDark ? Colors.white : AppColors.deepNavy,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

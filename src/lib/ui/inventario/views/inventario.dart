@@ -8,6 +8,8 @@ import 'package:salvando_vidas/ui/global/themes/colors.dart';
 import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvando_vidas/routing/routes.dart';
+import 'package:salvando_vidas/ui/emprestimo/widgets/historico_emprestimo_aluno_dialog.dart';
+import 'package:salvando_vidas/ui/inventario/widgets/inventario_options_menu_widget.dart';
 
 class Inventario extends ConsumerWidget {
   const Inventario({super.key});
@@ -57,25 +59,51 @@ class Inventario extends ConsumerWidget {
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                 child: Column(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Estoque de Kimonos',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? Colors.white : AppColors.deepNavy,
+                          ),
+                        ),
+                        const InventarioOptionsMenuWidget(),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
                     // ── Cards de estatísticas ──────────────────────────
                     IntrinsicHeight(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          // Card "Disponíveis" com botão Consultar
+                          // Card "Disponíveis" com botão Consultar Estoque
                           Expanded(
                             child: _StatCardConsultar(
                               title: 'Kimonos\nDisponíveis',
                               value: '$kimonoDisponives',
+                              buttonText: 'Ver Estoque',
+                              buttonIcon: Icons.checkroom_outlined,
+                              gradientColors: isDark
+                                  ? const [Color(0xFF071F3F), Color(0xFF006B85)] // Escuro vibrante
+                                  : const [Color(0xFF1976D2), Color(0xFF26C6DA)], // Claro vivo
                               onConsultar: () => _abrirPopUpKimonos(context),
                             ),
                           ),
                           const SizedBox(width: 12),
-                          // Card "Emprestados" — só número
+                          // Card "Emprestados" com botão explícito de Histórico
                           Expanded(
-                            child: _StatCardSimples(
+                            child: _StatCardConsultar(
                               title: 'Kimonos\nEmprestados',
                               value: '$kimonosEmprestados',
+                              buttonText: 'Ver Histórico',
+                              buttonIcon: Icons.history_rounded,
+                              gradientColors: isDark
+                                  ? const [Color(0xFF140D36), Color(0xFF45229E)] // Escuro vibrante
+                                  : const [Color(0xFF3F51B5), Color(0xFF7986CB)], // Claro vivo
+                              onConsultar: () => context.push(Routes.historicoEmprestimos),
                             ),
                           ),
                         ],
@@ -139,54 +167,62 @@ class Inventario extends ConsumerWidget {
                                       itemBuilder: (context, index) {
                                         final emp = emprestimos[index];
                                         final aluno = data.alunos[emp.alunoId]!;
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                width: 44,
-                                                height: 44,
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.cyanPrimary.withOpacity(0.15),
-                                                  borderRadius: BorderRadius.circular(12),
+                                        return InkWell(
+                                          onTap: () => mostrarHistoricoEmprestimoAlunoDialog(context, aluno),
+                                          borderRadius: BorderRadius.circular(12),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10, horizontal: 8),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 44,
+                                                  height: 44,
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.cyanPrimary.withOpacity(0.15),
+                                                    borderRadius: BorderRadius.circular(12),
+                                                  ),
+                                                  child: const Icon(
+                                                    Icons.checkroom_outlined,
+                                                    color: AppColors.cyanPrimary,
+                                                    size: 24,
+                                                  ),
                                                 ),
-                                                child: const Icon(
-                                                  Icons.checkroom_outlined,
+                                                const SizedBox(width: 12),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        aluno.nome,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 14,
+                                                          color: isDark
+                                                              ? Colors.white
+                                                              : AppColors.deepNavy,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 2),
+                                                      Text(
+                                                        '${emp.tamanho.nomeVisivel}, ${emp.cor.nomeVisivel}',
+                                                        style: TextStyle(
+                                                          color: AppColors
+                                                              .textSecondary,
+                                                          fontSize: 13,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const Icon(
+                                                  Icons.chevron_right,
                                                   color: AppColors.cyanPrimary,
-                                                  size: 24,
                                                 ),
-                                              ),
-                                              const SizedBox(width: 12),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      aluno.nome,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 14,
-                                                        color: isDark
-                                                            ? Colors.white
-                                                            : AppColors.deepNavy,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(height: 2),
-                                                    Text(
-                                                      '${emp.tamanho.nomeVisivel}, ${emp.cor.nomeVisivel}',
-                                                      style: TextStyle(
-                                                        color: AppColors
-                                                            .textSecondary,
-                                                        fontSize: 13,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         );
                                       },
@@ -263,66 +299,100 @@ class Inventario extends ConsumerWidget {
 class _StatCardConsultar extends StatelessWidget {
   final String title;
   final String value;
+  final String buttonText;
+  final IconData buttonIcon;
+  final List<Color> gradientColors;
   final VoidCallback onConsultar;
 
   const _StatCardConsultar({
     required this.title,
     required this.value,
+    this.buttonText = 'Consultar',
+    this.buttonIcon = Icons.arrow_forward_rounded,
+    required this.gradientColors,
     required this.onConsultar,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkSurface : Colors.white;
-    final textColor = isDark ? Colors.white : AppColors.deepNavy;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.royalAzure.withOpacity(0.4), width: 1.5),
-        boxShadow: AppColors.cardShadow(isDark),
+        gradient: LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: gradientColors.first.withOpacity(isDark ? 0.45 : 0.25),
+            blurRadius: 14,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: textColor,
-              height: 1.3,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                  height: 1.25,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w800,
-              color: textColor,
-            ),
-          ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 14),
           SizedBox(
-            height: 30,
+            width: double.infinity,
+            height: 36,
             child: ElevatedButton(
               onPressed: onConsultar,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.royalAzure,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+                backgroundColor: Colors.white,
+                foregroundColor: gradientColors.first,
+                padding: const EdgeInsets.symmetric(horizontal: 6),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 elevation: 0,
               ),
-              child: const Text(
-                'Consultar',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(buttonIcon, size: 15),
+                    const SizedBox(width: 5),
+                    Text(
+                      buttonText,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
