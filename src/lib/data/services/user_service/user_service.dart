@@ -104,5 +104,25 @@ class UserService {
     });
   }
 
+  Future<void> inactivateUser(String id) async {
+    return runSupabaseCall(() async {
+      try {
+        await _supabase.rpc('admin_update_user', params: {'p_id': id, 'p_ativo': false});
+      } catch (_) {
+        await _supabase.from('users').update({'ativo': false}).eq('id', id);
+      }
+    });
+  }
+
+  Future<void> reactivateUser(String id) async {
+    return runSupabaseCall(() async {
+      try {
+        await _supabase.rpc('admin_update_user', params: {'p_id': id, 'p_ativo': true});
+      } catch (_) {
+        await _supabase.from('users').update({'ativo': true}).eq('id', id);
+      }
+    });
+  }
+
   bool get isAdmin => localUser?.role == Role.admin;
 }

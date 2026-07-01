@@ -11,6 +11,8 @@ class AdminPage extends ConsumerWidget {
 
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -39,13 +41,6 @@ class AdminPage extends ConsumerWidget {
                       title: 'Editar Voluntário',
                       subtitle: 'Edite as informações dos\nvoluntários',
                       onTap: () => context.push(Routes.editarVoluntario),
-                    ),
-                    const SizedBox(height: 16),
-                    _AdminCard(
-                      icon: Icons.manage_history,
-                      title: 'Histórico de Empréstimos',
-                      subtitle: 'Visualize as informações de\ncada emprestimo',
-                      onTap: () => context.push(Routes.emprestimoDevolucao),
                     ),
                   ],
                 ),
@@ -130,7 +125,7 @@ class _AdminCard extends StatelessWidget {
                   ),
                 ),
                 const Icon(
-                  Icons.keyboard_arrow_down_rounded,
+                  Icons.chevron_right_rounded,
                   color: AppColors.cyanPrimary,
                   size: 28,
                 ),

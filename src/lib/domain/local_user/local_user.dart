@@ -17,17 +17,19 @@ class LocalUser with LocalUserMappable {
   final String? senha;
   final String funcao;
   final Faixa faixa;
+  final bool ativo;
 
   const LocalUser({
     this.id,
     required this.role,
     required this.nome,
     required this.telefone,
-    required this.cpf,
+    this.cpf = '',
     required this.email,
     this.senha,
-    required this.funcao,
+    this.funcao = '',
     required this.faixa,
+    this.ativo = true,
   });
 
   static final fromMap = LocalUserMapper.fromMap;

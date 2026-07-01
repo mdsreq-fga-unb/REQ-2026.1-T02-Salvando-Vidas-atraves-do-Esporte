@@ -112,6 +112,20 @@ class AppTheme {
       trackColor: WidgetStateProperty.resolveWith((states) =>
           states.contains(WidgetState.selected) ? AppColors.royalAzure.withOpacity(0.5) : AppColors.darkDivider),
     ),
+    textTheme: ThemeData.dark().textTheme.apply(
+      bodyColor: Colors.white,
+      displayColor: Colors.white,
+    ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: Colors.white),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.white,
+        side: const BorderSide(color: Colors.white70),
+      ),
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.darkTopbar,
       foregroundColor: Colors.white,

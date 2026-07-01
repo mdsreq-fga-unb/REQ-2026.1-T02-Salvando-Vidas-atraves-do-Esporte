@@ -5,6 +5,7 @@ import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import '../home_page_imports.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends ConsumerWidget {
@@ -40,6 +41,13 @@ class HomePage extends ConsumerWidget {
                 _buildInfoRow('Nome:', aluno.nome, isDark),
                 _buildInfoRow('CPF:', aluno.cpf, isDark),
                 _buildInfoRow('Telefone:', aluno.contato ?? 'N/A', isDark),
+                _buildInfoRow(
+                  'Emergência:',
+                  aluno.contatoEmergencia != null && aluno.contatoEmergencia!.isNotEmpty
+                      ? maskTelefone().maskText(aluno.contatoEmergencia!)
+                      : 'N/A',
+                  isDark,
+                ),
                 _buildInfoRow('Aniversário:', dateFormat.format(aluno.nascimento), isDark),
                 _buildInfoRow('Tipo Sanguíneo:', aluno.tipoSanguineo.nomeVisivel, isDark),
                 _buildInfoRow('ID da Ficha:', aluno.idFicha?.toString() ?? 'N/A', isDark),
@@ -92,6 +100,7 @@ class HomePage extends ConsumerWidget {
     final headerBg = isDark ? const Color(0xFF1E293B) : AppColors.platinum;
     final textColor = isDark ? Colors.white : AppColors.deepNavy;
     final subColor = isDark ? Colors.white70 : AppColors.textSecondary;
+    final colHeaderColor = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
 
     return Scaffold(
       body: Container(
@@ -153,7 +162,7 @@ class HomePage extends ConsumerWidget {
                               children: [
                                 // Cabeçalho da tabela de alunos
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
                                   decoration: BoxDecoration(
                                     color: headerBg,
                                     borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
@@ -167,16 +176,16 @@ class HomePage extends ConsumerWidget {
                                           onTap: () => ref.read(homeStoreProvider.notifier).toggleOrder(OrderBy.nome),
                                           child: Row(
                                             children: [
-                                              const Text('Nome', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                              Text('Nome', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: colHeaderColor)),
                                               if (homeState.value?.orderBy == OrderBy.nome)
-                                                Icon(homeState.value!.ascending ? Icons.arrow_drop_up : Icons.arrow_drop_down, size: 14, color: AppColors.textSecondary),
+                                                Icon(homeState.value!.ascending ? Icons.arrow_drop_up : Icons.arrow_drop_down, size: 16, color: colHeaderColor),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      const Expanded(
+                                      Expanded(
                                         flex: 2,
-                                        child: Text('Turma', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                        child: Text('Turma', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: colHeaderColor)),
                                       ),
                                       Expanded(
                                         flex: 3,
@@ -185,9 +194,9 @@ class HomePage extends ConsumerWidget {
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              const Text('Última\npresença', textAlign: TextAlign.center, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                                              Text('Última\npresença', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: colHeaderColor)),
                                               if (homeState.value?.orderBy == OrderBy.ultimaPresenca)
-                                                Icon(homeState.value!.ascending ? Icons.arrow_drop_up : Icons.arrow_drop_down, size: 14, color: AppColors.textSecondary),
+                                                Icon(homeState.value!.ascending ? Icons.arrow_drop_up : Icons.arrow_drop_down, size: 16, color: colHeaderColor),
                                             ],
                                           ),
                                         ),
@@ -360,38 +369,45 @@ class HomePage extends ConsumerWidget {
                                 : '${item.dias} dias';
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.cake_outlined,
-                                size: 14,
-                                color: AppColors.cyanPrimary,
-                              ),
-                              const SizedBox(width: 4),
-                              Expanded(
-                                child: Text(
-                                  item.aluno.nome,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: isDark ? Colors.white : Colors.black87,
+                          child: InkWell(
+                            onTap: () => _mostrarPopUpAniversario(context, item.aluno, item.dias, isDark),
+                            borderRadius: BorderRadius.circular(6),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.cake_outlined,
+                                    size: 14,
+                                    color: AppColors.cyanPrimary,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                  const SizedBox(width: 4),
+                                  Expanded(
+                                    child: Text(
+                                      item.aluno.nome,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: isDark ? Colors.white : Colors.black87,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Text(
+                                    diasTexto,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: item.dias == 0
+                                          ? AppColors.royalAzure
+                                          : subColor,
+                                      fontWeight: item.dias == 0
+                                          ? FontWeight.w700
+                                          : FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                diasTexto,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: item.dias == 0
-                                      ? AppColors.royalAzure
-                                      : subColor,
-                                  fontWeight: item.dias == 0
-                                      ? FontWeight.w700
-                                      : FontWeight.normal,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         );
                       },
@@ -411,46 +427,32 @@ class HomePage extends ConsumerWidget {
           ),
         );
 
-        final cardsBox = Column(
-          children: [
-            if (isMobile)
-              SizedBox(
-                height: 90,
-                child: MetricCard(
-                  title: 'Alunos Ativos',
-                  value: '${homeState.value?.totalAtivos ?? "..."}',
-                  subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
-                  color: AppColors.royalAzure,
-                ),
-              )
-            else
+        final cardsBox = IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
               Expanded(
                 child: MetricCard(
                   title: 'Alunos Ativos',
                   value: '${homeState.value?.totalAtivos ?? "..."}',
                   subtitle: 'Inativos: ${homeState.value?.totalInativos ?? "0"} | Total: ${homeState.value?.totalAlunos ?? "0"}',
-                  color: AppColors.royalAzure,
+                  gradientColors: isDark
+                      ? const [Color(0xFF041E42), Color(0xFF006680)] // Escuro vibrante
+                      : const [Color(0xFF1976D2), Color(0xFF26C6DA)], // Claro vivo
                 ),
               ),
-            const SizedBox(height: 12),
-            if (isMobile)
-              SizedBox(
-                height: 90,
-                child: MetricCard(
-                  title: 'Alertas de Evasão:',
-                  value: '${homeState.value?.alertasEvasao ?? "..."}',
-                  color: const Color(0xFFFFB348),
-                ),
-              )
-            else
+              const SizedBox(width: 12),
               Expanded(
                 child: MetricCard(
                   title: 'Alertas de Evasão:',
                   value: '${homeState.value?.alertasEvasao ?? "..."}',
-                  color: const Color(0xFFFFB348),
+                  gradientColors: isDark
+                      ? const [Color(0xFF5C1D00), Color(0xFFD9534F)] // Escuro vibrante
+                      : const [Color(0xFFF57C00), Color(0xFFFFB74D)], // Claro vivo
                 ),
               ),
-          ],
+            ],
+          ),
         );
 
         if (isMobile) {
@@ -464,18 +466,93 @@ class HomePage extends ConsumerWidget {
           );
         }
 
-        return SizedBox(
-          height: 192,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(child: aniversariantesBox),
-              const SizedBox(width: 12),
-              Expanded(child: cardsBox),
-            ],
-          ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            cardsBox,
+            const SizedBox(height: 12),
+            aniversariantesBox,
+          ],
         );
       },
+    );
+  }
+
+  void _mostrarPopUpAniversario(BuildContext context, Aluno aluno, int dias, bool isDark) {
+    final now = DateTime.now();
+    final dataHoje = DateTime(now.year, now.month, now.day);
+    var niverEsteAno = DateTime(now.year, aluno.nascimento.month, aluno.nascimento.day);
+    var anoNiver = now.year;
+    if (niverEsteAno.isBefore(dataHoje)) {
+      anoNiver = now.year + 1;
+    }
+    final idadeQueVaiFazer = anoNiver - aluno.nascimento.year;
+    final diaMes = "${aluno.nascimento.day.toString().padLeft(2, '0')}/${aluno.nascimento.month.toString().padLeft(2, '0')}";
+    final contagem = dias == 0 ? "Hoje! 🎉" : dias == 1 ? "Falta 1 dia" : "Faltam $dias dias";
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Row(
+          children: [
+            const Icon(Icons.cake, color: AppColors.cyanPrimary),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                aluno.nomeReferencia,
+                style: TextStyle(
+                  color: isDark ? Colors.white : AppColors.deepNavy,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _infoItem("Data do aniversário", diaMes, isDark),
+            const SizedBox(height: 10),
+            _infoItem("Idade a completar", "$idadeQueVaiFazer anos", isDark),
+            const SizedBox(height: 10),
+            _infoItem("Contagem regressiva", contagem, isDark, destaquecor: dias == 0 ? AppColors.royalAzure : AppColors.cyanPrimary),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text("Fechar", style: TextStyle(color: isDark ? Colors.white : AppColors.deepNavy, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _infoItem(String label, String valor, bool isDark, {Color? destaquecor}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: isDark ? Colors.white70 : AppColors.textSecondary,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          valor,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: destaquecor ?? (isDark ? Colors.white : AppColors.deepNavy),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -15,6 +15,7 @@ import 'package:salvando_vidas/ui/configuracao/views/editar_perfil_page.dart';
 import 'package:salvando_vidas/ui/inventario/views/inventario.dart';
 import 'package:salvando_vidas/ui/inventario/views/doacoes_perdas_page.dart';
 import 'package:salvando_vidas/ui/inventario/views/emprestimo_devolucao_page.dart';
+import 'package:salvando_vidas/ui/emprestimo/views/historico_emprestimos_page.dart';
 
 part 'router.g.dart';
 
@@ -95,7 +96,14 @@ GoRouter router(Ref ref) {
 
           GoRoute(
             path: Routes.emprestimoDevolucao,
-            builder: (context, state) => const EmprestimoDevolucaoPage(),
+            builder: (context, state) {
+              final modo = state.extra is bool ? (state.extra as bool) : null;
+              return EmprestimoDevolucaoPage(modoInicialEmprestar: modo);
+            },
+          ),
+          GoRoute(
+            path: Routes.historicoEmprestimos,
+            builder: (context, state) => const HistoricoEmprestimosPage(),
           ),
         ],
       ),

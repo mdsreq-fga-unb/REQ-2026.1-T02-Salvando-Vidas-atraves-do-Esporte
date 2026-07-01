@@ -9,6 +9,7 @@ import 'package:salvando_vidas/domain/turma/turma.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 
 class EditarAlunoPage extends ConsumerStatefulWidget {
   final Aluno aluno;
@@ -356,14 +357,13 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                                 notifier.updateTipoSanguineo(value);
                             },
                           ),
-                          _buildDropdownEnum<Faixa>(
-                            label: 'Faixa/Grau:*',
+                          FaixaDropdownField(
                             value: state.faixa,
-                            items: Faixa.values,
-                            getName: (Faixa f) => f.nomeVisivel,
                             onChanged: (value) {
                               if (value != null) notifier.updateFaixa(value);
                             },
+                            validator: (v) => v == null ? 'Selecione a faixa' : null,
+                            label: 'Faixa/Grau:*',
                           ),
                           _buildTextField(
                             'ID da ficha:*',

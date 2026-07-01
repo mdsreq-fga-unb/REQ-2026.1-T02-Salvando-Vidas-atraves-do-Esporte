@@ -182,6 +182,12 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                       : 'Não informado',
                 ),
                 _buildInfoRow(
+                  'Contato de emergência: ',
+                  widget.aluno.contatoEmergencia != null && widget.aluno.contatoEmergencia!.isNotEmpty
+                      ? formatTelefone.maskText(widget.aluno.contatoEmergencia!)
+                      : 'Não informado',
+                ),
+                _buildInfoRow(
                   'Aniversário: ',
                   _formatarData(widget.aluno.nascimento),
                 ),
@@ -196,10 +202,6 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
 
                 if (widget.responsavel != null) ...[
                   const SizedBox(height: 8),
-                  const Text(
-                    '(< 18 anos)',
-                    style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12),
-                  ),
                   _buildInfoRow(
                     'Nome do responsável: ',
                     widget.responsavel!.nome,

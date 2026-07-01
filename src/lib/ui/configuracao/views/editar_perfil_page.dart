@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:salvando_vidas/data/services/user_service/user_service.dart';
 import 'package:salvando_vidas/data/stores/update_voluntario/update_voluntario_store.dart';
 import 'package:salvando_vidas/main_imports.dart';
@@ -8,6 +9,7 @@ import 'package:salvando_vidas/main_imports.dart';
 // Importações dos seus componentes customizados
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/action_button.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
+import 'package:salvando_vidas/ui/global/masks.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class EditarPerfilPage extends ConsumerStatefulWidget {
@@ -22,6 +24,16 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
   late UpdateVoluntarioState state;
   late UpdateVoluntario notifier;
   late Logger logger;
+
+  late final MaskTextInputFormatter formatTelefone;
+  late final MaskTextInputFormatter formatCpf;
+
+  @override
+  void initState() {
+    super.initState();
+    formatTelefone = maskTelefone();
+    formatCpf = maskCPF();
+  }
 
   void _salvarAlteracoes() async {
     // Aciona a validação visual do Form antes de prosseguir
@@ -168,36 +180,27 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
 
                             // 4. Telefone
                             InputField(
-                              initialValue: state.telefone,
-                              update: notifier.updateTelefone,
+                              initialValue: formatTelefone.maskText(state.telefone),
+                              update: (_) => notifier.updateTelefone(formatTelefone.getUnmaskedText()),
                               error: state.telefoneError,
                               label: 'Telefone',
-                              hint: 'Digite o telefone de contato',
+                              hint: '(00) 00000-0000',
                               keyboardType: TextInputType.phone,
                               validatorMessage: 'Informe seu telefone',
+                              inputFormatters: [formatTelefone],
                             ),
                             const SizedBox(height: 14),
 
                             // 5. CPF
                             InputField(
-                              initialValue: state.cpf,
-                              update: notifier.updateCpf,
+                              initialValue: formatCpf.maskText(state.cpf),
+                              update: (_) => notifier.updateCpf(formatCpf.getUnmaskedText()),
                               error: state.cpfError,
                               label: 'CPF',
-                              hint: 'Digite o CPF do voluntário',
+                              hint: '000.000.000-00',
                               keyboardType: TextInputType.number,
                               validatorMessage: 'Informe seu CPF',
-                            ),
-                            const SizedBox(height: 14),
-
-                            // 6. Função
-                            InputField(
-                              initialValue: state.funcao,
-                              update: notifier.updateFuncao,
-                              error: state.funcaoError,
-                              label: 'Função',
-                              hint: 'Ex.: professor, monitor, apoio',
-                              validatorMessage: 'Informe sua função',
+                              inputFormatters: [formatCpf],
                             ),
 
                             const SizedBox(height: 24),

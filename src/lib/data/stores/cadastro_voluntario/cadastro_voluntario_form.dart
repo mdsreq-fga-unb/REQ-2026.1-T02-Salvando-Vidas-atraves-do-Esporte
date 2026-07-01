@@ -54,26 +54,21 @@ class CadastroVoluntarioState with CadastroVoluntarioStateMappable {
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
-  String? get funcaoError {
-    if (!dirty && funcao.isEmpty) return null;
-    return funcao.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get funcaoError => null;
 
   bool get temErros =>
       nomeError != null ||
       emailError != null ||
       telefoneError != null ||
-      senhaError != null ||
       cpfError != null ||
-      funcaoError != null;
+      senhaError != null;
 
   bool get podeCadastrar =>
       nome.isNotEmpty &&
       email.isNotEmpty &&
       telefone.isNotEmpty &&
-      senha.isNotEmpty &&
       cpf.isNotEmpty &&
-      funcao.isNotEmpty &&
+      senha.isNotEmpty &&
       !temErros;
 
   LocalUser get voluntario => LocalUser(
