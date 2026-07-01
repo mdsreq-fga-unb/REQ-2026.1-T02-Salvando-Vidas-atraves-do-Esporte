@@ -29,28 +29,22 @@ class CadastroVoluntarioState with CadastroVoluntarioStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError {
-    if (!dirty && nome.isEmpty) return null;
-    return nome.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeError => null;
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email.isEmpty) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get telefoneError {
-    if (!dirty && telefone.isEmpty) return null;
+    if (telefone.isEmpty) return null;
     return eTelefone(telefone) ? null : 'Não é um telefone válido';
   }
 
-  String? get senhaError {
-    if (!dirty && senha.isEmpty) return null;
-    return senha.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get senhaError => null;
 
   String? get cpfError {
-    if (!dirty && cpf.isEmpty) return null;
+    if (cpf.isEmpty) return null;
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 

@@ -62,65 +62,50 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError {
-    if (!dirty && nome.isEmpty) return null;
-    return nome.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeError => null;
 
-  String? get nomeResponsavelError {
-    if (!dirty && nomeResponsavel.isEmpty) return null;
-    return nomeResponsavel.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeResponsavelError => null;
 
   String? get cpfError {
-    if (!dirty && cpf.isEmpty) return null;
+    if (cpf.isEmpty) return null;
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
   String? get cpfResponsavelError {
-    if (!dirty && cpfResponsavel.isEmpty) return null;
+    if (cpfResponsavel.isEmpty) return null;
     return eCPF(cpfResponsavel) ? null : 'Não é um CPF válido';
   }
 
   String? get contatoError {
-    if (!dirty && contato.isEmpty) return null;
+    if (contato.isEmpty) return null;
     return eTelefone(contato) ? null : 'Não é um telefone válido';
   }
 
   String? get contatoEmergenciaError {
-    if (!dirty && contatoEmergencia.isEmpty) return null;
+    if (contatoEmergencia.isEmpty) return null;
     return eTelefone(contatoEmergencia) ? null : 'Não é um telefone válido';
   }
 
   String? get contatoResponsavelError {
-    if (!dirty && contatoResponsavel.isEmpty) return null;
+    if (contatoResponsavel.isEmpty) return null;
     return eTelefone(contatoResponsavel) ? null : 'Não é um telefone válido';
   }
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email.isEmpty) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get emailResponsavelError {
-    if (!dirty && emailResponsavel.isEmpty) return null;
+    if (emailResponsavel.isEmpty) return null;
     return eEmail(emailResponsavel) ? null : 'Não é um email válido';
   }
 
-  String? get nascimentoError {
-    if (!dirty && nascimento == null) return null;
-    return nascimento != null ? null : 'Não pode estar em branco';
-  }
+  String? get nascimentoError => null;
 
-  String? get tipoSanguineoError {
-    if (!dirty && tipoSanguineo == null) return null;
-    return tipoSanguineo != null ? null : 'Não pode estar em branco';
-  }
+  String? get tipoSanguineoError => null;
 
-  String? get faixaError {
-    if (!dirty && faixa == null) return null;
-    return faixa != null ? null : 'Não pode estar em branco';
-  }
+  String? get faixaError => null;
 
   String? get idFichaError {
     if (idFicha.isEmpty) return null;

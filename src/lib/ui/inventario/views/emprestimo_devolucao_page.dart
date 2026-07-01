@@ -8,7 +8,6 @@ import 'package:salvando_vidas/data/supabase_call.dart';
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
-import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 import 'package:go_router/go_router.dart';
 import 'package:collection/collection.dart';
 
@@ -291,7 +290,18 @@ class _EmprestimoDevolucaoPageState
                               itemBuilder: (context, index) {
                                 return ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: Colors.grey.shade300,
+                                    backgroundColor: isEmprestar
+                                        ? AppColors.royalAzure.withValues(alpha: 0.15)
+                                        : AppColors.cyanPrimary.withValues(alpha: 0.15),
+                                    child: Icon(
+                                      isEmprestar
+                                          ? Icons.person_outline
+                                          : Icons.sports_martial_arts,
+                                      color: isEmprestar
+                                          ? AppColors.royalAzure
+                                          : AppColors.cyanPrimary,
+                                      size: 22,
+                                    ),
                                   ),
                                   title: Text(
                                     alunos[index].nome,
@@ -537,17 +547,40 @@ class _EmprestimoDevolucaoPageState
                           tamanho: kimono.tamanho,
                           data: DateTime.now(),
                         );
-                        ref
+                        await ref
                             .read(kimonoServiceProvider)
                             .cadastrarEmprestimo(emprestimo);
-                        ref.invalidate(gestaoKimonosStoreProvider);
-                        ref.invalidate(gestaoEmprestimosStoreProvider);
-                        Navigator.pop(context);
-                        _showPopUpSucesso(
-                          'O kimono foi emprestado com sucesso!',
-                        );
+                        await ref.refresh(gestaoKimonosStoreProvider.future);
+                        await ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          _showPopUpSucesso(
+                            'O kimono foi emprestado com sucesso!',
+                          );
+                        }
                       } on AppApiException catch (e) {
                         ref.read(loggerProvider).e(e.message, error: e.error);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(e.message),
+                              backgroundColor: AppColors.error,
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Erro ao registrar empréstimo.'),
+                              backgroundColor: AppColors.error,
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: const Text(
@@ -593,18 +626,41 @@ class _EmprestimoDevolucaoPageState
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.cyanPrimary,
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       try {
                         final service = ref.read(kimonoServiceProvider);
-                        service.retornarEmprestimo(emprestimo);
-                        Navigator.pop(context);
-                        _showPopUpSucesso(
-                          'O kimono foi recuperado com sucesso!',
-                        );
-                        ref.invalidate(gestaoKimonosStoreProvider);
-                        ref.invalidate(gestaoEmprestimosStoreProvider);
+                        await service.retornarEmprestimo(emprestimo);
+                        await ref.refresh(gestaoKimonosStoreProvider.future);
+                        await ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          _showPopUpSucesso(
+                            'O kimono foi recuperado com sucesso!',
+                          );
+                        }
                       } on AppApiException catch (e) {
                         ref.read(loggerProvider).e(e.message, error: e.error);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(e.message),
+                              backgroundColor: AppColors.error,
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Erro ao registrar devolução.'),
+                              backgroundColor: AppColors.error,
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: const Text(

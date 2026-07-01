@@ -133,11 +133,13 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                   diff['id_responsavel'] = null;
                 }
 
-                await service.atualizaAluno(
-                  widget.aluno.id!,
-                  state.diffAluno(aluno),
-                );
-                ref.invalidate(pesquisaAlunoProvider);
+                if (diff.isNotEmpty) {
+                  await service.atualizaAluno(
+                    widget.aluno.id!,
+                    diff,
+                  );
+                }
+                await ref.refresh(pesquisaAlunoProvider.future);
 
                 if (!mounted) return;
                 Navigator.pop(ctx);
@@ -200,49 +202,45 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
           ),
         ),
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 600), // Responsividade
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: cardBg,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: isDark
-                      ? Colors.black.withValues(alpha: 0.3)
-                      : AppColors.shadowLight,
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Form(
-              key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Editar Aluno',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: textColor,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600), // Responsividade
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: cardBg,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isDark
+                          ? Colors.black.withValues(alpha: 0.3)
+                          : AppColors.shadowLight,
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // O formulário inteiro agora rola numa página só!
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSectionTitle('Dados Pessoais'),
+                  ],
+                ),
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Editar Aluno',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: textColor,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Dados Pessoais'),
                           _buildTextField(
                             'Nome:*',
                             notifier.updateNome,
@@ -365,45 +363,38 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                             label: 'Faixa/Grau:*',
                           ),
                           _buildTextField(
-                            'ID da ficha:*',
+                            'ID da ficha:',
                             notifier.updateIdFicha,
                             state.idFicha,
                             state.idFichaError,
                           ),
                           _buildTurmaDropdown(),
-                          const SizedBox(
-                            height: 20,
-                          ), // Respiro no final do scroll
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  // Botão de Salvar Único
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonBg,
-                        foregroundColor: buttonText,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          const SizedBox(height: 20),
+                      // Botão de Salvar Único
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: buttonBg,
+                            foregroundColor: buttonText,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: _salvarAlteracoes,
+                          child: const Text(
+                            'Salvar Alterações',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                      onPressed: _salvarAlteracoes,
-                      child: const Text(
-                        'Salvar Alterações',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

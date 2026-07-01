@@ -165,131 +165,126 @@ class _CadastrarVoluntarioPageState
           ),
         ),
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: containerBg,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: isDark ? Colors.black54 : AppColors.shadowLight,
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: containerBg,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isDark ? Colors.black54 : AppColors.shadowLight,
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Form(
-              key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Cadastrar Voluntário',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: textColor,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSectionTitle('Dados Pessoais'),
-                          InputField(
-                            initialValue: cadastro.nome,
-                            update: notifier.updateNome,
-                            error: cadastro.nomeError,
-                            label: 'Nome completo*',
-                            hint: 'Digite o nome completo',
-                            validatorMessage: 'O nome é obrigatório',
-                          ),
-                          const SizedBox(height: 12),
-                          InputField(
-                            initialValue: formatTelefone.maskText(
-                              cadastro.telefone,
-                            ),
-                            update: (_) => notifier.updateTelefone(
-                              formatTelefone.getUnmaskedText(),
-                            ),
-                            error: cadastro.telefoneError,
-                            label: 'Telefone*',
-                            hint: '(00) 00000-0000',
-                            keyboardType: TextInputType.phone,
-                            validatorMessage: 'Informe um telefone válido',
-                            inputFormatters: [formatTelefone],
-                          ),
-                          const SizedBox(height: 12),
-                          InputField(
-                            initialValue: formatCpf.maskText(cadastro.cpf),
-                            update: (_) =>
-                                notifier.updateCpf(formatCpf.getUnmaskedText()),
-                            error: cadastro.cpfError,
-                            label: 'CPF*',
-                            hint: '000.000.000-00',
-                            keyboardType: TextInputType.number,
-                            validatorMessage: 'Informe um CPF válido',
-                            inputFormatters: [formatCpf],
-                          ),
-                          const SizedBox(height: 20),
-                          _buildSectionTitle('Acesso ao Sistema'),
-                          InputField(
-                            initialValue: cadastro.email,
-                            update: notifier.updateEmail,
-                            error: cadastro.emailError,
-                            label: 'Email*',
-                            hint: 'email@exemplo.com',
-                            keyboardType: TextInputType.emailAddress,
-                            validatorMessage: 'Informe um email válido',
-                          ),
-                          const SizedBox(height: 12),
-                          InputField(
-                            initialValue: cadastro.senha,
-                            update: notifier.updateSenha,
-                            error: cadastro.senhaError,
-                            label: 'Senha*',
-                            hint: 'Digite a senha de acesso',
-                            validatorMessage: 'A senha é obrigatória',
-                          ),
-                          const SizedBox(height: 20),
-                          _buildSectionTitle('Graduação no Jiu-Jitsu (Faixa)'),
-                          _buildFaixaDropdown(cadastro, notifier),
-                          const SizedBox(height: 20),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.deepNavy,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: _salvar,
-                      child: const Text(
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
                         'Cadastrar Voluntário',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
+                          color: textColor,
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Dados Pessoais'),
+                      InputField(
+                        initialValue: cadastro.nome,
+                        update: notifier.updateNome,
+                        error: cadastro.nomeError,
+                        label: 'Nome completo*',
+                        hint: 'Digite o nome completo',
+                        validatorMessage: 'O nome é obrigatório',
+                      ),
+                      const SizedBox(height: 12),
+                      InputField(
+                        initialValue: formatTelefone.maskText(
+                          cadastro.telefone,
+                        ),
+                        update: (_) => notifier.updateTelefone(
+                          formatTelefone.getUnmaskedText(),
+                        ),
+                        error: cadastro.telefoneError,
+                        label: 'Telefone*',
+                        hint: '(00) 00000-0000',
+                        keyboardType: TextInputType.phone,
+                        validatorMessage: 'Informe um telefone válido',
+                        inputFormatters: [formatTelefone],
+                      ),
+                      const SizedBox(height: 12),
+                      InputField(
+                        initialValue: formatCpf.maskText(cadastro.cpf),
+                        update: (_) =>
+                            notifier.updateCpf(formatCpf.getUnmaskedText()),
+                        error: cadastro.cpfError,
+                        label: 'CPF*',
+                        hint: '000.000.000-00',
+                        keyboardType: TextInputType.number,
+                        validatorMessage: 'Informe um CPF válido',
+                        inputFormatters: [formatCpf],
+                      ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Acesso ao Sistema'),
+                      InputField(
+                        initialValue: cadastro.email,
+                        update: notifier.updateEmail,
+                        error: cadastro.emailError,
+                        label: 'Email*',
+                        hint: 'email@exemplo.com',
+                        keyboardType: TextInputType.emailAddress,
+                        validatorMessage: 'Informe um email válido',
+                      ),
+                      const SizedBox(height: 12),
+                      InputField(
+                        initialValue: cadastro.senha,
+                        update: notifier.updateSenha,
+                        error: cadastro.senhaError,
+                        label: 'Senha*',
+                        hint: 'Digite a senha de acesso',
+                        validatorMessage: 'A senha é obrigatória',
+                      ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Graduação no Jiu-Jitsu (Faixa)'),
+                      _buildFaixaDropdown(cadastro, notifier),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.deepNavy,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: _salvar,
+                          child: const Text(
+                            'Cadastrar Voluntário',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

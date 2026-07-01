@@ -44,7 +44,7 @@ class InputField extends StatelessWidget {
           initialValue: initialValue,
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.disabled,
           style: TextStyle(
             color: textColor,
             fontWeight: FontWeight.w600,
@@ -76,7 +76,9 @@ class InputField extends StatelessWidget {
             ),
           ),
           validator: (value) {
-            if (validatorMessage == null) return null;
+            if (validatorMessage == null || validatorMessage!.isEmpty) {
+              return null;
+            }
             final text = (value ?? '').trim();
             if (text.isEmpty) return validatorMessage;
             return null;

@@ -78,6 +78,15 @@ class RegistroKimonosStateMapper extends ClassMapperBase<RegistroKimonosState> {
     opt: true,
     def: '',
   );
+  static List<Estoque> _$estoqueList(RegistroKimonosState v) => v.estoqueList;
+  static const Field<RegistroKimonosState, List<Estoque>> _f$estoqueList =
+      Field(
+        'estoqueList',
+        _$estoqueList,
+        key: r'estoque_list',
+        opt: true,
+        def: const [],
+      );
 
   @override
   final MappableFields<RegistroKimonosState> fields = const {
@@ -88,6 +97,7 @@ class RegistroKimonosStateMapper extends ClassMapperBase<RegistroKimonosState> {
     #kimonoPerdido: _f$kimonoPerdido,
     #motivo: _f$motivo,
     #qtdPerdida: _f$qtdPerdida,
+    #estoqueList: _f$estoqueList,
   };
 
   static RegistroKimonosState _instantiate(DecodingData data) {
@@ -99,6 +109,7 @@ class RegistroKimonosStateMapper extends ClassMapperBase<RegistroKimonosState> {
       kimonoPerdido: data.dec(_f$kimonoPerdido),
       motivo: data.dec(_f$motivo),
       qtdPerdida: data.dec(_f$qtdPerdida),
+      estoqueList: data.dec(_f$estoqueList),
     );
   }
 
@@ -173,6 +184,8 @@ abstract class RegistroKimonosStateCopyWith<
 >
     implements ClassCopyWith<$R, $In, $Out> {
   EstoqueCopyWith<$R, Estoque, Estoque>? get kimonoPerdido;
+  ListCopyWith<$R, Estoque, EstoqueCopyWith<$R, Estoque, Estoque>>
+  get estoqueList;
   $R call({
     TamanhoKimono? tamanhoDoacao,
     CorKimono? corDoacao,
@@ -181,6 +194,7 @@ abstract class RegistroKimonosStateCopyWith<
     Estoque? kimonoPerdido,
     String? motivo,
     String? qtdPerdida,
+    List<Estoque>? estoqueList,
   });
   RegistroKimonosStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
@@ -199,6 +213,13 @@ class _RegistroKimonosStateCopyWithImpl<$R, $Out>
   EstoqueCopyWith<$R, Estoque, Estoque>? get kimonoPerdido =>
       $value.kimonoPerdido?.copyWith.$chain((v) => call(kimonoPerdido: v));
   @override
+  ListCopyWith<$R, Estoque, EstoqueCopyWith<$R, Estoque, Estoque>>
+  get estoqueList => ListCopyWith(
+    $value.estoqueList,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(estoqueList: v),
+  );
+  @override
   $R call({
     Object? tamanhoDoacao = $none,
     Object? corDoacao = $none,
@@ -207,6 +228,7 @@ class _RegistroKimonosStateCopyWithImpl<$R, $Out>
     Object? kimonoPerdido = $none,
     String? motivo,
     String? qtdPerdida,
+    List<Estoque>? estoqueList,
   }) => $apply(
     FieldCopyWithData({
       if (tamanhoDoacao != $none) #tamanhoDoacao: tamanhoDoacao,
@@ -216,6 +238,7 @@ class _RegistroKimonosStateCopyWithImpl<$R, $Out>
       if (kimonoPerdido != $none) #kimonoPerdido: kimonoPerdido,
       if (motivo != null) #motivo: motivo,
       if (qtdPerdida != null) #qtdPerdida: qtdPerdida,
+      if (estoqueList != null) #estoqueList: estoqueList,
     }),
   );
   @override
@@ -227,6 +250,7 @@ class _RegistroKimonosStateCopyWithImpl<$R, $Out>
     kimonoPerdido: data.get(#kimonoPerdido, or: $value.kimonoPerdido),
     motivo: data.get(#motivo, or: $value.motivo),
     qtdPerdida: data.get(#qtdPerdida, or: $value.qtdPerdida),
+    estoqueList: data.get(#estoqueList, or: $value.estoqueList),
   );
 
   @override

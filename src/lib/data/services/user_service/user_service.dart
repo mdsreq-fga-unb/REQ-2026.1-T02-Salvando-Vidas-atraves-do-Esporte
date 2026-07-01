@@ -101,6 +101,13 @@ class UserService {
   Future<void> updateUser(Map<String, dynamic> diff) async {
     return runSupabaseCall(() async {
       await _supabase.rpc('admin_update_user', params: diff);
+      final id = diff['p_id'];
+      if (id != null && localUser != null && id == localUser!.id) {
+        final data = await _supabase.from('users').select().eq('id', id);
+        if (data.isNotEmpty) {
+          _setLocalUser(LocalUser.fromMap(data.first));
+        }
+      }
     });
   }
 

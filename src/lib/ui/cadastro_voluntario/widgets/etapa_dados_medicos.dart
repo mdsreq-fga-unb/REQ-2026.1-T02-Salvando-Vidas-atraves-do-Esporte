@@ -30,10 +30,9 @@ class EtapaDadosMedicos extends ConsumerWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 600),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
                 _buildPerguntaMedica(
                   '1. Você possui alguma condição de saúde crônica (ex: problemas cardíacos, hipertensão, diabetes, asma)?',
                   isDark,
@@ -76,7 +75,7 @@ class EtapaDadosMedicos extends ConsumerWidget {
                   onChanged: notifier.updateObservacaoMedica,
                   maxLines: 3,
                   style: TextStyle(color: textColor),
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autovalidateMode: AutovalidateMode.disabled,
                   decoration: InputDecoration(
                     hintText: 'Digite as observações aqui...',
                     hintStyle: TextStyle(color: hintColor),
@@ -139,7 +138,6 @@ class EtapaDadosMedicos extends ConsumerWidget {
             ),
           ),
         ),
-      ),
     );
   }
 

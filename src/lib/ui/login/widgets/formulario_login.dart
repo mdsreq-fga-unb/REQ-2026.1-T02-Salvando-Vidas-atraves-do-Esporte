@@ -23,7 +23,7 @@ class FormularioLogin extends StatelessWidget {
       child: Form(
         key: formKey,
         // Só valida automaticamente DEPOIS do primeiro clique no botão entrar
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: AutovalidateMode.disabled,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

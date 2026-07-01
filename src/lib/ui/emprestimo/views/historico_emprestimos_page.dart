@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:salvando_vidas/data/stores/emprestimo/historico_emprestimos_store.dart';
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
+import 'package:salvando_vidas/ui/emprestimo/widgets/detalhes_item_historico_dialog.dart';
 import 'package:salvando_vidas/ui/emprestimo/widgets/historico_emprestimo_aluno_dialog.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
@@ -19,6 +20,7 @@ class _HistoricoEmprestimosPageState
     extends ConsumerState<HistoricoEmprestimosPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final TextEditingController _searchCtrl = TextEditingController();
   String _filtroNome = '';
 
   @override
@@ -29,6 +31,7 @@ class _HistoricoEmprestimosPageState
 
   @override
   void dispose() {
+    _searchCtrl.dispose();
     _tabController.dispose();
     super.dispose();
   }
@@ -273,6 +276,7 @@ class _HistoricoEmprestimosPageState
       child: Column(
         children: [
           TextField(
+            controller: _searchCtrl,
             style: TextStyle(
               color: isDark ? Colors.white : Colors.black87,
               fontSize: 15,
@@ -296,7 +300,10 @@ class _HistoricoEmprestimosPageState
                         color: AppColors.textSecondary,
                         size: 20,
                       ),
-                      onPressed: () => setState(() => _filtroNome = ''),
+                      onPressed: () {
+                        _searchCtrl.clear();
+                        setState(() => _filtroNome = '');
+                      },
                     )
                   : null,
               filled: true,
@@ -650,94 +657,97 @@ class _HistoricoTile extends StatelessWidget {
     final kimono =
         '${item.emprestimo.tamanho.nomeVisivel}, ${item.emprestimo.cor.nomeVisivel}';
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: tipoColor.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: () => mostrarDetalhesItemHistoricoDialog(context, item),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: tipoColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(tipoIcon, color: tipoColor, size: 22),
             ),
-            child: Icon(tipoIcon, color: tipoColor, size: 22),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: tipoColor.withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        tipoLabel,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          color: tipoColor,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: tipoColor.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          tipoLabel,
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: tipoColor,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      dataFormatada,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.textSecondary,
+                      Text(
+                        dataFormatada,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColors.textSecondary,
+                        ),
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    nomeAluno,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: textColor,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  nomeAluno,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: textColor,
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Kimono: $kimono',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.person_outline,
-                      size: 13,
+                  const SizedBox(height: 2),
+                  Text(
+                    'Kimono: $kimono',
+                    style: const TextStyle(
+                      fontSize: 13,
                       color: AppColors.textSecondary,
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      nomeVoluntario,
-                      style: const TextStyle(
-                        fontSize: 12,
+                  ),
+                  const SizedBox(height: 2),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.person_outline,
+                        size: 13,
                         color: AppColors.textSecondary,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 4),
+                      Text(
+                        nomeVoluntario,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -19,7 +19,6 @@ class CadastrosPage extends ConsumerStatefulWidget {
 }
 
 class _CadastrosPageState extends ConsumerState<CadastrosPage> {
-  final PageController _pageController = PageController();
   int _etapaAtual = 0;
   final _formKeyEtapa1 = GlobalKey<FormState>();
   final _formKeyEtapa2 = GlobalKey<FormState>();
@@ -44,19 +43,45 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
 
   @override
   void dispose() {
-    _pageController.dispose();
     _obsMedicasController.dispose();
     super.dispose();
   }
 
-  void _onStepChanged(int page) {
-    setState(() {
-      _etapaAtual = page;
-    });
+  Widget _buildEtapaAtual() {
+    switch (_etapaAtual) {
+      case 0:
+        return EtapaDadosBasicos(formKey: _formKeyEtapa1);
+      case 1:
+        return EtapaDadosMedicos(
+          formKey: _formKeyEtapa2,
+          termoAceito: _termoResponsabilidadeAceito,
+          onTermoChanged: (val) => setState(
+            () => _termoResponsabilidadeAceito = val ?? false,
+          ),
+        );
+      case 2:
+        return EtapaDadosResponsavel(formKey: _formKeyEtapa3);
+      default:
+        return const SizedBox.shrink();
+    }
   }
 
   void _avancar() {
-    if (_etapaAtual == 1) {
+    final formValido = _formKeys[_etapaAtual].currentState?.validate() ?? false;
+
+    if (_etapaAtual == 0) {
+      if (!formValido || !cadastro.estaValido) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Preencha todos os campos obrigatórios corretamente.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+      setState(() => _etapaAtual = 1);
+    } else if (_etapaAtual == 1) {
       if (!_termoResponsabilidadeAceito) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -69,34 +94,39 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
         );
         return;
       }
-    }
-
-    if (cadastro.estaValido) {
-      if (_etapaAtual == 0 || (_etapaAtual == 1 && cadastro.idade < 18)) {
-        _pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.ease,
+      if (!formValido) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Verifique os dados médicos informados.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
         );
-      } else if (cadastro.temResponsavel || cadastro.idade >= 18) {
-        _mostrarDialogConfirmacao();
+        return;
       }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Preencha todos os campos obrigatórios corretamente.'),
-          backgroundColor: AppColors.error,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
+      if (cadastro.idade >= 18) {
+        _mostrarDialogConfirmacao();
+      } else {
+        setState(() => _etapaAtual = 2);
+      }
+    } else if (_etapaAtual == 2) {
+      if (!formValido || !cadastro.temResponsavel) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Preencha os dados do responsável corretamente.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+      _mostrarDialogConfirmacao();
     }
   }
 
   void _voltar() {
     if (_etapaAtual > 0) {
-      _pageController.previousPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
+      setState(() => _etapaAtual--);
     }
   }
 
@@ -285,25 +315,9 @@ class _CadastrosPageState extends ConsumerState<CadastrosPage> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 24),
-                      SizedBox(
-                        height: 580,
-                        child: PageView(
-                          controller: _pageController,
-                          onPageChanged: _onStepChanged,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: [
-                            EtapaDadosBasicos(formKey: _formKeyEtapa1),
-                            EtapaDadosMedicos(
-                              formKey: _formKeyEtapa2,
-                              termoAceito: _termoResponsabilidadeAceito,
-                              onTermoChanged: (val) => setState(
-                                () =>
-                                    _termoResponsabilidadeAceito = val ?? false,
-                              ),
-                            ),
-                            EtapaDadosResponsavel(formKey: _formKeyEtapa3),
-                          ],
-                        ),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        child: _buildEtapaAtual(),
                       ),
                       const SizedBox(height: 24),
                       Row(

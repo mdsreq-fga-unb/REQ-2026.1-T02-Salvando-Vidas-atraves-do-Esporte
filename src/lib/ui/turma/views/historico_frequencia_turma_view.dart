@@ -18,6 +18,7 @@ class _HistoricoFrequenciaTurmaViewState extends ConsumerState<HistoricoFrequenc
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _filtroNome = '';
+  final TextEditingController _searchCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class _HistoricoFrequenciaTurmaViewState extends ConsumerState<HistoricoFrequenc
 
   @override
   void dispose() {
+    _searchCtrl.dispose();
     _tabController.dispose();
     super.dispose();
   }
@@ -207,19 +209,39 @@ class _HistoricoFrequenciaTurmaViewState extends ConsumerState<HistoricoFrequenc
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: TextField(
+            controller: _searchCtrl,
             style: TextStyle(color: isDark ? Colors.white : Colors.black87),
             onChanged: (val) => setState(() => _filtroNome = val),
             decoration: InputDecoration(
               hintText: 'Pesquisar aluno por nome...',
               hintStyle: const TextStyle(color: AppColors.textSecondary),
-              prefixIcon: const Icon(Icons.search, color: AppColors.cyanPrimary),
+              prefixIcon: const Icon(
+                Icons.search,
+                color: AppColors.cyanPrimary,
+              ),
+              suffixIcon: _filtroNome.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.clear,
+                        color: AppColors.textSecondary,
+                        size: 20,
+                      ),
+                      onPressed: () {
+                        _searchCtrl.clear();
+                        setState(() => _filtroNome = '');
+                      },
+                    )
+                  : null,
               filled: true,
               fillColor: isDark ? AppColors.darkInputFill : Colors.white,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide.none,
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 12,
+              ),
             ),
           ),
         ),

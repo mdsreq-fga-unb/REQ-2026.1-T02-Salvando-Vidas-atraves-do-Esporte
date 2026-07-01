@@ -20,6 +20,20 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
   late RegistroKimonosState state;
   late RegistroKimonosStore store;
 
+  final _doadorController = TextEditingController();
+  final _qtdDoadaController = TextEditingController();
+  final _motivoController = TextEditingController();
+  final _qtdPerdidaController = TextEditingController();
+
+  @override
+  void dispose() {
+    _doadorController.dispose();
+    _qtdDoadaController.dispose();
+    _motivoController.dispose();
+    _qtdPerdidaController.dispose();
+    super.dispose();
+  }
+
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
   Color get cardBg => isDark ? AppColors.darkSurface : Colors.white;
   Color get textColor => isDark ? Colors.white : Colors.black87;
@@ -74,11 +88,51 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                     .read(kimonoServiceProvider)
                     .cadastrarDoacao(state.doacao);
                 store.reset();
-                ref.invalidate(gestaoKimonosStoreProvider);
-                Navigator.pop(context);
-                _mostrarSucessoDoacao();
+                _doadorController.clear();
+                _qtdDoadaController.clear();
+                await ref.refresh(gestaoKimonosStoreProvider.future);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  _mostrarSucessoDoacao();
+                }
               } on AppApiException catch (e) {
                 ref.read(loggerProvider).e(e.message, error: e.error);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(e.message),
+                      backgroundColor: AppColors.error,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Erro ao registrar doação.'),
+                      backgroundColor: AppColors.error,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              } catch (e) {
+                ref.read(loggerProvider).e(
+                  'Erro inesperado ao registrar doação',
+                  error: e,
+                );
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Erro ao registrar doação.'),
+                      backgroundColor: AppColors.error,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
               }
             },
             child: const Text('Confirmar'),
@@ -171,11 +225,40 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                     .read(kimonoServiceProvider)
                     .cadastrarPerda(state.perda);
                 store.reset();
-                ref.invalidate(gestaoKimonosStoreProvider);
-                Navigator.pop(context);
-                _mostrarSucessoPerda();
+                _motivoController.clear();
+                _qtdPerdidaController.clear();
+                await ref.refresh(gestaoKimonosStoreProvider.future);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  _mostrarSucessoPerda();
+                }
               } on AppApiException catch (e) {
                 ref.read(loggerProvider).e(e.message, error: e.error);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(e.message),
+                      backgroundColor: AppColors.error,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              } catch (e) {
+                ref.read(loggerProvider).e(
+                  'Erro inesperado ao registrar perda',
+                  error: e,
+                );
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Erro ao registrar perda.'),
+                      backgroundColor: AppColors.error,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
               }
             },
             child: const Text('Confirmar'),
@@ -233,10 +316,29 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
     state = ref.watch(registroKimonosStoreProvider);
     store = ref.read(registroKimonosStoreProvider.notifier);
 
+    if (_doadorController.text != state.doador) {
+      _doadorController.text = state.doador;
+    }
+    if (_qtdDoadaController.text != state.qtdDoada) {
+      _qtdDoadaController.text = state.qtdDoada;
+    }
+    if (_motivoController.text != state.motivo) {
+      _motivoController.text = state.motivo;
+    }
+    if (_qtdPerdidaController.text != state.qtdPerdida) {
+      _qtdPerdidaController.text = state.qtdPerdida;
+    }
+
     int doacoes = 0;
     int perdas = 0;
 
     if (estoque.value != null) {
+      if (estoque.value!.estoque != state.estoqueList) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) store.syncEstoque(estoque.value!.estoque);
+        });
+      }
+
       for (final perda in estoque.value!.perdas) {
         perdas += perda.quantidade;
       }
@@ -509,7 +611,7 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                 ),
                                 const SizedBox(height: 14),
                                 TextFormField(
-                                  initialValue: state.doador,
+                                  controller: _doadorController,
                                   style: TextStyle(
                                     color: textColor,
                                     fontSize: 15,
@@ -559,7 +661,7 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                 ),
                                 const SizedBox(height: 14),
                                 TextFormField(
-                                  initialValue: state.qtdDoada,
+                                  controller: _qtdDoadaController,
                                   keyboardType: TextInputType.number,
                                   style: TextStyle(
                                     color: textColor,
@@ -605,6 +707,9 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                       horizontal: 16,
                                       vertical: 14,
                                     ),
+                                    errorText: state.qtdDoada.isNotEmpty
+                                        ? state.qtdDoadaError
+                                        : null,
                                   ),
                                   onChanged: store.updateQtdDoada,
                                 ),
@@ -816,7 +921,7 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                 ),
                                 const SizedBox(height: 14),
                                 TextFormField(
-                                  initialValue: state.motivo,
+                                  controller: _motivoController,
                                   style: TextStyle(
                                     color: textColor,
                                     fontSize: 15,
@@ -867,7 +972,7 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                 ),
                                 const SizedBox(height: 14),
                                 TextFormField(
-                                  initialValue: state.qtdPerdida,
+                                  controller: _qtdPerdidaController,
                                   keyboardType: TextInputType.number,
                                   style: TextStyle(
                                     color: textColor,
@@ -913,6 +1018,9 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                       horizontal: 16,
                                       vertical: 14,
                                     ),
+                                    errorText: state.qtdPerdida.isNotEmpty
+                                        ? state.qtdPerdidaError
+                                        : null,
                                   ),
                                   onChanged: store.updateQtdPerdida,
                                 ),

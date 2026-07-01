@@ -35,7 +35,7 @@ final class ThemeStoreProvider
   ThemeStore create() => ThemeStore();
 }
 
-String _$themeStoreHash() => r'0af5ff1a4873d2494fc8f25d54569329ae18610e';
+String _$themeStoreHash() => r'ad6930a89dfe7f78ce8af62759a8196660410dfe';
 
 abstract class _$ThemeStore extends $AsyncNotifier<bool> {
   FutureOr<bool> build();

@@ -33,20 +33,41 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
   }
 
   void _salvarAlteracoes() async {
-    // Aciona a validação visual do Form antes de prosseguir
     if (_formKey.currentState?.validate() ?? false) {
       if (state.podeCadastrar) {
         try {
           final diff = state.diff;
           await ref.read(userServiceProvider).updateUser(diff);
+          ref.invalidate(updateVoluntarioProvider);
 
+          if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Perfil atualizado com sucesso!')),
+            const SnackBar(
+              content: Text('Perfil atualizado com sucesso!'),
+              backgroundColor: AppColors.success,
+              behavior: SnackBarBehavior.floating,
+            ),
           );
-          context.pop(); // Retorna para a tela de configurações
+          context.pop();
         } on AppApiException catch (e) {
           logger.e('', error: e.error);
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.message),
+              backgroundColor: AppColors.error,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Preencha os campos corretamente para salvar.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
       }
     }
   }
@@ -175,7 +196,7 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
                               label: 'Nova Senha (opcional)',
                               hint:
                                   'Digite a senha do voluntário (deixe em branco para manter)',
-                              validatorMessage: '',
+                              validatorMessage: null,
                             ),
                             const SizedBox(height: 14),
 

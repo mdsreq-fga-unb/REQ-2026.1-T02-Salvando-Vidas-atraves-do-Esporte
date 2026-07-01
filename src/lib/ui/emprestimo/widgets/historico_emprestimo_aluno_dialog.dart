@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salvando_vidas/data/stores/emprestimo/historico_emprestimos_store.dart';
 import 'package:salvando_vidas/domain/aluno/aluno.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
+import 'package:salvando_vidas/ui/emprestimo/widgets/detalhes_item_historico_dialog.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 void mostrarHistoricoEmprestimoAlunoDialog(BuildContext context, Aluno aluno) {
@@ -152,7 +153,7 @@ class _HistoricoEmprestimoAlunoSheet extends ConsumerWidget {
                           ),
                         )
                       else
-                        ...itensDoAluno.map((item) => _buildTimelineCard(item, isDark)),
+                        ...itensDoAluno.map((item) => _buildTimelineCard(context, item, isDark)),
                     ],
                   );
                 },
@@ -168,7 +169,6 @@ class _HistoricoEmprestimoAlunoSheet extends ConsumerWidget {
     final total = itens.length;
     final ativos = itens.where((i) => i.emprestimo.dataDevolucao == null).length;
     final devolvidos = itens.where((i) => i.emprestimo.dataDevolucao != null).length;
-    final taxaDevolucao = total > 0 ? (devolvidos / total) * 100 : 0.0;
 
     final corStatus = ativos > 0 ? AppColors.warning : AppColors.success;
 
@@ -192,28 +192,31 @@ class _HistoricoEmprestimoAlunoSheet extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Status Atual',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Status Atual',
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    ativos > 0 ? '$ativos Empréstimo(s) Ativo(s)' : 'Sem Empréstimos Pendentes',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                      color: corStatus,
+                    const SizedBox(height: 4),
+                    Text(
+                      ativos > 0 ? '$ativos Empréstimo(s) Ativo(s)' : 'Sem Empréstimos Pendentes',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: corStatus,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
@@ -284,7 +287,7 @@ class _HistoricoEmprestimoAlunoSheet extends ConsumerWidget {
     );
   }
 
-  Widget _buildTimelineCard(HistoricoItem item, bool isDark) {
+  Widget _buildTimelineCard(BuildContext context, HistoricoItem item, bool isDark) {
     final isDevolvido = item.emprestimo.dataDevolucao != null;
     final statusColor = isDevolvido ? AppColors.success : AppColors.warning;
     final statusText = isDevolvido ? 'Devolvido' : 'Em Aberto';
@@ -295,43 +298,46 @@ class _HistoricoEmprestimoAlunoSheet extends ConsumerWidget {
 
     final kimono = '${item.emprestimo.tamanho.nomeVisivel}, ${item.emprestimo.cor.nomeVisivel}';
 
-    return Container(
+    return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.darkInputFill : Colors.white,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
+        side: BorderSide(
           color: isDark ? AppColors.darkDivider : AppColors.divider,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.2 : 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
-      child: Column(
+      color: isDark ? AppColors.darkInputFill : Colors.white,
+      elevation: 1,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: () => mostrarDetalhesItemHistoricoDialog(context, item),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Icon(Icons.sports_martial_arts, size: 20, color: AppColors.royalAzure),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Kimono: $kimono',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: isDark ? Colors.white : Colors.black87,
+              Expanded(
+                child: Row(
+                  children: [
+                    Icon(Icons.sports_martial_arts, size: 20, color: AppColors.royalAzure),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Kimono: $kimono',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: isDark ? Colors.white : Colors.black87,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
@@ -382,6 +388,8 @@ class _HistoricoEmprestimoAlunoSheet extends ConsumerWidget {
           ),
         ],
       ),
+    ),
+    ),
     );
   }
 }

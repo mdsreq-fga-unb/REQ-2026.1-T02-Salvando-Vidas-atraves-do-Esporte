@@ -5,11 +5,9 @@ import 'package:salvando_vidas/data/stores/gestao_kimonos/gestao_kimonos_store.d
 import 'package:salvando_vidas/data/supabase_call.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
 import 'package:salvando_vidas/ui/global/themes/colors.dart';
-import 'package:salvando_vidas/ui/global/widgets/faixa_badge.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvando_vidas/routing/routes.dart';
 import 'package:salvando_vidas/ui/emprestimo/widgets/historico_emprestimo_aluno_dialog.dart';
-import 'package:salvando_vidas/ui/inventario/widgets/inventario_options_menu_widget.dart';
 
 class Inventario extends ConsumerWidget {
   const Inventario({super.key});
@@ -61,7 +59,6 @@ class Inventario extends ConsumerWidget {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Estoque de Kimonos',
@@ -71,7 +68,6 @@ class Inventario extends ConsumerWidget {
                             color: isDark ? Colors.white : AppColors.deepNavy,
                           ),
                         ),
-                        const InventarioOptionsMenuWidget(),
                       ],
                     ),
                     const SizedBox(height: 12),

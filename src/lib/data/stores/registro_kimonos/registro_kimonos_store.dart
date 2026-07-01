@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:salvando_vidas/data/stores/gestao_kimonos/gestao_kimonos_store.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
 
 import 'package:collection/collection.dart';
@@ -17,6 +18,7 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
   final Estoque? kimonoPerdido;
   final String motivo;
   final String qtdPerdida;
+  final List<Estoque> estoqueList;
 
   RegistroKimonosState({
     this.tamanhoDoacao,
@@ -26,6 +28,7 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
     this.kimonoPerdido,
     this.motivo = '',
     this.qtdPerdida = '',
+    this.estoqueList = const [],
   });
 
   String? get tamanhoDoacaoError {
@@ -42,9 +45,18 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
 
   String? get qtdDoadaError {
     final qtd = int.tryParse(qtdDoada);
-    return qtd != null && qtd > 0
-        ? null
-        : "Deve informar o número de kimonos doados";
+    if (qtd == null || qtd <= 0) {
+      return "Deve informar o número de kimonos doados";
+    }
+    if (tamanhoDoacao != null && corDoacao != null) {
+      final int disponivel = estoqueList
+          .where((e) => e.tamanho == tamanhoDoacao && e.cor == corDoacao)
+          .fold(0, (sum, item) => sum + item.quantidadeDisponivel);
+      if (qtd > disponivel) {
+        return "A quantidade excede o estoque disponível ($disponivel)";
+      }
+    }
+    return null;
   }
 
   String? get kimonoPerdidoError {
@@ -59,9 +71,15 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
 
   String? get qtdPerdidaError {
     final qtd = int.tryParse(qtdPerdida);
-    return qtd != null && qtd > 0
-        ? null
-        : "Deve informar a quantidade de kimonos perdidos";
+    if (qtd == null || qtd <= 0) {
+      return "Deve informar a quantidade de kimonos perdidos";
+    }
+    if (kimonoPerdido != null) {
+      if (qtd > kimonoPerdido!.quantidadeDisponivel) {
+        return "A quantidade excede o estoque disponível (${kimonoPerdido!.quantidadeDisponivel})";
+      }
+    }
+    return null;
   }
 
   bool get doacaoValida =>
@@ -105,38 +123,53 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
 class RegistroKimonosStore extends _$RegistroKimonosStore {
   @override
   RegistroKimonosState build() {
-    return RegistroKimonosState();
+    final estoque =
+        ref.read(gestaoKimonosStoreProvider).value?.estoque ?? [];
+    return RegistroKimonosState(estoqueList: estoque);
+  }
+
+  List<Estoque> get _currentEstoque =>
+      ref.read(gestaoKimonosStoreProvider).value?.estoque ??
+      state.estoqueList;
+
+  void syncEstoque(List<Estoque> estoque) {
+    if (state.estoqueList != estoque) {
+      state = state.copyWith(estoqueList: estoque);
+    }
   }
 
   void updateTamanhoDoacao(TamanhoKimono? tamanho) {
-    state = state.copyWith(tamanhoDoacao: tamanho);
+    state = state.copyWith(
+      tamanhoDoacao: tamanho,
+      estoqueList: _currentEstoque,
+    );
   }
 
   void updateCorDoacao(CorKimono? cor) {
-    state = state.copyWith(corDoacao: cor);
+    state = state.copyWith(corDoacao: cor, estoqueList: _currentEstoque);
   }
 
   void updateDoador(String doador) {
-    state = state.copyWith(doador: doador);
+    state = state.copyWith(doador: doador, estoqueList: _currentEstoque);
   }
 
   void updateQtdDoada(String qtd) {
-    state = state.copyWith(qtdDoada: qtd);
+    state = state.copyWith(qtdDoada: qtd, estoqueList: _currentEstoque);
   }
 
   void updateKimonoPerdido(Estoque? kimono) {
-    state = state.copyWith(kimonoPerdido: kimono);
+    state = state.copyWith(kimonoPerdido: kimono, estoqueList: _currentEstoque);
   }
 
   void updateMotivo(String motivo) {
-    state = state.copyWith(motivo: motivo);
+    state = state.copyWith(motivo: motivo, estoqueList: _currentEstoque);
   }
 
   void updateQtdPerdida(String qtd) {
-    state = state.copyWith(qtdPerdida: qtd);
+    state = state.copyWith(qtdPerdida: qtd, estoqueList: _currentEstoque);
   }
 
   void reset() {
-    state = RegistroKimonosState();
+    state = RegistroKimonosState(estoqueList: _currentEstoque);
   }
 }

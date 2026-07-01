@@ -44,7 +44,7 @@ final class RegistroKimonosStoreProvider
 }
 
 String _$registroKimonosStoreHash() =>
-    r'e1456c1b55e7adb0df377a09fec8c4db2570214a';
+    r'e573aaadb6044ce81874d2932ace7e0e03117251';
 
 abstract class _$RegistroKimonosStore extends $Notifier<RegistroKimonosState> {
   RegistroKimonosState build();

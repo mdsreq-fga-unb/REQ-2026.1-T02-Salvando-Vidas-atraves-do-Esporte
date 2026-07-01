@@ -64,11 +64,10 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 600),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
                 InputField(
                   initialValue: cadastro.nome,
                   update: notifier.updateNome,
@@ -178,7 +177,7 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                         color: textColor,
                         fontWeight: FontWeight.w600,
                       ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autovalidateMode: AutovalidateMode.disabled,
                       decoration: InputDecoration(
                         hintText: 'DD/MM/AAAA',
                         hintStyle: TextStyle(color: hint),
@@ -266,13 +265,11 @@ class _EtapaDadosBasicosState extends ConsumerState<EtapaDadosBasicos> {
                   error: cadastro.idFichaError,
                   label: 'ID da ficha',
                   hint: 'Digite o id da ficha',
-                  validatorMessage: 'O ID da ficha deve ser um número',
                 ),
               ],
             ),
           ),
         ),
-      ),
     );
   }
 }

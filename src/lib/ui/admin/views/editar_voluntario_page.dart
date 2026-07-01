@@ -548,147 +548,142 @@ class _EditarVoluntarioFormState extends ConsumerState<_EditarVoluntarioForm> {
           ),
         ),
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: containerBg,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: isDark ? Colors.black54 : AppColors.shadowLight,
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: containerBg,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isDark ? Colors.black54 : AppColors.shadowLight,
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Form(
-              key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Editar Voluntário',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: textColor,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSectionTitle('Dados Pessoais'),
-                          _buildField(
-                            label: 'Nome completo*',
-                            initial: _nome,
-                            hint: 'Digite o nome completo',
-                            onChanged: (v) => _nome = v,
-                            validator: (v) => (v == null || v.trim().isEmpty)
-                                ? 'O nome é obrigatório'
-                                : null,
-                          ),
-                          const SizedBox(height: 12),
-                          _buildMaskedField(
-                            label: 'Telefone*',
-                            initial: formatTelefone.maskText(_telefone),
-                            hint: '(00) 00000-0000',
-                            formatter: formatTelefone,
-                            keyboardType: TextInputType.phone,
-                            onChanged: (_) =>
-                                _telefone = formatTelefone.getUnmaskedText(),
-                            validator: (v) => (v == null || v.trim().isEmpty)
-                                ? 'O telefone é obrigatório'
-                                : null,
-                          ),
-                          const SizedBox(height: 12),
-                          _buildMaskedField(
-                            label: 'CPF*',
-                            initial: formatCpf.maskText(_cpf),
-                            hint: '000.000.000-00',
-                            formatter: formatCpf,
-                            keyboardType: TextInputType.number,
-                            onChanged: (_) =>
-                                _cpf = formatCpf.getUnmaskedText(),
-                            validator: (v) =>
-                                (v == null ||
-                                    !eCPF(
-                                      formatCpf.getUnmaskedText().isEmpty
-                                          ? _cpf
-                                          : formatCpf.getUnmaskedText(),
-                                    ))
-                                ? 'Informe um CPF válido'
-                                : null,
-                          ),
-                          const SizedBox(height: 20),
-                          _buildSectionTitle('Acesso ao Sistema'),
-                          _buildField(
-                            label: 'Email*',
-                            initial: _email,
-                            hint: 'email@exemplo.com',
-                            keyboardType: TextInputType.emailAddress,
-                            onChanged: (v) => _email = v,
-                            validator: (v) => (v == null || v.trim().isEmpty)
-                                ? 'O email é obrigatório'
-                                : null,
-                          ),
-                          const SizedBox(height: 12),
-                          _buildField(
-                            label: 'Nova senha (deixe em branco para manter)',
-                            initial: '',
-                            hint: 'Digite nova senha',
-                            onChanged: (v) => _senha = v,
-                          ),
-                          const SizedBox(height: 20),
-                          _buildSectionTitle('Dados Institucionais'),
-                          _buildField(
-                            label: 'Função*',
-                            initial: _funcao,
-                            hint: 'Ex.: professor, monitor, apoio',
-                            onChanged: (v) => _funcao = v,
-                            validator: (v) => (v == null || v.trim().isEmpty)
-                                ? 'A função é obrigatória'
-                                : null,
-                          ),
-                          const SizedBox(height: 12),
-                          _buildSectionTitle('Graduação no Jiu-Jitsu (Faixa)'),
-                          _buildFaixaDropdown(),
-                          const SizedBox(height: 20),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.deepNavy,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: _salvar,
-                      child: const Text(
-                        'Salvar Alterações',
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Editar Voluntário',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
+                          color: textColor,
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Dados Pessoais'),
+                      _buildField(
+                        label: 'Nome completo*',
+                        initial: _nome,
+                        hint: 'Digite o nome completo',
+                        onChanged: (v) => _nome = v,
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'O nome é obrigatório'
+                            : null,
+                      ),
+                      const SizedBox(height: 12),
+                      _buildMaskedField(
+                        label: 'Telefone*',
+                        initial: formatTelefone.maskText(_telefone),
+                        hint: '(00) 00000-0000',
+                        formatter: formatTelefone,
+                        keyboardType: TextInputType.phone,
+                        onChanged: (_) =>
+                            _telefone = formatTelefone.getUnmaskedText(),
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'O telefone é obrigatório'
+                            : null,
+                      ),
+                      const SizedBox(height: 12),
+                      _buildMaskedField(
+                        label: 'CPF*',
+                        initial: formatCpf.maskText(_cpf),
+                        hint: '000.000.000-00',
+                        formatter: formatCpf,
+                        keyboardType: TextInputType.number,
+                        onChanged: (_) =>
+                            _cpf = formatCpf.getUnmaskedText(),
+                        validator: (v) =>
+                            (v == null ||
+                                !eCPF(
+                                  formatCpf.getUnmaskedText().isEmpty
+                                      ? _cpf
+                                      : formatCpf.getUnmaskedText(),
+                                ))
+                            ? 'Informe um CPF válido'
+                            : null,
+                      ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Acesso ao Sistema'),
+                      _buildField(
+                        label: 'Email*',
+                        initial: _email,
+                        hint: 'email@exemplo.com',
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (v) => _email = v,
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'O email é obrigatório'
+                            : null,
+                      ),
+                      const SizedBox(height: 12),
+                      _buildField(
+                        label: 'Nova senha (deixe em branco para manter)',
+                        initial: '',
+                        hint: 'Digite nova senha',
+                        onChanged: (v) => _senha = v,
+                      ),
+                      const SizedBox(height: 20),
+                      _buildSectionTitle('Dados Institucionais'),
+                      _buildField(
+                        label: 'Função*',
+                        initial: _funcao,
+                        hint: 'Ex.: professor, monitor, apoio',
+                        onChanged: (v) => _funcao = v,
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'A função é obrigatória'
+                            : null,
+                      ),
+                      const SizedBox(height: 12),
+                      _buildSectionTitle('Graduação no Jiu-Jitsu (Faixa)'),
+                      _buildFaixaDropdown(),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.deepNavy,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: _salvar,
+                          child: const Text(
+                            'Salvar Alterações',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
