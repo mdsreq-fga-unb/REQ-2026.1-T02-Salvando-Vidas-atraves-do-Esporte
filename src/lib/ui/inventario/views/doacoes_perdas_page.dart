@@ -74,7 +74,7 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                     .read(kimonoServiceProvider)
                     .cadastrarDoacao(state.doacao);
                 store.reset();
-                ref.refresh(gestaoKimonosStoreProvider.future);
+                ref.invalidate(gestaoKimonosStoreProvider);
                 Navigator.pop(context);
                 _mostrarSucessoDoacao();
               } on AppApiException catch (e) {
@@ -171,7 +171,7 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                     .read(kimonoServiceProvider)
                     .cadastrarPerda(state.perda);
                 store.reset();
-                ref.refresh(gestaoKimonosStoreProvider.future);
+                ref.invalidate(gestaoKimonosStoreProvider);
                 Navigator.pop(context);
                 _mostrarSucessoPerda();
               } on AppApiException catch (e) {

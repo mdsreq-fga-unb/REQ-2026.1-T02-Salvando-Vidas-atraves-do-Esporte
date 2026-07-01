@@ -540,8 +540,8 @@ class _EmprestimoDevolucaoPageState
                         ref
                             .read(kimonoServiceProvider)
                             .cadastrarEmprestimo(emprestimo);
-                        ref.refresh(gestaoKimonosStoreProvider.future);
-                        ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        ref.invalidate(gestaoKimonosStoreProvider);
+                        ref.invalidate(gestaoEmprestimosStoreProvider);
                         Navigator.pop(context);
                         _showPopUpSucesso(
                           'O kimono foi emprestado com sucesso!',
@@ -601,8 +601,8 @@ class _EmprestimoDevolucaoPageState
                         _showPopUpSucesso(
                           'O kimono foi recuperado com sucesso!',
                         );
-                        ref.refresh(gestaoKimonosStoreProvider);
-                        ref.refresh(gestaoEmprestimosStoreProvider.future);
+                        ref.invalidate(gestaoKimonosStoreProvider);
+                        ref.invalidate(gestaoEmprestimosStoreProvider);
                       } on AppApiException catch (e) {
                         ref.read(loggerProvider).e(e.message, error: e.error);
                       }

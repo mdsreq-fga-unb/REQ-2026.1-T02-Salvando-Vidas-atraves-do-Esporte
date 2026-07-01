@@ -270,7 +270,7 @@ class _MatricularAlunoViewState extends ConsumerState<MatricularAlunoView> {
                 });
 
                 // Atualizar a lista de alunos e a presença da turma
-                ref.refresh(turmasStoreProvider.future);
+                ref.invalidate(turmasStoreProvider);
                 ref.invalidate(pesquisaAlunoProvider);
                 ref.invalidate(presencaStoreProvider(widget.turma.id));
 

@@ -72,7 +72,7 @@ class TurmaDetail extends ConsumerWidget {
       await alunoService.atualizaAluno(alunoId, {'id_turma': null});
 
       // Refresh stores
-      ref.refresh(turmasStoreProvider.future);
+      ref.invalidate(turmasStoreProvider);
       ref.invalidate(presencaStoreProvider(turma.id));
       ref.invalidate(pesquisaAlunoProvider);
 

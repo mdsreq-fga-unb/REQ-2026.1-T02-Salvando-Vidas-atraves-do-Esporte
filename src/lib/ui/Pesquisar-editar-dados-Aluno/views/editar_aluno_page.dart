@@ -137,7 +137,7 @@ class _EditarAlunoPageState extends ConsumerState<EditarAlunoPage> {
                   widget.aluno.id!,
                   state.diffAluno(aluno),
                 );
-                await ref.refresh(pesquisaAlunoProvider.future);
+                ref.invalidate(pesquisaAlunoProvider);
 
                 if (!mounted) return;
                 Navigator.pop(ctx);
