@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class ActionButton extends StatelessWidget {
   const ActionButton({
@@ -20,7 +21,7 @@ class ActionButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? const Color(0xFF10A9D0),
+          backgroundColor: backgroundColor ?? AppColors.cyanPrimary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

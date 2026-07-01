@@ -96,13 +96,8 @@ void main() {
       await tester.tap(find.byType(InkWell));
       await tester.pumpAndSettle();
 
-      // Verifica se os detalhes e o botão de editar apareceram
-      final richTextFinder = find.byWidgetPredicate(
-        (widget) =>
-            widget is RichText &&
-            widget.text.toPlainText() == 'CPF: ${alunoAtivo.cpf}',
-      );
-      expect(richTextFinder, findsOneWidget);
+      expect(find.text('CPF: '), findsOneWidget);
+      expect(find.textContaining(alunoAtivo.cpf), findsOneWidget);
       expect(find.text('Editar Informações'), findsOneWidget);
     });
 

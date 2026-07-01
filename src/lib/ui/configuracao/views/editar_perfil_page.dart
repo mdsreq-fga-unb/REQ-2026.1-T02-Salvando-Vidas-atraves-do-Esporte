@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:salvando_vidas/data/services/user_service/user_service.dart';
 import 'package:salvando_vidas/data/stores/update_voluntario/update_voluntario_store.dart';
 import 'package:salvando_vidas/main_imports.dart';
@@ -8,6 +6,8 @@ import 'package:salvando_vidas/main_imports.dart';
 // Importações dos seus componentes customizados
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/action_button.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
+import 'package:salvando_vidas/ui/global/masks.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class EditarPerfilPage extends ConsumerStatefulWidget {
   const EditarPerfilPage({super.key});
@@ -22,21 +22,52 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
   late UpdateVoluntario notifier;
   late Logger logger;
 
+  late final MaskTextInputFormatter formatTelefone;
+  late final MaskTextInputFormatter formatCpf;
+
+  @override
+  void initState() {
+    super.initState();
+    formatTelefone = maskTelefone();
+    formatCpf = maskCPF();
+  }
+
   void _salvarAlteracoes() async {
-    // Aciona a validação visual do Form antes de prosseguir
     if (_formKey.currentState?.validate() ?? false) {
       if (state.podeCadastrar) {
         try {
           final diff = state.diff;
           await ref.read(userServiceProvider).updateUser(diff);
+          ref.invalidate(updateVoluntarioProvider);
 
+          if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Perfil atualizado com sucesso!')),
+            const SnackBar(
+              content: Text('Perfil atualizado com sucesso!'),
+              backgroundColor: AppColors.success,
+              behavior: SnackBarBehavior.floating,
+            ),
           );
-          context.pop(); // Retorna para a tela de configurações
+          context.pop();
         } on AppApiException catch (e) {
           logger.e('', error: e.error);
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.message),
+              backgroundColor: AppColors.error,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Preencha os campos corretamente para salvar.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
       }
     }
   }
@@ -47,9 +78,19 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
     notifier = ref.read(updateVoluntarioProvider.notifier);
     logger = ref.read(loggerProvider);
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final topbarBg = isDark ? AppColors.darkTopbar : AppColors.cyanPrimary;
+    final gradientColors = isDark
+        ? AppColors.bgGradientDark
+        : AppColors.bgGradientLight;
+    final containerBg = isDark ? AppColors.darkSurface : Colors.white;
+    final avatarBg = isDark ? const Color(0xFF161B22) : AppColors.white2;
+    final textColor = isDark ? Colors.white : AppColors.black1;
+    final cardShadows = AppColors.cardShadow(isDark);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF00BCD4),
+        backgroundColor: topbarBg,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -62,11 +103,11 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFFF8F8F8), Color(0xFFE4E4E4)],
+            colors: gradientColors,
           ),
         ),
         child: SafeArea(
@@ -87,42 +128,38 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
                           vertical: 26,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: containerBg,
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x0A000000),
-                              blurRadius: 22,
-                              offset: Offset(0, 10),
-                            ),
-                          ],
+                          boxShadow: cardShadows,
                         ),
                         child: Column(
                           children: [
-                            const CircleAvatar(
+                            CircleAvatar(
                               radius: 36,
-                              backgroundColor: Color(0xFFE2E6FA),
-                              child: Icon(
+                              backgroundColor: avatarBg,
+                              child: const Icon(
                                 Icons.person,
-                                color: Color(0xFF4A55A2),
+                                color: AppColors.royalAzure,
                                 size: 36,
                               ),
                             ),
                             const SizedBox(height: 16),
-                            const Text(
+                            Text(
                               'Seus Dados',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF333333),
+                                color: textColor,
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Text(
+                            Text(
                               'Atualize suas informações pessoais abaixo.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.grey,
+                                color: isDark
+                                    ? AppColors.darkTextSecondary
+                                    : AppColors.textSecondary,
                                 fontSize: 14,
                               ),
                             ),
@@ -159,42 +196,39 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
                               label: 'Nova Senha (opcional)',
                               hint:
                                   'Digite a senha do voluntário (deixe em branco para manter)',
-                              validatorMessage: '',
+                              validatorMessage: null,
                             ),
                             const SizedBox(height: 14),
 
                             // 4. Telefone
                             InputField(
-                              initialValue: state.telefone,
-                              update: notifier.updateTelefone,
+                              initialValue: formatTelefone.maskText(
+                                state.telefone,
+                              ),
+                              update: (_) => notifier.updateTelefone(
+                                formatTelefone.getUnmaskedText(),
+                              ),
                               error: state.telefoneError,
                               label: 'Telefone',
-                              hint: 'Digite o telefone de contato',
+                              hint: '(00) 00000-0000',
                               keyboardType: TextInputType.phone,
                               validatorMessage: 'Informe seu telefone',
+                              inputFormatters: [formatTelefone],
                             ),
                             const SizedBox(height: 14),
 
                             // 5. CPF
                             InputField(
-                              initialValue: state.cpf,
-                              update: notifier.updateCpf,
+                              initialValue: formatCpf.maskText(state.cpf),
+                              update: (_) => notifier.updateCpf(
+                                formatCpf.getUnmaskedText(),
+                              ),
                               error: state.cpfError,
                               label: 'CPF',
-                              hint: 'Digite o CPF do voluntário',
+                              hint: '000.000.000-00',
                               keyboardType: TextInputType.number,
                               validatorMessage: 'Informe seu CPF',
-                            ),
-                            const SizedBox(height: 14),
-
-                            // 6. Função
-                            InputField(
-                              initialValue: state.funcao,
-                              update: notifier.updateFuncao,
-                              error: state.funcaoError,
-                              label: 'Função',
-                              hint: 'Ex.: professor, monitor, apoio',
-                              validatorMessage: 'Informe sua função',
+                              inputFormatters: [formatCpf],
                             ),
 
                             const SizedBox(height: 24),

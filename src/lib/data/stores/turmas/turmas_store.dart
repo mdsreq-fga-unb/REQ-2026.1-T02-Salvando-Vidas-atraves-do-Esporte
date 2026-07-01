@@ -4,7 +4,7 @@ import 'package:salvando_vidas/domain/turma/turma.dart';
 
 part 'turmas_store.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class TurmasStore extends _$TurmasStore {
   @override
   Future<List<Turma>> build() async {

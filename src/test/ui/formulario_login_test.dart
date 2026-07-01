@@ -11,11 +11,12 @@ void main() {
 
     // 2. Envolve em um ProviderScope (mesmo se não usar Riverpod direto aqui, é boa prática)
     // Envolve também em MediaQuery e Localizations, que o TextField precisa para funcionar
+    final formKey = GlobalKey<FormState>();
     await tester.pumpWidget(
-      const ProviderScope(
+      ProviderScope(
         child: MaterialApp(
           home: Scaffold(
-            body: SingleChildScrollView(child: FormularioLogin()),
+            body: SingleChildScrollView(child: FormularioLogin(formKey: formKey)),
           ),
         ),
       ),

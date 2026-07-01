@@ -10,8 +10,11 @@ part 'cadastro_aluno.mapper.dart';
 @MappableClass()
 class CadastroAlunoState with CadastroAlunoStateMappable {
   final String nome;
+  final String? apelido;
+  final bool usarApelido;
   final String cpf;
   final String contato;
+  final String contatoEmergencia; // NOVA VARIÁVEL
   final String email;
   final DateTime? nascimento;
   final TipoSanguineo? tipoSanguineo;
@@ -20,6 +23,14 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
   final String idFicha;
   final bool dirty;
 
+  final bool pMedica1;
+  final bool pMedica2;
+  final bool pMedica3;
+  final bool pMedica4;
+  final bool pMedica5;
+
+  final String? observacaoMedica;
+
   final String nomeResponsavel;
   final String cpfResponsavel;
   final String contatoResponsavel;
@@ -27,14 +38,23 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
 
   CadastroAlunoState({
     this.nome = '',
+    this.apelido,
+    this.usarApelido = false,
     this.cpf = '',
     this.contato = '',
+    this.contatoEmergencia = '',
     this.email = '',
     this.nascimento,
     this.tipoSanguineo,
     this.faixa,
     this.grau = 0,
     this.idFicha = '',
+    this.pMedica1 = false,
+    this.pMedica2 = false,
+    this.pMedica3 = false,
+    this.pMedica4 = false,
+    this.pMedica5 = false,
+    this.observacaoMedica = '',
     this.nomeResponsavel = '',
     this.cpfResponsavel = '',
     this.contatoResponsavel = '',
@@ -42,60 +62,50 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError {
-    if (!dirty && nome.isEmpty) return null;
-    return nome.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeError => null;
 
-  String? get nomeResponsavelError {
-    if (!dirty && nomeResponsavel.isEmpty) return null;
-    return nomeResponsavel.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeResponsavelError => null;
 
   String? get cpfError {
-    if (!dirty && cpf.isEmpty) return null;
+    if (cpf.isEmpty) return null;
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
   String? get cpfResponsavelError {
-    if (!dirty && cpfResponsavel.isEmpty) return null;
+    if (cpfResponsavel.isEmpty) return null;
     return eCPF(cpfResponsavel) ? null : 'Não é um CPF válido';
   }
 
   String? get contatoError {
-    if (!dirty && contato.isEmpty) return null;
+    if (contato.isEmpty) return null;
     return eTelefone(contato) ? null : 'Não é um telefone válido';
   }
 
+  String? get contatoEmergenciaError {
+    if (contatoEmergencia.isEmpty) return null;
+    return eTelefone(contatoEmergencia) ? null : 'Não é um telefone válido';
+  }
+
   String? get contatoResponsavelError {
-    if (!dirty && contatoResponsavel.isEmpty) return null;
+    if (contatoResponsavel.isEmpty) return null;
     return eTelefone(contatoResponsavel) ? null : 'Não é um telefone válido';
   }
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email.isEmpty) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get emailResponsavelError {
-    if (!dirty && emailResponsavel.isEmpty) return null;
+    if (emailResponsavel.isEmpty) return null;
     return eEmail(emailResponsavel) ? null : 'Não é um email válido';
   }
 
-  String? get nascimentoError {
-    if (!dirty && nascimento == null) return null;
-    return nascimento != null ? null : 'Não pode estar em branco';
-  }
+  String? get nascimentoError => null;
 
-  String? get tipoSanguineoError {
-    if (!dirty && tipoSanguineo == null) return null;
-    return tipoSanguineo != null ? null : 'Não pode estar em branco';
-  }
+  String? get tipoSanguineoError => null;
 
-  String? get faixaError {
-    if (!dirty && faixa == null) return null;
-    return faixa != null ? null : 'Não pode estar em branco';
-  }
+  String? get faixaError => null;
 
   String? get idFichaError {
     if (idFicha.isEmpty) return null;
@@ -108,17 +118,18 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
       nomeError != null ||
       cpfError != null ||
       contatoError != null ||
+      contatoEmergenciaError != null ||
       emailError != null ||
       nascimentoError != null ||
       tipoSanguineoError != null ||
-      faixaError != null ||
-      idFichaError != null;
+      faixaError != null;
 
   bool get estaValido =>
       !temErros &&
       nome.isNotEmpty &&
       cpf.isNotEmpty &&
       contato.isNotEmpty &&
+      contatoEmergencia.isNotEmpty &&
       email.isNotEmpty;
 
   int get idade {
@@ -128,15 +139,21 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
 
   bool get temResponsavel {
     if (idade >= 18) return true;
-    return nomeResponsavelError == null &&
+    return nomeResponsavel.isNotEmpty &&
+        cpfResponsavel.isNotEmpty &&
+        contatoResponsavel.isNotEmpty &&
+        nomeResponsavelError == null &&
         cpfResponsavelError == null &&
         contatoResponsavelError == null;
   }
 
   Aluno get aluno => Aluno(
     nome: nome,
+    apelido: apelido,
+    usarApelido: usarApelido,
     cpf: cpf,
     contato: contato,
+    contatoEmergencia: contatoEmergencia,
     email: email,
     nascimento: nascimento!,
     tipoSanguineo: tipoSanguineo!,
@@ -146,6 +163,12 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
     federado: false,
     dataEntrada: DateTime.now(),
     idFicha: int.tryParse(idFicha),
+    pMedica1: pMedica1,
+    pMedica2: pMedica2,
+    pMedica3: pMedica3,
+    pMedica4: pMedica4,
+    pMedica5: pMedica5,
+    observacaoMedica: observacaoMedica,
   );
 
   Responsavel get responsavel => Responsavel(
@@ -168,12 +191,34 @@ class CadastroAluno extends _$CadastroAluno {
     state = state.copyWith(nome: value, dirty: true);
   }
 
+  void updateApelido(String? value) {
+    final ap = (value != null && value.trim().isNotEmpty) ? value.trim() : null;
+    final novoUsarReferencia = ap == null
+        ? false
+        : ((state.apelido == null || state.apelido!.isEmpty)
+              ? true
+              : state.usarApelido);
+    state = state.copyWith(
+      apelido: ap,
+      usarApelido: novoUsarReferencia,
+      dirty: true,
+    );
+  }
+
+  void updateUsarApelido(bool value) {
+    state = state.copyWith(usarApelido: value, dirty: true);
+  }
+
   void updateCPF(String value) {
     state = state.copyWith(cpf: value, dirty: true);
   }
 
   void updateContato(String value) {
     state = state.copyWith(contato: value, dirty: true);
+  }
+
+  void updateContatoEmergencia(String value) {
+    state = state.copyWith(contatoEmergencia: value, dirty: true);
   }
 
   void updateEmail(String value) {
@@ -210,6 +255,30 @@ class CadastroAluno extends _$CadastroAluno {
 
   void updateEmailResponsavel(String value) {
     state = state.copyWith(emailResponsavel: value, dirty: true);
+  }
+
+  void updatePMedica1(bool value) {
+    state = state.copyWith(pMedica1: value);
+  }
+
+  void updatePMedica2(bool value) {
+    state = state.copyWith(pMedica2: value);
+  }
+
+  void updatePMedica3(bool value) {
+    state = state.copyWith(pMedica3: value);
+  }
+
+  void updatePMedica4(bool value) {
+    state = state.copyWith(pMedica4: value);
+  }
+
+  void updatePMedica5(bool value) {
+    state = state.copyWith(pMedica5: value);
+  }
+
+  void updateObservacaoMedica(String? value) {
+    state = state.copyWith(observacaoMedica: value);
   }
 
   void reset() {

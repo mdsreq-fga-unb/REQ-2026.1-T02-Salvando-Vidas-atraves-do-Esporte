@@ -9,3 +9,6 @@ MaskTextInputFormatter maskTelefone() => MaskTextInputFormatter(
   mask: '(##) #####-####',
   filter: {"#": RegExp(r'[0-9]')},
 );
+
+MaskTextInputFormatter maskData() =>
+    MaskTextInputFormatter(mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')});

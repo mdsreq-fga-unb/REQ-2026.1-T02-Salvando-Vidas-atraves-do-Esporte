@@ -32,57 +32,55 @@ class _EtapaDadosResponsavelState extends ConsumerState<EtapaDadosResponsavel> {
 
     return Form(
       key: widget.formKey,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InputField(
-              initialValue: cadastro.nomeResponsavel,
-              update: notifier.updateNomeResponsavel,
-              error: cadastro.nomeResponsavelError,
-              label: 'Nome do Responsável*',
-              hint: 'Digite o nome completo',
-              validatorMessage: 'O nome é obrigatório',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InputField(
+            initialValue: cadastro.nomeResponsavel,
+            update: notifier.updateNomeResponsavel,
+            error: cadastro.nomeResponsavelError,
+            label: 'Nome do Responsável*',
+            hint: 'Digite o nome completo',
+            validatorMessage: 'O nome é obrigatório',
+          ),
+          const SizedBox(height: 14),
+          InputField(
+            initialValue: formatCPF.maskText(cadastro.cpfResponsavel),
+            update: (_) =>
+                notifier.updateCPFResponsavel(formatCPF.getUnmaskedText()),
+            error: cadastro.cpfResponsavelError,
+            label: 'CPF do Responsável*',
+            hint: '000.000.000-00',
+            keyboardType: TextInputType.number,
+            validatorMessage: 'Informe um CPF válido',
+            inputFormatters: [formatCPF],
+          ),
+          const SizedBox(height: 14),
+          InputField(
+            initialValue: formatTelefone.maskText(
+              cadastro.contatoResponsavel,
             ),
-            const SizedBox(height: 14),
-            InputField(
-              initialValue: formatCPF.maskText(cadastro.cpfResponsavel),
-              update: (_) =>
-                  notifier.updateCPFResponsavel(formatCPF.getUnmaskedText()),
-              error: cadastro.cpfResponsavelError,
-              label: 'CPF do Responsável*',
-              hint: '000.000.000-00',
-              keyboardType: TextInputType.number,
-              validatorMessage: 'O CPF é obrigatório',
-              inputFormatters: [formatCPF],
+            update: (_) => notifier.updateContatoResponsavel(
+              formatTelefone.getUnmaskedText(),
             ),
-            const SizedBox(height: 14),
-            InputField(
-              initialValue: formatTelefone.maskText(
-                cadastro.contatoResponsavel,
-              ),
-              update: (_) => notifier.updateContatoResponsavel(
-                formatTelefone.getUnmaskedText(),
-              ),
-              error: cadastro.contatoResponsavelError,
-              label: 'Telefone do Responsável*',
-              hint: '(00) 00000-0000',
-              keyboardType: TextInputType.phone,
-              validatorMessage: 'O telefone é obrigatório',
-              inputFormatters: [formatTelefone],
-            ),
-            const SizedBox(height: 14),
-            InputField(
-              initialValue: cadastro.emailResponsavel,
-              update: notifier.updateEmailResponsavel,
-              error: cadastro.emailResponsavelError,
-              label: 'Email do Responsável*',
-              hint: 'email@email.com',
-              keyboardType: TextInputType.emailAddress,
-              validatorMessage: 'O email é obrigatório',
-            ),
-          ],
-        ),
+            error: cadastro.contatoResponsavelError,
+            label: 'Contato do Responsável*',
+            hint: '(00) 00000-0000',
+            keyboardType: TextInputType.phone,
+            validatorMessage: 'O telefone é obrigatório',
+            inputFormatters: [formatTelefone],
+          ),
+          const SizedBox(height: 14),
+          InputField(
+            initialValue: cadastro.emailResponsavel,
+            update: notifier.updateEmailResponsavel,
+            error: cadastro.emailResponsavelError,
+            label: 'Email do Responsável*',
+            hint: 'email@email.com',
+            keyboardType: TextInputType.emailAddress,
+            validatorMessage: 'O email é obrigatório',
+          ),
+        ],
       ),
     );
   }

@@ -10,14 +10,18 @@ part 'update_aluno.mapper.dart';
 @MappableClass()
 class UpdateAlunoState with UpdateAlunoStateMappable {
   final String nome;
+  final String? apelido;
+  final bool usarApelido;
   final String cpf;
   final String contato;
+  final String contatoEmergencia;
   final String email;
   final DateTime? nascimento;
   final TipoSanguineo? tipoSanguineo;
   final Faixa? faixa;
   final int grau;
   final String idFicha;
+  final int? idTurma;
   final bool dirty;
 
   final String nomeResponsavel;
@@ -32,14 +36,18 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     required this.alunoOriginal,
     required this.responsavelOriginal,
     this.nome = '',
+    this.apelido,
+    this.usarApelido = false,
     this.cpf = '',
     this.contato = '',
+    this.contatoEmergencia = '',
     this.email = '',
     this.nascimento,
     this.tipoSanguineo,
     this.faixa,
     this.grau = 0,
     this.idFicha = '',
+    this.idTurma,
     this.nomeResponsavel = '',
     this.cpfResponsavel = '',
     this.contatoResponsavel = '',
@@ -47,60 +55,50 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError {
-    if (!dirty && nome.isEmpty) return null;
-    return nome.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeError => nome.trim().isEmpty ? 'Nome é obrigatório' : null;
 
-  String? get nomeResponsavelError {
-    if (!dirty && nomeResponsavel.isEmpty) return null;
-    return nomeResponsavel.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeResponsavelError => null;
 
   String? get cpfError {
-    if (!dirty && cpf.isEmpty) return null;
+    if (cpf.isEmpty) return null;
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
   String? get cpfResponsavelError {
-    if (!dirty && cpfResponsavel.isEmpty) return null;
+    if (cpfResponsavel.isEmpty) return null;
     return eCPF(cpfResponsavel) ? null : 'Não é um CPF válido';
   }
 
   String? get contatoError {
-    if (!dirty && contato.isEmpty) return null;
+    if (contato.isEmpty) return null;
     return eTelefone(contato) ? null : 'Não é um telefone válido';
   }
 
+  String? get contatoEmergenciaError {
+    if (contatoEmergencia.isEmpty) return null;
+    return eTelefone(contatoEmergencia) ? null : 'Não é um telefone válido';
+  }
+
   String? get contatoResponsavelError {
-    if (!dirty && contatoResponsavel.isEmpty) return null;
+    if (contatoResponsavel.isEmpty) return null;
     return eTelefone(contatoResponsavel) ? null : 'Não é um telefone válido';
   }
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email.isEmpty) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get emailResponsavelError {
-    if (!dirty && emailResponsavel.isEmpty) return null;
+    if (emailResponsavel.isEmpty) return null;
     return eEmail(emailResponsavel) ? null : 'Não é um email válido';
   }
 
-  String? get nascimentoError {
-    if (!dirty && nascimento == null) return null;
-    return nascimento != null ? null : 'Não pode estar em branco';
-  }
+  String? get nascimentoError => null;
 
-  String? get tipoSanguineoError {
-    if (!dirty && tipoSanguineo == null) return null;
-    return tipoSanguineo != null ? null : 'Não pode estar em branco';
-  }
+  String? get tipoSanguineoError => null;
 
-  String? get faixaError {
-    if (!dirty && faixa == null) return null;
-    return faixa != null ? null : 'Não pode estar em branco';
-  }
+  String? get faixaError => null;
 
   String? get idFichaError {
     if (idFicha.isEmpty) return null;
@@ -113,6 +111,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
       nomeError != null ||
       cpfError != null ||
       contatoError != null ||
+      contatoEmergenciaError != null ||
       emailError != null ||
       nascimentoError != null ||
       tipoSanguineoError != null ||
@@ -124,6 +123,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
       nome.isNotEmpty &&
       cpf.isNotEmpty &&
       contato.isNotEmpty &&
+      contatoEmergencia.isNotEmpty &&
       email.isNotEmpty;
 
   int get idade {
@@ -133,69 +133,53 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
 
   bool get temResponsavel {
     if (idade >= 18) return true;
-    return nomeResponsavelError == null &&
+    return nomeResponsavel.isNotEmpty &&
+        cpfResponsavel.isNotEmpty &&
+        contatoResponsavel.isNotEmpty &&
+        nomeResponsavelError == null &&
         cpfResponsavelError == null &&
         contatoResponsavelError == null;
   }
 
   Aluno get aluno => Aluno(
+    id: alunoOriginal.id,
     nome: nome,
+    apelido: apelido,
+    usarApelido: usarApelido,
     cpf: cpf,
     contato: contato,
+    contatoEmergencia: contatoEmergencia,
     email: email,
     nascimento: nascimento!,
     tipoSanguineo: tipoSanguineo!,
     faixa: faixa!,
     grau: grau,
-    ativo: true,
-    federado: false,
-    dataEntrada: DateTime.now(),
+    ativo: alunoOriginal.ativo,
+    federado: alunoOriginal.federado,
+    dataEntrada: alunoOriginal.dataEntrada,
     idFicha: int.tryParse(idFicha),
+    idTurma: idTurma,
+    pMedica1: alunoOriginal.pMedica1,
+    pMedica2: alunoOriginal.pMedica2,
+    pMedica3: alunoOriginal.pMedica3,
+    pMedica4: alunoOriginal.pMedica4,
+    pMedica5: alunoOriginal.pMedica5,
+    observacaoMedica: alunoOriginal.observacaoMedica,
   );
 
   Map<String, dynamic> diffAluno(Aluno aluno) {
-    final Map<String, dynamic> diff = {};
+    final original = alunoOriginal.toMap();
+    final novo = aluno.toMap();
 
-    if (alunoOriginal.nome != aluno.nome) {
-      diff['nome'] = aluno.nome;
+    for (final key in original.keys) {
+      if (novo[key] == original[key]) {
+        novo.remove(key);
+      }
     }
 
-    if (alunoOriginal.cpf != aluno.cpf) {
-      diff['cpf'] = aluno.cpf;
-    }
+    novo.remove('id');
 
-    if (alunoOriginal.contato != aluno.contato) {
-      diff['contato'] = aluno.contato;
-    }
-
-    if (alunoOriginal.email != aluno.email) {
-      diff['email'] = aluno.email;
-    }
-
-    if (alunoOriginal.nascimento != aluno.nascimento) {
-      diff['nascimento'] = aluno.nascimento;
-    }
-
-    if (alunoOriginal.tipoSanguineo != aluno.tipoSanguineo) {
-      diff['tipo_sanguineo'] = aluno.tipoSanguineo;
-    }
-
-    if (alunoOriginal.faixa != aluno.faixa) {
-      diff['faixa'] = aluno.faixa;
-    }
-
-    if (alunoOriginal.grau != aluno.grau) {
-      diff['grau'] = aluno.grau;
-    }
-
-    if (alunoOriginal.idFicha != aluno.idFicha) {
-      diff['id_ficha'] = aluno.idFicha;
-    }
-
-    if (alunoOriginal.idResponsavel != aluno.idResponsavel) {
-      diff['id_responsavel'] = aluno.idResponsavel;
-    }
-    return diff;
+    return novo;
   }
 
   Responsavel get responsavel => Responsavel(
@@ -215,14 +199,18 @@ class UpdateAluno extends _$UpdateAluno {
       alunoOriginal: aluno,
       responsavelOriginal: responsavel,
       nome: aluno.nome,
+      apelido: aluno.apelido,
+      usarApelido: aluno.usarApelido,
       cpf: aluno.cpf,
       contato: aluno.contato ?? '',
+      contatoEmergencia: aluno.contatoEmergencia ?? '',
       email: aluno.email,
       nascimento: aluno.nascimento,
       tipoSanguineo: aluno.tipoSanguineo,
       faixa: aluno.faixa,
       grau: aluno.grau,
       idFicha: '${aluno.idFicha ?? ""}',
+      idTurma: aluno.idTurma,
       nomeResponsavel: responsavel?.nome ?? '',
       cpfResponsavel: responsavel?.cpf ?? '',
       contatoResponsavel: responsavel?.contato ?? '',
@@ -234,12 +222,34 @@ class UpdateAluno extends _$UpdateAluno {
     state = state.copyWith(nome: value, dirty: true);
   }
 
+  void updateApelido(String? value) {
+    final ap = (value != null && value.trim().isNotEmpty) ? value.trim() : null;
+    final novoUsarReferencia = ap == null
+        ? false
+        : ((state.apelido == null || state.apelido!.isEmpty)
+              ? true
+              : state.usarApelido);
+    state = state.copyWith(
+      apelido: ap,
+      usarApelido: novoUsarReferencia,
+      dirty: true,
+    );
+  }
+
+  void updateUsarApelidoComoReferencia(bool value) {
+    state = state.copyWith(usarApelido: value, dirty: true);
+  }
+
   void updateCPF(String value) {
     state = state.copyWith(cpf: value, dirty: true);
   }
 
   void updateContato(String value) {
     state = state.copyWith(contato: value, dirty: true);
+  }
+
+  void updateContatoEmergencia(String value) {
+    state = state.copyWith(contatoEmergencia: value, dirty: true);
   }
 
   void updateEmail(String value) {
@@ -260,6 +270,10 @@ class UpdateAluno extends _$UpdateAluno {
 
   void updateIdFicha(String value) {
     state = state.copyWith(idFicha: value, dirty: true);
+  }
+
+  void updateIdTurma(int? value) {
+    state = state.copyWith(idTurma: value, dirty: true);
   }
 
   void updateNomeResponsavel(String value) {

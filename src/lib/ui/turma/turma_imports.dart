@@ -6,3 +6,4 @@ export 'core/turma_model.dart';
 export 'views/turma_detalhes.dart';
 export 'widgets/aluno_tile_card.dart';
 export 'views/registrar_frequencia_view.dart';
+export 'views/matricular_aluno_view.dart';

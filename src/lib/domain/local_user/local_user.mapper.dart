@@ -82,7 +82,12 @@ class LocalUserMapper extends ClassMapperBase<LocalUser> {
     _$telefone,
   );
   static String _$cpf(LocalUser v) => v.cpf;
-  static const Field<LocalUser, String> _f$cpf = Field('cpf', _$cpf);
+  static const Field<LocalUser, String> _f$cpf = Field(
+    'cpf',
+    _$cpf,
+    opt: true,
+    def: '',
+  );
   static String _$email(LocalUser v) => v.email;
   static const Field<LocalUser, String> _f$email = Field('email', _$email);
   static String? _$senha(LocalUser v) => v.senha;
@@ -92,9 +97,21 @@ class LocalUserMapper extends ClassMapperBase<LocalUser> {
     opt: true,
   );
   static String _$funcao(LocalUser v) => v.funcao;
-  static const Field<LocalUser, String> _f$funcao = Field('funcao', _$funcao);
+  static const Field<LocalUser, String> _f$funcao = Field(
+    'funcao',
+    _$funcao,
+    opt: true,
+    def: '',
+  );
   static Faixa _$faixa(LocalUser v) => v.faixa;
   static const Field<LocalUser, Faixa> _f$faixa = Field('faixa', _$faixa);
+  static bool _$ativo(LocalUser v) => v.ativo;
+  static const Field<LocalUser, bool> _f$ativo = Field(
+    'ativo',
+    _$ativo,
+    opt: true,
+    def: true,
+  );
 
   @override
   final MappableFields<LocalUser> fields = const {
@@ -107,9 +124,8 @@ class LocalUserMapper extends ClassMapperBase<LocalUser> {
     #senha: _f$senha,
     #funcao: _f$funcao,
     #faixa: _f$faixa,
+    #ativo: _f$ativo,
   };
-  @override
-  final bool ignoreNull = true;
 
   static LocalUser _instantiate(DecodingData data) {
     return LocalUser(
@@ -122,6 +138,7 @@ class LocalUserMapper extends ClassMapperBase<LocalUser> {
       senha: data.dec(_f$senha),
       funcao: data.dec(_f$funcao),
       faixa: data.dec(_f$faixa),
+      ativo: data.dec(_f$ativo),
     );
   }
 
@@ -194,6 +211,7 @@ abstract class LocalUserCopyWith<$R, $In extends LocalUser, $Out>
     String? senha,
     String? funcao,
     Faixa? faixa,
+    bool? ativo,
   });
   LocalUserCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -217,6 +235,7 @@ class _LocalUserCopyWithImpl<$R, $Out>
     Object? senha = $none,
     String? funcao,
     Faixa? faixa,
+    bool? ativo,
   }) => $apply(
     FieldCopyWithData({
       if (id != $none) #id: id,
@@ -228,6 +247,7 @@ class _LocalUserCopyWithImpl<$R, $Out>
       if (senha != $none) #senha: senha,
       if (funcao != null) #funcao: funcao,
       if (faixa != null) #faixa: faixa,
+      if (ativo != null) #ativo: ativo,
     }),
   );
   @override
@@ -241,6 +261,7 @@ class _LocalUserCopyWithImpl<$R, $Out>
     senha: data.get(#senha, or: $value.senha),
     funcao: data.get(#funcao, or: $value.funcao),
     faixa: data.get(#faixa, or: $value.faixa),
+    ativo: data.get(#ativo, or: $value.ativo),
   );
 
   @override

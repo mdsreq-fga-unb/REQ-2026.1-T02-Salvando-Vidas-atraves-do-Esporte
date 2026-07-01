@@ -53,11 +53,11 @@ class PresencaStore extends _$PresencaStore {
       );
     }
 
-    final presenca_anterior = await presencaService.listarPresencas(id, data);
+    final presencaAnterior = await presencaService.listarPresencas(id, data);
 
     final presenca = {for (final aluno in alunos) aluno.id!: false};
 
-    for (var value in presenca_anterior) {
+    for (var value in presencaAnterior) {
       presenca[value.alunoId] = true;
     }
 
@@ -98,11 +98,11 @@ class PresencaStore extends _$PresencaStore {
         );
       }
 
-      final presenca_anterior = await presencaService.listarPresencas(id, data);
+      final presencaAnterior = await presencaService.listarPresencas(id, data);
 
       final presenca = {for (final aluno in alunos) aluno.id!: false};
 
-      for (var value in presenca_anterior) {
+      for (var value in presencaAnterior) {
         presenca[value.alunoId] = true;
       }
 

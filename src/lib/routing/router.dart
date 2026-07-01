@@ -1,18 +1,21 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salvando_vidas/data/services/global/global_service.dart';
 import 'package:salvando_vidas/data/services/user_service/user_service.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/admin/views/admin_page.dart';
+import 'package:salvando_vidas/ui/admin/views/cadastrar_voluntario_page.dart';
+import 'package:salvando_vidas/ui/admin/views/editar_voluntario_page.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/views/cadastros_page.dart';
 import 'package:salvando_vidas/ui/configuracao/views/configuracao.dart';
-import 'package:salvando_vidas/ui/global/widgets/navbar.dart';
-import 'package:salvando_vidas/ui/global/widgets/topbar.dart';
 import 'package:salvando_vidas/ui/home/views/home_page.dart';
 import 'package:salvando_vidas/ui/login/views/login_page.dart';
 import 'package:salvando_vidas/ui/turma/views/turma.dart';
-// IMPORTAÇÕES DAS NOVAS TELAS:
-import 'package:salvando_vidas/ui/Pesquisar-editar-dados-Aluno/pesquisa_alunos_imports.dart'; 
+import 'package:salvando_vidas/ui/Pesquisar-editar-dados-Aluno/pesquisa_alunos_imports.dart';
 import 'package:salvando_vidas/ui/configuracao/views/editar_perfil_page.dart';
+import 'package:salvando_vidas/ui/inventario/views/inventario.dart';
+import 'package:salvando_vidas/ui/inventario/views/doacoes_perdas_page.dart';
+import 'package:salvando_vidas/ui/inventario/views/emprestimo_devolucao_page.dart';
+import 'package:salvando_vidas/ui/emprestimo/views/historico_emprestimos_page.dart';
 
 part 'router.g.dart';
 
@@ -24,10 +27,10 @@ GoRouter router(Ref ref) {
     routes: [
       // ROTAS SEM NAVBAR
       GoRoute(path: Routes.login, builder: (context, state) => LoginPage()),
-      
+
       // NOVA ROTA DA TELA DE EDIÇÃO DE PERFIL:
       GoRoute(
-        path: Routes.editarPerfil, 
+        path: Routes.editarPerfil,
         builder: (context, state) => const EditarPerfilPage(),
       ),
 
@@ -58,6 +61,16 @@ GoRouter router(Ref ref) {
           GoRoute(path: Routes.admin, builder: (context, state) => AdminPage()),
 
           GoRoute(
+            path: Routes.cadastrarVoluntario,
+            builder: (context, state) => const CadastrarVoluntarioPage(),
+          ),
+
+          GoRoute(
+            path: Routes.editarVoluntario,
+            builder: (context, state) => const EditarVoluntarioPage(),
+          ),
+
+          GoRoute(
             path: Routes.cadastros,
             builder: (context, state) => CadastrosPage(),
           ),
@@ -70,8 +83,30 @@ GoRouter router(Ref ref) {
           GoRoute(path: Routes.turma, builder: (context, state) => TurmaPage()),
 
           GoRoute(
-            path: Routes.buscaAluno, 
+            path: Routes.buscaAluno,
             builder: (context, state) => const PesquisaAlunosPage(),
+          ),
+
+          GoRoute(
+            path: Routes.inventario,
+            builder: (context, state) => Inventario(),
+          ),
+
+          GoRoute(
+            path: Routes.doacoesPerdas,
+            builder: (context, state) => const DoacoesPerdasPage(),
+          ),
+
+          GoRoute(
+            path: Routes.emprestimoDevolucao,
+            builder: (context, state) {
+              final modo = state.extra is bool ? (state.extra as bool) : null;
+              return EmprestimoDevolucaoPage(modoInicialEmprestar: modo);
+            },
+          ),
+          GoRoute(
+            path: Routes.historicoEmprestimos,
+            builder: (context, state) => const HistoricoEmprestimosPage(),
           ),
         ],
       ),
@@ -79,10 +114,46 @@ GoRouter router(Ref ref) {
   );
 }
 
-class MainScaffold extends StatelessWidget {
+class MainScaffold extends ConsumerStatefulWidget {
   final Widget child;
 
   const MainScaffold({super.key, required this.child});
+
+  @override
+  ConsumerState<MainScaffold> createState() => _MainScaffoldState();
+}
+
+class _MainScaffoldState extends ConsumerState<MainScaffold> {
+  @override
+  void initState() {
+    super.initState();
+
+    final currentUser = ref.read(supabaseClientProvider).auth.currentUser;
+
+    if (currentUser != null) {
+      ref
+          .read(supabaseClientProvider)
+          .channel('public:users')
+          .onPostgresChanges(
+            event: PostgresChangeEvent.update,
+            schema: 'public',
+            table: 'users',
+            filter: PostgresChangeFilter(
+              type: PostgresChangeFilterType.eq,
+              column: 'id',
+              value: currentUser.id,
+            ),
+            callback: (payload) async {
+              final ativo = payload.newRecord['ativo'] as bool?;
+              if (ativo == false && mounted) {
+                await ref.read(userServiceProvider).logout();
+                context.go(Routes.login);
+              }
+            },
+          )
+          .subscribe();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +161,7 @@ class MainScaffold extends StatelessWidget {
 
     return Scaffold(
       appBar: const TopBar(),
-      body: child,
-
+      body: widget.child,
       bottomNavigationBar: keyboardOpen ? null : const NavBar(),
     );
   }

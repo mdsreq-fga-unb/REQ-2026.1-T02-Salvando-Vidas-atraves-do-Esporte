@@ -18,19 +18,28 @@ void main() {
   });
 
   final Map<String, Object> alunoSimuladoJson = <String, Object>{
-  'id': 1,
-  'nome': 'Lucas Oliveira',
-  'cpf': '12345678900', // Sem pontos e traços
-  'email': 'lucas@email.com',
-  'faixa': 'branca', // O dart_mappable lê o nome da enum
-  'grau': 1,
-  'tipo_sanguineo': 'a_positivo', // caseStyle: CaseStyle.snakeCase
-  'nascimento': '2000-01-01', // Apenas YYYY-MM-DD
-  'data_entrada': '2026-06-13', // Apenas YYYY-MM-DD
-  'ativo': true,
-  'federado': false,
-  'id_turma': 2,
-};
+    'id': 1,
+    'nome': 'Lucas Oliveira',
+    'cpf': '12345678900', // Sem pontos e traços
+    'email': 'lucas@email.com',
+    'faixa': 'branca', // O dart_mappable lê o nome da enum
+    'grau': 1,
+    'tipo_sanguineo': 'a_positivo', // caseStyle: CaseStyle.snakeCase
+    'nascimento': '2000-01-01', // Apenas YYYY-MM-DD
+    'data_entrada': '2026-06-13', // Apenas YYYY-MM-DD
+    'ativo': true,
+    'federado': false,
+    'id_turma': 2,
+    
+    // --- CAMPOS MÉDICOS ADICIONADOS ---
+    
+    'p_medica1': false,
+    'p_medica2': false,
+    'p_medica3': false,
+    'p_medica4': false,
+    'p_medica5': false,
+    'observacao_medica': 'Apto para o esporte, sem restrições.',
+  };
 
   final responsavelSimuladoJson = {
   'id': 1,

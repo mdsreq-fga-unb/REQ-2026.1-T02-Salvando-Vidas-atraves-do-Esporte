@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salvando_vidas/data/services/global/global_service.dart';
 import 'package:salvando_vidas/data/stores/turmas/turmas_store.dart';
 import 'package:salvando_vidas/domain/turma/turma.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/turma/turma_imports.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class TurmaPage extends ConsumerStatefulWidget {
   const TurmaPage({super.key});
@@ -20,126 +22,97 @@ class _TurmasViewState extends ConsumerState<TurmaPage> {
     );
   }
 
-  void _onEditarTurma(Turma turma) {
-    // Implementação futura da edição
-  }
-
-  void _onExcluirTurma(Turma turma) {
-    _showConfirmacaoExclusao(turma);
-  }
-
-  void _showConfirmacaoExclusao(Turma turma) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: const Text('Excluir Turma'),
-        content: Text('Deseja excluir "${turma.nome}"?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text(
-              'Cancelar',
-              style: TextStyle(color: Color(0xFFAAAAAA)),
-            ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              foregroundColor: const Color(0xFFFFFFFF),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            onPressed: () {
-              setState(() {});
-              Navigator.pop(ctx);
-            },
-            child: const Text('Excluir'),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final turmas = ref.watch(turmasStoreProvider);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final headerBg = isDark ? AppColors.darkSurface : AppColors.platinum;
+    final headerBorder = isDark ? AppColors.darkDivider : AppColors.inputFill;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-              ),
-            ),
-            child: const Text(
-              'Turmas',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF333333),
-              ),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: gradientColors,
           ),
-          Expanded(
-            child: turmas.when(
-              data: (listaTurmas) {
-                return RefreshIndicator(
-                  onRefresh: () => ref.refresh(turmasStoreProvider.future),
-                  child: switch (listaTurmas.isNotEmpty) {
-                    false => _buildAltState('Nenhuma turma foi encontrada'),
-                    true => ListView.builder(
-                      padding: const EdgeInsets.only(top: 16, bottom: 24),
-                      itemCount: listaTurmas.length,
-                      itemBuilder: (context, index) {
-                        final turma = listaTurmas[index];
-                        return TurmaCardWidget(
-                          turma: turma,
-                          onTap: () => _onTapTurma(turma),
-                          onEditar: () => _onEditarTurma(turma),
-                          onExcluir: () => _onExcluirTurma(turma),
-                        );
+        ),
+        child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 768), // Responsividade fluida no tablet
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                decoration: BoxDecoration(
+                  color: headerBg,
+                  border: Border(
+                    bottom: BorderSide(color: headerBorder, width: 1),
+                  ),
+                ),
+                child: Text(
+                  'Turmas Abertas',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: textColor,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: turmas.when(
+                  data: (listaTurmas) {
+                    return RefreshIndicator(
+                      onRefresh: () => ref.refresh(turmasStoreProvider.future),
+                      child: switch (listaTurmas.isNotEmpty) {
+                        false => _buildAltState('Nenhuma turma foi encontrada'),
+                        true => ListView.builder(
+                          padding: const EdgeInsets.only(top: 16, bottom: 24),
+                          itemCount: listaTurmas.length,
+                          itemBuilder: (context, index) {
+                            final turma = listaTurmas[index];
+                            return TurmaCardWidget(
+                              turma: turma,
+                              onTap: () => _onTapTurma(turma),
+                            );
+                          },
+                        ),
                       },
-                    ),
-                  },
-                );
-              },
-              error: (error, stack) {
-                switch (error) {
-                  case AppApiException(:final message, :final error):
-                    ref.read(loggerProvider).e(message, error: error);
-                    return _buildAltState(message);
-                  default:
-                    return _buildAltState(
-                      'Ocorreu algum erro inesperado ao carregar as turmas',
                     );
-                }
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-            ),
+                  },
+                  error: (error, stack) {
+                    if (error is AppApiException) {
+                      ref.read(loggerProvider).e(error.message, error: error.error);
+                      return _buildAltState(error.message);
+                    }
+                    return _buildAltState('Ocorreu algum erro inesperado ao carregar as turmas');
+                  },
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
+      ),
       ),
     );
   }
 
   Widget _buildAltState(String mensagem) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.group_outlined, size: 48, color: Color(0xFFAAAAAA)),
-          SizedBox(height: 12),
+          const Icon(Icons.group_outlined, size: 48, color: AppColors.textSecondary),
+          const SizedBox(height: 12),
           Text(
-            'Nenhuma turma cadastrada',
-            style: TextStyle(color: Color(0xFFAAAAAA), fontSize: 14),
+            mensagem,
+            style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
           ),
         ],
       ),

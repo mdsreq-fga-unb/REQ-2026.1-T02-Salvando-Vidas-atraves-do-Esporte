@@ -1,57 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/turma/views/historico_frequencia_turma_view.dart';
 
-enum TurmaMenuOption { editar, excluir }
+enum TurmaMenuOption { historico }
 
 class TurmaOptionsMenuWidget extends StatelessWidget {
   final int turmaId;
-  final VoidCallback? onEditar;
-  final VoidCallback? onExcluir;
 
   const TurmaOptionsMenuWidget({
     super.key,
     required this.turmaId,
-    this.onEditar,
-    this.onExcluir,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final menuBg = isDark ? AppColors.darkSurface : Colors.white;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final iconColor = isDark ? AppColors.cyanPrimary : AppColors.deepNavy;
+
     return PopupMenuButton<TurmaMenuOption>(
-      icon: const Icon(Icons.more_vert, color: Color(0xFFAAAAAA)),
-      color: const Color(0xFFFFFFFF),
+      icon: const Icon(Icons.more_vert, color: AppColors.textSecondary),
+      color: menuBg,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onSelected: (TurmaMenuOption option) {
         switch (option) {
-          case TurmaMenuOption.editar:
-            onEditar?.call();
-            break;
-          case TurmaMenuOption.excluir:
-            onExcluir?.call();
+          case TurmaMenuOption.historico:
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => HistoricoFrequenciaTurmaView(turmaId: turmaId),
+              ),
+            );
             break;
         }
       },
       itemBuilder: (BuildContext context) => [
         PopupMenuItem<TurmaMenuOption>(
-          value: TurmaMenuOption.editar,
+          value: TurmaMenuOption.historico,
           child: Row(
             children: [
-              const Icon(
-                Icons.edit_outlined,
-                color: Color(0xFF0097B2),
+              Icon(
+                Icons.history,
+                color: iconColor,
                 size: 18,
               ),
               const SizedBox(width: 8),
-              const Text('Editar'),
-            ],
-          ),
-        ),
-        PopupMenuItem<TurmaMenuOption>(
-          value: TurmaMenuOption.excluir,
-          child: Row(
-            children: [
-              const Icon(Icons.delete_outline, color: Colors.red, size: 18),
-              const SizedBox(width: 8),
-              const Text('Excluir', style: TextStyle(color: Colors.red)),
+              Expanded(
+                child: Text(
+                  'Histórico de Frequência',
+                  style: TextStyle(color: textColor),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
         ),

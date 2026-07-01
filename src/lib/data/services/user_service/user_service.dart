@@ -7,15 +7,33 @@ import '../global/global_service.dart';
 part 'user_service.g.dart';
 
 @Riverpod(keepAlive: true)
+class LocalUserNotifier extends _$LocalUserNotifier {
+  @override
+  LocalUser? build() => null;
+
+  void set(LocalUser? user) => state = user;
+}
+
+@Riverpod(keepAlive: true)
 UserService userService(Ref ref) {
-  return UserService(ref.watch(supabaseClientProvider));
+  return UserService(ref.watch(supabaseClientProvider), ref);
 }
 
 class UserService {
   final SupabaseClient _supabase;
-  LocalUser? localUser;
+  final Ref _ref;
 
-  UserService(this._supabase);
+  UserService(this._supabase, this._ref);
+
+  LocalUser? get localUser => _ref.read(localUserProvider);
+
+  set localUser(LocalUser? user) {
+    _ref.read(localUserProvider.notifier).set(user);
+  }
+
+  void _setLocalUser(LocalUser? user) {
+    localUser = user;
+  }
 
   Future<bool> login(String email, String password) async {
     final authResponse = await runSupabaseCall(() async {
@@ -23,26 +41,31 @@ class UserService {
         email: email,
         password: password,
       );
-    });
+    }, timeout: 5);
 
     if (authResponse.user == null) return false;
 
-    localUser = await getLocalUser(authResponse.user!);
-    return localUser != null;
+    final user = await getLocalUser(authResponse.user!);
+    _setLocalUser(user);
+    return user != null;
   }
 
   Future<void> logout() async {
     await runSupabaseCall(() async {
       await _supabase.auth.signOut().withDefaultTimeout();
-      localUser = null;
+      _setLocalUser(null);
     });
   }
 
   Future<bool> isLoggedIn() async {
     User? user = _supabase.auth.currentUser;
-    if (user == null) return false;
+    if (user == null) {
+      _setLocalUser(null);
+      return false;
+    }
 
-    localUser = await getLocalUser(user);
+    final localUser = await getLocalUser(user);
+    _setLocalUser(localUser);
     return localUser != null;
   }
 
@@ -51,10 +74,11 @@ class UserService {
       final data = await _supabase.from('users').select().eq('id', user.id);
 
       if (data.isNotEmpty) {
-        return LocalUser.fromMap(data.first);
+        final user = LocalUser.fromMap(data.first);
+        return user.ativo ? user : null;
       }
       return null;
-    });
+    }, timeout: 5);
   }
 
   Future<List<LocalUser>> listUsers() async {
@@ -66,7 +90,10 @@ class UserService {
 
   Future<void> registerUser(LocalUser user) async {
     return runSupabaseCall(() async {
-      await _supabase.rpc('admin_create_user', params: user.toMap());
+      final novo = user.toMap();
+      novo.remove('id');
+      novo.remove('ativo');
+      await _supabase.rpc('admin_create_user', params: novo);
     });
   }
 
@@ -79,8 +106,41 @@ class UserService {
   Future<void> updateUser(Map<String, dynamic> diff) async {
     return runSupabaseCall(() async {
       await _supabase.rpc('admin_update_user', params: diff);
+      final id = diff['p_id'];
+      if (id != null && localUser != null && id == localUser!.id) {
+        final data = await _supabase.from('users').select().eq('id', id);
+        if (data.isNotEmpty) {
+          _setLocalUser(LocalUser.fromMap(data.first));
+        }
+      }
     });
   }
 
-  bool get isAdmin => localUser != null ? localUser!.role == Role.admin : false;
+  Future<void> inactivateUser(String id) async {
+    return runSupabaseCall(() async {
+      try {
+        await _supabase.rpc(
+          'admin_update_user',
+          params: {'p_id': id, 'p_ativo': false},
+        );
+      } catch (_) {
+        await _supabase.from('users').update({'ativo': false}).eq('id', id);
+      }
+    });
+  }
+
+  Future<void> reactivateUser(String id) async {
+    return runSupabaseCall(() async {
+      try {
+        await _supabase.rpc(
+          'admin_update_user',
+          params: {'p_id': id, 'p_ativo': true},
+        );
+      } catch (_) {
+        await _supabase.from('users').update({'ativo': true}).eq('id', id);
+      }
+    });
+  }
+
+  bool get isAdmin => localUser?.role == Role.admin;
 }

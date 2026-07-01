@@ -1,7 +1,6 @@
 import 'package:salvando_vidas/main_imports.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
-
-// O que é MenuCard
 class MenuCard extends StatelessWidget {
   const MenuCard({
     super.key,
@@ -20,6 +19,11 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? AppColors.darkSurface : AppColors.inputFill;
+    final titleColor = isDark ? Colors.white : AppColors.deepNavy;
+    final subColor = isDark ? Colors.white70 : AppColors.deepNavy;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -29,15 +33,9 @@ class MenuCard extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: const Color(0xFFD8DDE6),
+            color: cardBg,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x22000000),
-                blurRadius: 16,
-                offset: Offset(0, 8),
-              ),
-            ],
+            boxShadow: AppColors.cardShadow(isDark),
           ),
           child: Row(
             children: [
@@ -51,14 +49,15 @@ class MenuCard extends StatelessWidget {
                 child: Icon(icon, color: Colors.white, size: 30),
               ),
               const SizedBox(width: 16),
+              // O Expanded aqui salva o layout de quebrar em telas estreitas
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: Color(0xFF08216F),
+                      style: TextStyle(
+                        color: titleColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       ),
@@ -66,15 +65,15 @@ class MenuCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: Color(0xFF1E2B61),
+                      style: TextStyle(
+                        color: subColor,
                         fontSize: 13,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Color(0xFF2457F0)),
+              const Icon(Icons.chevron_right, color: AppColors.royalAzure),
             ],
           ),
         ),

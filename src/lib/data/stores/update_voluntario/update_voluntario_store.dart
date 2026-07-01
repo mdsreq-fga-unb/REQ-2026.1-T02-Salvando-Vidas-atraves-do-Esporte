@@ -31,54 +31,46 @@ class UpdateVoluntarioState with UpdateVoluntarioStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError {
-    if (!dirty && nome.isEmpty) return null;
-    return nome.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get nomeError => nome.trim().isEmpty ? 'Nome é obrigatório' : null;
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email.isEmpty) return null;
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get telefoneError {
-    if (!dirty && telefone.isEmpty) return null;
+    if (telefone.isEmpty) return null;
     return eTelefone(telefone) ? null : 'Não é um telefone válido';
   }
 
   String? get cpfError {
-    if (!dirty && cpf.isEmpty) return null;
+    if (cpf.isEmpty) return null;
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
-  String? get funcaoError {
-    if (!dirty && funcao.isEmpty) return null;
-    return funcao.isNotEmpty ? null : 'Não pode estar em branco';
-  }
+  String? get funcaoError =>
+      funcao.trim().isEmpty ? 'Função é obrigatória' : null;
 
   bool get temErros =>
       nomeError != null ||
       emailError != null ||
       telefoneError != null ||
-      cpfError != null ||
-      funcaoError != null;
+      cpfError != null;
 
   bool get podeCadastrar =>
       nome.isNotEmpty &&
       email.isNotEmpty &&
       telefone.isNotEmpty &&
       cpf.isNotEmpty &&
-      funcao.isNotEmpty &&
       !temErros;
 
   Map<String, dynamic> get diff => {
     'p_id': id,
-    'p_email': email.isEmpty ? null : email,
-    'p_senha': senha.isEmpty ? null : senha,
-    'p_nome': nome.isEmpty ? null : nome,
-    'p_telefone': telefone.isEmpty ? null : telefone,
-    'p_cpf': cpf.isEmpty ? null : cpf,
-    'p_funcao': funcao.isEmpty ? null : funcao,
+    'p_email': email.trim().isEmpty ? null : email.trim(),
+    'p_senha': senha.trim().isEmpty ? null : senha.trim(),
+    'p_nome': nome.trim().isEmpty ? null : nome.trim(),
+    'p_telefone': telefone.trim().isEmpty ? null : telefone.trim(),
+    'p_cpf': cpf.trim().isEmpty ? null : cpf.trim(),
   };
 }
 

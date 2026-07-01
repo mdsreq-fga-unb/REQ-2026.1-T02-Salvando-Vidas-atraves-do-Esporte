@@ -1,12 +1,13 @@
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/data/stores/cadastro_voluntario/cadastro_voluntario_form.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 enum InputTypes { nome, email, senha, telefone, cpf, funcao }
 
 final voluntarioInputDecoration = InputDecoration(
-  hintStyle: const TextStyle(color: Color(0xAA000000), fontSize: 13),
+  hintStyle: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
   filled: true,
-  fillColor: const Color(0xFFD8DDE6),
+  fillColor: AppColors.inputFill,
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(12),
     borderSide: BorderSide.none,
@@ -17,7 +18,7 @@ final voluntarioInputDecoration = InputDecoration(
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(12),
-    borderSide: const BorderSide(color: Color(0xFF2457F0), width: 1.2),
+    borderSide: const BorderSide(color: AppColors.royalAzure, width: 1.2),
   ),
   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
 );
@@ -29,6 +30,11 @@ class CadastroTextField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final fillColor = isDark ? AppColors.darkInputFill : AppColors.inputFill;
+    final hintColor = isDark ? Colors.white54 : AppColors.textSecondary;
+
     final notifier = ref.read(cadastroVoluntarioProvider.notifier);
     final cadastro = ref.watch(cadastroVoluntarioProvider);
     return TextFormField(
@@ -46,11 +52,13 @@ class CadastroTextField extends ConsumerWidget {
         InputTypes.cpf => (cpf) => notifier.updateCpf(cpf),
         InputTypes.funcao => (funcao) => notifier.updateFuncao(funcao),
       },
-      style: const TextStyle(
-        color: Color(0xFF24304D),
+      style: TextStyle(
+        color: textColor,
         fontWeight: FontWeight.w600,
       ),
       decoration: voluntarioInputDecoration.copyWith(
+        fillColor: fillColor,
+        hintStyle: TextStyle(color: hintColor, fontSize: 13),
         hintText: switch (type) {
           InputTypes.nome => 'Digite o nome completo',
           InputTypes.email => 'Digite o email do voluntário',
@@ -84,13 +92,16 @@ class VoluntarioInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final labelColor = isDark ? Colors.white : AppColors.cyanPrimary;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: Color(0xFF10A9D0),
+          style: TextStyle(
+            color: labelColor,
             fontSize: 14,
             fontWeight: FontWeight.w700,
           ),

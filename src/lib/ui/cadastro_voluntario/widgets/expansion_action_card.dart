@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class ExpansionActionCard extends StatelessWidget {
   const ExpansionActionCard({
@@ -24,20 +25,19 @@ class ExpansionActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = backgroundColor ?? const Color(0xFFEAF6FA);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = backgroundColor ?? (isDark ? AppColors.darkSurface : AppColors.cyanPastel.withValues(alpha: 0.2));
+    final titleColor = isDark ? Colors.white : AppColors.deepNavy;
+    final subColor = isDark ? Colors.white70 : AppColors.deepNavy;
+    final expandedBg = isDark ? const Color(0xFF0A0E14) : Colors.white;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x22000000),
-            blurRadius: 12,
-            offset: Offset(0, 8),
-          ),
-        ],
+        boxShadow: AppColors.cardShadow(isDark),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,8 +60,8 @@ class ExpansionActionCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: Color(0xFF08216F),
+                      style: TextStyle(
+                        color: titleColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                       ),
@@ -69,8 +69,8 @@ class ExpansionActionCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: Color(0xFF1E2B61),
+                      style: TextStyle(
+                        color: subColor,
                         fontSize: 13,
                       ),
                     ),
@@ -81,7 +81,7 @@ class ExpansionActionCard extends StatelessWidget {
                 onPressed: onToggle,
                 icon: Icon(
                   expanded ? Icons.expand_less : Icons.expand_more,
-                  color: const Color(0xFF2457F0),
+                  color: AppColors.royalAzure,
                 ),
               ),
             ],
@@ -92,8 +92,9 @@ class ExpansionActionCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: expandedBg,
                 borderRadius: BorderRadius.circular(12),
+                border: isDark ? Border.all(color: AppColors.darkDivider) : null,
               ),
               child: child,
             ),

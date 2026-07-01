@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:salvando_vidas/ui/global/widgets/label.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class InputField extends StatelessWidget {
   const InputField({
@@ -9,7 +10,7 @@ class InputField extends StatelessWidget {
     required this.initialValue,
     required this.label,
     required this.hint,
-    required this.validatorMessage,
+    this.validatorMessage,
     this.keyboardType,
     this.fillColor,
     this.inputFormatters,
@@ -17,18 +18,22 @@ class InputField extends StatelessWidget {
   });
 
   final Color? fillColor;
-
   final void Function(String) update;
   final String? error;
   final String initialValue;
   final String label;
   final String hint;
-  final String validatorMessage;
+  final String? validatorMessage;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : AppColors.deepNavy;
+    final defaultFillColor = isDark ? AppColors.darkInputFill : AppColors.platinum;
+    final hintColor = isDark ? Colors.white54 : AppColors.textSecondary;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,16 +44,17 @@ class InputField extends StatelessWidget {
           initialValue: initialValue,
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
-          style: const TextStyle(
-            color: Color(0xFF24304D),
+          autovalidateMode: AutovalidateMode.disabled,
+          style: TextStyle(
+            color: textColor,
             fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
             hintText: hint,
             errorText: error,
-            hintStyle: const TextStyle(color: Color(0xAA000000), fontSize: 13),
+            hintStyle: TextStyle(color: hintColor, fontSize: 13),
             filled: true,
-            fillColor: fillColor ?? const Color(0xFFD8DDE6),
+            fillColor: fillColor ?? defaultFillColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -60,7 +66,7 @@ class InputField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(
-                color: Color(0xFF2457F0),
+                color: AppColors.royalAzure,
                 width: 1.2,
               ),
             ),
@@ -70,6 +76,9 @@ class InputField extends StatelessWidget {
             ),
           ),
           validator: (value) {
+            if (validatorMessage == null || validatorMessage!.isEmpty) {
+              return null;
+            }
             final text = (value ?? '').trim();
             if (text.isEmpty) return validatorMessage;
             return null;

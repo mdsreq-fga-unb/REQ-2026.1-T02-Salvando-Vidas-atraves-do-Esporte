@@ -40,8 +40,8 @@ class MockUserService extends _i1.Mock implements _i2.UserService {
           as bool);
 
   @override
-  set localUser(_i3.LocalUser? value) => super.noSuchMethod(
-    Invocation.setter(#localUser, value),
+  set localUser(_i3.LocalUser? user) => super.noSuchMethod(
+    Invocation.setter(#localUser, user),
     returnValueForMissingStub: null,
   );
 
@@ -116,6 +116,24 @@ class MockUserService extends _i1.Mock implements _i2.UserService {
   _i4.Future<void> updateUser(Map<String, dynamic>? diff) =>
       (super.noSuchMethod(
             Invocation.method(#updateUser, [diff]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> inactivateUser(String? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#inactivateUser, [id]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> reactivateUser(String? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#reactivateUser, [id]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )

@@ -199,6 +199,60 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
   static const Field<Aluno, bool> _f$ativo = Field('ativo', _$ativo);
   static bool _$federado(Aluno v) => v.federado;
   static const Field<Aluno, bool> _f$federado = Field('federado', _$federado);
+  static bool _$pMedica1(Aluno v) => v.pMedica1;
+  static const Field<Aluno, bool> _f$pMedica1 = Field(
+    'pMedica1',
+    _$pMedica1,
+    key: r'p_medica1',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica2(Aluno v) => v.pMedica2;
+  static const Field<Aluno, bool> _f$pMedica2 = Field(
+    'pMedica2',
+    _$pMedica2,
+    key: r'p_medica2',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica3(Aluno v) => v.pMedica3;
+  static const Field<Aluno, bool> _f$pMedica3 = Field(
+    'pMedica3',
+    _$pMedica3,
+    key: r'p_medica3',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica4(Aluno v) => v.pMedica4;
+  static const Field<Aluno, bool> _f$pMedica4 = Field(
+    'pMedica4',
+    _$pMedica4,
+    key: r'p_medica4',
+    opt: true,
+    def: false,
+  );
+  static bool _$pMedica5(Aluno v) => v.pMedica5;
+  static const Field<Aluno, bool> _f$pMedica5 = Field(
+    'pMedica5',
+    _$pMedica5,
+    key: r'p_medica5',
+    opt: true,
+    def: false,
+  );
+  static String? _$apelido(Aluno v) => v.apelido;
+  static const Field<Aluno, String> _f$apelido = Field(
+    'apelido',
+    _$apelido,
+    opt: true,
+  );
+  static bool _$usarApelido(Aluno v) => v.usarApelido;
+  static const Field<Aluno, bool> _f$usarApelido = Field(
+    'usarApelido',
+    _$usarApelido,
+    key: r'usar_apelido',
+    opt: true,
+    def: false,
+  );
   static int? _$id(Aluno v) => v.id;
   static const Field<Aluno, int> _f$id = Field('id', _$id, opt: true);
   static String? _$contato(Aluno v) => v.contato;
@@ -242,6 +296,13 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
     key: r'id_ficha',
     opt: true,
   );
+  static String? _$observacaoMedica(Aluno v) => v.observacaoMedica;
+  static const Field<Aluno, String> _f$observacaoMedica = Field(
+    'observacaoMedica',
+    _$observacaoMedica,
+    key: r'observacao_medica',
+    opt: true,
+  );
 
   @override
   final MappableFields<Aluno> fields = const {
@@ -255,6 +316,13 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
     #dataEntrada: _f$dataEntrada,
     #ativo: _f$ativo,
     #federado: _f$federado,
+    #pMedica1: _f$pMedica1,
+    #pMedica2: _f$pMedica2,
+    #pMedica3: _f$pMedica3,
+    #pMedica4: _f$pMedica4,
+    #pMedica5: _f$pMedica5,
+    #apelido: _f$apelido,
+    #usarApelido: _f$usarApelido,
     #id: _f$id,
     #contato: _f$contato,
     #contatoEmergencia: _f$contatoEmergencia,
@@ -262,9 +330,8 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
     #idResponsavel: _f$idResponsavel,
     #idTurma: _f$idTurma,
     #idFicha: _f$idFicha,
+    #observacaoMedica: _f$observacaoMedica,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Aluno _instantiate(DecodingData data) {
     return Aluno(
@@ -278,6 +345,13 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
       dataEntrada: data.dec(_f$dataEntrada),
       ativo: data.dec(_f$ativo),
       federado: data.dec(_f$federado),
+      pMedica1: data.dec(_f$pMedica1),
+      pMedica2: data.dec(_f$pMedica2),
+      pMedica3: data.dec(_f$pMedica3),
+      pMedica4: data.dec(_f$pMedica4),
+      pMedica5: data.dec(_f$pMedica5),
+      apelido: data.dec(_f$apelido),
+      usarApelido: data.dec(_f$usarApelido),
       id: data.dec(_f$id),
       contato: data.dec(_f$contato),
       contatoEmergencia: data.dec(_f$contatoEmergencia),
@@ -285,6 +359,7 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
       idResponsavel: data.dec(_f$idResponsavel),
       idTurma: data.dec(_f$idTurma),
       idFicha: data.dec(_f$idFicha),
+      observacaoMedica: data.dec(_f$observacaoMedica),
     );
   }
 
@@ -345,6 +420,13 @@ abstract class AlunoCopyWith<$R, $In extends Aluno, $Out>
     DateTime? dataEntrada,
     bool? ativo,
     bool? federado,
+    bool? pMedica1,
+    bool? pMedica2,
+    bool? pMedica3,
+    bool? pMedica4,
+    bool? pMedica5,
+    String? apelido,
+    bool? usarApelido,
     int? id,
     String? contato,
     String? contatoEmergencia,
@@ -352,6 +434,7 @@ abstract class AlunoCopyWith<$R, $In extends Aluno, $Out>
     int? idResponsavel,
     int? idTurma,
     int? idFicha,
+    String? observacaoMedica,
   });
   AlunoCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -374,6 +457,13 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
     DateTime? dataEntrada,
     bool? ativo,
     bool? federado,
+    bool? pMedica1,
+    bool? pMedica2,
+    bool? pMedica3,
+    bool? pMedica4,
+    bool? pMedica5,
+    Object? apelido = $none,
+    bool? usarApelido,
     Object? id = $none,
     Object? contato = $none,
     Object? contatoEmergencia = $none,
@@ -381,6 +471,7 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
     Object? idResponsavel = $none,
     Object? idTurma = $none,
     Object? idFicha = $none,
+    Object? observacaoMedica = $none,
   }) => $apply(
     FieldCopyWithData({
       if (nome != null) #nome: nome,
@@ -393,6 +484,13 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
       if (dataEntrada != null) #dataEntrada: dataEntrada,
       if (ativo != null) #ativo: ativo,
       if (federado != null) #federado: federado,
+      if (pMedica1 != null) #pMedica1: pMedica1,
+      if (pMedica2 != null) #pMedica2: pMedica2,
+      if (pMedica3 != null) #pMedica3: pMedica3,
+      if (pMedica4 != null) #pMedica4: pMedica4,
+      if (pMedica5 != null) #pMedica5: pMedica5,
+      if (apelido != $none) #apelido: apelido,
+      if (usarApelido != null) #usarApelido: usarApelido,
       if (id != $none) #id: id,
       if (contato != $none) #contato: contato,
       if (contatoEmergencia != $none) #contatoEmergencia: contatoEmergencia,
@@ -400,6 +498,7 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
       if (idResponsavel != $none) #idResponsavel: idResponsavel,
       if (idTurma != $none) #idTurma: idTurma,
       if (idFicha != $none) #idFicha: idFicha,
+      if (observacaoMedica != $none) #observacaoMedica: observacaoMedica,
     }),
   );
   @override
@@ -414,6 +513,13 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
     dataEntrada: data.get(#dataEntrada, or: $value.dataEntrada),
     ativo: data.get(#ativo, or: $value.ativo),
     federado: data.get(#federado, or: $value.federado),
+    pMedica1: data.get(#pMedica1, or: $value.pMedica1),
+    pMedica2: data.get(#pMedica2, or: $value.pMedica2),
+    pMedica3: data.get(#pMedica3, or: $value.pMedica3),
+    pMedica4: data.get(#pMedica4, or: $value.pMedica4),
+    pMedica5: data.get(#pMedica5, or: $value.pMedica5),
+    apelido: data.get(#apelido, or: $value.apelido),
+    usarApelido: data.get(#usarApelido, or: $value.usarApelido),
     id: data.get(#id, or: $value.id),
     contato: data.get(#contato, or: $value.contato),
     contatoEmergencia: data.get(
@@ -424,6 +530,7 @@ class _AlunoCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Aluno, $Out>
     idResponsavel: data.get(#idResponsavel, or: $value.idResponsavel),
     idTurma: data.get(#idTurma, or: $value.idTurma),
     idFicha: data.get(#idFicha, or: $value.idFicha),
+    observacaoMedica: data.get(#observacaoMedica, or: $value.observacaoMedica),
   );
 
   @override

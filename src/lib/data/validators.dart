@@ -1,63 +1,39 @@
 import 'package:salvando_vidas/main_imports.dart';
 
 bool eEmail(String email) {
+  final clean = email.trim();
   final exp = RegExp(r"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$");
-  return exp.hasMatch(email);
+  return exp.hasMatch(clean);
 }
 
 bool eTelefone(String telefone) {
-  final exp = RegExp(r"^[\d]{10,11}$");
-  return exp.hasMatch(telefone);
+  final clean = telefone.replaceAll(RegExp(r'[^0-9]'), '');
+  return clean.length >= 10 && clean.length <= 11;
 }
 
 bool eCPF(String cpf) {
-  final exp = RegExp(r"^[\d]{11}$");
-  if (!exp.hasMatch(cpf)) return false;
+  final clean = cpf.replaceAll(RegExp(r'[^0-9]'), '');
+  if (clean.length != 11) return false;
 
-  switch (cpf) {
-    case "00000000000":
-    case "11111111111":
-    case "22222222222":
-    case "33333333333":
-    case "44444444444":
-    case "55555555555":
-    case "66666666666":
-    case "77777777777":
-    case "88888888888":
-    case "99999999999":
-    case "01234567890":
-      return false;
-  }
-
-  List<int> digitos = [];
-  for (final digito in cpf.characters) {
-    digitos.add(int.parse(digito));
-  }
-
-  int ver1 = int.parse(cpf[9]);
-  int ver2 = int.parse(cpf[10]);
-  int verC = 0;
-
-  for (var i = 0; i < 9; i++) {
-    verC += digitos[i] * (10 - i);
-  }
-
-  verC %= 11;
-
-  if (((verC == 0 || verC == 1) && ver1 != 0) || ((11 - verC) != ver1)) {
+  if (RegExp(r'^(\d)\1{10}$').hasMatch(clean) || clean == '01234567890') {
     return false;
   }
 
-  verC = 0;
+  final digitos = clean.split('').map(int.parse).toList();
 
-  for (var i = 0; i < 10; i++) {
-    verC += digitos[i] * (11 - i);
+  var soma1 = 0;
+  for (var i = 0; i < 9; i++) {
+    soma1 += digitos[i] * (10 - i);
   }
+  final resto1 = soma1 % 11;
+  final ver1 = resto1 < 2 ? 0 : 11 - resto1;
+  if (digitos[9] != ver1) return false;
 
-  verC %= 11;
-
-  if ((verC == 0 || verC == 1) && ver2 == 0) return true;
-  if ((11 - verC) == ver2) return true;
-
-  return false;
+  var soma2 = 0;
+  for (var i = 0; i < 10; i++) {
+    soma2 += digitos[i] * (11 - i);
+  }
+  final resto2 = soma2 % 11;
+  final ver2 = resto2 < 2 ? 0 : 11 - resto2;
+  return digitos[10] == ver2;
 }

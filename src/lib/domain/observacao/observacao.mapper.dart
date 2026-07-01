@@ -55,8 +55,6 @@ class ObservacaoMapper extends ClassMapperBase<Observacao> {
     #turmaId: _f$turmaId,
     #data: _f$data,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Observacao _instantiate(DecodingData data) {
     return Observacao(

@@ -114,6 +114,9 @@ void main() {
         await tester.tap(find.widgetWithText(ElevatedButton, 'Deslogar'));
         await tester.pumpAndSettle();
 
+        await tester.tap(find.widgetWithText(ElevatedButton, 'Deslogar').last);
+        await tester.pumpAndSettle();
+
         verify(mockUserService.logout()).called(1);
         expect(find.text('Pagina Login'), findsOneWidget);
       },

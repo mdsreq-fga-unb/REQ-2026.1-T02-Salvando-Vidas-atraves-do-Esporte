@@ -17,3 +17,5 @@ O link abaixo leva para os quadros utilizados na sessão JAD realizada no dia 08
 # R7 - Segunda Sessão JAD - Reunião 11/06
 
 O link abaixo leva para os quadros utilizados na sessão JAD realizada no dia 11/06, focada na repriorização do MVP utilizando as _User Stories_:
+
+[Quadro Sessão JAD 11/06](https://miro.com/app/board/uXjVHWbGQMc=/?moveToWidget=3458764674298702616&cot=14)

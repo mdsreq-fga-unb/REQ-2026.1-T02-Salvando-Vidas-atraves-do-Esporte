@@ -1,6 +1,8 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:salvando_vidas/data/services/global/global_service.dart';
 import 'package:salvando_vidas/data/services/turma_service/turma_service.dart';
 import 'package:salvando_vidas/domain/turma/turma.dart';
 
@@ -16,7 +18,6 @@ void main() {
     turmaService = TurmaService(mockSupabaseClient);
   });
 
-  // JSON da nossa Turma Perfeita (usando snake_case para simular o banco)
   final turmaSimuladoJson = {
     'id': 1,
     'nome': 'Turma de Jiu-Jitsu',
@@ -35,10 +36,7 @@ void main() {
   };
 
   group('TurmaService -', () {
-    
     test('deve contar a quantidade de alunos de uma turma com sucesso', () async {
-      // 1. ARRANGE
-      // Simulamos que a tabela de alunos devolveu 3 registros para a turma id = 1
       final alunosSimulados = [
         {'id': 101, 'id_turma': 1},
         {'id': 102, 'id_turma': 1},
@@ -48,40 +46,46 @@ void main() {
       when(mockSupabaseClient.from('alunos'))
           .thenAnswer((_) => FakeQueryBuilder(alunosSimulados));
 
-      // 2. ACT
       final quantidade = await turmaService.contarAlunos(1);
-
-      // 3. ASSERT
-      // O FakeCountBuilder vai ler o .length da lista e devolver 3!
       expect(quantidade, 3);
     });
 
     test('deve listar as turmas e atribuir a quantidade de alunos com sucesso', () async {
-      // 1. ARRANGE (O Desafio das Duas Tabelas)
-      
-      // Ensinamos o mock a responder a chamada da tabela 'turmas'
       when(mockSupabaseClient.from('turmas'))
           .thenAnswer((_) => FakeQueryBuilder([turmaSimuladoJson]));
 
-      // Em seguida, ensinamos o mock a responder a chamada da tabela 'alunos'
-      // Simulando que essa turma tem 2 alunos cadastrados
       when(mockSupabaseClient.from('alunos'))
           .thenAnswer((_) => FakeQueryBuilder([
                 {'id': 101, 'id_turma': 1},
                 {'id': 102, 'id_turma': 1},
               ]));
 
-      // 2. ACT
       final resultado = await turmaService.listarTurmas();
 
-      // 3. ASSERT
       expect(resultado, isA<List<Turma>>());
       expect(resultado.length, 1);
       expect(resultado.first.nome, 'Turma de Jiu-Jitsu');
-      
-      // A Prova Final: Verifica se o loop "for" preencheu o campo de quantidade corretamente
       expect(resultado.first.qtdAlunos, 2);
     });
 
+    test('deve atualizar turma com sucesso', () async {
+      when(mockSupabaseClient.from('turmas'))
+          .thenAnswer((_) => FakeQueryBuilder([]));
+
+      await turmaService.atualizaTurma(1, {'nome': 'Novo Nome'});
+      verify(mockSupabaseClient.from('turmas')).called(1);
+    });
+
+    test('turmaServiceProvider build', () {
+      final container = ProviderContainer(
+        overrides: [
+          supabaseClientProvider.overrideWithValue(mockSupabaseClient),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      final service = container.read(turmaServiceProvider);
+      expect(service, isNotNull);
+    });
   });
 }
