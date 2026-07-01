@@ -88,6 +88,7 @@ class UserService {
     return runSupabaseCall(() async {
       final novo = user.toMap();
       novo.remove('id');
+      novo.remove('ativo');
       await _supabase.rpc('admin_create_user', params: novo);
     });
   }
@@ -114,7 +115,10 @@ class UserService {
   Future<void> inactivateUser(String id) async {
     return runSupabaseCall(() async {
       try {
-        await _supabase.rpc('admin_update_user', params: {'p_id': id, 'p_ativo': false});
+        await _supabase.rpc(
+          'admin_update_user',
+          params: {'p_id': id, 'p_ativo': false},
+        );
       } catch (_) {
         await _supabase.from('users').update({'ativo': false}).eq('id', id);
       }
@@ -124,7 +128,10 @@ class UserService {
   Future<void> reactivateUser(String id) async {
     return runSupabaseCall(() async {
       try {
-        await _supabase.rpc('admin_update_user', params: {'p_id': id, 'p_ativo': true});
+        await _supabase.rpc(
+          'admin_update_user',
+          params: {'p_id': id, 'p_ativo': true},
+        );
       } catch (_) {
         await _supabase.from('users').update({'ativo': true}).eq('id', id);
       }

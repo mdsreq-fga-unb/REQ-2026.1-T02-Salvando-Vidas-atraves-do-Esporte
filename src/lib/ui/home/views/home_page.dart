@@ -323,7 +323,7 @@ class HomePage extends ConsumerWidget {
         final isMobile = constraints.maxWidth < 600;
 
         final aniversariantesBox = Container(
-          height: isMobile ? 180 : double.infinity,
+          height: 180,
           decoration: BoxDecoration(
             color: cardBg,
             borderRadius: BorderRadius.circular(12),
@@ -413,7 +413,7 @@ class HomePage extends ConsumerWidget {
                       },
                     );
                   },
-                  error: (_, __) => const Center(child: Text('Erro')),
+                  error: (_, _) => const Center(child: Text('Erro')),
                   loading: () => const Center(
                     child: SizedBox(
                       width: 20,
