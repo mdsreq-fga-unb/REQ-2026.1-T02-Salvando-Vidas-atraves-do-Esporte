@@ -4,6 +4,7 @@
 
 Os requisitos funcionais descrevem as funcionalidades específicas que o sistema deve implementar para atender às necessidades da instituição Salvando Vidas Através do Esporte, realizado pela Segunda Igreja Batista do Recanto das Emas. A seguir, são apresentados o conjunto preliminar de requisitos.
 
+<span id="#rf01"></span>
 | ID | Nome | Descrição |
 | :---: | :--- | :--- |
 | RF01 | Cadastrar aluno | Permitir a inserção de um novo aluno no sistema, registrando seus dados pessoais e de matrícula. |
