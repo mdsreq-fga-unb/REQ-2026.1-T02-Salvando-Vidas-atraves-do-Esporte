@@ -1,153 +1,133 @@
-# 10.3 Critérios de Aceitação do MVP
+# Critérios de Aceitação
 
-Os Critérios de Aceitação (CA) definem as condições mínimas para que cada História de Usuário do MVP seja considerada concluída. Os RNFs transversais compõem a Definition of Done e se aplicam a todas as histórias. Esses critérios não são estáticos: são continuamente validados e refinados junto aos stakeholders ao longo dos ciclos iterativos.
+## Gestão de Alunos
 
----
+### US-01 — Cadastro e Manutenção de Dados Cadastrais
 
-## Gestão de Alunos e Responsáveis
+* O sistema deve validar o preenchimento dos campos obrigatórios (Nome, CPF, Telefone, Contato de emergência, Email, Aniversário, Tipo Sanguíneo, Faixa/Grau) antes de concluir o cadastro do aluno.
+* Quando o aluno for menor de idade, o sistema deve solicitar o preenchimento dos dados do responsável.
+* Deve haver campos opcionais para inserção de apelido e ID da ficha física.
 
-**US-01** — Cadastro e Manutenção de Dados Cadastrais
+### US-02 — Cadastro e Manutenção de Dados Cadastrais
 
-- Campos obrigatórios do aluno e do responsável devem ser validados antes de salvar.
-- O sistema confirma o cadastro bem-sucedido.
-- O aluno recém-cadastrado é encontrado pela busca por nome.
-
-**US-02** — Cadastro e Manutenção de Dados Cadastrais
-
-- Qualquer campo do cadastro pode ser editado, com alterações salvas imediatamente.
-- A inativação exige confirmação e não exclui os dados.
-- Cadastros inativos ficam ocultos nas listagens ativas, mas acessíveis para consulta histórica.
-
-**US-03** — Vínculos entre Aluno e Responsável
-
-- Um responsável pode ser vinculado a um ou mais alunos.
-- O sistema deve exigir a vinculação de um responsável legal caso a data de nascimento informe que o aluno é menor de 18 anos.
-- O perfil do aluno exibe o responsável vinculado.
+* O aluno deve ser localizado pela funcionalidade de busca utilizando seu nome.
+* O sistema deve permitir a edição dos dados cadastrais do aluno a qualquer momento.
+* Deve haver confirmação da intenção de salvar alterações realizadas.
 
 
-**US-04** — Vínculos entre Aluno e Responsável
+### US-03 — Cadastro e Manutenção de Dados Cadastrais
 
-- O vínculo pode ser removido mediante confirmação.
-- A remoção do vínculo não exclui o cadastro do responsável.
-- O responsável desvinculado deixa de aparecer no perfil do aluno.
-
-**US-36** — Vínculos entre Aluno e Responsável
-- O sistema deve permitir localizar alunos e responsáveis inativos.
-- A reativação deve exigir confirmação do Coordenador.
-- Após a confirmação, o cadastro deve retornar ao status "Ativo" e às listagens do sistema.
-- O histórico do aluno e os vínculos com responsáveis devem ser preservados.
+* O sistema deve solicitar confirmação antes de realizar a inativação do cadastro do aluno.
+* Cadastros inativos não devem ser exibidos nas listagens de alunos ativos.
+* Após a reativação, o cadastro do aluno deve retornar ao status "Ativo" e voltar a ser exibido nas listagens do sistema com o histórico de informações preservado.
 
 
 ---
+
 ## Gestão de Turmas
 
-**US-08** — Matrículas e Participação em Turmas
+### US-07 — Matrículas e Participação em Turmas
 
-- Somente alunos ativos podem ser matriculados em turmas ativas.
-- O aluno matriculado aparece automaticamente na lista de chamada da turma.
+* O sistema deve permitir a matrícula apenas de alunos com cadastro ativo.
+* Após a matrícula, o aluno deve ser incluído automaticamente na lista de chamada da turma correspondente.
+* O sistema não deve permitir que um aluno possua matrícula ativa em mais de uma turma simultaneamente.
 
-**US-09** — Matrículas e Participação em Turmas
+### US-08 — Matrículas e Participação em Turmas
 
-- O cancelamento da matrícula exige confirmação.
-- O aluno desmatriculado não aparece em chamadas futuras da turma.
-- O histórico de presença anterior ao cancelamento é preservado.
-
+* O sistema deve solicitar confirmação antes de concluir o cancelamento da matrícula do aluno.
+* Após o cancelamento da matrícula, o aluno não deve aparecer nas listas de chamada futuras da turma.
+* O sistema deve preservar o histórico de presença anterior ao cancelamento, caso o aluno seja matriculado novamente na mesma turma.
 
 ---
 
 ## Controle de Frequência e Evasão
 
-**US-10** — Registro de Presença em Aula
+### US-09 — Registro de Presença em Aula
 
-- A lista de alunos matriculados é exibida para registro de chamada.
-- Cada marcação é confirmada em menos de 1 segundo.
-- Não é possível registrar presença em turma encerrada ou data futura.
+* O sistema deve exibir a lista de alunos matriculados na turma para realização da chamada.
+* O sistema deve exigir que um instrutor ou professor esteja vinculado ao registro de frequência da aula.
+* O sistema não deve permitir o registro de presença para datas futuras.
 
-**US-11** — Registro de Presença em Aula
+### US-10 — Correção de Registro de Presença
 
-- O status de presença de um registro já lançado pode ser alterado pelo Voluntário
-- A correção é refletida imediatamente no histórico do aluno.
+* O status de presença de um registro já lançado pode ser alterado pelo voluntário.
+* O sistema deve exibir ao voluntário o status de presença atualizado imediatamente após a confirmação da alteração.
+* A correção deve ser refletida imediatamente no histórico do aluno.
 
-**US-13** — Monitoramento e Prevenção à Evasão
+### US-12 — Monitoramento e Prevenção à Evasão
 
-- O histórico de frequência de um aluno pode ser consultado com filtro por período.
-- O resultado exibe data, turma e status de cada aula, além do total de presenças e ausências.
+* O sistema deve permitir a consulta ao histórico de frequência do aluno com opção de filtro por período.
+* O histórico de frequência deve exibir, para cada registro, a data da aula e o status de presença do aluno.
+* O sistema deve apresentar o total acumulado de presenças e ausências do aluno no período consultado.
 
-**US-14** — Monitoramento e Prevenção à Evasão
+### US-13 — Monitoramento e Prevenção à Evasão
 
-- O sistema gera automaticamente a lista de alunos com 2 semanas consecutivas de falta.
-- A lista exibe nome, turma e semanas consecutivas de ausência.
-- Os indicadores são atualizados e exibidos em menos de 3 segundos.
+* O sistema deve exibir no painel principal um contador com o total de alunos que possuem duas ou mais semanas consecutivas de ausência.
+* O sistema deve aplicar um destaque visual aos alunos identificados como em risco de evasão nas listagens gerais.
+* O destaque visual deve ser removido automaticamente após o registro de uma nova presença do aluno.
 
 ---
 
 ## Estoque Solidário de Kimonos
 
-**US-15** — Controle de Inventário
+### US-14 — Controle de Inventário
 
-- Doações são registradas com tamanho, quantidade e data; quantidade zero ou negativa é bloqueada.
-- O estoque disponível para empréstimo é exibido de forma atualizada.
-- Cada entrada gera um log de auditoria.
+* O sistema deve permitir o registro de doações contendo, no mínimo, tamanho, cor, quantidade e nome do doador.
+* Após o registro da doação, o sistema deve atualizar automaticamente a quantidade disponível no estoque.
+* O sistema não deve permitir o registro de doações com campos obrigatórios vazios ou com quantidade igual ou inferior a zero.
 
-**US-16** — Controle de Inventário
+### US-15 — Controle de Inventário
 
-- A baixa por dano exige confirmação e não pode exceder o estoque atual.
-- Kimonos baixados não aparecem no estoque disponível.
-- Cada baixa gera um log de auditoria com motivo, quantidade e data.
+* O sistema deve exigir a seleção do kimono danificado ou perdido antes do registro da ocorrência.
+* O sistema deve solicitar o motivo da perda ou dano e a quantidade de itens afetados.
+* O sistema deve concluir o registro apenas quando todos os campos obrigatórios estiverem preenchidos.
 
-**US-17** — Empréstimos e Devoluções
+### US-16 — Empréstimos e Devoluções
 
-- O empréstimo vincula o kimono a um aluno ativo e o retira do estoque disponível.
-- Não é possível emprestar kimono indisponível em estoque.
-- Um aluno poderá ter apenas um empréstimo ativo.
-- O perfil do aluno exibe o empréstimo ativo
-- Cada empréstimo gera log de auditoria com data, kimono e aluno vinculado.
+* O sistema deve vincular o empréstimo do kimono a um aluno com cadastro ativo e removê-lo automaticamente do estoque disponível.
+* O sistema não deve permitir o empréstimo de kimonos indisponíveis no estoque.
+* O sistema deve permitir apenas um empréstimo ativo de kimono por aluno.
 
-**US-18** — Empréstimos e Devoluções
+### US-17 — Empréstimos e Devoluções
 
-- A devolução reintegra o kimono ao estoque disponível.
-- Não é possível registrar devolução de kimono que não esteja emprestado.
-- O formulário de devolução deve possuir uma opção (ex: checkbox) para registrar "Devolvido com dano" direcionando o item automaticamente para a baixa, impedindo que volte ao estoque disponível.
-- Cada devolução gera log de auditoria com data e aluno.
+* O sistema deve reintegrar automaticamente o kimono ao estoque disponível após o registro da devolução.
+* O sistema não deve permitir o registro da devolução de um kimono que não possua empréstimo ativo.
+* O sistema deve exibir a lista de alunos com empréstimos ativos para seleção durante o processo de devolução.
 
 ---
 
 ## Acompanhamento Pedagógico e Engajamento
 
-**US-19** — Engajamento com a Comunidade
+### US-18 — Engajamento com a Comunidade
 
-- A lista de aniversariantes da semana é exibida no dashboard em até 3 segundos após o login.
-- A lista de aniversariantes deve exibir claramente o nome do aluno e a quantidade de dias restantes para o aniversário.
-- Caso não existam aniversariantes na semana, o sistema deve exibir uma mensagem informando.
+* O sistema deve exibir automaticamente a lista de aniversariantes da semana no dashboard após a autenticação do usuário.
+* A lista de aniversariantes deve apresentar claramente o nome do aluno e a quantidade de dias restantes até o aniversário.
+* Caso não existam aniversariantes na semana corrente, o sistema deve exibir uma mensagem informativa ao usuário.
 
 ---
 
 ## Gestão de Usuários e Acessos
 
-**US-30** — Cadastro e Manutenção de Voluntários
+### US-28 — Cadastro e Manutenção de Voluntários
 
-- Campos obrigatórios são validados antes de salvar.
-- A senha é armazenada com criptografia.
-- Os dados do voluntário podem ser editados a qualquer momento.
+* O sistema deve permitir o cadastro de voluntários contendo, no mínimo, os campos: nome, CPF, telefone de contato, telefone de emergência, e-mail e faixa de graduação.
+* O sistema deve validar o preenchimento dos campos obrigatórios antes de concluir o cadastro do voluntário.
+* O sistema deve permitir a edição dos dados do voluntário a qualquer momento, exceto do CPF, que deve permanecer imutável após o cadastro.
 
-**US-31** — Cadastro e Manutenção de Voluntários
+### US-29 — Inativação e Reativação de Voluntários
 
-- A inativação exige confirmação e impede o login do voluntário imediatamente.
-- O histórico de ações do voluntário inativo é preservado e acessível.
+* O sistema deve exigir uma confirmação do usuário antes de concluir a inativação do voluntário.
+* Após a inativação, o voluntário não deve conseguir acessar o sistema até que seu cadastro seja reativado.
+* O sistema deve permitir a reativação do voluntário preservando todo o histórico e informações previamente cadastradas.
 
-**US-33** — Controle de Acesso e Segurança
+### US-31 — Controle de Acesso e Segurança
 
-- O sistema oferece ao menos dois perfis: Coordenador e Voluntário.
-- O sistema não deve exibir no menu ou nas telas as funcionalidades e botões que estejam fora do nível de permissão do usuário autenticado.
-- Apenas usuários autenticados acessam telas protegidas.
+* O sistema deve solicitar um endereço de e-mail e uma senha válidos para realizar a autenticação do usuário.
+* Quando as credenciais informadas forem válidas, o sistema deve autenticar o usuário e redirecioná-lo para a tela inicial.
+* Quando as credenciais informadas forem inválidas, o sistema deve impedir o acesso e exibir uma mensagem indicando credenciais incorretas.
 
-**US-34** — Controle de Acesso e Segurança
+### US-32 — Controle de Acesso e Segurança
 
-- O logout invalida a sessão imediatamente e redireciona para a tela de login.
-- Após o logout, nenhuma tela protegida é acessível sem novo login.
-
-**US-35** — Controle de Acesso e Segurança
-
-- O sistema deve solicitar um e-mail e uma senha válidos para a autenticação.
-- Se credenciais corretas, o usuário deve ser autenticado e redirecionado para a tela inicial.
-- Se credenciais incorretas, o sistema deve bloquear o acesso e exibir uma mensagem de erro genérica.
+* O sistema deve solicitar a confirmação do usuário antes de realizar o encerramento da sessão.
+* Após a confirmação do logout, o sistema deve invalidar imediatamente a sessão ativa e redirecionar o usuário para a tela de login.
+* Após o logout, o sistema não deve permitir o acesso a telas protegidas sem que uma nova autenticação seja realizada.
