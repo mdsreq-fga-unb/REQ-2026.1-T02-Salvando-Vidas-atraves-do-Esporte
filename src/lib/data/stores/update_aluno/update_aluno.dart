@@ -55,7 +55,7 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError => null;
+  String? get nomeError => nome.trim().isEmpty ? 'Nome é obrigatório' : null;
 
   String? get nomeResponsavelError => null;
 
@@ -133,7 +133,10 @@ class UpdateAlunoState with UpdateAlunoStateMappable {
 
   bool get temResponsavel {
     if (idade >= 18) return true;
-    return nomeResponsavelError == null &&
+    return nomeResponsavel.isNotEmpty &&
+        cpfResponsavel.isNotEmpty &&
+        contatoResponsavel.isNotEmpty &&
+        nomeResponsavelError == null &&
         cpfResponsavelError == null &&
         contatoResponsavelError == null;
   }

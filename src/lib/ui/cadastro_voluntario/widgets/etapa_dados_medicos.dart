@@ -105,20 +105,22 @@ class EtapaDadosMedicos extends ConsumerWidget {
                           : AppColors.royalAzure.withOpacity(0.2),
                     ),
                   ),
-                  child: CheckboxListTile(
-                    contentPadding: EdgeInsets.zero,
-                    controlAffinity: ListTileControlAffinity.leading,
-                    activeColor: isDark
-                        ? AppColors.cyanPrimary
-                        : AppColors.deepNavy,
-                    title: Text(
-                      'Termo de Responsabilidade*',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: textColor,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: CheckboxListTile(
+                      contentPadding: EdgeInsets.zero,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: isDark
+                          ? AppColors.cyanPrimary
+                          : AppColors.deepNavy,
+                      title: Text(
+                        'Termo de Responsabilidade*',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: textColor,
+                        ),
                       ),
-                    ),
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Text(
@@ -133,7 +135,8 @@ class EtapaDadosMedicos extends ConsumerWidget {
                     onChanged: onTermoChanged,
                   ),
                 ),
-                const SizedBox(height: 16),
+              ),
+              const SizedBox(height: 16),
               ],
             ),
           ),

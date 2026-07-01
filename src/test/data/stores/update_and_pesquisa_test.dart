@@ -66,7 +66,7 @@ void main() {
       addTearDown(container.dispose);
 
       final aluno = criarAlunoTeste(id: 1, nome: 'Orig', ativo: true);
-      final resp = Responsavel(id: 10, nome: 'Resp Orig', cpf: '07481138096', contato: '11987654321', email: 'r@t.com', ativo: true);
+      final resp = Responsavel(id: 10, nome: 'Resp Orig', cpf: '52998224725', contato: '11987654321', email: 'r@t.com', ativo: true);
 
       final provider = updateAlunoProvider(aluno, resp);
       final notifier = container.read(provider.notifier);
@@ -87,7 +87,7 @@ void main() {
       notifier.updateIdFicha('50');
 
       notifier.updateNomeResponsavel('Novo Resp');
-      notifier.updateCPFResponsavel('07481138096');
+      notifier.updateCPFResponsavel('52998224725');
       notifier.updateContatoResponsavel('11987654323');
       notifier.updateEmailResponsavel('nr@t.com');
 

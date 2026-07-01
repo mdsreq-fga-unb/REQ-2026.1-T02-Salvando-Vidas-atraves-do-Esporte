@@ -74,6 +74,38 @@ void main() {
       final stateMenor = container.read(cadastroAlunoProvider);
       expect(stateMenor.temResponsavel, isTrue);
       expect(stateMenor.responsavel.nome, 'Mae do Aluno');
+
+      // Testar apelido e usarApelido
+      notifier.updateApelido(' Dudu ');
+      expect(container.read(cadastroAlunoProvider).apelido, 'Dudu');
+      expect(container.read(cadastroAlunoProvider).usarApelido, isTrue);
+      notifier.updateUsarApelido(false);
+      expect(container.read(cadastroAlunoProvider).usarApelido, isFalse);
+      notifier.updateApelido(null);
+      expect(container.read(cadastroAlunoProvider).apelido, isNull);
+      expect(container.read(cadastroAlunoProvider).usarApelido, isFalse);
+
+      // Testar perguntas médicas
+      notifier.updatePMedica1(true);
+      notifier.updatePMedica2(true);
+      notifier.updatePMedica3(true);
+      notifier.updatePMedica4(true);
+      notifier.updatePMedica5(true);
+      notifier.updateObservacaoMedica('Alergia a poeira');
+      final stateMed = container.read(cadastroAlunoProvider);
+      expect(stateMed.pMedica1, isTrue);
+      expect(stateMed.pMedica5, isTrue);
+      expect(stateMed.observacaoMedica, 'Alergia a poeira');
+
+      // Testar erros de validação
+      notifier.updateEmailResponsavel('email_invalido');
+      expect(container.read(cadastroAlunoProvider).emailResponsavelError, isNotNull);
+      notifier.updateIdFicha('abc');
+      expect(container.read(cadastroAlunoProvider).idFichaError, isNotNull);
+
+      // Testar reset
+      notifier.reset();
+      expect(container.read(cadastroAlunoProvider).nome, '');
     });
   });
 }

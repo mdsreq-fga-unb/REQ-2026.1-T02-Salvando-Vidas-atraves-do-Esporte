@@ -139,7 +139,10 @@ class CadastroAlunoState with CadastroAlunoStateMappable {
 
   bool get temResponsavel {
     if (idade >= 18) return true;
-    return nomeResponsavelError == null &&
+    return nomeResponsavel.isNotEmpty &&
+        cpfResponsavel.isNotEmpty &&
+        contatoResponsavel.isNotEmpty &&
+        nomeResponsavelError == null &&
         cpfResponsavelError == null &&
         contatoResponsavelError == null;
   }

@@ -204,13 +204,62 @@ void main() {
       );
     });
 
-    test('deve deletar usuario com sucesso via rpc', () async {
-      // 1. ARRANGE
+    test('deve atualizar usuario atual com sucesso via rpc e atualizar localUser', () async {
+      when(
+        mockSupabaseClient.rpc(any, params: anyNamed('params')),
+      ).thenAnswer((_) => FakeFilterBuilder<dynamic>([]));
+      when(
+        mockSupabaseClient.from('users'),
+      ).thenAnswer((_) => FakeQueryBuilder([localUserSimuladoJson]));
+
+      userService.localUser = LocalUser.fromMap(localUserSimuladoJson);
+
+      await userService.updateUser({
+        'p_id': 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+        'nome': 'Nome Atualizado',
+      });
+
+      expect(userService.localUser?.nome, 'João Silva');
+    });
+
+    test('deve inativar e reativar usuario com sucesso via rpc', () async {
       when(
         mockSupabaseClient.rpc(any, params: anyNamed('params')),
       ).thenAnswer((_) => FakeFilterBuilder<dynamic>([]));
 
-      // 2. ACT & ASSERT
+      await expectLater(
+        () async => await userService.inactivateUser('user-123'),
+        returnsNormally,
+      );
+      await expectLater(
+        () async => await userService.reactivateUser('user-123'),
+        returnsNormally,
+      );
+    });
+
+    test('deve inativar e reativar usuario com fallback para tabela users quando rpc falha', () async {
+      when(
+        mockSupabaseClient.rpc(any, params: anyNamed('params')),
+      ).thenThrow(Exception('RPC error'));
+      when(
+        mockSupabaseClient.from('users'),
+      ).thenAnswer((_) => FakeQueryBuilder([]));
+
+      await expectLater(
+        () async => await userService.inactivateUser('user-123'),
+        returnsNormally,
+      );
+      await expectLater(
+        () async => await userService.reactivateUser('user-123'),
+        returnsNormally,
+      );
+    });
+
+    test('deve deletar usuario com sucesso via rpc', () async {
+      when(
+        mockSupabaseClient.rpc(any, params: anyNamed('params')),
+      ).thenAnswer((_) => FakeFilterBuilder<dynamic>([]));
+
       expect(
         () async => await userService.deleteUser('user-123'),
         returnsNormally,

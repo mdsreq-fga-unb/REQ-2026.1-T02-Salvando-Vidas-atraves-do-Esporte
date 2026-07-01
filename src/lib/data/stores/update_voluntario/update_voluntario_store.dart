@@ -31,7 +31,7 @@ class UpdateVoluntarioState with UpdateVoluntarioStateMappable {
     this.dirty = false,
   });
 
-  String? get nomeError => null;
+  String? get nomeError => nome.trim().isEmpty ? 'Nome é obrigatório' : null;
 
   String? get emailError {
     if (email.isEmpty) return null;
@@ -48,7 +48,8 @@ class UpdateVoluntarioState with UpdateVoluntarioStateMappable {
     return eCPF(cpf) ? null : 'Não é um CPF válido';
   }
 
-  String? get funcaoError => null;
+  String? get funcaoError =>
+      funcao.trim().isEmpty ? 'Função é obrigatória' : null;
 
   bool get temErros =>
       nomeError != null ||

@@ -46,7 +46,13 @@ class TurmaOptionsMenuWidget extends StatelessWidget {
                 size: 18,
               ),
               const SizedBox(width: 8),
-              Text('Histórico de Frequência', style: TextStyle(color: textColor)),
+              Expanded(
+                child: Text(
+                  'Histórico de Frequência',
+                  style: TextStyle(color: textColor),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
         ),

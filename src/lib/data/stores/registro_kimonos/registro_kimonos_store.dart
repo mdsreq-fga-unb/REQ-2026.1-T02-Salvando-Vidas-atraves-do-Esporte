@@ -48,14 +48,6 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
     if (qtd == null || qtd <= 0) {
       return "Deve informar o número de kimonos doados";
     }
-    if (tamanhoDoacao != null && corDoacao != null) {
-      final int disponivel = estoqueList
-          .where((e) => e.tamanho == tamanhoDoacao && e.cor == corDoacao)
-          .fold(0, (sum, item) => sum + item.quantidadeDisponivel);
-      if (qtd > disponivel) {
-        return "A quantidade excede o estoque disponível ($disponivel)";
-      }
-    }
     return null;
   }
 
@@ -88,11 +80,13 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
       doadorError == null &&
       qtdDoadaError == null;
 
-  bool perdaValida(List<Estoque>? estoque) {
+  bool perdaValida([List<Estoque>? estoque]) {
+    final list = estoque ?? estoqueList;
     final disponivel =
-        estoque
-            ?.firstWhereOrNull((e) => e == kimonoPerdido)
+        list
+            .firstWhereOrNull((e) => e == kimonoPerdido)
             ?.quantidadeDisponivel ??
+        kimonoPerdido?.quantidadeDisponivel ??
         0;
 
     if ((int.tryParse(qtdPerdida) ?? 0) > disponivel) return false;

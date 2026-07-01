@@ -99,13 +99,13 @@ void main() {
       expect(state.doacao.quantidade, 10);
 
       // Perda
-      expect(state.perdaValida, isFalse);
+      expect(state.perdaValida(), isFalse);
       notifier.updateKimonoPerdido(Estoque(cor: CorKimono.preto, tamanho: TamanhoKimono.a2, quantidadeDisponivel: 5));
       notifier.updateMotivo('Rasgou na competição');
       notifier.updateQtdPerdida('1');
 
       final statePerda = container.read(registroKimonosStoreProvider);
-      expect(statePerda.perdaValida, isTrue);
+      expect(statePerda.perdaValida(), isTrue);
       expect(statePerda.perda.motivo, 'Rasgou na competição');
 
       notifier.reset();

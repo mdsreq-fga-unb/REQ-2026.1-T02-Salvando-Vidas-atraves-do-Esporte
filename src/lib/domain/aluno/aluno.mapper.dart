@@ -204,30 +204,40 @@ class AlunoMapper extends ClassMapperBase<Aluno> {
     'pMedica1',
     _$pMedica1,
     key: r'p_medica1',
+    opt: true,
+    def: false,
   );
   static bool _$pMedica2(Aluno v) => v.pMedica2;
   static const Field<Aluno, bool> _f$pMedica2 = Field(
     'pMedica2',
     _$pMedica2,
     key: r'p_medica2',
+    opt: true,
+    def: false,
   );
   static bool _$pMedica3(Aluno v) => v.pMedica3;
   static const Field<Aluno, bool> _f$pMedica3 = Field(
     'pMedica3',
     _$pMedica3,
     key: r'p_medica3',
+    opt: true,
+    def: false,
   );
   static bool _$pMedica4(Aluno v) => v.pMedica4;
   static const Field<Aluno, bool> _f$pMedica4 = Field(
     'pMedica4',
     _$pMedica4,
     key: r'p_medica4',
+    opt: true,
+    def: false,
   );
   static bool _$pMedica5(Aluno v) => v.pMedica5;
   static const Field<Aluno, bool> _f$pMedica5 = Field(
     'pMedica5',
     _$pMedica5,
     key: r'p_medica5',
+    opt: true,
+    def: false,
   );
   static String? _$apelido(Aluno v) => v.apelido;
   static const Field<Aluno, String> _f$apelido = Field(
