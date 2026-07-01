@@ -929,9 +929,17 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(14),
                                       ),
-                                      elevation: state.perdaValida ? 2 : 0,
+                                      elevation:
+                                          state.perdaValida(
+                                            estoque.value?.estoque,
+                                          )
+                                          ? 2
+                                          : 0,
                                     ),
-                                    onPressed: state.perdaValida
+                                    onPressed:
+                                        state.perdaValida(
+                                          estoque.value?.estoque,
+                                        )
                                         ? _mostrarConfirmacaoPerda
                                         : null,
                                     icon: const Icon(

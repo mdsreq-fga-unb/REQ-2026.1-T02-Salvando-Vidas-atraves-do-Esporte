@@ -68,11 +68,11 @@ class UpdateVoluntarioState with UpdateVoluntarioStateMappable {
 
   Map<String, dynamic> get diff => {
     'p_id': id,
-    'p_email': email.isEmpty ? null : email,
-    'p_senha': senha.isEmpty ? null : senha,
-    'p_nome': nome.isEmpty ? null : nome,
-    'p_telefone': telefone.isEmpty ? null : telefone,
-    'p_cpf': cpf.isEmpty ? null : cpf,
+    'p_email': email.trim().isEmpty ? null : email.trim(),
+    'p_senha': senha.trim().isEmpty ? null : senha.trim(),
+    'p_nome': nome.trim().isEmpty ? null : nome.trim(),
+    'p_telefone': telefone.trim().isEmpty ? null : telefone.trim(),
+    'p_cpf': cpf.trim().isEmpty ? null : cpf.trim(),
   };
 }
 

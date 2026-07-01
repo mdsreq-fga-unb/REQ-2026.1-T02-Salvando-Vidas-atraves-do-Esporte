@@ -2,6 +2,8 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salvando_vidas/domain/kimono/kimono.dart';
 
+import 'package:collection/collection.dart';
+
 part 'registro_kimonos_store.g.dart';
 part 'registro_kimonos_store.mapper.dart';
 
@@ -68,10 +70,19 @@ class RegistroKimonosState with RegistroKimonosStateMappable {
       doadorError == null &&
       qtdDoadaError == null;
 
-  bool get perdaValida =>
-      kimonoPerdidoError == null &&
-      motivoError == null &&
-      qtdPerdidaError == null;
+  bool perdaValida(List<Estoque>? estoque) {
+    final disponivel =
+        estoque
+            ?.firstWhereOrNull((e) => e == kimonoPerdido)
+            ?.quantidadeDisponivel ??
+        0;
+
+    if ((int.tryParse(qtdPerdida) ?? 0) > disponivel) return false;
+
+    return kimonoPerdidoError == null &&
+        motivoError == null &&
+        qtdPerdidaError == null;
+  }
 
   Doacao get doacao => Doacao(
     doador: doador,
