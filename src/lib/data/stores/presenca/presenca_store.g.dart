@@ -52,7 +52,7 @@ final class PresencaStoreProvider
   }
 }
 
-String _$presencaStoreHash() => r'fc0cf2116cf26e892982f36c3187932967a8db85';
+String _$presencaStoreHash() => r'882160fd8c4e2de1d6f4723fc92f68d91e8edc60';
 
 final class PresencaStoreFamily extends $Family
     with
