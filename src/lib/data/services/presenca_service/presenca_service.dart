@@ -72,4 +72,36 @@ class PresencaService {
       return res.map((data) => UltimaPresenca.fromMap(data)).toList();
     });
   }
+
+  Future<List<Presenca>> listarPresencasPorAluno(int alunoId) {
+    return runSupabaseCall(() async {
+      final res = await _supabase
+          .from('presencas')
+          .select()
+          .eq('aluno_id', alunoId);
+      return res.map((data) => Presenca.fromMap(data)).toList();
+    });
+  }
+
+  Future<List<Observacao>> listarObservacoesPorTurma(int idTurma) {
+    return runSupabaseCall(() async {
+      final res = await _supabase
+          .from('observacoes')
+          .select()
+          .eq('turma_id', idTurma);
+      return res.map((data) => Observacao.fromMap(data)).toList();
+    });
+  }
+
+  Future<List<Presenca>> listarTodasPresencasPorTurma(int idTurma) {
+    return runSupabaseCall(() async {
+      final res = await _supabase
+          .from('presencas')
+          .select()
+          .eq('turma_id', idTurma);
+      return res.map((data) => Presenca.fromMap(data)).toList();
+    });
+  }
 }
+
+

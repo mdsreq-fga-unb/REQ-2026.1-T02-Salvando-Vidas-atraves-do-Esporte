@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvando_vidas/routing/routes.dart';
@@ -7,7 +8,6 @@ import 'package:salvando_vidas/ui/global/widgets/topbar.dart';
 void main() {
   group('TopBar Widget Test', () {
     testWidgets('Deve renderizar a logo e navegar para home ao clicar', (WidgetTester tester) async {
-      // Configura um router simples para o teste
       final router = GoRouter(
         initialLocation: '/outra-pagina',
         routes: [
@@ -17,20 +17,19 @@ void main() {
       );
 
       await tester.pumpWidget(
-        MaterialApp.router(
-          routerConfig: router,
+        ProviderScope(
+          child: MaterialApp.router(
+            routerConfig: router,
+          ),
         ),
       );
 
-      // Verifica se a logo está presente e se não estamos na home ainda
-      expect(find.byKey(const ValueKey('logoText')), findsOneWidget);
+      expect(find.byType(Image), findsOneWidget);
       expect(find.text('Pagina Home'), findsNothing);
 
-      // Simula o clique no GestureDetector que envolve a logo
-      await tester.tap(find.byType(GestureDetector));
-      await tester.pumpAndSettle(); // Espera a transição de navegação
+      await tester.tap(find.byType(InkWell).first);
+      await tester.pumpAndSettle();
 
-      // Verifica se a navegação para a home ocorreu
       expect(find.text('Pagina Home'), findsOneWidget);
     });
   });

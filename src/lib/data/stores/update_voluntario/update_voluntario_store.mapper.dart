@@ -95,8 +95,6 @@ class UpdateVoluntarioStateMapper
     #faixa: _f$faixa,
     #dirty: _f$dirty,
   };
-  @override
-  final bool ignoreNull = true;
 
   static UpdateVoluntarioState _instantiate(DecodingData data) {
     return UpdateVoluntarioState(

@@ -40,8 +40,8 @@ class MockUserService extends _i1.Mock implements _i2.UserService {
           as bool);
 
   @override
-  set localUser(_i3.LocalUser? value) => super.noSuchMethod(
-    Invocation.setter(#localUser, value),
+  set localUser(_i3.LocalUser? user) => super.noSuchMethod(
+    Invocation.setter(#localUser, user),
     returnValueForMissingStub: null,
   );
 

@@ -53,8 +53,6 @@ class PesquisaAlunoStateMapper extends ClassMapperBase<PesquisaAlunoState> {
     #responsaveis: _f$responsaveis,
     #mostrarInativos: _f$mostrarInativos,
   };
-  @override
-  final bool ignoreNull = true;
 
   static PesquisaAlunoState _instantiate(DecodingData data) {
     return PesquisaAlunoState(

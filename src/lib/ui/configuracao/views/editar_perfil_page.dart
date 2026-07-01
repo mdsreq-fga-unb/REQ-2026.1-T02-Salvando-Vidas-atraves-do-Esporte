@@ -8,6 +8,7 @@ import 'package:salvando_vidas/main_imports.dart';
 // Importações dos seus componentes customizados
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/action_button.dart';
 import 'package:salvando_vidas/ui/cadastro_voluntario/widgets/input_field.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class EditarPerfilPage extends ConsumerStatefulWidget {
   const EditarPerfilPage({super.key});
@@ -47,9 +48,17 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
     notifier = ref.read(updateVoluntarioProvider.notifier);
     logger = ref.read(loggerProvider);
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final topbarBg = isDark ? AppColors.darkTopbar : AppColors.cyanPrimary;
+    final gradientColors = isDark ? AppColors.bgGradientDark : AppColors.bgGradientLight;
+    final containerBg = isDark ? AppColors.darkSurface : Colors.white;
+    final avatarBg = isDark ? const Color(0xFF161B22) : AppColors.white2;
+    final textColor = isDark ? Colors.white : AppColors.black1;
+    final cardShadows = AppColors.cardShadow(isDark);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF00BCD4),
+        backgroundColor: topbarBg,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -62,11 +71,11 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFFF8F8F8), Color(0xFFE4E4E4)],
+            colors: gradientColors,
           ),
         ),
         child: SafeArea(
@@ -87,42 +96,36 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
                           vertical: 26,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: containerBg,
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x0A000000),
-                              blurRadius: 22,
-                              offset: Offset(0, 10),
-                            ),
-                          ],
+                          boxShadow: cardShadows,
                         ),
                         child: Column(
                           children: [
-                            const CircleAvatar(
+                            CircleAvatar(
                               radius: 36,
-                              backgroundColor: Color(0xFFE2E6FA),
-                              child: Icon(
+                              backgroundColor: avatarBg,
+                              child: const Icon(
                                 Icons.person,
-                                color: Color(0xFF4A55A2),
+                                color: AppColors.royalAzure,
                                 size: 36,
                               ),
                             ),
                             const SizedBox(height: 16),
-                            const Text(
+                            Text(
                               'Seus Dados',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF333333),
+                                color: textColor,
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Text(
+                            Text(
                               'Atualize suas informações pessoais abaixo.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.grey,
+                                color: isDark ? AppColors.darkTextSecondary : AppColors.textSecondary,
                                 fontSize: 14,
                               ),
                             ),

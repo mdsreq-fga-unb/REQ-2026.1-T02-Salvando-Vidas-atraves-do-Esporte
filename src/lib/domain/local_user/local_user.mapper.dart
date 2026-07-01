@@ -108,8 +108,6 @@ class LocalUserMapper extends ClassMapperBase<LocalUser> {
     #funcao: _f$funcao,
     #faixa: _f$faixa,
   };
-  @override
-  final bool ignoreNull = true;
 
   static LocalUser _instantiate(DecodingData data) {
     return LocalUser(

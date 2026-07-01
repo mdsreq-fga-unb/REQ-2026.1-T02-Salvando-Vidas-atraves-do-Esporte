@@ -6,6 +6,8 @@ import 'package:salvando_vidas/domain/responsavel/responsavel.dart';
 import 'package:salvando_vidas/main_imports.dart';
 import 'package:salvando_vidas/ui/Pesquisar-editar-dados-Aluno/views/editar_aluno_page.dart';
 import 'package:salvando_vidas/ui/global/masks.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
+import 'package:salvando_vidas/ui/turma/widgets/historico_frequencia_aluno_dialog.dart';
 
 class AlunoExpandableCard extends ConsumerStatefulWidget {
   final Aluno aluno;
@@ -35,12 +37,19 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
   @override
   Widget build(BuildContext context) {
     final bool isInativo = !widget.aluno.ativo;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isInativo
+        ? AppColors.textSecondary.withValues(alpha: 0.4)
+        : (isDark ? AppColors.darkSurface : Colors.white);
+    final mainText = isInativo ? AppColors.textSecondary : (isDark ? Colors.white : Colors.black);
+    final subText = isInativo ? AppColors.textSecondary : (isDark ? Colors.white70 : AppColors.black1);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: isInativo ? 0 : 2,
-      color: isInativo ? Colors.grey[200] : Colors.white,
+      elevation: isInativo ? 0 : 4,
+      shadowColor: AppColors.royalAzure.withOpacity(isDark ? 0.35 : 0.18),
+      color: cardBg,
       child: InkWell(
         onTap: () => setState(() => _isExpanded = !_isExpanded),
         borderRadius: BorderRadius.circular(12),
@@ -60,11 +69,11 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                         Row(
                           children: [
                             Text(
-                              widget.aluno.nome,
+                              widget.aluno.nomeReferencia,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
-                                color: isInativo ? Colors.grey[500] : Colors.black,
+                                color: mainText,
                               ),
                             ),
                             if (isInativo) ...[
@@ -75,7 +84,7 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[400],
+                                  color: AppColors.textSecondary,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: const Text(
@@ -95,14 +104,14 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                           'Turma: ${widget.aluno.idTurma ?? "N/A"}',
                           style: TextStyle(
                             fontSize: 14,
-                            color: isInativo ? Colors.grey[400] : Colors.black87,
+                            color: subText,
                           ),
                         ),
                         Text(
                           'Faixa: ${widget.aluno.faixa.nomeVisivel}',
                           style: TextStyle(
                             fontSize: 14,
-                            color: isInativo ? Colors.grey[400] : Colors.black87,
+                            color: subText,
                           ),
                         ),
                       ],
@@ -137,7 +146,7 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                             value: 'inativar',
                             child: Row(
                               children: [
-                                Icon(Icons.block, size: 18, color: Colors.red),
+                                Icon(Icons.block, size: 18, color: AppColors.error),
                                 SizedBox(width: 8),
                                 Text('Inativar'),
                               ],
@@ -148,7 +157,7 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                             value: 'reativar',
                             child: Row(
                               children: [
-                                Icon(Icons.check_circle_outline, size: 18, color: Colors.green),
+                                Icon(Icons.check_circle_outline, size: 18, color: AppColors.success),
                                 SizedBox(width: 8),
                                 Text('Reativar'),
                               ],
@@ -161,6 +170,10 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
 
               if (_isExpanded) ...[
                 const SizedBox(height: 12),
+                if (widget.aluno.apelido != null && widget.aluno.apelido!.isNotEmpty) ...[
+                  _buildInfoRow('Nome completo: ', widget.aluno.nome),
+                  _buildInfoRow('Apelido: ', widget.aluno.apelido!),
+                ],
                 _buildInfoRow('CPF: ', formatCPF.maskText(widget.aluno.cpf)),
                 _buildInfoRow(
                   'Telefone: ',
@@ -205,9 +218,28 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.cyanPrimary,
+                        side: const BorderSide(color: AppColors.cyanPrimary, width: 1.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      icon: const Icon(Icons.history, size: 18),
+                      onPressed: () => mostrarHistoricoFrequenciaAlunoDialog(context, widget.aluno),
+                      label: const Text(
+                        'Ver Histórico de Frequência',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00BCD4),
+                        backgroundColor: AppColors.cyanPrimary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -240,20 +272,25 @@ class _AlunoExpandableCardState extends ConsumerState<AlunoExpandableCard> {
   }
 
   Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 2.0),
-      child: RichText(
-        text: TextSpan(
-          style: const TextStyle(color: Colors.black87, fontSize: 13),
-          children: [
-            TextSpan(
-              text: label,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 2.0),
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(color: isDark ? Colors.white70 : AppColors.black1, fontSize: 13),
+              children: [
+                TextSpan(
+                  text: label,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                TextSpan(text: value),
+              ],
             ),
-            TextSpan(text: value),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

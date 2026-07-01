@@ -22,7 +22,7 @@ final class TurmasStoreProvider
         argument: null,
         retry: null,
         name: r'turmasStoreProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -35,7 +35,7 @@ final class TurmasStoreProvider
   TurmasStore create() => TurmasStore();
 }
 
-String _$turmasStoreHash() => r'f03529e838895ea2d7efe718e968433031e76306';
+String _$turmasStoreHash() => r'3ce166b162f513451224c898e1d80b8f98979ddb';
 
 abstract class _$TurmasStore extends $AsyncNotifier<List<Turma>> {
   FutureOr<List<Turma>> build();

@@ -50,8 +50,6 @@ class PresencaMapper extends ClassMapperBase<Presenca> {
     #turmaId: _f$turmaId,
     #data: _f$data,
   };
-  @override
-  final bool ignoreNull = true;
 
   static Presenca _instantiate(DecodingData data) {
     return Presenca(
@@ -204,8 +202,6 @@ class UltimaPresencaMapper extends ClassMapperBase<UltimaPresenca> {
     #dataUltimaPresenca: _f$dataUltimaPresenca,
     #diasDesdeUltimaPresenca: _f$diasDesdeUltimaPresenca,
   };
-  @override
-  final bool ignoreNull = true;
 
   static UltimaPresenca _instantiate(DecodingData data) {
     return UltimaPresenca(

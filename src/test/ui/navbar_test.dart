@@ -14,18 +14,15 @@ import 'navbar_test.mocks.dart';
 void main() {
   late MockUserService mockUserService;
 
-  // Helper para criar o ambiente de teste com router e provider
-  Widget createWidgetUnderTest(String initialLocation, {bool isAdmin = false}) {
-    when(mockUserService.isAdmin).thenReturn(isAdmin);
-
+  Widget createWidgetUnderTest(String initialLocation) {
     final router = GoRouter(
       initialLocation: initialLocation,
       routes: [
         GoRoute(path: Routes.home, builder: (c, s) => const Scaffold(bottomNavigationBar: NavBar(), body: Text('Home'))),
         GoRoute(path: Routes.buscaAluno, builder: (c, s) => const Scaffold(bottomNavigationBar: NavBar(), body: Text('Busca'))),
         GoRoute(path: Routes.turma, builder: (c, s) => const Scaffold(bottomNavigationBar: NavBar(), body: Text('Turma'))),
+        GoRoute(path: Routes.inventario, builder: (c, s) => const Scaffold(bottomNavigationBar: NavBar(), body: Text('Inventario'))),
         GoRoute(path: Routes.configuracao, builder: (c, s) => const Scaffold(bottomNavigationBar: NavBar(), body: Text('Config'))),
-        GoRoute(path: Routes.admin, builder: (c, s) => const Scaffold(bottomNavigationBar: NavBar(), body: Text('Admin'))),
       ],
     );
 
@@ -40,16 +37,13 @@ void main() {
   });
 
   group('NavBar Widget Test', () {
-    testWidgets('Deve renderizar 4 itens para usuário normal', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(Routes.home, isAdmin: false));
-      expect(find.byType(NavigationDestination), findsNWidgets(4));
-      expect(find.byIcon(Icons.people), findsNothing);
-    });
-
-    testWidgets('Deve renderizar 5 itens para admin', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(Routes.home, isAdmin: true));
-      expect(find.byType(NavigationDestination), findsNWidgets(5));
-      expect(find.byIcon(Icons.people), findsOneWidget);
+    testWidgets('Deve renderizar os 5 itens de navegação', (WidgetTester tester) async {
+      await tester.pumpWidget(createWidgetUnderTest(Routes.home));
+      expect(find.byIcon(Icons.home), findsOneWidget);
+      expect(find.byIcon(Icons.search), findsOneWidget);
+      expect(find.byIcon(Icons.school), findsOneWidget);
+      expect(find.byIcon(Icons.inventory), findsOneWidget);
+      expect(find.byIcon(Icons.settings), findsOneWidget);
     });
 
     testWidgets('Deve navegar para a tela de busca ao clicar no ícone de pesquisa', (WidgetTester tester) async {
@@ -63,14 +57,15 @@ void main() {
       expect(find.text('Busca'), findsOneWidget);
     });
 
-    testWidgets('Deve manter o item de configuração selecionado na tela de configuração', (WidgetTester tester) async {
-      // Inicia na rota de configuração
-      await tester.pumpWidget(createWidgetUnderTest(Routes.configuracao));
+    testWidgets('Deve navegar para a tela de configurações ao clicar no ícone de config', (WidgetTester tester) async {
+      await tester.pumpWidget(createWidgetUnderTest(Routes.home));
 
-      // A NavBar usa o GoRouterState para determinar o índice.
-      // O teste verifica se o índice correto foi selecionado.
-      final navBar = tester.widget<NavigationBar>(find.byType(NavigationBar));
-      expect(navBar.selectedIndex, 3);
+      expect(find.text('Config'), findsNothing);
+
+      await tester.tap(find.byIcon(Icons.settings));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Config'), findsOneWidget);
     });
   });
 }

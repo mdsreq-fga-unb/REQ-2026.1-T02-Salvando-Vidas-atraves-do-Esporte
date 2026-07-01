@@ -7,7 +7,7 @@ Data obterDiff(Data original, Data atualizado) {
   final Data diff = {};
 
   atualizado.forEach((key, value) {
-    if (atualizado[key] != value) {
+    if (original[key] != value) {
       diff[key] = value;
     }
   });
@@ -30,9 +30,9 @@ class HookData extends MappingHook {
   @override
   Object? beforeEncode(Object? value) {
     if (value is DateTime) {
-      final dia = value.year.toString().padLeft(2, '0');
+      final ano = value.year.toString().padLeft(4, '0');
       final mes = value.month.toString().padLeft(2, '0');
-      final ano = value.day.toString().padLeft(4, '0');
+      final dia = value.day.toString().padLeft(2, '0');
 
       return '$ano-$mes-$dia';
     }

@@ -36,7 +36,7 @@ void main() {
       expect(campo.obscureText, isTrue);
 
       // 2. Toca no ícone de visibilidade (IconButton)
-      await tester.tap(find.byIcon(Icons.visibility));
+      await tester.tap(find.byIcon(Icons.visibility_off_outlined));
       await tester.pump();
 
       // 3. Agora deve estar visível (obscureText = false)

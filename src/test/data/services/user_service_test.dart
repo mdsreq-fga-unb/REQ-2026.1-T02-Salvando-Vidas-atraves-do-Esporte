@@ -1,7 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'package:salvando_vidas/data/services/global/global_service.dart';
 import 'package:salvando_vidas/data/services/user_service/user_service.dart';
 import 'package:salvando_vidas/domain/local_user/local_user.dart';
 
@@ -53,6 +55,7 @@ void main() {
   late UserService userService;
   late MockSupabaseClient mockSupabaseClient;
   late FakeAuth fakeAuth;
+  late ProviderContainer container;
 
   setUp(() {
     mockSupabaseClient = MockSupabaseClient();
@@ -60,7 +63,12 @@ void main() {
 
     when(mockSupabaseClient.auth).thenReturn(fakeAuth);
 
-    userService = UserService(mockSupabaseClient);
+    container = ProviderContainer(
+      overrides: [
+        supabaseClientProvider.overrideWithValue(mockSupabaseClient),
+      ],
+    );
+    userService = container.read(userServiceProvider);
   });
 
   // O JSON limpo do Usuário (Respeitando a regra do CPF/Telefone sem máscara!)

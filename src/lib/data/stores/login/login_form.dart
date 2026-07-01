@@ -11,17 +11,21 @@ class LoginFormState {
   LoginFormState({this.email = '', this.senha = '', this.dirty = false});
 
   String? get emailError {
-    if (!dirty && email.isEmpty) return null;
+    if (email.isEmpty) {
+      return dirty ? 'Não pode estar em branco' : null;
+    }
     return eEmail(email) ? null : 'Não é um email válido';
   }
 
   String? get senhaError {
-    if (!dirty && senha.isEmpty) return null;
-    return senha.isNotEmpty ? null : 'Não pode estar em branco';
+    if (senha.isEmpty) {
+      return dirty ? 'Não pode estar em branco' : null;
+    }
+    return null;
   }
 
   bool get temErros => emailError != null || senhaError != null;
-  bool get canLogin => email.isNotEmpty && senha.isNotEmpty && !temErros;
+  bool get canLogin => email.isNotEmpty && eEmail(email) && senha.isNotEmpty;
 
   LoginFormState copyWith({String? email, String? senha, bool? dirty}) {
     return LoginFormState(
@@ -39,12 +43,15 @@ class LoginForm extends _$LoginForm {
     return LoginFormState();
   }
 
-  // Substitui as @actions
   void updateEmail(String value) {
-    state = state.copyWith(email: value, dirty: true);
+    state = state.copyWith(email: value);
   }
 
   void updateSenha(String value) {
-    state = state.copyWith(senha: value, dirty: true);
+    state = state.copyWith(senha: value);
+  }
+
+  void validateForm() {
+    state = state.copyWith(dirty: true);
   }
 }

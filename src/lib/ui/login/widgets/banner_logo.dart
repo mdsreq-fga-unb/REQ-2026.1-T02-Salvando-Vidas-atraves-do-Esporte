@@ -1,30 +1,26 @@
 import 'package:salvando_vidas/main_imports.dart';
-
-import '../login_imports.dart';
+import 'package:salvando_vidas/ui/global/themes/colors.dart';
 
 class BannerLogo extends StatelessWidget {
   const BannerLogo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
-      width: 148,
-      height: 148,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: const [
-          BoxShadow(
-            color: LoginColors.shadowLight,
-            blurRadius: 18,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
-      alignment: Alignment.center,
+      padding: isDark
+          ? const EdgeInsets.symmetric(horizontal: 24, vertical: 16)
+          : EdgeInsets.zero,
+      decoration: isDark
+          ? BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: AppColors.cardShadow(true),
+            )
+          : null,
       child: Image.asset(
         'assets/images/logoMestre.png',
-        height: 120,
+        height: isDark ? 168 : 200,
         fit: BoxFit.contain,
       ),
     );
