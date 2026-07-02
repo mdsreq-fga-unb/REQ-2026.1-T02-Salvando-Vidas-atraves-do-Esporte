@@ -6,6 +6,9 @@ Repositório da equipe **Na Minha Máquina Funciona** dedicado ao desenvolviment
 
 - [Visão do Produto e Projeto](./Visão%20do%20Produto%20e%20Projeto/cenarioAtualDoClienteEDoNegocio.md)
 
+- [Cronograma](./Planejamento%e%Organizacao/cronograma.md)
+- 
+
 ## Equipe
 
 <div class="team-all-in-one">
