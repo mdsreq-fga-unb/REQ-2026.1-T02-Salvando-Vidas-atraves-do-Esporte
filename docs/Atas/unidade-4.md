@@ -1,6 +1,6 @@
-### Atas — Unidade 3
+### Atas — Unidade 4
 
-Esta página reúne as atas relacionadas à Unidade 3 do projeto **Salvando Vidas Através do Esporte**, separadas por tipo de reunião.
+Esta página reúne as atas relacionadas à Unidade 4 do projeto **Salvando Vidas Através do Esporte**, separadas por tipo de reunião.
 
 ---
 
@@ -30,14 +30,11 @@ Esta página reúne as atas relacionadas à Unidade 3 do projeto **Salvando Vida
 
 ### Atas de Reunião com Cliente
 
-=== "27/05 — C5 — Validação DoR/DoD"
+=== "26/06 — C8 — Validação Cliente dos Ciclos 4 e 5"
 
-    {% include "./cliente/unidade-3/ATA-20260527-C5.md" %}
+    {% include "./cliente/unidade-3/ATA-20260626-C8.md" %}
 
-=== "03/06 — C6 — Priorização MoSCoW"
+=== "29/06 — C9 — UAT Final"
 
-    {% include "./cliente/unidade-3/ATA-20260603-C6.md" %}
+    {% include "./cliente/unidade-3/ATA-20260629-C9.md" %}
 
-=== "11/06 — C7 — Validação do MVP e Protótipos"
-
-    {% include "./cliente/unidade-3/ATA-20260611-C7.md" %}
