@@ -36,7 +36,7 @@ Abaixo, detalhamos as atividades da Engenharia de Requisitos (ER) associadas às
     - **Validação de Protótipos com o Cliente:** Sessões onde os *protótipos* são testados em sessões nas quais o cliente interage diretamente com as interfaces e fluxos propostos. O feedback imediato, obtido de forma visual e prática, permite validar se o entendimento dos requisitos, incluindo as histórias de usuário associadas, está correto e alinhado às necessidades reais.
 
 - **Elicitação e Descoberta (Refinamento):**
-    - **Refinamento Iterativo (Sessões JAD contínuas):** Durante a avaliação dos protótipos, novos requisitos ou ajustes (*refinamentos*) são descobertos iterativamente a partir da interação visual do usuário.
+    - **Refinamento Iterativo:** Durante a avaliação dos protótipos, novos requisitos ou ajustes (*refinamentos*) são descobertos iterativamente a partir da interação visual do usuário.
 
 **Construção Rápida (Iterativa)**
 
@@ -55,7 +55,7 @@ Abaixo, detalhamos as atividades da Engenharia de Requisitos (ER) associadas às
 
 | Fases do Processo RAD | Atividades ER | Prática | Técnica | Resultado Esperado |
 | :--- | :--- | :--- | :--- | :--- | 
-| Planejamento de Requisitos | Elicitação e Descoberta | Levantamento intensivo de necessidades | Workshops JAD, Entrevistas e Brainstorming | Escopo preliminar, funcionalidades mapeadas e objetivos alinhados com stakeholders. |
+| Planejamento de Requisitos | Elicitação e Descoberta | Levantamento intensivo de necessidades | Entrevistas e Brainstorming | Escopo preliminar, funcionalidades mapeadas e objetivos alinhados com stakeholders. |
 | | Análise e Consenso | Definição de Escopo, Prioridade e Esforço Técnico | Priorização MoSCoW, Matriz Avaliação Técnica × Valor de Negócio (Planning Poker auxiliar)| Requisitos críticos (Must have) priorizados, avaliados e acordados para o primeiro protótipo |
 | | Declaração de Requisitos | Registro Inicial de Requisitos | Temas, Épicos, User Stories, Critérios de Aceitação, DoR e DoD | Backlog inicial estruturado com histórias focadas nas necessidades do usuário, com políticas de entrada e saída definidas. |
 | | Verificação e Validação | V&V Contínua e Iterativa | Alinhamento contínuo com stakeholders | Requisitos estruturalmente corretos e validados quanto ao atendimento das necessidades de negócio desde o início. |
@@ -64,7 +64,7 @@ Abaixo, detalhamos as atividades da Engenharia de Requisitos (ER) associadas às
 | | Declaração de Requisitos | Refinamento de Histórias | Atualização contínua de histórias de usuário e critérios de aceitação | Histórias refinadas e ajustadas conforme interações com protótipos. |
 | | Representação de Requisitos | Criação de Interfaces Visuais | Prototipagem Rápida (Wireframes e Mockups) | Protótipos de interface e fluxos navegáveis desenvolvidos iterativamente para avaliação visual do cliente. |
 | | Verificação e Validação | Avaliação com Stakeholders | Validação de Protótipos com o Cliente | Confirmação visual de que o design atende às histórias de usuário e necessidades reais antes da codificação. |
-| | Elicitação e Descoberta | Refinamento Iterativo | Sessões JAD Contínuas | Novos requisitos ou ajustes detalhados a partir da interação visual do cliente com os protótipos. |
+| | Elicitação e Descoberta | Refinamento Iterativo | Sessões de entrevistas Contínuas | Novos requisitos ou ajustes detalhados a partir da interação visual do cliente com os protótipos. |
 | Construção Rápida (Iterativa) | Organização e Atualização | Manutenção Contínua do Backlog | Gerenciamento e Refinamento de Backlog (Grooming) | Histórias de usuário detalhadas, estimadas e ajustadas no backlog (DEEP) conforme mudanças da fase de design. |
 | | Verificação e Validação | Verificação Técnica | Revisão de Critérios de Aceitação, Checklists e Definition of Done (DoD) | Incremento de software construído rapidamente verificado quanto à correção, consistência e testabilidade. |
 | Transição (Cutover) | Verificação e Validação | Homologação Final | Validação Final (Teste de Aceitação pelo Cliente - UAT / Homologação) | Produto consolidado validado no ambiente de homologação com aprovação para lançamento oficial. |
