@@ -4,7 +4,7 @@ Este documento mapeia e organiza a cobertura dos testes automatizados (Unitário
 
 ---
 
-## 📊 Resumo Executivo de Cobertura por Épico
+## Resumo Executivo de Cobertura por Épico
 
 | Épico / Área | Lógica, Stores & Services | Widgets & Componentes UI | Status Geral |
 | :--- | :---: | :---: | :---: |
