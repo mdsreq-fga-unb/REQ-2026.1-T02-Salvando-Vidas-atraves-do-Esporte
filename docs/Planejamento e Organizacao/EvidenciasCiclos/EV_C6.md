@@ -17,28 +17,24 @@
 
 === "Baixa Fidelidade"
 
-    === "US-29"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-29 T1](../../assets/evidencias/c6_baixafid_us29_t1.png) | ![Baixa Fid. US-29 T2](../../assets/evidencias/c6_baixafid_us29_t2.png) |
+    === "US-12"
+        ![Baixa Fidelidade US-12](../../assets/Evidencias/BaixaFidelidade/[US-12]RF15.png)
 
 === "Mockups"
 
-    === "US-29"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-29 T1](../../assets/evidencias/c6_mockup_us29_t1.png) | ![Mockup US-29 T2](../../assets/evidencias/c6_mockup_us29_t2.png) |
+    === "US-12"
+        ![Mockup US-12](../../assets/Evidencias/Mockups/[US-12]RF15.png)
 
 ---
 
 ## Engenharia de Software { #eng-software }
 
-### Diagramas de Entidade (DER)
+### Diagramas de Atividades
 
-=== "US-29"
-    ![DER US-29](../../assets/evidencias/c6_der_us29.png)
+=== "US-12"
+    ![US-12](../../assets/Evidencias/Diagramas/US-12.png)
 
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar a inativação e reativação de voluntários (US-29).
+    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar o histórico de frequência de alunos e voluntários (US-12).
 
 ---
 

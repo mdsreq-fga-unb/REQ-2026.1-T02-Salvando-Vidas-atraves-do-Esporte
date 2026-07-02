@@ -18,42 +18,32 @@
 === "Baixa Fidelidade"
 
     === "US-13"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-13 T1](../../assets/evidencias/c5_baixafid_us13_t1.png) | ![Baixa Fid. US-13 T2](../../assets/evidencias/c5_baixafid_us13_t2.png) |
+        ![Baixa Fidelidade US-13](../../assets/Evidencias/BaixaFidelidade/[US-13]RF17.png)
 
     === "US-18"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-18 T1](../../assets/evidencias/c5_baixafid_us18_t1.png) | ![Baixa Fid. US-18 T2](../../assets/evidencias/c5_baixafid_us18_t2.png) |
+        ![Baixa Fidelidade US-18](../../assets/Evidencias/BaixaFidelidade/[US-18]RF29.png)
 
 === "Mockups"
 
     === "US-13"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-13 T1](../../assets/evidencias/c5_mockup_us13_t1.png) | ![Mockup US-13 T2](../../assets/evidencias/c5_mockup_us13_t2.png) |
+        ![Mockup US-13](../../assets/Evidencias/Mockups/[US-13]RF17.png)
 
     === "US-18"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-18 T1](../../assets/evidencias/c5_mockup_us18_t1.png) | ![Mockup US-18 T2](../../assets/evidencias/c5_mockup_us18_t2.png) |
+        ![Mockup US-18](../../assets/Evidencias/Mockups/[US-18]RF29.png)
 
 ---
 
 ## Engenharia de Software { #eng-software }
 
-### Diagramas de Entidade (DER)
+### Diagramas de Atividades
 
 === "US-13"
-    ![DER US-13](../../assets/evidencias/c5_der_us13.png)
+    ![US-13](../../assets/Evidencias/Diagramas/US-13.png)
 
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar o monitoramento de risco de evasão (US-13).
 
 === "US-18"
-    ![DER US-18](../../assets/evidencias/c5_der_us18.png)
+    ![US-18](../../assets/Evidencias/Diagramas/US-18.png)
 
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar a exibição de aniversariantes da semana no dashboard (US-18).
 
 ---
 

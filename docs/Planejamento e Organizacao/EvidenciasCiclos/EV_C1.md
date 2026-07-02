@@ -20,72 +20,52 @@
 === "Baixa Fidelidade"
 
     === "US-28"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-28 T1](../../assets/evidencias/c1_baixafid_us28_t1.png) | ![Baixa Fid. US-28 T2](../../assets/evidencias/c1_baixafid_us28_t2.png) |
+        ![Baixa Fidelidade US-28 RF35](../../assets/Evidencias/BaixaFidelidade/[US-28]RF35.png)
+
+        ![Baixa Fidelidade US-28 RF36](../../assets/Evidencias/BaixaFidelidade/[US-28]RF36.png)
 
     === "US-29"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-29 T1](../../assets/evidencias/c1_baixafid_us29_t1.png) | ![Baixa Fid. US-29 T2](../../assets/evidencias/c1_baixafid_us29_t2.png) |
+        ![Baixa Fidelidade US-29](../../assets/Evidencias/BaixaFidelidade/[US-29]RF37%20RF38.png)
 
     === "US-31"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-31 T1](../../assets/evidencias/c1_baixafid_us31_t1.png) | ![Baixa Fid. US-31 T2](../../assets/evidencias/c1_baixafid_us31_t2.png) |
+        ![Baixa Fidelidade US-31](../../assets/Evidencias/BaixaFidelidade/[US-31]RF40%20[US-32]RF41.png)
 
     === "US-32"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Baixa Fid. US-32 T1](../../assets/evidencias/c1_baixafid_us32_t1.png) | ![Baixa Fid. US-32 T2](../../assets/evidencias/c1_baixafid_us32_t2.png) |
+        ![Baixa Fidelidade US-32](../../assets/Evidencias/BaixaFidelidade/[US-31]RF40%20[US-32]RF41.png)
 
 === "Mockups"
 
     === "US-28"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-28 T1](../../assets/evidencias/c1_mockup_us28_t1.png) | ![Mockup US-28 T2](../../assets/evidencias/c1_mockup_us28_t2.png) |
+        ![Mockup US-28 RF35](../../assets/Evidencias/Mockups/[US-28]RF35.png)
+
+        ![Mockup US-28 RF36](../../assets/Evidencias/Mockups/[US-28]RF36.png)
 
     === "US-29"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-29 T1](../../assets/evidencias/c1_mockup_us29_t1.png) | ![Mockup US-29 T2](../../assets/evidencias/c1_mockup_us29_t2.png) |
+        ![Mockup US-29](../../assets/Evidencias/Mockups/[US-29]RF37%20RF38.png)
 
     === "US-31"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-31 T1](../../assets/evidencias/c1_mockup_us31_t1.png) | ![Mockup US-31 T2](../../assets/evidencias/c1_mockup_us31_t2.png) |
+        ![Mockup US-31](../../assets/Evidencias/Mockups/[US-31]RF40.png)
 
     === "US-32"
-        | Tela 1 | Tela 2 |
-        |:---:|:---:|
-        | ![Mockup US-32 T1](../../assets/evidencias/c1_mockup_us32_t1.png) | ![Mockup US-32 T2](../../assets/evidencias/c1_mockup_us32_t2.png) |
+        ![Mockup US-32](../../assets/Evidencias/Mockups/[US-32]RF41.png)
 
 ---
 
 ## Engenharia de Software { #eng-software }
 
-### Diagramas de Entidade (DER)
+### Diagramas de Atividades
 
 === "US-28"
-    ![DER US-28](../../assets/evidencias/c1_der_us28.png)
-
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar o cadastro e edição de voluntários (US-28).
+    ![US-28](../../assets/Evidencias/Diagramas/US-28.png)
 
 === "US-29"
-    ![DER US-29](../../assets/evidencias/c1_der_us29.png)
-
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar a inativação e reativação de voluntários (US-29).
+    ![US-29](../../assets/Evidencias/Diagramas/US-29.png)
 
 === "US-31"
-    ![DER US-31](../../assets/evidencias/c1_der_us31.png)
-
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar o login no sistema (US-31).
+    ![US-31](../../assets/Evidencias/Diagramas/US-31.png)
 
 === "US-32"
-    ![DER US-32](../../assets/evidencias/c1_der_us32.png)
-
-    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar o encerramento de sessão (US-32).
+    ![US-32](../../assets/Evidencias/Diagramas/US-32.png)
 
 ---
 
