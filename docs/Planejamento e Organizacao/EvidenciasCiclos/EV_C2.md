@@ -1,0 +1,86 @@
+# Evidências — Ciclo 2
+**Período:** 29/05/2026 a 03/06/2026 <br>
+**Histórias trabalhadas:** [US-01](../USsMVP/US-01.md), [US-02](../USsMVP/US-02.md), [US-03](../USsMVP/US-03.md)
+
+---
+
+## Engenharia de Requisitos { #eng-requisitos }
+
+### Gravações e Atas
+
+| Evidência | Descrição |
+| :--- | :--- |
+| [Gravação 03/06](link_video) | Descreva aqui o que foi elicitado/validado nesta gravação, com quem foi realizada e quais histórias (US-01, US-02, US-03) foram abordadas. |
+| [Ata 03/06](link_ata) | Descreva aqui as decisões tomadas, os alinhamentos com o cliente e o que foi aprovado nesta reunião referente ao Ciclo 2. |
+
+### Protótipos
+
+=== "Baixa Fidelidade"
+
+    === "US-01"
+        | Tela 1 | Tela 2 |
+        |:---:|:---:|
+        | ![Baixa Fid. US-01 T1](../../assets/evidencias/c2_baixafid_us01_t1.png) | ![Baixa Fid. US-01 T2](../../assets/evidencias/c2_baixafid_us01_t2.png) |
+
+    === "US-02"
+        | Tela 1 | Tela 2 |
+        |:---:|:---:|
+        | ![Baixa Fid. US-02 T1](../../assets/evidencias/c2_baixafid_us02_t1.png) | ![Baixa Fid. US-02 T2](../../assets/evidencias/c2_baixafid_us02_t2.png) |
+
+    === "US-03"
+        | Tela 1 | Tela 2 |
+        |:---:|:---:|
+        | ![Baixa Fid. US-03 T1](../../assets/evidencias/c2_baixafid_us03_t1.png) | ![Baixa Fid. US-03 T2](../../assets/evidencias/c2_baixafid_us03_t2.png) |
+
+=== "Mockups"
+
+    === "US-01"
+        | Tela 1 | Tela 2 |
+        |:---:|:---:|
+        | ![Mockup US-01 T1](../../assets/evidencias/c2_mockup_us01_t1.png) | ![Mockup US-01 T2](../../assets/evidencias/c2_mockup_us01_t2.png) |
+
+    === "US-02"
+        | Tela 1 | Tela 2 |
+        |:---:|:---:|
+        | ![Mockup US-02 T1](../../assets/evidencias/c2_mockup_us02_t1.png) | ![Mockup US-02 T2](../../assets/evidencias/c2_mockup_us02_t2.png) |
+
+    === "US-03"
+        | Tela 1 | Tela 2 |
+        |:---:|:---:|
+        | ![Mockup US-03 T1](../../assets/evidencias/c2_mockup_us03_t1.png) | ![Mockup US-03 T2](../../assets/evidencias/c2_mockup_us03_t2.png) |
+
+---
+
+## Engenharia de Software { #eng-software }
+
+### Diagramas de Entidade (DER)
+
+=== "US-01"
+    ![DER US-01](../../assets/evidencias/c2_der_us01.png)
+
+    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar o cadastro de alunos (US-01).
+
+=== "US-02"
+    ![DER US-02](../../assets/evidencias/c2_der_us02.png)
+
+    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar a edição e busca de alunos (US-02).
+
+=== "US-03"
+    ![DER US-03](../../assets/evidencias/c2_der_us03.png)
+
+    **Finalidade:** Descreva aqui quais entidades e relacionamentos foram modelados para suportar a inativação e reativação de alunos (US-03).
+
+---
+
+## Definition of Done { #dod }
+
+### Checklist do Ciclo 2
+
+| Critério do DoD | Evidência | Status |
+| :--- | :--- | :---: |
+| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](link_github) | ✅ |
+| O código passou por revisão via Pull Request? | [PR #XX](link_github) | ✅ |
+| Os testes automatizados foram executados e passaram? | [Issue #XX](link_github) | ✅ |
+| Os workflows de build foram executados com sucesso? | [Release vX.X](link_github) | ✅ |
+| A documentação foi atualizada? | [Commit](link_github) | ✅ |
+| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](link_video) | ✅ |
