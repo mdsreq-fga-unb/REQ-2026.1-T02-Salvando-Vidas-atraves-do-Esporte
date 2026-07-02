@@ -59,7 +59,6 @@ nav:
       - 3. Interveção Social: Visão do Produto e Projeto/intervencaoSocial.md
       - 4. Estratégias de Engenharia de Software: Visão do Produto e Projeto/estrategiasDeEngenhariaDeSoftware.md
       - 5. Engenharia de Requisitos: Visão do Produto e Projeto/engenhariaDeRequisitos.md
-      - 6. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
       - 7. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
       - 8. Requisitos de Software: Visão do Produto e Projeto/requisitosDeSoftware.md
       - 9. DoR e DoD: Visão do Produto e Projeto/DoREDoD.md
@@ -72,6 +71,7 @@ nav:
       - "Documentos": Entregas/documentos.md
       - "Glossário de Dados": Entregas/glossario.md
       - "Representação Processo de Software": Entregas/ciclos.md
+      - "Gerenciamento e Refinamento do Backlog": Entregas/mudancasBacklog.md
   - Atas e Reuniões Gravadas:
       - "Atas":
           - Unidade 1: Atas/unidade-1.md
