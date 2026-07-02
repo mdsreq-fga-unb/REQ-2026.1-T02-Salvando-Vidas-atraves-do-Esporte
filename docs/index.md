@@ -6,9 +6,9 @@ Repositório da equipe **Na Minha Máquina Funciona** dedicado ao desenvolviment
 
 - [Visão do Produto e Projeto](./Visão%20do%20Produto%20e%20Projeto/cenarioAtualDoClienteEDoNegocio.md)
 
-- [Cronograma](./Planejamento%e%Organizacao/cronograma.md)
-- [QuadroMVP](./Planejamento%e%Organizacao/quadroMVP.md)
-- [Rastreabilidade](./Planejamento%e%Organizacao/rastreabilidade.md) 
+- [Cronograma](./Planejamento%20e%20Organizacao/cronograma.md)
+- [QuadroMVP](./Planejamento%20e%20Organizacao/quadroMVP.md)
+- [Rastreabilidade](./Planejamento%20e%20Organizacao/rastreabilidade.md) 
 
 ## Equipe
 
