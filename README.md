@@ -6,6 +6,18 @@ Repositório da equipe **Na Minha Máquina Funciona** dedicado ao desenvolviment
 
 - [Visão do Produto e Projeto](https://mdsreq-fga-unb.github.io/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte/Vis%C3%A3o%20do%20Produto%20e%20Projeto/cenarioAtualDoClienteEDoNegocio/)
 
+## Credenciais para uso do aplicativo
+
+### Usuário Administrador
+
+- **Email:** george@gmail.com
+- **Senha:** 12345678
+
+### Usuário Voluntário
+
+- **Email:** george.vol@gmail.com
+- **Senha:** 12345678 
+
 ## Equipe
 
 <div align="center">

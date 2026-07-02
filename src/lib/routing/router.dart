@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salvando_vidas/data/services/user_service/user_service.dart';
 import 'package:salvando_vidas/main_imports.dart';
@@ -113,10 +114,46 @@ GoRouter router(Ref ref) {
   );
 }
 
-class MainScaffold extends StatelessWidget {
+class MainScaffold extends ConsumerStatefulWidget {
   final Widget child;
 
   const MainScaffold({super.key, required this.child});
+
+  @override
+  ConsumerState<MainScaffold> createState() => _MainScaffoldState();
+}
+
+class _MainScaffoldState extends ConsumerState<MainScaffold> {
+  @override
+  void initState() {
+    super.initState();
+
+    final currentUser = ref.read(supabaseClientProvider).auth.currentUser;
+
+    if (currentUser != null) {
+      ref
+          .read(supabaseClientProvider)
+          .channel('public:users')
+          .onPostgresChanges(
+            event: PostgresChangeEvent.update,
+            schema: 'public',
+            table: 'users',
+            filter: PostgresChangeFilter(
+              type: PostgresChangeFilterType.eq,
+              column: 'id',
+              value: currentUser.id,
+            ),
+            callback: (payload) async {
+              final ativo = payload.newRecord['ativo'] as bool?;
+              if (ativo == false && mounted) {
+                await ref.read(userServiceProvider).logout();
+                context.go(Routes.login);
+              }
+            },
+          )
+          .subscribe();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +161,7 @@ class MainScaffold extends StatelessWidget {
 
     return Scaffold(
       appBar: const TopBar(),
-      body: child,
+      body: widget.child,
       bottomNavigationBar: keyboardOpen ? null : const NavBar(),
     );
   }

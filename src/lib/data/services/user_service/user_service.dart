@@ -59,7 +59,10 @@ class UserService {
 
   Future<bool> isLoggedIn() async {
     User? user = _supabase.auth.currentUser;
-    if (user == null) return false;
+    if (user == null) {
+      _setLocalUser(null);
+      return false;
+    }
 
     final localUser = await getLocalUser(user);
     _setLocalUser(localUser);
@@ -71,7 +74,8 @@ class UserService {
       final data = await _supabase.from('users').select().eq('id', user.id);
 
       if (data.isNotEmpty) {
-        return LocalUser.fromMap(data.first);
+        final user = LocalUser.fromMap(data.first);
+        return user.ativo ? user : null;
       }
       return null;
     }, timeout: 5);
