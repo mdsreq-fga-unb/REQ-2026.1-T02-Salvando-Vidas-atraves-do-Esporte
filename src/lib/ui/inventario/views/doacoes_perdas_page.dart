@@ -72,7 +72,10 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: const FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text('Cancelar', maxLines: 1),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -135,7 +138,10 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                 }
               }
             },
-            child: const Text('Confirmar'),
+            child: const FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text('Confirmar', maxLines: 1),
+            ),
           ),
         ],
       ),
@@ -209,7 +215,10 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
+            child: const FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text('Cancelar', maxLines: 1),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -261,7 +270,10 @@ class _DoacoesPerdasPageState extends ConsumerState<DoacoesPerdasPage> {
                 }
               }
             },
-            child: const Text('Confirmar'),
+            child: const FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text('Confirmar', maxLines: 1),
+            ),
           ),
         ],
       ),

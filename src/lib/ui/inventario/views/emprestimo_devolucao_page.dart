@@ -477,15 +477,23 @@ class _EmprestimoDevolucaoPageState
                   ),
                   actions: [
                     TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      ),
                       onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        'Cancelar',
-                        style: TextStyle(color: Colors.grey),
+                      child: const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          'Cancelar',
+                          maxLines: 1,
+                          style: TextStyle(color: Colors.grey),
+                        ),
                       ),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.cyanPrimary,
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                       ),
                       onPressed: state.value?.kimono == null
                           ? null
@@ -496,9 +504,13 @@ class _EmprestimoDevolucaoPageState
                                 state.value!.kimono!,
                               );
                             },
-                      child: const Text(
-                        'Avançar',
-                        style: TextStyle(color: Colors.white),
+                      child: const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          'Avançar',
+                          maxLines: 1,
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ],
@@ -530,11 +542,17 @@ class _EmprestimoDevolucaoPageState
               children: [
                 Expanded(
                   child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                    ),
                     onPressed: () {
                       Navigator.pop(context);
                       _showPopUpSelecaoKimono(aluno);
                     },
-                    child: const Text('Cancelar'),
+                    child: const FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('Cancelar', maxLines: 1),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -542,6 +560,7 @@ class _EmprestimoDevolucaoPageState
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.cyanPrimary,
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                     ),
                     onPressed: () async {
                       try {
@@ -587,9 +606,13 @@ class _EmprestimoDevolucaoPageState
                         }
                       }
                     },
-                    child: const Text(
-                      'Confirmar',
-                      style: TextStyle(color: Colors.white),
+                    child: const FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Confirmar',
+                        maxLines: 1,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -620,8 +643,14 @@ class _EmprestimoDevolucaoPageState
               children: [
                 Expanded(
                   child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                    ),
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancelar'),
+                    child: const FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('Cancelar', maxLines: 1),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -629,6 +658,7 @@ class _EmprestimoDevolucaoPageState
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.cyanPrimary,
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                     ),
                     onPressed: () async {
                       try {
@@ -667,9 +697,13 @@ class _EmprestimoDevolucaoPageState
                         }
                       }
                     },
-                    child: const Text(
-                      'Confirmar',
-                      style: TextStyle(color: Colors.white),
+                    child: const FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Confirmar',
+                        maxLines: 1,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
