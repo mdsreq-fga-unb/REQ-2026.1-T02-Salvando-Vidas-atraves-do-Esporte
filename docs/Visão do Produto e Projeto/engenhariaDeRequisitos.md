@@ -6,7 +6,7 @@ Abaixo, detalhamos as atividades da Engenharia de Requisitos (ER) associadas às
 **Planejamento de Requisitos**
 
 - **Elicitação e Descoberta:**
-    - **Workshop JAD (Joint Application Design) adaptado ao contexto do projeto:** Sessões de trabalho colaborativo envolvendo a equipe de desenvolvimento, o cliente e os usuários finais para levantar rapidamente as necessidades de negócio, mapear as funcionalidades centrais do sistema e alinhar as expectativas gerais do projeto.
+    <!--- **Workshop JAD (Joint Application Design) adaptado ao contexto do projeto:** Sessões de trabalho colaborativo envolvendo a equipe de desenvolvimento, o cliente e os usuários finais para levantar rapidamente as necessidades de negócio, mapear as funcionalidades centrais do sistema e alinhar as expectativas gerais do projeto.-->
     - **Entrevistas e Brainstorming:** Utilizados no início do projeto e a cada iteração para capturar as dores dos usuários e propor soluções em conjunto com os stakeholders.
 
 - **Análise e Consenso:**
