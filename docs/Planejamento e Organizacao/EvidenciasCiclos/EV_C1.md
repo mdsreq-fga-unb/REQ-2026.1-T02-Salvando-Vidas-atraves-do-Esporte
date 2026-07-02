@@ -1,5 +1,5 @@
 # Evidências — Ciclo 1
-**Período:** 21/05/2026 a 27/05/2026
+**Período:** 21/05/2026 a 29/05/2026
 <br>**Histórias trabalhadas:** [US-28](../USsMVP/US-28.md), [US-29](../USsMVP/US-29.md), [US-31](../USsMVP/US-31.md), [US-32](../USsMVP/US-32.md)
 
 ---
