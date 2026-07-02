@@ -1,5 +1,5 @@
 # Evidências — Ciclo 4
-**Período:** 11/06/2026 a 16/06/2026 <br>
+**Período:** 11/06/2026 a 26/06/2026 <br>
 **Histórias trabalhadas:** [US-14](../USsMVP/US-14.md), [US-15](../USsMVP/US-15.md), [US-16](../USsMVP/US-16.md), [US-17](../USsMVP/US-17.md)
 
 ---
@@ -10,8 +10,8 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Gravação 26/06](link_video) | Descreva aqui o que foi elicitado/validado nesta gravação, com quem foi realizada e quais histórias (US-14, US-15, US-16, US-17) foram abordadas. |
-| [Ata 26/06](link_ata) | Descreva aqui as decisões tomadas, os alinhamentos com o cliente e o que foi aprovado nesta reunião referente ao Ciclo 4. |
+| [Gravação 26/06](link_video) | Este vídeo apresenta a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-14, US-15, US-16, US-17, todas essas referentes ao Ciclo 4. Durante a reunião, a equipe demonstrou a terceira versão do aplicativo e os protótipos, que foram aceitos pelos stakeholders sem necessidade de alterações, ficando pendente apenas a história US-12, referente ao histórico de frequência, para o próximo e último ciclo de desenvolvimento. |
+| [Ata 26/06](link_ata) | Ata da reunião do dia 26/06/2026 com a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-14, US-15, US-16 e US-17. |
 
 ### Protótipos
 

@@ -119,7 +119,7 @@
 
 === "Reunião 7 - 03/06"
 
-    ## R7 - Reunião 03/06 - Segunda sessão JAD: priorização das User Stories para composição do MVP 
+    ## R7 - Reunião 03/06 - Priorização do MVP: priorização das User Stories com a técnica do MoSCoW 
     
     <iframe src="https://drive.google.com/file/d/1ANG92X-n4NnMNAb-J_wUUmgj6HJkW9p_/preview" width="640" height="480"></iframe>
     
@@ -139,7 +139,11 @@
     
     ### Resumo
     
-    Nesta reunião, foi realizada a segunda sessão JAD, com o foco de aplicar novamente a técnica MoSCoW com os stakeholders, desta vez utilizando as histórias de usuário. No geral, a priorização dos requisitos manteve-se semelhante à anterior, com apenas algumas alterações. Em especial, a US20 (relacionada ao registro de orientações pedagógicas) teve sua prioridade elevada para *Should*.
+    A reunião correspondeu à **Priorização do MVP**, com foco na priorização das histórias de usuário utilizando a técnica **MoSCoW**.
+
+    A dinâmica foi conduzida com apoio do **Miro**, utilizando cores para tornar a priorização mais visual e acessível aos clientes. A equipe e os clientes passaram por cada história de usuário atribuindo notas e categorias MoSCoW.
+
+    Durante a sessão, os clientes **reduziram a prioridade da criação de turmas para Should**, justificando que as turmas permanecem as mesmas há muito tempo e, portanto, essa funcionalidade não é prioritária no momento.
 
 === "Reunião 8 - 11/06"
 
@@ -162,3 +166,51 @@
     Nesta reunião, foram validados os protótipos de média fidelidade do dashboard principal, do cadastro de alunos, da página de turmas e da página de registro de presença. Também foi validada a segunda versão do aplicativo.
     
     Os protótipos foram aceitos com apenas pequenas alterações. No dashboard principal, especificamente, os voluntários afirmaram que não seria necessária a inclusão do número de turmas, nem a indicação de quais alunos específicos possuem um kimono doado.
+
+=== "Reunião 9 - 26/06"
+
+    ## R9 - Reunião 26/06 - Validação dos Ciclos 4 e 5
+    
+    <iframe src="https://drive.google.com/file/d/1upUMxQrX4p9PVr3YnMwv3nMCB0OgYQDu/preview" width="640" height="480"></iframe>
+    
+    ### Participantes
+    
+    - **Equipe**:
+        - Giovani - 241032500
+        - Júlia - 241036142
+        - Lucas - 241011386
+        - Pedro Lucas - 241025710
+        - Pedro Ramos - 222031680
+    - **Stakeholders**:
+        - José Lucas (Representante do Projeto Social)
+        - Aline (Voluntária do Projeto Social)
+        - Leonardo (Voluntário do Projeto Social)
+        - João (Voluntário do Projeto Social)
+    
+    ### Resumo
+    
+    Nesta reunião, foram validadas as implementações das US-14, US-15, US-16, US-17, referentes ao Ciclo 4 e as US-13, US-18, referentes ao Ciclo 5. Também foi validada a terceira versão do aplicativo. Os protótipos foram aceitos sem nenhuma alteração. Ficou pendente apenas a implementação da US-12 (Histórico de frequência) que irá compor o próximo e último ciclo.
+
+=== "Reunião 10 - 29/06"
+
+    ## R10 - Reunião 29/06 - Entrega Final do Projeto ao Cliente - UAT Final
+    
+    ### **Obs:** Como a Reunião foi feita de forma presencial, não foram gravados vídeos. Entretanto, foram tiradas fotos para a evidência da entrega.
+    
+    ### Participantes
+    
+    - **Equipe**:
+        - Júlia - 241036142
+        - Lucas - 241011386
+        - Pedro Lucas - 241025710
+        - Pedro Ramos - 222031680
+        - Maykon - Monitor
+    - **Stakeholders**:
+        - José Lucas (Representante do Projeto Social)
+        - Aline (Voluntária do Projeto Social)
+        - Leonardo (Voluntário do Projeto Social)
+        - João (Voluntário do Projeto Social)
+    
+    ### Resumo
+    
+    Nesta reunião, nós, integrantes do grupo "Na Minha Máquina Funciona", fomos até a Segunda Igreja Batista do Recanto das Emas para a validação final e entrega do projeto da disciplina ao cliente. Com a versão do apk com a US-12 implementada. Após a demostração, o grupo participou da aula de jiu-jitsu realizada pelo projeto Salvando Vidas Através do Esporte.
