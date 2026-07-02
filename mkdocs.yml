@@ -22,6 +22,38 @@ extra_css:
 nav:
   - Home: index.md
 
+  - Planejamento e Organização:
+      - Quadro MVP: Planejamento e Organizacao/quadroMVP.md
+      - Cronograma: Planejamento e Organizacao/cronograma.md
+      - Evidências: Planejamento e Organizacao/evidencias.md
+      - Rastreabilidade: Planejamento e Organizacao/rastreabilidade.md
+      - User Stories do MVP:
+          - US-01 — Cadastro de Aluno: Planejamento e Organizacao/USsMVP/US-01.md
+          - US-02 — Edição e Busca de Aluno: Planejamento e Organizacao/USsMVP/US-02.md
+          - US-03 — Inativação e Reativação de Aluno: Planejamento e Organizacao/USsMVP/US-03.md
+          - US-07 — Matrícula de Aluno em Turma: Planejamento e Organizacao/USsMVP/US-07.md
+          - US-08 — Cancelamento de Matrícula: Planejamento e Organizacao/USsMVP/US-08.md
+          - US-09 — Registro de Presença em Aula: Planejamento e Organizacao/USsMVP/US-09.md
+          - US-10 — Correção de Registro de Presença: Planejamento e Organizacao/USsMVP/US-10.md
+          - US-12 — Consulta de Histórico de Presença: Planejamento e Organizacao/USsMVP/US-12.md
+          - US-13 — Monitoramento de Risco de Evasão: Planejamento e Organizacao/USsMVP/US-13.md
+          - US-14 — Registro de Doação e Consulta de Estoque: Planejamento e Organizacao/USsMVP/US-14.md
+          - US-15 — Registro de Perda ou Dano de Kimono: Planejamento e Organizacao/USsMVP/US-15.md
+          - US-16 — Registro de Empréstimo de Kimono: Planejamento e Organizacao/USsMVP/US-16.md
+          - US-17 — Registro de Devolução de Kimono: Planejamento e Organizacao/USsMVP/US-17.md
+          - US-18 — Aniversariantes da Semana no Dashboard: Planejamento e Organizacao/USsMVP/US-18.md
+          - US-28 — Cadastro e Edição de Voluntários: Planejamento e Organizacao/USsMVP/US-28.md
+          - US-29 — Inativação e Reativação de Voluntários: Planejamento e Organizacao/USsMVP/US-29.md
+          - US-31 — Login no Sistema: Planejamento e Organizacao/USsMVP/US-31.md
+          - US-32 — Encerramento de Sessão: Planejamento e Organizacao/USsMVP/US-32.md
+      - Evidências por Ciclo:
+          - Ciclo 1: Planejamento e Organizacao/EvidenciasCiclos/EV_C1.md
+          - Ciclo 2: Planejamento e Organizacao/EvidenciasCiclos/EV_C2.md
+          - Ciclo 3: Planejamento e Organizacao/EvidenciasCiclos/EV_C3.md
+          - Ciclo 4: Planejamento e Organizacao/EvidenciasCiclos/EV_C4.md
+          - Ciclo 5: Planejamento e Organizacao/EvidenciasCiclos/EV_C5.md
+          - Ciclo 6: Planejamento e Organizacao/EvidenciasCiclos/EV_C6.md
+
   - Visão do Produto e Projeto:
       - 1. Cenário Atual do Cliente e do Negócio: Visão do Produto e Projeto/cenarioAtualDoClienteEDoNegocio.md
       - 2. Proposta da Solução: Visão do Produto e Projeto/PropostaDaSolucao.md
