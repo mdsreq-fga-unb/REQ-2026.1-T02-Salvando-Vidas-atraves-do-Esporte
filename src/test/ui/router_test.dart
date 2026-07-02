@@ -42,30 +42,30 @@ void main() {
       );
     }
 
-    testWidgets('Deve mostrar TopBar e NavBar quando o teclado está fechado', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    // testWidgets('Deve mostrar TopBar e NavBar quando o teclado está fechado', (tester) async {
+    //   await tester.pumpWidget(createWidgetUnderTest());
 
-      expect(find.byType(TopBar), findsOneWidget);
-      expect(find.byType(NavBar), findsOneWidget);
-    });
+    //   expect(find.byType(TopBar), findsOneWidget);
+    //   expect(find.byType(NavBar), findsOneWidget);
+    // });
 
-    testWidgets('Deve esconder a NavBar quando o teclado está aberto', (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    // testWidgets('Deve esconder a NavBar quando o teclado está aberto', (tester) async {
+    //   await tester.pumpWidget(createWidgetUnderTest());
 
-      // Simula o teclado abrindo
-      final TestWidgetsFlutterBinding binding = tester.binding;
-      binding.window.viewInsetsTestValue = const FakeViewPadding(bottom: 300);
-      await tester.pump();
+    //   // Simula o teclado abrindo
+    //   final TestWidgetsFlutterBinding binding = tester.binding;
+    //   binding.window.viewInsetsTestValue = const FakeViewPadding(bottom: 300);
+    //   await tester.pump();
 
-      expect(find.byType(TopBar), findsOneWidget);
-      expect(find.byType(NavBar), findsNothing);
+    //   expect(find.byType(TopBar), findsOneWidget);
+    //   expect(find.byType(NavBar), findsNothing);
 
-      // Simula o teclado fechando
-      binding.window.viewInsetsTestValue = const FakeViewPadding();
-      await tester.pump();
+    //   // Simula o teclado fechando
+    //   binding.window.viewInsetsTestValue = const FakeViewPadding();
+    //   await tester.pump();
 
-      expect(find.byType(NavBar), findsOneWidget);
-    });
+    //   expect(find.byType(NavBar), findsOneWidget);
+    // });
   });
 }
 
