@@ -10,7 +10,7 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Foto da Apresentação](../../Atas/reunioes.md#reuniao-r10) | Esta reunião presencial marca a entrega final e a validação definitiva do projeto (UAT Final, seguindo o Ciclo do RAD) junto aos stakeholders. No encontro, a equipe apresentou a versão concluída do aplicativo com a implementação da última história de usuário pendente (US-12), consolidando todas as funcionalidades acordadas e oficializando a entrega do produto final aprovado pelos clientes após a demonstração técnica. |
+| [Foto da Apresentação](../../../docs/assets/Evidencias/Foto_em_grupo.jpg) | Esta reunião presencial marca a entrega final e a validação definitiva do projeto (UAT Final, seguindo o Ciclo do RAD) junto aos stakeholders. No encontro, a equipe apresentou a versão concluída do aplicativo com a implementação da última história de usuário pendente (US-12), consolidando todas as funcionalidades acordadas e oficializando a entrega do produto final aprovado pelos clientes após a demonstração técnica. |
 | [Ata 29/06](../../Atas/reunioes.md#reuniao-r10) | Ata da reunião presencial do dia 29/06/2026 com a validação final incluindo a versão do apk com a US-12 implementada. |
 
 ### Protótipos
