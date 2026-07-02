@@ -41,7 +41,7 @@ jobs:
       - name: Build Flutter Web
         run: |
           flutter pub get
-          flutter build web --wasm --release
+          flutter build web --release
 
       - name: Copy content to target repo and push
         run: |
@@ -49,4 +49,4 @@ jobs:
           cd target-repo
           git add .
           git commit -m "Update Flutter Web (commit: ${{ github.sha }})"
-          git push origin ${{ env.TARGET_BRANCH }}
+          git push --force origin ${{ env.TARGET_BRANCH }}
