@@ -22,11 +22,15 @@
 | [US-32 — Encerramento de Sessão](./USsMVP/US-32.md) | Implementado | - |
 
 
-## 
-COLOCAR OS LINKS
-US CP REQ FUNCIONAL STATUS OBSERVAÇÕES(comentários)
+## 5. Matriz de Avaliação Técnica × Valor de Negócio
 
-MATRIZ VALOR X ESFORÇO
+A matriz abaixo apresenta a distribuição das histórias de usuário segundo os eixos de complexidade técnica e valor de negócio, com destaque para o quadrante correspondente ao MVP aprovado.
 
-EXPLICAÇÕES dos calculos
-se ficar muito grande jogar pra parte da priorização do mvp
+![Matriz MVP](../assets/MatrizMVP.png){ width="800" }
+
+**Figura 1:** Matriz MVP. Fonte: Elaborada por Júlia Gabriella
+
+Disponível em: [Matriz Avaliação Técnica x Valor Negócio](https://miro.com/app/board/uXjVHT_JmM8=/?share_link_id=938810057712)
+
+<!--<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHT_JmM8=/?focusWidget=3458764647487987076&embedMode=view_only_without_ui&embedId=195967925908" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>-->
+

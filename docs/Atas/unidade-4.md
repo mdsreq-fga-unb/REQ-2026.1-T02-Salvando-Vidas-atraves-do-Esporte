@@ -6,25 +6,14 @@ Esta página reúne as atas relacionadas à Unidade 4 do projeto **Salvando Vida
 
 ### Atas de Reunião da Equipe
 
-=== "26/05 — E12 — Planejamento Inicial"
+=== "18/06 — E17 — Implementação e Preparação para Entrega Final"
 
-    {% include "./equipe/unidade-3/ATA-20260526-E12.md" %}
+    {% include "./equipe/unidade-4/ATA-20260618-E17.md" %}
 
-=== "28/05 — E13 — Refinamento de Requisitos e Planejamento da Implementação"
+=== "25/06 — E18 — Organização da Entrega Final"
 
-    {% include "./equipe/unidade-3/ATA-20260528-E13.md" %}
+    {% include "./equipe/unidade-4/ATA-20260625-E18.md" %}
 
-=== "02/06 — E14 — Refinamento dos Requisitos e Organização das Pendências"
-
-    {% include "./equipe/unidade-3/ATA-20260602-E14.md" %}
-
-=== "09/06 — E15 — Verificação, Validação e Planejamento das Implementações"
-
-    {% include "./equipe/unidade-3/ATA-20260609-E15.md" %}
-
-=== "11/06 — E16 — Planning Poker e Refinamento de Requisitos"
-
-    {% include "./equipe/unidade-3/ATA-20260611-E16.md" %}
 
 ---
 
