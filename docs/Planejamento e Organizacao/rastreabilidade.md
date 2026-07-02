@@ -10,10 +10,9 @@ Como imagens não suportam hyperlinks para páginas específicas, foi disponibil
 
 ## Árvore de Rastreabilidade
 
-emmbeed aqui
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/SVAdS-FIGJAM?node-id=479-2190&embed-host=share" allowfullscreen></iframe>
 
-
-links aqui
+[Link do Figjam](https://www.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/SVAdS-FIGJAM?node-id=479-2190&t=DdOXDDY37ZZyFlwT-1)
 
 ### Tabela com hyperlinks 
 
