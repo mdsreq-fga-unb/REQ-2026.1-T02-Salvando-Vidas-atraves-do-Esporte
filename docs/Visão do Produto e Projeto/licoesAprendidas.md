@@ -157,3 +157,43 @@
 
 === "Unidade 4"
     ## 11.4 Unidade 4
+
+    ### Lições Aprendidas e Melhorias para o Processo
+
+    1. Refinamento e Consistência do Backlog de Histórias de Usuário
+
+        **Desafio:** Ao revisar o backlog no Ciclo 4, a equipe identificou diversas incoerências acumuladas entre as USs já cadastradas, dependências mal mapeadas, critérios de aceite desalinhados com a evolução do produto e histórias que não refletiam mais o entendimento atual do escopo, exigindo uma análise completa e o refinamento de todo o backlog, e não apenas das histórias da sprint corrente.
+
+        **Lição:** Um backlog não pode ser tratado como algo definido uma vez e esquecido. Conforme o produto evolui, é necessário revisar periodicamente todas as histórias já registradas, não só as novas, para garantir coerência entre elas e evitar que inconsistências se acumulem silenciosamente ao longo dos ciclos.
+
+        **Ação de Melhoria:** Passar a reservar checkpoints específicos a cada novo ciclo exclusivamente para auditar o backlog como um todo, verificando dependências entre USs, coerência dos critérios de aceite e alinhamento com o entendimento mais recente do produto, evitando refinamentos emergenciais e concentrados.
+
+    2. Aplicação Correta da Metodologia JAD
+
+        **Desafio:** Em avaliação com o professor, a equipe constatou que o Workshop JAD não vinha sendo aplicado de acordo com o que a metodologia prevê, o que impediu que essa técnica fosse validada como efetivamente utilizada e exigiu reestruturar partes do processo e da documentação do projeto para refletir a realidade do que havia sido feito.
+
+        **Lição:** Aplicar o nome de uma metodologia sem seguir rigorosamente suas etapas gera retrabalho e compromete a credibilidade da documentação do processo. Entender a essência e os papéis previstos pela técnica é tão importante quanto executá-la na prática.
+
+        **Ação de Melhoria:** Estudar formalmente os passos, papéis e artefatos definidos pelo JAD antes de reivindicar seu uso, documentando evidências claras de cada etapa (preparação, facilitação, sessão conjunta e documentação final) para garantir que a técnica seja, de fato, aplicada corretamente nos próximos ciclos.
+
+    3. Entrega Final e Validação com o Cliente (UAT Final)
+
+        **Desafio:** Consolidar, apresentar e validar presencialmente a entrega final do produto junto aos stakeholders, incluindo a implementação da última história de usuário pendente (US-12), exigiu forte alinhamento entre toda a equipe para garantir uma demonstração técnica coesa e sem falhas.
+
+        **Lição:** Reuniões presenciais de validação final concentram grande responsabilidade, pois qualquer falha de alinhamento entre os membros da equipe fica evidente diante do cliente. A preparação prévia é decisiva para o sucesso da aprovação e para transmitir confiança na entrega.
+
+        **Ação de Melhoria:** Ensaiar a demonstração final de forma coletiva antes do UAT, garantindo que todos os membros dominassem o funcionamento das funcionalidades entregues. A experiência positiva dessa entrega passa a servir de referência para conduzir futuras apresentações e validações com o cliente.
+
+    ### Dificuldades e Ações para Superá-las
+
+    1. Incoerências acumuladas no backlog
+
+        **Como superar:** Mapear todas as USs existentes em uma revisão cruzada, identificando duplicidades, dependências não documentadas e critérios de aceite desatualizados, corrigindo-os antes de dar continuidade ao desenvolvimento.
+
+    2. Uso incorreto da metodologia JAD
+
+        **Como superar:** Revisitar a bibliografia sobre JAD, redefinir claramente os papéis dos participantes e reestruturar a documentação do projeto para refletir com precisão as técnicas efetivamente aplicadas em cada workshop.
+
+    3. Alinhamento da equipe para a entrega final
+
+        **Como superar:** Realizar um ensaio geral da demonstração antes da reunião de UAT com os stakeholders, distribuindo claramente entre os membros quem apresentaria cada funcionalidade e validando previamente o funcionamento de tudo o que seria mostrado.
