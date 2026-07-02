@@ -10,8 +10,8 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Gravação 26/06](link_video) | Descreva aqui o que foi elicitado/validado nesta gravação, com quem foi realizada e quais histórias (US-13, US-18) foram abordadas. |
-| [Ata 26/06](link_ata) | Descreva aqui as decisões tomadas, os alinhamentos com o cliente e o que foi aprovado nesta reunião referente ao Ciclo 5. |
+| [Gravação 26/06](link_video) | Este vídeo apresenta a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-13 e US-18, referentes ao Ciclo 5. Durante a reunião, a equipe demonstrou a terceira versão do aplicativo e os protótipos, que foram aceitos pelos stakeholders sem necessidade de alterações, ficando pendente apenas a história US-12, referente ao histórico de frequência, para o próximo e último ciclo de desenvolvimento. |
+| [Ata 26/06](link_ata) | Ata da reunião do dia 26/06/2026 com a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-13 e US-18. |
 
 ### Protótipos
 

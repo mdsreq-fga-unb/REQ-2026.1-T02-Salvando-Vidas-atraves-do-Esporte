@@ -10,8 +10,8 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Gravação 29/06](link_video) | Descreva aqui o que foi elicitado/validado nesta gravação, com quem foi realizada e quais histórias (US-29) foram abordadas. |
-| [Ata 29/06](link_ata) | Descreva aqui as decisões tomadas, os alinhamentos com o cliente e o que foi aprovado nesta reunião referente ao Ciclo 6. |
+| [Foto da Apresentação](link_da_foto) | Esta reunião presencial marca a entrega final e a validação definitiva do projeto (UAT Final, seguindo o Ciclo do RAD) junto aos stakeholders. No encontro, a equipe apresentou a versão concluída do aplicativo com a implementação da última história de usuário pendente (US-12), consolidando todas as funcionalidades acordadas e oficializando a entrega do produto final aprovado pelos clientes após a demonstração técnica. |
+| [Ata 29/06](link_ata) | Ata da reunião presencial do dia 29/06/2026 com a validação final incluindo a versão do apk com a US-12 implementada. |
 
 ### Protótipos
 
