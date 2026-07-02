@@ -54,13 +54,13 @@ O MVP foi validado e aprovado tanto pela equipe quanto pelos stakeholders.
  
 ## 4. Evidências
  
-- 📋 **Workshop JAD adaptado — Sessão 2 (Miro):** classificação MoSCoW realizada com os stakeholders, com a identificação por cores das histórias de usuário.
+- **Sessão Priorizzação Moscow (Miro):** classificação MoSCoW realizada com os stakeholders, com a identificação por cores das histórias de usuário.
   [Acessar quadro no Miro](https://miro.com/app/board/uXjVHWbGQMc=/?share_link_id=537692299700)
-- 🃏 **Planning Poker — Tabela de complexidade técnica** (Equipe Na Minha Máquina Funciona):
-  [Planilha de resumo das votações](https://docs.google.com/spreadsheets/d/1dQxS_lAYoNAk5GWnPe9KIyS89q93ol7SqFwbwe0jv1Q/edit?gid=1468318094#gid=1468318094) · [Sala de votação — Planning Poker](https://app.planitpoker.com/room/Yysv6ThKtJi3A38aSklnc2ORHxQT7WqR)
+- **Planning Poker — Tabela de complexidade técnica** (Equipe Na Minha Máquina Funciona):
+  [Planilha de resumo das votações](https://docs.google.com/spreadsheets/d/1dQxS_lAYoNAk5GWnPe9KIyS89q93ol7SqFwbwe0jv1Q/edit?gid=1468318094#gid=1468318094)
 ---
 
-## 5. Matriz de Avaliação Técnica × Valor de Negócio
+<!--## 5. Matriz de Avaliação Técnica × Valor de Negócio
 
 A matriz abaixo apresenta a distribuição das histórias de usuário segundo os eixos de complexidade técnica e valor de negócio, com destaque para o quadrante correspondente ao MVP aprovado.
 
@@ -70,6 +70,6 @@ A matriz abaixo apresenta a distribuição das histórias de usuário segundo os
 
 Disponível em: [Matriz Avaliação Técnica x Valor Negócio](https://miro.com/app/board/uXjVHT_JmM8=/?share_link_id=938810057712)
 
-<!--<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHT_JmM8=/?focusWidget=3458764647487987076&embedMode=view_only_without_ui&embedId=195967925908" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>-->
+<!--<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVHT_JmM8=/?focusWidget=3458764647487987076&embedMode=view_only_without_ui&embedId=195967925908" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>-->--->
 
 

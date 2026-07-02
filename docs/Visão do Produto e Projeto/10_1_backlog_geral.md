@@ -26,7 +26,7 @@ Antes do detalhamento granular, apresenta-se a síntese arquitetural do escopo d
 
 ---
 
-### Especificação das Histórias de Usuário
+<!--### Especificação das Histórias de Usuário
 
 === "Tema: Gestão de Alunos"
 
@@ -144,7 +144,7 @@ Antes do detalhamento granular, apresenta-se a síntese arquitetural do escopo d
     | US-31 | Como **Voluntário**, quero realizar o login com minhas credenciais, para acessar as funcionalidades protegidas e restritas ao meu perfil de forma segura. | [RF40](requisitosDeSoftware.md#rf40) | [RNF04](requisitosDeSoftware.md#rnf04) |
     | US-32 | Como **Voluntário**, quero encerrar minha sessão ao terminar o uso, para impedir acessos indevidos pelo meu dispositivo. | [RF41](requisitosDeSoftware.md#rf41) | - |
 
----
+--- -->
 
 > **Nota:** Os Requisitos Não Funcionais transversais **RNF03** (LGPD), **RNF06** (Responsividade) e **RNF09** (Dark Mode), que representam restrições de todo o sistema, não foram descritos como Histórias de Usuário individuais. Eles atuam como restrições arquiteturais e compõem a **Definition of Done (DoD)** que baliza o desenvolvimento de todas as histórias.
 
@@ -152,11 +152,11 @@ Antes do detalhamento granular, apresenta-se a síntese arquitetural do escopo d
 
 ---
 
-### 10.2 Árvore de Rastreabilidade Backlog
+<!--### 10.2 Árvore de Rastreabilidade Backlog
 
 ![Árvore de Rastreabilidade](../assets/arvoreBacklog.jpg){ width="800" }
 **Figura 5:** Árvore de Rastreabilidade. Fonte: Elaborada por Júlia Gabriella
 
-Disponível em: [Árvore de Rastreabilidade Backlog](https://www.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/SVAdS-FIGJAM?node-id=297-615&p=f&t=1atgk2CdgQM7cyIf-0)
+Disponível em: [Árvore de Rastreabilidade Backlog](https://www.figma.com/board/Pl8q1fRIxDhYP1zkDhp3N7/SVAdS-FIGJAM?node-id=297-615&p=f&t=1atgk2CdgQM7cyIf-0)-->
 
 ---

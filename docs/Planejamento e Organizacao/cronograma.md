@@ -9,10 +9,3 @@
 | **Ciclo 5** | 16/06 <br>-<br> 26/06 | [US-13](./USsMVP/US-13.md) <br> [US-18](./USsMVP/US-18.md)<br> [Diagramas Entidades](./EvidenciasCiclos/EV_C5.md#eng-software) | [Validação Cliente](./EvidenciasCiclos/EV_C5.md#eng-requisitos) <br> [Mockups](./EvidenciasCiclos/EV_C5.md#eng-requisitos)<br> [Protótipo Baixa Fid.](./EvidenciasCiclos/EV_C5.md#eng-requisitos) <br>[DoD](./EvidenciasCiclos/EV_C5.md#dod) | Finalizado | - |
 | **Ciclo 6** | 26/06 <br>-<br> 29/06 | [US-12](./USsMVP/US-12.md) <br> [Diagramas Entidades](./EvidenciasCiclos/EV_C6.md#eng-software) | [Validação Cliente](./EvidenciasCiclos/EV_C6.md#eng-requisitos) <br> [Mockups](./EvidenciasCiclos/EV_C6.md#eng-requisitos)<br> [Protótipo Baixa Fid.](./EvidenciasCiclos/EV_C6.md#eng-requisitos) <br>[DoD](./EvidenciasCiclos/EV_C6.md#dod) | Finalizado | - |
 
-<!-- <br> é quebra de linhas>
-TODOS ESTÃO EM RELAÇÃO AO NOVO 
-
-
-UNIDADE 1 NOTA GRUPO 8,3
-UNIDADE 3 NOTA GRUPO 6,45
-UNIDADE 2 NOTA GRUPO 8,90 + 0,7 = 9,60
