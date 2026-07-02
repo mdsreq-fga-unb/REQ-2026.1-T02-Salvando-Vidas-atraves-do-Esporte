@@ -11,9 +11,9 @@
 | Evidência | Descrição |
 | :--- | :--- |
 | [Gravação 27/05](../../Atas/reunioes.md#reuniao-r5) | Este vídeo apresenta a validação das atualizações na documentação de DOR (Definition of Ready) e DOD (Definition of Done) com o coordenador do projeto. Durante a reunião, a gerente da equipe explicou os critérios necessários para iniciar e concluir o desenvolvimento das entregas e alinhou os próximos passos, confirmando uma nova reunião conjunta no dia 29 para apresentar a implementação inicial do MVP, focada nas telas de login e cadastro de voluntário. |
-| [Ata 27/05](../../Atas/reunioes.md#reuniao-r5) | Ata do dia 27/05/2026 com a validação do DoR e DoD com o Coordenador do Projeto Salvando Vidas Através do Esporte |
+| [Ata 27/05](../../Atas/unidade-3.md) | Ata do dia 27/05/2026 com a validação do DoR e DoD com o Coordenador do Projeto Salvando Vidas Através do Esporte |
 | [Gravação 29/05](../../Atas/reunioes.md#reuniao-r6) | Este vídeo apresenta a validação da primeira versão do MVP e dos protótipos iniciais com os stakeholders. Durante a reunião, a equipe demonstrou as funcionalidades de login e o cadastro de voluntários, contemplando as histórias de usuário US-28, US-29, US-31 e US-32. |
-| [Ata 29/05](../../Atas/reunioes.md#reuniao-r6) | Ata do dia 29/05/2026 com a validação da primeira versão do MVP e dos Protótipos Iniciais. |
+| [Ata 29/05](../../Atas/unidade-3.md) | Ata do dia 29/05/2026 com a validação da primeira versão do MVP e dos Protótipos Iniciais. |
 
 ### Protótipos
 

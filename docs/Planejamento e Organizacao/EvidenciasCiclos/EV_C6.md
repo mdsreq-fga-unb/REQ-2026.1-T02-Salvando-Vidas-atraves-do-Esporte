@@ -11,7 +11,7 @@
 | Evidência | Descrição |
 | :--- | :--- |
 | [Foto da Apresentação](../../../docs/assets/Evidencias/Foto_em_grupo.jpg) | Esta reunião presencial marca a entrega final e a validação definitiva do projeto (UAT Final, seguindo o Ciclo do RAD) junto aos stakeholders. No encontro, a equipe apresentou a versão concluída do aplicativo com a implementação da última história de usuário pendente (US-12), consolidando todas as funcionalidades acordadas e oficializando a entrega do produto final aprovado pelos clientes após a demonstração técnica. |
-| [Ata 29/06](../../Atas/reunioes.md#reuniao-r10) | Ata da reunião presencial do dia 29/06/2026 com a validação final incluindo a versão do apk com a US-12 implementada. |
+| [Ata 29/06](../../Atas/unidade-4.md) | Ata da reunião presencial do dia 29/06/2026 com a validação final incluindo a versão do apk com a US-12 implementada. |
 
 ### Protótipos
 
@@ -53,4 +53,4 @@
 | Os testes automatizados foram executados e passaram? | [PR #116](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte/pull/116#event-27458732588) | ✅ |
 | Os workflows de build foram executados com sucesso? | [Release v1.0.0](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte/releases/tag/v1.0.0) | ✅ |
 | A documentação foi atualizada? | [Commit](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
-| A funcionalidade foi testada e aprovada pelo cliente? | [Ata/Evidência](../../Atas/reunioes.md#reuniao-r10) | ✅ |
+| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](../../Atas/reunioes.md#reuniao-r10) | ✅ |

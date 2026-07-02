@@ -11,7 +11,7 @@
 | Evidência | Descrição |
 | :--- | :--- |
 | [Gravação 26/06](../../Atas/reunioes.md#reuniao-r9) | Este vídeo apresenta a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-13 e US-18, referentes ao Ciclo 5. Durante a reunião, a equipe demonstrou a terceira versão do aplicativo e os protótipos, que foram aceitos pelos stakeholders sem necessidade de alterações, ficando pendente apenas a história US-12, referente ao histórico de frequência, para o próximo e último ciclo de desenvolvimento. |
-| [Ata 26/06](../../Atas/reunioes.md#reuniao-r9) | Ata da reunião do dia 26/06/2026 com a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-13 e US-18. |
+| [Ata 26/06](../../Atas/unidade-4.md) | Ata da reunião do dia 26/06/2026 com a validação das implementações dos ciclos 4 e 5, abrangendo as histórias de usuário US-13 e US-18. |
 
 ### Protótipos
 

@@ -11,7 +11,7 @@
 | Evidência | Descrição |
 | :--- | :--- |
 | [Gravação 11/06](../../Atas/reunioes.md#reuniao-r8) | Este vídeo registra a validação do MVP com foco na apresentação da identidade visual e dos protótipos de alta fidelidade. Nele, a equipe demonstra a logo oficial e o design detalhado das telas, recebendo sugestões de refinamento visual e de interação por parte dos clientes, que validaram o progresso sem alterações significativas no escopo original. |
-| [Ata 11/06](../../Atas/reunioes.md#reuniao-r8) | Ata da reunião do dia 11/06/2026 com a validação do MVP com foco na apresentação da identidade visual e dos protótipos de alta fidelidade. |
+| [Ata 11/06](../../Atas/unidade-3.md) | Ata da reunião do dia 11/06/2026 com a validação do MVP com foco na apresentação da identidade visual e dos protótipos de alta fidelidade. |
 
 ### Protótipos
 

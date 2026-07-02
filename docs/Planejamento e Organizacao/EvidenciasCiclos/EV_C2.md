@@ -11,7 +11,7 @@
 | Evidência | Descrição |
 | :--- | :--- |
 | [Gravação 03/06](../../Atas/reunioes.md#reuniao-r7) | Este vídeo apresenta a reunião de priorização do MVP realizada com a técnica MoSCoW e o apoio visual do Miro. Durante a dinâmica, a equipe e os clientes revisaram as histórias de usuário (US-01, US-02, US-03) e decidiram reduzir a prioridade da funcionalidade de criação de turmas para a categoria 'Should', justificando que ela não é essencial para o lançamento inicial por ser um processo pouco frequente. |
-| [Ata 03/06](../../Atas/reunioes.md#reuniao-r7) | Ata da reunião do dia 03/06/2026 com a Priorização do MVP utilizando a técnica MoSCoW |
+| [Ata 03/06](../../Atas/unidade-3.md) | Ata da reunião do dia 03/06/2026 com a Priorização do MVP utilizando a técnica MoSCoW |
 
 ### Protótipos
 
