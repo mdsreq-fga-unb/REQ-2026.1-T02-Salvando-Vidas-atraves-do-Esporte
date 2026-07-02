@@ -11,9 +11,9 @@
 | Evidência | Descrição |
 | :--- | :--- |
 | [Gravação 27/05](../../Atas/reunioes.md#reuniao-r5) | Este vídeo apresenta a validação das atualizações na documentação de DOR (Definition of Ready) e DOD (Definition of Done) com o coordenador do projeto. Durante a reunião, a gerente da equipe explicou os critérios necessários para iniciar e concluir o desenvolvimento das entregas e alinhou os próximos passos, confirmando uma nova reunião conjunta no dia 29 para apresentar a implementação inicial do MVP, focada nas telas de login e cadastro de voluntário. |
-| [Ata 27/05](link_ata) | Ata do dia 27/05/2026 com a validação do DoR e DoD com o Coordenador do Projeto Salvando Vidas Através do Esporte |
-| [Gravação 29/05](../../Atas/reunioes.md#reuniao-r5) | Este vídeo apresenta a validação da primeira versão do MVP e dos protótipos iniciais com os stakeholders. Durante a reunião, a equipe demonstrou as funcionalidades de login e o cadastro de voluntários, contemplando as histórias de usuário US-28, US-29, US-31 e US-32. |
-| [Ata 29/05](link_ata) | Ata do dia 29/05/2026 com a validação da primeira versão do MVP e dos Protótipos Iniciais. |
+| [Ata 27/05](../../Atas/reunioes.md#reuniao-r5) | Ata do dia 27/05/2026 com a validação do DoR e DoD com o Coordenador do Projeto Salvando Vidas Através do Esporte |
+| [Gravação 29/05](../../Atas/reunioes.md#reuniao-r6) | Este vídeo apresenta a validação da primeira versão do MVP e dos protótipos iniciais com os stakeholders. Durante a reunião, a equipe demonstrou as funcionalidades de login e o cadastro de voluntários, contemplando as histórias de usuário US-28, US-29, US-31 e US-32. |
+| [Ata 29/05](../../Atas/reunioes.md#reuniao-r6) | Ata do dia 29/05/2026 com a validação da primeira versão do MVP e dos Protótipos Iniciais. |
 
 ### Protótipos
 
@@ -95,9 +95,9 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](link_github) | ✅ |
-| O código passou por revisão via Pull Request? | [PR #XX](link_github) | ✅ |
-| Os testes automatizados foram executados e passaram? | [Issue #XX](link_github) | ✅ |
-| Os workflows de build foram executados com sucesso? | [Release vX.X](link_github) | ✅ |
-| A documentação foi atualizada? | [Commit](link_github) | ✅ |
-| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](link_video) | ✅ |
+| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| O código passou por revisão via Pull Request? | [PR #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| Os testes automatizados foram executados e passaram? | [Issue #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| Os workflows de build foram executados com sucesso? | [Release vX.X](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| A documentação foi atualizada? | [Commit](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](../../Atas/reunioes.md#reuniao-r6) | ✅ |

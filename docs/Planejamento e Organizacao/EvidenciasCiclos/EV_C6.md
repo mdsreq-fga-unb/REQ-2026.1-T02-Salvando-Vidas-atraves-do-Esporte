@@ -10,8 +10,8 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Foto da Apresentação](link_da_foto) | Esta reunião presencial marca a entrega final e a validação definitiva do projeto (UAT Final, seguindo o Ciclo do RAD) junto aos stakeholders. No encontro, a equipe apresentou a versão concluída do aplicativo com a implementação da última história de usuário pendente (US-12), consolidando todas as funcionalidades acordadas e oficializando a entrega do produto final aprovado pelos clientes após a demonstração técnica. |
-| [Ata 29/06](link_ata) | Ata da reunião presencial do dia 29/06/2026 com a validação final incluindo a versão do apk com a US-12 implementada. |
+| [Foto da Apresentação](../../Atas/reunioes.md#reuniao-r10) | Esta reunião presencial marca a entrega final e a validação definitiva do projeto (UAT Final, seguindo o Ciclo do RAD) junto aos stakeholders. No encontro, a equipe apresentou a versão concluída do aplicativo com a implementação da última história de usuário pendente (US-12), consolidando todas as funcionalidades acordadas e oficializando a entrega do produto final aprovado pelos clientes após a demonstração técnica. |
+| [Ata 29/06](../../Atas/reunioes.md#reuniao-r10) | Ata da reunião presencial do dia 29/06/2026 com a validação final incluindo a versão do apk com a US-12 implementada. |
 
 ### Protótipos
 
@@ -48,9 +48,9 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](link_github) | ✅ |
-| O código passou por revisão via Pull Request? | [PR #XX](link_github) | ✅ |
-| Os testes automatizados foram executados e passaram? | [Issue #XX](link_github) | ✅ |
-| Os workflows de build foram executados com sucesso? | [Release vX.X](link_github) | ✅ |
-| A documentação foi atualizada? | [Commit](link_github) | ✅ |
-| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](link_video) | ✅ |
+| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| O código passou por revisão via Pull Request? | [PR #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| Os testes automatizados foram executados e passaram? | [Issue #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| Os workflows de build foram executados com sucesso? | [Release vX.X](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| A documentação foi atualizada? | [Commit](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| A funcionalidade foi testada e aprovada pelo cliente? | [Ata/Evidência](../../Atas/reunioes.md#reuniao-r10) | ✅ |

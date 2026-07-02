@@ -10,8 +10,8 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Gravação 03/06](link_video) | Este vídeo apresenta a reunião de priorização do MVP realizada com a técnica MoSCoW e o apoio visual do Miro. Durante a dinâmica, a equipe e os clientes revisaram as histórias de usuário (US-01, US-02, US-03) e decidiram reduzir a prioridade da funcionalidade de criação de turmas para a categoria 'Should', justificando que ela não é essencial para o lançamento inicial por ser um processo pouco frequente. |
-| [Ata 03/06](link_ata) | Ata da reunião do dia 03/06/2026 com a Priorização do MVP utilizando a técnica MoSCoW |
+| [Gravação 03/06](../../Atas/reunioes.md#reuniao-r7) | Este vídeo apresenta a reunião de priorização do MVP realizada com a técnica MoSCoW e o apoio visual do Miro. Durante a dinâmica, a equipe e os clientes revisaram as histórias de usuário (US-01, US-02, US-03) e decidiram reduzir a prioridade da funcionalidade de criação de turmas para a categoria 'Should', justificando que ela não é essencial para o lançamento inicial por ser um processo pouco frequente. |
+| [Ata 03/06](../../Atas/reunioes.md#reuniao-r7) | Ata da reunião do dia 03/06/2026 com a Priorização do MVP utilizando a técnica MoSCoW |
 
 ### Protótipos
 
@@ -78,9 +78,9 @@
 
 | Critério do DoD | Evidência | Status |
 | :--- | :--- | :---: |
-| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](link_github) | ✅ |
-| O código passou por revisão via Pull Request? | [PR #XX](link_github) | ✅ |
-| Os testes automatizados foram executados e passaram? | [Issue #XX](link_github) | ✅ |
-| Os workflows de build foram executados com sucesso? | [Release vX.X](link_github) | ✅ |
-| A documentação foi atualizada? | [Commit](link_github) | ✅ |
-| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](link_video) | ✅ |
+| A funcionalidade atende aos critérios de aceitação? | [Issue #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| O código passou por revisão via Pull Request? | [PR #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| Os testes automatizados foram executados e passaram? | [Issue #XX](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| Os workflows de build foram executados com sucesso? | [Release vX.X](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| A documentação foi atualizada? | [Commit](https://github.com/mdsreq-fga-unb/REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte) | ✅ |
+| A funcionalidade foi testada e aprovada pelo cliente? | [Gravação](../../Atas/reunioes.md#reuniao-r7) | ✅ |
