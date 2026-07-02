@@ -5,8 +5,16 @@ repo_name: REQ-2026.1-T02-Salvando-Vidas-atraves-do-Esporte
 
 theme:
   name: material
+  language: pt-BR
   palette:
-    scheme: slate
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 extra_css:
   - stylesheets/extra.css
@@ -14,40 +22,86 @@ extra_css:
 nav:
   - Home: index.md
 
+  - Planejamento e Organização:
+      - Quadro MVP: Planejamento e Organizacao/quadroMVP.md
+      - Cronograma: Planejamento e Organizacao/cronograma.md
+      - Rastreabilidade: Planejamento e Organizacao/rastreabilidade.md
+      - User Stories do MVP:
+          - US-01 — Cadastro de Aluno: Planejamento e Organizacao/USsMVP/US-01.md
+          - US-02 — Edição e Busca de Aluno: Planejamento e Organizacao/USsMVP/US-02.md
+          - US-03 — Inativação e Reativação de Aluno: Planejamento e Organizacao/USsMVP/US-03.md
+          - US-07 — Matrícula de Aluno em Turma: Planejamento e Organizacao/USsMVP/US-07.md
+          - US-08 — Cancelamento de Matrícula: Planejamento e Organizacao/USsMVP/US-08.md
+          - US-09 — Registro de Presença em Aula: Planejamento e Organizacao/USsMVP/US-09.md
+          - US-10 — Correção de Registro de Presença: Planejamento e Organizacao/USsMVP/US-10.md
+          - US-12 — Consulta de Histórico de Presença: Planejamento e Organizacao/USsMVP/US-12.md
+          - US-13 — Monitoramento de Risco de Evasão: Planejamento e Organizacao/USsMVP/US-13.md
+          - US-14 — Registro de Doação e Consulta de Estoque: Planejamento e Organizacao/USsMVP/US-14.md
+          - US-15 — Registro de Perda ou Dano de Kimono: Planejamento e Organizacao/USsMVP/US-15.md
+          - US-16 — Registro de Empréstimo de Kimono: Planejamento e Organizacao/USsMVP/US-16.md
+          - US-17 — Registro de Devolução de Kimono: Planejamento e Organizacao/USsMVP/US-17.md
+          - US-18 — Aniversariantes da Semana no Dashboard: Planejamento e Organizacao/USsMVP/US-18.md
+          - US-28 — Cadastro e Edição de Voluntários: Planejamento e Organizacao/USsMVP/US-28.md
+          - US-29 — Inativação e Reativação de Voluntários: Planejamento e Organizacao/USsMVP/US-29.md
+          - US-31 — Login no Sistema: Planejamento e Organizacao/USsMVP/US-31.md
+          - US-32 — Encerramento de Sessão: Planejamento e Organizacao/USsMVP/US-32.md
+      - Evidências por Ciclo:
+          - Ciclo 1: Planejamento e Organizacao/EvidenciasCiclos/EV_C1.md
+          - Ciclo 2: Planejamento e Organizacao/EvidenciasCiclos/EV_C2.md
+          - Ciclo 3: Planejamento e Organizacao/EvidenciasCiclos/EV_C3.md
+          - Ciclo 4: Planejamento e Organizacao/EvidenciasCiclos/EV_C4.md
+          - Ciclo 5: Planejamento e Organizacao/EvidenciasCiclos/EV_C5.md
+          - Ciclo 6: Planejamento e Organizacao/EvidenciasCiclos/EV_C6.md
+
   - Visão do Produto e Projeto:
       - 1. Cenário Atual do Cliente e do Negócio: Visão do Produto e Projeto/cenarioAtualDoClienteEDoNegocio.md
       - 2. Proposta da Solução: Visão do Produto e Projeto/PropostaDaSolucao.md
       - 3. Interveção Social: Visão do Produto e Projeto/intervencaoSocial.md
       - 4. Estratégias de Engenharia de Software: Visão do Produto e Projeto/estrategiasDeEngenhariaDeSoftware.md
       - 5. Engenharia de Requisitos: Visão do Produto e Projeto/engenhariaDeRequisitos.md
-      - 6. Cronograma e Entregas: Visão do Produto e Projeto/cronogramaEEntregas.md
       - 7. Interação entre Equipe e Cliente: Visão do Produto e Projeto/interacaoEntreEquipeECliente.md
       - 8. Requisitos de Software: Visão do Produto e Projeto/requisitosDeSoftware.md
       - 9. DoR e DoD: Visão do Produto e Projeto/DoREDoD.md
       - 10. Backlog do Produto:
           - 10.1 Backlog Geral: Visão do Produto e Projeto/10_1_backlog_geral.md
           - 10.2 Priorização Geral e MVP: Visão do Produto e Projeto/10_2_Priorizacao_MVP.md
-          - 10.3 Critérios de Aceitação do MVP: Visão do Produto e Projeto/10_3_criterios_aceitacao_MVP.md
       - 11. Liçoes Aprendidas: Visão do Produto e Projeto/licoesAprendidas.md
-  - Entregas e Documentos:
+  - Evidências de ESW e ER:
       - "Entregas": Entregas/entregas.md
       - "Documentos": Entregas/documentos.md
+      - "Glossário de Dados": Entregas/glossario.md
+      - "Representação Processo de Software": Entregas/ciclos.md
+      - "Gerenciamento e Refinamento do Backlog": Entregas/mudancasBacklog.md
   - Atas e Reuniões Gravadas:
       - "Atas":
           - Unidade 1: Atas/unidade-1.md
           - Unidade 2: Atas/unidade-2.md
+          - Unidade 3: Atas/unidade-3.md
+          - Unidade 4: Atas/unidade-4.md
       - "Reuniões Gravadas": Atas/reunioes.md
   - Referências: assets/referencias.md
 
 plugins:
   - include-markdown
+  - search
+  - panzoom:
+      full_screen: True
+      hint_location: "top"
+      include_selectors:
+        - "img"
 
 markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
+  - pymdownx.blocks.caption
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.emoji:

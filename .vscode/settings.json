@@ -1,0 +1,19 @@
+{
+    "files.exclude": {
+        ".cache": true,
+        ".venv": true,
+        "site": true,
+        "src/coverage": true,
+        "src/.dart_tool": true,
+        "src/.flutter-plugins*": true,
+        "src/.metadata": true,
+        "src/analysis_options.yaml": true,
+        "src/pubspec.lock": true,
+        // Pastas Relacionadas a build
+        "src/android": true,
+        "src/build": true,
+        "src/linux": true,
+        "src/web": true,
+        "src/windows": true,
+    }
+}

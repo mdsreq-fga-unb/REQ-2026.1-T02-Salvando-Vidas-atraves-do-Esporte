@@ -72,14 +72,15 @@ A execução baseia-se no engajamento contínuo: a equipe realiza **reuniões in
     | 22/05 - 18/06 (28 dias) | Desenvolvimento funcionalidades Must have do MVP integradas <br> Refinamento contínuo do Backlog <br> Verificação interna contra critérios de aceitação <br> DoR e DoD | 
     | 22/05 - 29/05 (8 dias) | Correções Fase 2 <br> Refinamentos visuais |
     | 29/05 - 14/05 (17 dias) | Desenvolvimento funcionalidades do restante das funcionalidades do MVP <br> Refinamento do Backlog |
-    | 13/06 - 14/06 (2 dias) | Gravação da apresentação entrega 3 |
+    | 15/06 | Gravação da apresentação entrega 3 |
 
     Descrição Detalhada das atividades realizadas no período 
 
     | Iteração | Data | Atividade ER | Técnica | Descrição | Verificação e Validação |
     | - | - | - | - | - | - |
     | R5 | 29/05 | Representação de Requisitos <br> Verificação e Validação <br> Elicitação e Descoberta | Prototipagem Rápida <br> Validação de Protótipos com o Cliente <br> Workshop JAD (refinamento) | Reunião com cliente para Validação dos protótipos refinados e critérios de aceitação <br> Aprovação do refinamento do backlog estruturado | Validação dos refinamentos visuais <br> Aprovação dos critérios de aceitação definidos | 
-    | R6 | 10/06 | Verificação e Validação | Verificação (Checklists e Revisão Técnica) | Reunião com cliente para demostração do incremento funcional <br> Validação do DoD das funcionalidades entregues | Validação das funcionalidades implementadas <br> Coleta de ajustes e prioridades |
+    | R6 | 03/06 |  Elicitação e Descoberta (refinamento) <br> Análise e Consenso <br> Verificação e Validação  | Workshop JAD e MoSCoW | Reunião com cliente para validação do Ciclo 2, priorização MoSCoW com US e suas alterações para demostração do incremento funcional | Validação das funcionalidades implementadas <br> Coleta de ajustes e prioridades <br> Priorização Atualizada baseada nas US |
+    | R7 | 11/06 | Análise e Consenso <br> Verificação e Validação | Validação MVP | Reunião de validação do MVP corrigido com base nas alterações feitas apartir da R6 <br> Validação do Ciclo 3 | Validação das funcionalidades implementadas no Ciclo 3 <br> Validação do MVP |
     | E3 | 15/06 | - | - | Entrega 3 <br> Correções fase 2 <br> Verificação e Validação de Requisitos <br> Organização e Atualização de Requisitos | - |
     | A3 | 16/05 - 18/06 | - | - | Prova 3 <br> Apresentações da Unidade 3 | Feedback do Professor | 
 
@@ -98,8 +99,8 @@ A execução baseia-se no engajamento contínuo: a equipe realiza **reuniões in
 
     | Iteração | Data | Atividade ER | Técnica | Descrição | Verificação e Validação |
     | - | - | - | - | - | - |
-    | R7 | 25/06 | Organização e Atualização <br> Verificação e Validação | Refinamento de Backlog (Grooming) <br> Verificação (Checklists e Revisão Técnica) | Reunião com cliente para o início do teste de aceitação (UAT) <br> Alinhamento do escopo final para homologação | Validação das funcionalidades em uso real <br> Verificação de pendências | 
-    | R8 | 03/07 | Verificação e Validação | Validação final (Homologação / UAT Final) | Reunião com cliente para Aprovação formal da entrega consolidada | Aceite formal do cliente para encerramento do MVP do projeto |
+    | R8 | 25/06 | Organização e Atualização <br> Verificação e Validação | Refinamento de Backlog (Grooming) <br> Verificação (Checklists e Revisão Técnica) | Reunião com cliente para o início do teste de aceitação (UAT) <br> Alinhamento do escopo final para homologação | Validação das funcionalidades em uso real <br> Verificação de pendências | 
+    | R9 | 03/07 | Verificação e Validação | Validação final (Homologação / UAT Final) | Reunião com cliente para Aprovação formal da entrega consolidada | Aceite formal do cliente para encerramento do MVP do projeto |
     | E4 | 06/07 | - | - | Entrega 4 <br> Correções fase 3 <br> MVP do Produto desenvolvido e Homologado pelos clientes <br> User Story Mapping | - |
     | A4 | 07/07 - 09/07 | - | - | Prova 4 <br> Apresentações da Unidade 4 | Feedback do Professor | 
 

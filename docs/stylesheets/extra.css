@@ -201,3 +201,41 @@
     border-radius: 4px;
     border: 1px solid rgba(128, 128, 128, 0.3); /* Adds a subtle border so the white "dia-vazio" box is visible */
 }
+
+/* Aplica o brilho apenas em links que NÃO são do GLightbox */
+.md-typeset a:not(.glightbox):hover {
+    filter: brightness(1.3);
+}
+
+/* 1. Remove clareamento e filtros de brilho */
+.md-typeset a img,
+.md-typeset a:hover img,
+.md-typeset a:focus img,
+.glightbox:hover img {
+    opacity: 1 !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    transition: none !important;
+}
+
+/* 2. Remove o "overlay" que o Material coloca no fundo do link */
+.md-typeset a.glightbox,
+.md-typeset a.glightbox:hover,
+.md-typeset a.glightbox:focus {
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 3. Garante que o cursor seja apenas a lupa */
+.md-typeset img {
+    cursor: zoom-in !important;
+}
+
+/* Estilo padronizado para as fotos da equipe */
+.foto-equipe {
+    width: 100px !important;  /* Largura fixa */
+    height: 100px !important; /* Altura fixa */
+    object-fit: cover;        /* Corta o excesso sem distorcer a imagem */
+    margin: 0 auto;           /* Centraliza a imagem na célula */
+}

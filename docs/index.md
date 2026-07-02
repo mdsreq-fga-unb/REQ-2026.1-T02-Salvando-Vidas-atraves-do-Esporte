@@ -6,6 +6,10 @@ Repositório da equipe **Na Minha Máquina Funciona** dedicado ao desenvolviment
 
 - [Visão do Produto e Projeto](./Visão%20do%20Produto%20e%20Projeto/cenarioAtualDoClienteEDoNegocio.md)
 
+- [Cronograma](./Planejamento%20e%20Organizacao/cronograma.md)
+- [QuadroMVP](./Planejamento%20e%20Organizacao/quadroMVP.md)
+- [Rastreabilidade](./Planejamento%20e%20Organizacao/rastreabilidade.md) 
+
 ## Equipe
 
 <div class="team-all-in-one">
@@ -30,8 +34,13 @@ Repositório da equipe **Na Minha Máquina Funciona** dedicado ao desenvolviment
     <p>Matrícula: 241011386</p>
   </div>
   <div class="team-card-compact">
-    <img src="https://avatars.githubusercontent.com/u/182804941?v=4" alt="Foto de PEDRO">
+    <img src="https://avatars.githubusercontent.com/u/182804941?v=4" alt="Foto de PEDRO L.">
     <h3>PEDRO LUCAS BARBOSA DA SILVA</h3>
     <p>Matrícula: 241025710</p>
+  </div>
+  <div class="team-card-compact">
+    <img src="https://avatars.githubusercontent.com/u/127259012?v=4" alt="Foto de PEDRO R.">
+    <h3>PEDRO RAMOS SOUSA REIS</h3>
+    <p>Matrícula: 222031680</p>
   </div>
 </div>

@@ -1,0 +1,15 @@
+### Glossário de Dados
+
+| Termo | Definição | Tipo/Domínio | Observações |
+| :--- | :--- | :--- | :--- |
+| Responsável | Pessoa com vínculo legal responsável por um ou mais alunos participantes do projeto (geralmente menores de idade). | Cadastro de Pessoa (Texto/Alfanumérico) | Regra de negócio: Deve possuir vínculo obrigatório com o cadastro do aluno para assegurar a integridade cadastral. |
+| Estoque Solidário | Conjunto de materiais esportivos, prioritariamente kimonos, oriundos de doações e geridos pelo projeto para uso da comunidade. | Controle de Inventário (Numérico / Quantidade) | Regra de negócio: O fluxo de entrada e saída deve permitir identificar a disponibilidade contínua de recursos. |
+| Empréstimo (de Recurso) | Cessão temporária de um kimono ou material esportivo a um aluno ativo que não tem condições de adquiri-lo. | Transação (Data Início, Data Fim, Status) | Difere de doação definitiva. O material deve ser devolvido em caso de inatividade para garantir rotatividade justa. |
+| Ocorrência Pedagógica | Registro de um evento, intervenção, evolução ou comportamento relevante do aluno, do ponto de vista disciplinar, psicossocial ou esportivo. | Registro Cronológico (Data/Hora, Texto Descritivo) | Regra de negócio: O histórico não pode ser apagado e deve subsidiar intervenções assertivas. |
+| Graduação (Faixa/Grau) | Nível de evolução técnica do aluno dentro da arte marcial (Jiu-Jitsu). | Categoria (Lista de Faixas e Graus) | Atualizado com base na evolução do aluno e registrado no histórico. |
+| Frequência / Assiduidade | Registro em tempo real da presença do aluno nas aulas ou campeonatos do projeto social. | Status Diário (Presente, Ausente, Justificado) | Regra de negócio: Ausências prolongadas acionam alertas para evitar abandono. |
+| Coordenador (Perfil) | Usuário com nível de acesso administrativo máximo no sistema, responsável pela gestão global do projeto. | Perfil de Acesso (Role) | Pode visualizar, criar, editar e inativar qualquer registro, gerir turmas, usuários e estoque. |
+| Voluntário (Perfil) | Professor, monitor ou colaborador que atua diretamente nas aulas e no acompanhamento diário dos alunos. | Perfil de Acesso (Role) | Possui permissões limitadas: lança presenças, ocorrências pedagógicas e consulta dados. |
+| Aluno Ativo | Status do aluno que está frequentando regularmente o projeto e apto a participar de turmas, campeonatos e receber empréstimos. | Status (Booleano/Lista) | Regra de Negócio: Condição obrigatória para receber kimono e ser matriculado em turmas. |
+| Aluno Inativo | Status do aluno que se desligou do projeto, abandonou os treinos ou teve a matrícula cancelada. | Status (Booleano/Lista) | O histórico do aluno inativo nunca é apagado, mas ele é ocultado das listas ativas. |
+| Campeonato | Evento esportivo competitivo do qual os alunos do projeto participam. | Evento (Data, Local, Texto) | Exige o vínculo (inscrição) de alunos ativos para formalizar a participação. |
