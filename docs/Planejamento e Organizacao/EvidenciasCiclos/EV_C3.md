@@ -10,8 +10,8 @@
 
 | Evidência | Descrição |
 | :--- | :--- |
-| [Gravação 11/06](link_video) | Descreva aqui o que foi elicitado/validado nesta gravação, com quem foi realizada e quais histórias (US-07, US-08, US-09, US-10) foram abordadas. |
-| [Ata 11/06](link_ata) | Descreva aqui as decisões tomadas, os alinhamentos com o cliente e o que foi aprovado nesta reunião referente ao Ciclo 3. |
+| [Gravação 11/06](link_video) | Este vídeo registra a validação do MVP com foco na apresentação da identidade visual e dos protótipos de alta fidelidade. Nele, a equipe demonstra a logo oficial e o design detalhado das telas, recebendo sugestões de refinamento visual e de interação por parte dos clientes, que validaram o progresso sem alterações significativas no escopo original. |
+| [Ata 11/06](link_ata) | Ata da reunião do dia 11/06/2026 com a validação do MVP com foco na apresentação da identidade visual e dos protótipos de alta fidelidade. |
 
 ### Protótipos
 
